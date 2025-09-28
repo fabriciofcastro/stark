@@ -27,7 +27,7 @@ const SectionWrapper = ({
 		switch (variant) {
 			case "hero":
 				return {
-					container: "relative min-h-screen",
+					container: "relative h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-[95vh] min-h-[500px] max-h-[900px]",
 					background:
 						"bg-gradient-to-br from-primary-900 via-neutral-950 to-accent-900",
 					overlay: "absolute inset-0 bg-black/20",
@@ -60,7 +60,7 @@ const SectionWrapper = ({
 
 			case "services":
 				return {
-					container: "relative py-24",
+					container: "relative pt-32 pb-24",
 					background:
 						"bg-gradient-to-b from-transparent via-primary-800/20 to-transparent",
 					overlay:
