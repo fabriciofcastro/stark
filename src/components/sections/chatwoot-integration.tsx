@@ -38,7 +38,6 @@ const ChatwootIntegration = ({
 				} as Record<string, unknown>);
 
 				// Configurações personalizadas
-				window.chatwootSDK.setLocale(settings.locale || "pt");
 				window.chatwootSDK.setCustomAttributes({
 					source: "website",
 					page: window.location.pathname,
@@ -90,7 +89,6 @@ declare global {
 	interface Window {
 		chatwootSDK: {
 			run: (config: Record<string, unknown>) => void;
-			setLocale: (locale: string) => void;
 			setCustomAttributes: (attributes: Record<string, unknown>) => void;
 			on: (event: string, callback: () => void) => void;
 			show: () => void;
