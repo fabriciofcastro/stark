@@ -22,5 +22,11 @@
     "clean": {
       "cache": false
     }
+  },
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    }
   }
 }
