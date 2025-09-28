@@ -228,9 +228,11 @@ const ModernHeader = () => {
 												: "opacity-100 max-w-none"
 										}`}
 									>
-										<h1 className={`font-bold text-white group-hover:text-brand-gold-300 transition-all duration-300 ${
-											isScrolled ? "text-lg" : "text-xl lg:text-2xl"
-										}`}>
+										<h1
+											className={`font-bold text-white group-hover:text-brand-gold-300 transition-all duration-300 ${
+												isScrolled ? "text-lg" : "text-xl lg:text-2xl"
+											}`}
+										>
 											STARK
 										</h1>
 										{!isScrolled && (

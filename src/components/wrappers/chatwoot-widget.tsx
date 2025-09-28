@@ -38,8 +38,7 @@ export default function ChatwootWidget() {
       s.defer = true;
       s.src = `${CHATWOOT_BASE_URL}/packs/js/sdk.js`;
       s.onload = () => {
-        // @ts-expect-error chatwoot global
-        window.chatwootSDK?.run({
+        (window as any).chatwootSDK?.run({
           websiteToken: CHATWOOT_WEBSITE_TOKEN,
           baseUrl: CHATWOOT_BASE_URL,
         });
