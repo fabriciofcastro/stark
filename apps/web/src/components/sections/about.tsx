@@ -192,8 +192,49 @@ const About = () => {
 					</div>
 				</div>
 
+				{/* Nossa História */}
+				<div className="mt-16">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+						<div>
+							<h3 className="text-3xl font-bold text-white mb-6">
+								Nossa História de <span className="text-secondary-400">Sucesso</span>
+							</h3>
+							<div className="space-y-4 text-neutral-300">
+								<p className="text-lg leading-relaxed">
+									Fundada em 2018, a STARK nasceu da visão de democratizar o acesso à tecnologia de ponta para empresas de todos os portes. Nossa missão é transformar ideias em realidade digital.
+								</p>
+								<p className="text-lg leading-relaxed">
+									Com mais de 5 anos de experiência, já atendemos mais de 150 empresas, desde startups inovadoras até grandes corporações, sempre com foco em resultados mensuráveis e parcerias duradouras.
+								</p>
+								<div className="flex items-center space-x-4 mt-6">
+									<div className="flex items-center space-x-2">
+										<div className="w-3 h-3 bg-secondary-500 rounded-full"></div>
+										<span className="text-sm font-medium text-white">5+ Anos de Experiência</span>
+									</div>
+									<div className="flex items-center space-x-2">
+										<div className="w-3 h-3 bg-accent-500 rounded-full"></div>
+										<span className="text-sm font-medium text-white">150+ Empresas Atendidas</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="relative">
+							<div className="bg-gradient-to-br from-primary-800/30 to-accent-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+								<h4 className="text-xl font-bold text-white mb-4">Nossa Missão</h4>
+								<p className="text-neutral-300 mb-6">
+									Democratizar o acesso à tecnologia de ponta, oferecendo soluções inovadoras que impulsionam o crescimento e a transformação digital das empresas.
+								</p>
+								<h4 className="text-xl font-bold text-white mb-4">Nossa Visão</h4>
+								<p className="text-neutral-300">
+									Ser a referência em tecnologia e inovação, reconhecida pela excelência técnica e pelo impacto positivo na transformação digital do Brasil.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				{/* Call to Action */}
-				<div className="text-center">
+				<div className="text-center mt-16">
 					<div className="bg-gradient-to-r from-primary-900/50 to-accent-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
 						<h3 className="text-2xl font-bold text-white mb-4">
 							Pronto para Transformar Seu Negócio?
