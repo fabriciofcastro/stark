@@ -1,9 +1,6 @@
 "use client";
 
-import {
-	AnimatePresence,
-	motion,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -102,13 +99,13 @@ const ModernHeader = () => {
 	const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	const [isScrolled, setIsScrolled] = useState(false);
-	
+
 	// Detectar scroll para mudar aparência do header
 	useEffect(() => {
 		const handleScroll = () => {
 			setIsScrolled(window.scrollY > 20);
 		};
-		
+
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
@@ -170,8 +167,8 @@ const ModernHeader = () => {
 			<motion.header
 				ref={headerRef}
 				className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-					isScrolled 
-						? "h-16 backdrop-blur-xl bg-white/95 shadow-lg border-b border-white/20" 
+					isScrolled
+						? "h-16 backdrop-blur-xl bg-gray-900/95 shadow-lg border-b border-white/20"
 						: "h-20 backdrop-blur-md bg-white/10"
 				}`}
 				initial={{ y: -100 }}
@@ -196,9 +193,11 @@ const ModernHeader = () => {
 
 				<div className="relative">
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-						<div className={`flex items-center justify-between transition-all duration-300 ${
-							isScrolled ? "h-16" : "h-20"
-						}`}>
+						<div
+							className={`flex items-center justify-between transition-all duration-300 ${
+								isScrolled ? "h-16" : "h-20"
+							}`}
+						>
 							{/* Logo */}
 							<motion.div
 								className="flex items-center space-x-3"
@@ -207,20 +206,28 @@ const ModernHeader = () => {
 							>
 								<Link href="/" className="flex items-center space-x-3 group">
 									<div className="relative">
-										<div className={`bg-gradient-to-br from-brand-gold-400 to-brand-gold-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ${
-											isScrolled ? "w-8 h-8" : "w-10 h-10 lg:w-12 lg:h-12"
-										}`}>
-											<Zap className={`text-white transition-all duration-300 ${
-												isScrolled ? "w-4 h-4" : "w-6 h-6 lg:w-7 lg:h-7"
-											}`} />
+										<div
+											className={`bg-gradient-to-br from-brand-gold-400 to-brand-gold-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ${
+												isScrolled ? "w-8 h-8" : "w-10 h-10 lg:w-12 lg:h-12"
+											}`}
+										>
+											<Zap
+												className={`text-white transition-all duration-300 ${
+													isScrolled ? "w-4 h-4" : "w-6 h-6 lg:w-7 lg:h-7"
+												}`}
+											/>
 										</div>
 										{!isScrolled && (
 											<div className="absolute -inset-1 bg-gradient-to-br from-brand-gold-400/20 to-brand-gold-600/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 										)}
 									</div>
-									<div className={`hidden sm:block transition-all duration-300 ${
-										isScrolled ? "opacity-0 max-w-0 overflow-hidden" : "opacity-100 max-w-none"
-									}`}>
+									<div
+										className={`hidden sm:block transition-all duration-300 ${
+											isScrolled
+												? "opacity-0 max-w-0 overflow-hidden"
+												: "opacity-100 max-w-none"
+										}`}
+									>
 										<h1 className="text-xl lg:text-2xl font-bold text-white group-hover:text-brand-gold-300 transition-colors duration-300">
 											STARK
 										</h1>
@@ -241,11 +248,11 @@ const ModernHeader = () => {
 													type="button"
 													className={`flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
 														isActive(item.href)
-															? isScrolled 
-																? "text-brand-gold-600 bg-brand-gold-50" 
+															? isScrolled
+																? "text-brand-gold-300 bg-brand-gold-500/20"
 																: "text-brand-gold-300 bg-white/10"
 															: isScrolled
-																? "text-gray-700 hover:text-brand-gold-600 hover:bg-brand-gold-50"
+																? "text-white/90 hover:text-brand-gold-300 hover:bg-white/10"
 																: "text-white/90 hover:text-white hover:bg-white/5"
 													}`}
 													onMouseEnter={handleServicesMouseEnter}
@@ -264,11 +271,11 @@ const ModernHeader = () => {
 												href={item.href}
 												className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
 													isActive(item.href)
-														? isScrolled 
-															? "text-brand-gold-600 bg-brand-gold-50" 
+														? isScrolled
+															? "text-brand-gold-300 bg-brand-gold-500/20"
 															: "text-brand-gold-300 bg-white/10"
 														: isScrolled
-															? "text-gray-700 hover:text-brand-gold-600 hover:bg-brand-gold-50"
+															? "text-white/90 hover:text-brand-gold-300 hover:bg-white/10"
 															: "text-white/90 hover:text-white hover:bg-white/5"
 												}`}
 											>
@@ -288,17 +295,23 @@ const ModernHeader = () => {
 									whileTap={{ scale: 0.95 }}
 								>
 									<Link href="/contact">
-										<Button className={`font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ${
-											isScrolled 
-												? "bg-brand-gold-500 hover:bg-brand-gold-600 text-white px-4 py-2"
-												: "bg-gradient-to-r from-brand-gold-500 to-brand-gold-600 hover:from-brand-gold-600 hover:to-brand-gold-700 text-white px-6 py-2"
-										}`}>
-											<Phone className={`mr-2 transition-all duration-300 ${
-												isScrolled ? "w-4 h-4" : "w-4 h-4"
-											}`} />
-											<span className={`transition-all duration-300 ${
-												isScrolled ? "text-sm" : "text-sm"
-											}`}>
+										<Button
+											className={`font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ${
+												isScrolled
+													? "bg-brand-gold-500 hover:bg-brand-gold-600 text-white px-4 py-2"
+													: "bg-gradient-to-r from-brand-gold-500 to-brand-gold-600 hover:from-brand-gold-600 hover:to-brand-gold-700 text-white px-6 py-2"
+											}`}
+										>
+											<Phone
+												className={`mr-2 transition-all duration-300 ${
+													isScrolled ? "w-4 h-4" : "w-4 h-4"
+												}`}
+											/>
+											<span
+												className={`transition-all duration-300 ${
+													isScrolled ? "text-sm" : "text-sm"
+												}`}
+											>
 												{isScrolled ? "Contato" : "Fale Conosco"}
 											</span>
 										</Button>
@@ -309,8 +322,8 @@ const ModernHeader = () => {
 								<motion.button
 									type="button"
 									className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ${
-										isScrolled 
-											? "text-gray-700 hover:bg-brand-gold-50 hover:text-brand-gold-600"
+										isScrolled
+											? "text-white/90 hover:bg-white/10 hover:text-brand-gold-300"
 											: "text-white hover:bg-white/10"
 									}`}
 									onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -545,9 +558,11 @@ const ModernHeader = () => {
 			</AnimatePresence>
 
 			{/* Espaçamento para o header fixo */}
-			<div className={`transition-all duration-300 ${
-				isScrolled ? "h-16" : "h-20"
-			}`} />
+			<div
+				className={`transition-all duration-300 ${
+					isScrolled ? "h-16" : "h-20"
+				}`}
+			/>
 		</>
 	);
 };
