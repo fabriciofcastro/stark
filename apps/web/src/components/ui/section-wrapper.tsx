@@ -291,27 +291,39 @@ const SectionWrapper = ({
 	};
 
 	return (
-		<DynamicBackground
-			variant={variant}
-			className={`${styles.container} ${className}`}
-			intensity="medium"
-			speed="medium"
-		>
+		<div className={`${styles.container} ${className}`}>
+			{/* Background */}
+			<div className={`absolute inset-0 ${styles.background}`} />
+
+			{/* Overlay */}
+			<div className={styles.overlay} />
+
+			{/* Animated Shapes */}
+			<div className="absolute inset-0 pointer-events-none overflow-hidden">
+				{styles.shapes.map((shape, index) => (
+					<motion.div
+						key={index}
+						className={`absolute ${shape.size} ${shape.position} bg-${shape.color} rounded-full blur-3xl`}
+						{...getAnimationProps(shape.animation)}
+					/>
+				))}
+			</div>
+
 			{/* Pattern Overlay */}
 			{styles.pattern !== "none" && (
 				<GeometricPattern
 					variant={styles.pattern as any}
-					opacity={0.1}
-					color="rgba(255,255,255,0.1)"
+					opacity={0.05}
+					color="rgba(255,255,255,0.05)"
 					size={50}
 					animated={true}
-					speed="medium"
+					speed="slow"
 				/>
 			)}
 
 			{/* Content */}
 			<div className={styles.content}>{children}</div>
-		</DynamicBackground>
+		</div>
 	);
 };
 

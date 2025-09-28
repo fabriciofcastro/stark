@@ -93,18 +93,7 @@ const MinimalistCard = ({
 			{badge && <div className={`${styles.badge} ${badgeColor}`}>{badge}</div>}
 
 			{/* Icon */}
-			{icon && (
-				<AnimatedIcon
-					size="lg"
-					effect="glow"
-					color="secondary"
-					intensity="medium"
-					hover={true}
-					className={styles.icon}
-				>
-					{icon}
-				</AnimatedIcon>
-			)}
+			{icon && <div className={styles.icon}>{icon}</div>}
 
 			{/* Title */}
 			<h3 className={styles.title}>{title}</h3>
@@ -150,23 +139,19 @@ const MinimalistCard = ({
 	);
 
 	return (
-		<AnimatedBorder variant="shimmer" intensity="low">
-			<ReflectionEffect variant="shimmer" intensity="low">
-				<motion.div
-					className={`${styles.container} ${className}`}
-					whileHover={{ y: -2 }}
-					transition={{ duration: 0.2 }}
-				>
-					{link ? (
-						<Link href={link} className="block cursor-pointer">
-							<CardContent />
-						</Link>
-					) : (
-						<CardContent />
-					)}
-				</motion.div>
-			</ReflectionEffect>
-		</AnimatedBorder>
+		<motion.div
+			className={`${styles.container} ${className}`}
+			whileHover={{ y: -2 }}
+			transition={{ duration: 0.3 }}
+		>
+			{link ? (
+				<Link href={link} className="block cursor-pointer">
+					<CardContent />
+				</Link>
+			) : (
+				<CardContent />
+			)}
+		</motion.div>
 	);
 };
 

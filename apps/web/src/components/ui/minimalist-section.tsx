@@ -72,15 +72,14 @@ const MinimalistSection = ({
 
 					{/* Title */}
 					{title && (
-						<AnimatedTitle
-							variant="h2"
-							effect="shimmer"
-							intensity="medium"
-							delay={0.1}
+						<motion.h2
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6, delay: 0.1 }}
 							className={styles.title}
 						>
 							{title}
-						</AnimatedTitle>
+						</motion.h2>
 					)}
 
 					{/* Description */}
