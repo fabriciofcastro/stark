@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 
 type Errors = Partial<
-  Record<
+	Record<
 		| "name"
 		| "email"
 		| "company"
@@ -45,8 +45,8 @@ type Errors = Partial<
 		| "currentSystem"
 		| "priority"
 		| "urgency",
-    string
-  >
+		string
+	>
 >;
 
 interface ServiceField {
@@ -70,7 +70,7 @@ interface ServiceConfig {
 }
 
 const emailRegex =
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 // Configurações dos serviços com campos dinâmicos
 const serviceConfigs: ServiceConfig[] = [
@@ -261,41 +261,43 @@ const serviceConfigs: ServiceConfig[] = [
 ];
 
 function maskPhone(input: string): string {
-  const digits = input.replace(/\D/g, "");
-  if (digits.length <= 10) {
-    return digits
-      .replace(/(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{4})(\d)/, "$1-$2")
-      .slice(0, 14);
-  }
-  return digits
-    .replace(/(\d{2})(\d)/, "($1) $2")
-    .replace(/(\d{5})(\d)/, "$1-$2")
-    .slice(0, 15);
+	const digits = input.replace(/\D/g, "");
+	if (digits.length <= 10) {
+		return digits
+			.replace(/(\d{2})(\d)/, "($1) $2")
+			.replace(/(\d{4})(\d)/, "$1-$2")
+			.slice(0, 14);
+	}
+	return digits
+		.replace(/(\d{2})(\d)/, "($1) $2")
+		.replace(/(\d{5})(\d)/, "$1-$2")
+		.slice(0, 15);
 }
 
-
 const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [company, setCompany] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [service, setService] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+	const [name, setName] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [company, setCompany] = useState<string>("");
+	const [phone, setPhone] = useState<string>("");
+	const [service, setService] = useState<string>("");
+	const [message, setMessage] = useState<string>("");
 	const [consent, setConsent] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const [sent, setSent] = useState<boolean>(false);
-  const [errors, setErrors] = useState<Errors>({});
-  const [statusMsg, setStatusMsg] = useState<string>("");
+	const [submitting, setSubmitting] = useState<boolean>(false);
+	const [sent, setSent] = useState<boolean>(false);
+	const [errors, setErrors] = useState<Errors>({});
+	const [statusMsg, setStatusMsg] = useState<string>("");
 	const [statusType, setStatusType] = useState<"idle" | "error" | "success">(
 		"idle",
 	);
-	const [showValidationPopup, setShowValidationPopup] = useState<boolean>(false);
-	const [dynamicFields, setDynamicFields] = useState<Record<string, string>>({});
+	const [showValidationPopup, setShowValidationPopup] =
+		useState<boolean>(false);
+	const [dynamicFields, setDynamicFields] = useState<Record<string, string>>(
+		{},
+	);
 
-  const honeyRef = useRef<HTMLInputElement | null>(null);
-  const MESSAGE_MAX = 500;
-	
+	const honeyRef = useRef<HTMLInputElement | null>(null);
+	const MESSAGE_MAX = 500;
+
 	// Gerar IDs únicos
 	const nameId = useId();
 	const emailId = useId();
@@ -307,38 +309,42 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 	const patternId = useId();
 
 	// Obter configuração do serviço selecionado
-	const selectedServiceConfig = serviceConfigs.find(s => s.id === service);
+	const selectedServiceConfig = serviceConfigs.find((s) => s.id === service);
 
 	function validate(): Errors {
-    const e: Errors = {};
+		const e: Errors = {};
 		if (!name || name.trim().length < 3)
-      e.name = "Informe seu nome completo (mín. 3 caracteres).";
+			e.name = "Informe seu nome completo (mín. 3 caracteres).";
 		if (!email || !emailRegex.test(email))
-      e.email = "Informe um e-mail válido.";
+			e.email = "Informe um e-mail válido.";
 		if (!company || company.trim().length < 2)
-      e.company = "Informe o nome da empresa.";
+			e.company = "Informe o nome da empresa.";
 		const digits = (phone || "").replace(/\D/g, "");
-    if (digits.length < 10) e.phone = "Telefone inválido. Use DDD + número.";
+		if (digits.length < 10) e.phone = "Telefone inválido. Use DDD + número.";
 		if (!service) e.service = "Selecione um serviço.";
 		if (!message || message.trim().length < 10)
 			e.message = "Mensagem deve ter pelo menos 10 caracteres.";
 
 		// Validar campos dinâmicos do serviço selecionado
 		if (selectedServiceConfig) {
-			selectedServiceConfig.fields.forEach(field => {
-				if (field.required && (!dynamicFields[field.id] || dynamicFields[field.id].trim().length === 0)) {
+			selectedServiceConfig.fields.forEach((field) => {
+				if (
+					field.required &&
+					(!dynamicFields[field.id] ||
+						dynamicFields[field.id].trim().length === 0)
+				) {
 					e[field.id as keyof Errors] = `${field.label} é obrigatório.`;
 				}
 			});
 		}
 
-    return e;
-  }
+		return e;
+	}
 
-  const validateField = (field: keyof Errors) => {
-    const res = validate();
-    setErrors((prev) => ({ ...prev, [field]: res[field] }));
-  };
+	const validateField = (field: keyof Errors) => {
+		const res = validate();
+		setErrors((prev) => ({ ...prev, [field]: res[field] }));
+	};
 
 	const handleSubmit = async (e?: React.FormEvent) => {
 		e?.preventDefault();
@@ -348,11 +354,11 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 		const validationErrors = validate();
 		if (Object.keys(validationErrors).length > 0) {
 			setErrors(validationErrors);
-      setStatusType("error");
+			setStatusType("error");
 			setStatusMsg("Por favor, corrija os erros antes de enviar.");
 			setShowValidationPopup(true);
-      return;
-    }
+			return;
+		}
 
 		if (!consent) {
 			setStatusType("error");
@@ -361,34 +367,36 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 			return;
 		}
 
-    setSubmitting(true);
+		setSubmitting(true);
 		setStatusType("idle");
 
 		try {
 			const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          phone,
-          service,
-          message,
-					serviceDetails: selectedServiceConfig ? {
-						serviceName: selectedServiceConfig.label,
-						serviceDescription: selectedServiceConfig.description,
-						fields: dynamicFields
-					} : null,
-        }),
-      });
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name,
+					email,
+					company,
+					phone,
+					service,
+					message,
+					serviceDetails: selectedServiceConfig
+						? {
+								serviceName: selectedServiceConfig.label,
+								serviceDescription: selectedServiceConfig.description,
+								fields: dynamicFields,
+							}
+						: null,
+				}),
+			});
 
 			if (response.ok) {
-      setSent(true);
-      setStatusType("success");
-      setStatusMsg("Mensagem enviada com sucesso.");
-      pushToast({
-        type: "success",
+				setSent(true);
+				setStatusType("success");
+				setStatusMsg("Mensagem enviada com sucesso.");
+				pushToast({
+					type: "success",
 					message: "Mensagem enviada! Responderemos em breve.",
 				});
 			} else {
@@ -406,10 +414,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 		}
 	};
 
-  return (
-		<section
-			className="px-4 py-20 sm:px-6 lg:px-8 reveal relative overflow-hidden min-h-screen"
-		>
+	return (
+		<section className="px-4 py-20 sm:px-6 lg:px-8 reveal relative overflow-hidden min-h-screen">
 			{/* Background animado melhorado */}
 			<div className="absolute inset-0">
 				<div className="absolute inset-0 bg-gradient-to-br from-brand-green-900/95 via-brand-green-800/90 to-brand-gold-900/85" />
@@ -460,7 +466,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 			</div>
 
 			<div className="mx-auto max-w-4xl relative z-10">
-          {showHeading && (
+				{showHeading && (
 					<motion.div
 						className="mb-16 text-center"
 						initial={{ opacity: 0, y: 20 }}
@@ -511,7 +517,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 							<div className="flex items-center gap-2 text-sm text-gray-300">
 								<CheckCircle className="w-4 h-4 text-green-400" />
 								<span>Validação em tempo real</span>
-            </div>
+							</div>
 							<div className="flex items-center gap-2 text-sm text-gray-300">
 								<Clock className="w-4 h-4 text-brand-gold-400" />
 								<span>Resposta em até 15 min</span>
@@ -519,15 +525,15 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 							<div className="flex items-center gap-2 text-sm text-gray-300">
 								<Target className="w-4 h-4 text-blue-400" />
 								<span>Proposta personalizada</span>
-            </div>
+							</div>
 						</motion.div>
 					</motion.div>
-          )}
+				)}
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+				<motion.div
+					initial={{ opacity: 0, y: 12 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.35, ease: "easeOut" }}
 					className="relative rounded-3xl border border-white/20 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden"
 				>
 					{/* Glow effect */}
@@ -559,8 +565,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 									)}
 									% completo
 								</span>
-              </div>
-              
+							</div>
+
 							<div className="relative">
 								<div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
 									<motion.div
@@ -572,8 +578,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 										transition={{ duration: 0.5 }}
 									/>
 								</div>
-              </div>
-              
+							</div>
+
 							<div className="flex items-center justify-between mt-3 text-xs text-gray-400">
 								<span>
 									Campos obrigatórios:{" "}
@@ -598,9 +604,9 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								tabIndex={-1}
 								title="Campo honeypot para bots"
 							/>
-              
+
 							{/* Seção 1: Dados Pessoais */}
-              <motion.div
+							<motion.div
 								className="p-6 bg-white/5 rounded-2xl border border-white/10"
 								initial={{ opacity: 0, y: 10 }}
 								animate={{ opacity: 1, y: 0 }}
@@ -621,70 +627,70 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								</div>
 
 								<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <Input
+									<Input
 										id={nameId}
-                  label="Nome Completo *"
-                  floating
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    setErrors((prev) => ({ ...prev, name: undefined }));
-                  }}
-                  onBlur={() => validateField("name")}
-                  description="Informe ao menos 3 caracteres."
-                  required
-                  error={errors.name}
-                  autoComplete="name"
-                />
-                <Input
+										label="Nome Completo *"
+										floating
+										value={name}
+										onChange={(e) => {
+											setName(e.target.value);
+											setErrors((prev) => ({ ...prev, name: undefined }));
+										}}
+										onBlur={() => validateField("name")}
+										description="Informe ao menos 3 caracteres."
+										required
+										error={errors.name}
+										autoComplete="name"
+									/>
+									<Input
 										id={emailId}
-                  label="Email *"
-                  type="email"
-                  floating
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrors((prev) => ({ ...prev, email: undefined }));
-                  }}
-                  onBlur={() => validateField("email")}
-                  description="Nunca compartilharemos seu e-mail."
-                  required
-                  error={errors.email}
-                  autoComplete="email"
-                />
-                <Input
+										label="Email *"
+										type="email"
+										floating
+										value={email}
+										onChange={(e) => {
+											setEmail(e.target.value);
+											setErrors((prev) => ({ ...prev, email: undefined }));
+										}}
+										onBlur={() => validateField("email")}
+										description="Nunca compartilharemos seu e-mail."
+										required
+										error={errors.email}
+										autoComplete="email"
+									/>
+									<Input
 										id={companyId}
-                  label="Empresa *"
-                  floating
-                  value={company}
+										label="Empresa *"
+										floating
+										value={company}
 										onChange={(e) => {
 											setCompany(e.target.value);
 											setErrors((prev) => ({ ...prev, company: undefined }));
 										}}
-                  onBlur={() => validateField("company")}
-                  required
-                  error={errors.company}
-                  autoComplete="organization"
-                />
-                <Input
+										onBlur={() => validateField("company")}
+										required
+										error={errors.company}
+										autoComplete="organization"
+									/>
+									<Input
 										id={phoneId}
-                  label="Telefone *"
-                  type="tel"
-                  floating
-                  value={phone}
-                  onChange={(e) => {
-                    const m = maskPhone(e.target.value);
-                    setPhone(m);
-                    setErrors((prev) => ({ ...prev, phone: undefined }));
-                  }}
-                  onBlur={() => validateField("phone")}
-                  description="Inclua DDD. Ex: (11) 91234-5678."
-                  required
-                  error={errors.phone}
-                  autoComplete="tel"
-                />
+										label="Telefone *"
+										type="tel"
+										floating
+										value={phone}
+										onChange={(e) => {
+											const m = maskPhone(e.target.value);
+											setPhone(m);
+											setErrors((prev) => ({ ...prev, phone: undefined }));
+										}}
+										onBlur={() => validateField("phone")}
+										description="Inclua DDD. Ex: (11) 91234-5678."
+										required
+										error={errors.phone}
+										autoComplete="tel"
+									/>
 								</div>
-              </motion.div>
+							</motion.div>
 
 							{/* Seção 2: Serviços */}
 							<motion.div
@@ -696,41 +702,41 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								<div className="flex items-center gap-3 mb-6">
 									<div className="p-2 bg-blue-500/20 rounded-lg">
 										<Settings className="w-5 h-5 text-blue-400" />
-              </div>
+									</div>
 									<div>
-                <h4 className="text-white text-lg font-semibold">
+										<h4 className="text-white text-lg font-semibold">
 											O que você precisa
-                </h4>
+										</h4>
 										<p className="text-sm text-gray-400">
 											Selecione o serviço de interesse
 										</p>
 									</div>
-              </div>
-              
+								</div>
+
 								<Select
 									id={serviceId}
-                label="Serviço de Interesse *"
-                value={service}
+									label="Serviço de Interesse *"
+									value={service}
 									onChange={(e) => {
 										setService(e.target.value);
-                  setErrors((prev) => ({ ...prev, service: undefined }));
+										setErrors((prev) => ({ ...prev, service: undefined }));
 										// Limpar campos dinâmicos quando mudar o serviço
 										setDynamicFields({});
-                }}
-                onBlur={() => validateField("service")}
+									}}
+									onBlur={() => validateField("service")}
 									description="Selecione o assunto principal."
-                required
-                error={errors.service}
-									options={serviceConfigs.map(config => ({
+									required
+									error={errors.service}
+									options={serviceConfigs.map((config) => ({
 										value: config.id,
-										label: config.label
+										label: config.label,
 									}))}
 								/>
 
 								{/* Campos dinâmicos baseados no serviço selecionado */}
 								<AnimatePresence>
 									{selectedServiceConfig && (
-              <motion.div
+										<motion.div
 											initial={{ opacity: 0, height: 0 }}
 											animate={{ opacity: 1, height: "auto" }}
 											exit={{ opacity: 0, height: 0 }}
@@ -739,9 +745,13 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 										>
 											<div className="p-4 bg-white/5 rounded-xl border border-white/10">
 												<div className="flex items-center gap-3 mb-4">
-													<div className={`p-2 rounded-lg bg-${selectedServiceConfig.color}-500/20`}>
-														<selectedServiceConfig.icon className={`w-5 h-5 text-${selectedServiceConfig.color}-400`} />
-              </div>
+													<div
+														className={`p-2 rounded-lg bg-${selectedServiceConfig.color}-500/20`}
+													>
+														<selectedServiceConfig.icon
+															className={`w-5 h-5 text-${selectedServiceConfig.color}-400`}
+														/>
+													</div>
 													<div>
 														<h5 className="text-white font-semibold">
 															{selectedServiceConfig.label}
@@ -750,32 +760,42 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 															{selectedServiceConfig.description}
 														</p>
 													</div>
-              </div>
-              
+												</div>
+
 												<div className="grid grid-cols-1 gap-4">
 													{selectedServiceConfig.fields.map((field, index) => {
 														const IconComponent = field.icon;
 														const fieldId = `${field.id}-${index}`;
 														return (
 															<div key={field.id} className="space-y-2">
-																<label htmlFor={fieldId} className="flex items-center gap-2 text-sm font-medium text-gray-200">
+																<label
+																	htmlFor={fieldId}
+																	className="flex items-center gap-2 text-sm font-medium text-gray-200"
+																>
 																	<IconComponent className="w-4 h-4" />
 																	{field.label}
-																	{field.required && <span className="text-red-400">*</span>}
+																	{field.required && (
+																		<span className="text-red-400">*</span>
+																	)}
 																</label>
-																
+
 																{field.type === "select" ? (
 																	<Select
 																		id={fieldId}
 																		value={dynamicFields[field.id] || ""}
 																		onChange={(e) => {
-																			setDynamicFields(prev => ({
+																			setDynamicFields((prev) => ({
 																				...prev,
-																				[field.id]: e.target.value
+																				[field.id]: e.target.value,
 																			}));
-																			setErrors(prev => ({ ...prev, [field.id]: undefined }));
+																			setErrors((prev) => ({
+																				...prev,
+																				[field.id]: undefined,
+																			}));
 																		}}
-																		onBlur={() => validateField(field.id as keyof Errors)}
+																		onBlur={() =>
+																			validateField(field.id as keyof Errors)
+																		}
 																		options={field.options || []}
 																		error={errors[field.id as keyof Errors]}
 																	/>
@@ -784,13 +804,18 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 																		id={fieldId}
 																		value={dynamicFields[field.id] || ""}
 																		onChange={(e) => {
-																			setDynamicFields(prev => ({
+																			setDynamicFields((prev) => ({
 																				...prev,
-																				[field.id]: e.target.value
+																				[field.id]: e.target.value,
 																			}));
-																			setErrors(prev => ({ ...prev, [field.id]: undefined }));
+																			setErrors((prev) => ({
+																				...prev,
+																				[field.id]: undefined,
+																			}));
 																		}}
-																		onBlur={() => validateField(field.id as keyof Errors)}
+																		onBlur={() =>
+																			validateField(field.id as keyof Errors)
+																		}
 																		placeholder={field.placeholder}
 																		error={errors[field.id as keyof Errors]}
 																		rows={3}
@@ -801,18 +826,23 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 																		type={field.type}
 																		value={dynamicFields[field.id] || ""}
 																		onChange={(e) => {
-																			setDynamicFields(prev => ({
+																			setDynamicFields((prev) => ({
 																				...prev,
-																				[field.id]: e.target.value
+																				[field.id]: e.target.value,
 																			}));
-																			setErrors(prev => ({ ...prev, [field.id]: undefined }));
+																			setErrors((prev) => ({
+																				...prev,
+																				[field.id]: undefined,
+																			}));
 																		}}
-																		onBlur={() => validateField(field.id as keyof Errors)}
+																		onBlur={() =>
+																			validateField(field.id as keyof Errors)
+																		}
 																		placeholder={field.placeholder}
 																		error={errors[field.id as keyof Errors]}
 																	/>
 																)}
-																
+
 																{field.description && (
 																	<p className="text-xs text-gray-400">
 																		{field.description}
@@ -826,45 +856,45 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 										</motion.div>
 									)}
 								</AnimatePresence>
-              </motion.div>
+							</motion.div>
 
 							{/* Seção 3: Mensagem */}
-              <motion.div
+							<motion.div
 								className="p-6 bg-white/5 rounded-2xl border border-white/10"
-                initial={{ opacity: 0, y: 10 }}
+								initial={{ opacity: 0, y: 10 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.5 }}
-              >
+							>
 								<div className="flex items-center gap-3 mb-6">
 									<div className="p-2 bg-orange-500/20 rounded-lg">
 										<MessageSquare className="w-5 h-5 text-orange-400" />
-                </div>
+									</div>
 									<div>
-                <h4 className="text-white text-lg font-semibold">
+										<h4 className="text-white text-lg font-semibold">
 											Sua Mensagem
-                </h4>
+										</h4>
 										<p className="text-sm text-gray-400">
 											Descreva sua necessidade com detalhes
 										</p>
-                </div>
-              </div>
+									</div>
+								</div>
 
-              <Textarea
+								<Textarea
 									id={messageId}
-                label="Mensagem *"
-                floating
-                rows={5}
-                value={message}
-                onChange={(e) => {
+									label="Mensagem *"
+									floating
+									rows={5}
+									value={message}
+									onChange={(e) => {
 										setMessage(e.target.value);
-                  setErrors((prev) => ({ ...prev, message: undefined }));
-                }}
-                onBlur={() => validateField("message")}
-                maxLength={MESSAGE_MAX}
-                required
-                error={errors.message}
-                showCounter
-              />
+										setErrors((prev) => ({ ...prev, message: undefined }));
+									}}
+									onBlur={() => validateField("message")}
+									maxLength={MESSAGE_MAX}
+									required
+									error={errors.message}
+									showCounter
+								/>
 							</motion.div>
 
 							{/* Seção de Consentimento */}
@@ -883,7 +913,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 									</h4>
 								</div>
 
-								<label htmlFor={consentId} className="flex items-start gap-3 text-sm text-gray-200 cursor-pointer">
+								<label
+									htmlFor={consentId}
+									className="flex items-start gap-3 text-sm text-gray-200 cursor-pointer"
+								>
 									<input
 										id={consentId}
 										type="checkbox"
@@ -902,25 +935,25 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 										</a>{" "}
 										e em conformidade com a LGPD. *
 									</span>
-              </label>
+								</label>
 							</motion.div>
 
-              {statusType !== "idle" && (
-                <motion.output
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`text-sm ${
-                    statusType === "error"
-                      ? "text-red-400"
-                      : statusType === "success"
-                        ? "text-emerald-400"
-                        : "text-gray-200"
-                  }`}
-                  aria-live={statusType === "error" ? "assertive" : "polite"}
-                >
-                  {statusMsg}
-                </motion.output>
-              )}
+							{statusType !== "idle" && (
+								<motion.output
+									initial={{ opacity: 0, y: 4 }}
+									animate={{ opacity: 1, y: 0 }}
+									className={`text-sm ${
+										statusType === "error"
+											? "text-red-400"
+											: statusType === "success"
+												? "text-emerald-400"
+												: "text-gray-200"
+									}`}
+									aria-live={statusType === "error" ? "assertive" : "polite"}
+								>
+									{statusMsg}
+								</motion.output>
+							)}
 
 							{/* Botões de Ação */}
 							<motion.div
@@ -930,9 +963,9 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								transition={{ delay: 0.7 }}
 							>
 								<motion.div className="flex-1" whileTap={{ scale: 0.98 }}>
-                  <Button
-                    type="submit"
-                    variant="primary"
+									<Button
+										type="submit"
+										variant="primary"
 										className="w-full cursor-pointer relative overflow-hidden group"
 										disabled={submitting || !consent}
 									>
@@ -957,8 +990,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
 										{/* Efeito de brilho */}
 										<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  </Button>
-                </motion.div>
+									</Button>
+								</motion.div>
 							</motion.div>
 
 							<div className="flex items-center justify-center gap-4 text-xs text-gray-500">
@@ -1016,9 +1049,9 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 							<MapPin className="w-4 h-4" />
 							<span>São Paulo, SP</span>
 						</motion.div>
-        </div>
+					</div>
 				</motion.div>
-              </div>
+			</div>
 
 			{/* Popup de Validação */}
 			<AnimatePresence>
@@ -1051,7 +1084,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								>
 									<X className="w-5 h-5 text-gray-500" />
 								</button>
-              </div>
+							</div>
 
 							<div className="space-y-3 mb-6">
 								<p className="text-gray-600">
@@ -1059,13 +1092,16 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								</p>
 								<ul className="space-y-2">
 									{Object.entries(errors).map(([field, error]) => (
-										<li key={field} className="flex items-center gap-2 text-sm text-red-600">
+										<li
+											key={field}
+											className="flex items-center gap-2 text-sm text-red-600"
+										>
 											<div className="w-1.5 h-1.5 bg-red-500 rounded-full" />
 											<span>{error}</span>
 										</li>
 									))}
 								</ul>
-        </div>
+							</div>
 
 							<div className="flex gap-3">
 								<Button
@@ -1082,7 +1118,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 										const firstErrorField = Object.keys(errors)[0];
 										if (firstErrorField) {
 											const element = document.getElementById(firstErrorField);
-											element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+											element?.scrollIntoView({
+												behavior: "smooth",
+												block: "center",
+											});
 											element?.focus();
 										}
 									}}
@@ -1091,13 +1130,13 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 								>
 									Corrigir Agora
 								</Button>
-      </div>
+							</div>
 						</motion.div>
 					</motion.div>
 				)}
 			</AnimatePresence>
-    </section>
-  );
+		</section>
+	);
 };
 
 export default Contact;
