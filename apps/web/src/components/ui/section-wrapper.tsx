@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { GeometricPattern } from "./geometric-pattern";
 
 interface SectionWrapperProps {
 	variant:
@@ -288,40 +289,6 @@ const SectionWrapper = ({
 		}
 	};
 
-	const getPatternStyle = (pattern: string) => {
-		switch (pattern) {
-			case "grid":
-				return {
-					backgroundImage: `
-						linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-						linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
-					`,
-					backgroundSize: "50px 50px",
-				};
-			case "dots":
-				return {
-					backgroundImage:
-						"radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
-					backgroundSize: "30px 30px",
-				};
-			case "hexagon":
-				return {
-					backgroundImage: `
-						radial-gradient(circle at 25% 25%, rgba(255,255,255,0.05) 2px, transparent 2px),
-						radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 2px, transparent 2px)
-					`,
-					backgroundSize: "60px 60px",
-				};
-			case "lines":
-				return {
-					backgroundImage:
-						"linear-gradient(45deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-					backgroundSize: "40px 40px",
-				};
-			default:
-				return {};
-		}
-	};
 
 	return (
 		<div className={`${styles.container} ${className}`}>
@@ -344,9 +311,13 @@ const SectionWrapper = ({
 
 			{/* Pattern Overlay */}
 			{styles.pattern !== "none" && (
-				<div
-					className="absolute inset-0 opacity-30"
-					style={getPatternStyle(styles.pattern)}
+				<GeometricPattern
+					variant={styles.pattern as any}
+					opacity={0.1}
+					color="rgba(255,255,255,0.1)"
+					size={50}
+					animated={true}
+					speed="medium"
 				/>
 			)}
 

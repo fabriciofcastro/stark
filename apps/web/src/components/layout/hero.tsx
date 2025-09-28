@@ -14,11 +14,11 @@ const Hero = () => {
       {/* Decorative Elements */}
       <div
         aria-hidden="true"
-        className="absolute top-0 left-0 w-72 h-72 bg-gold/10 rounded-full blur-3xl -z-10"
+        className="absolute top-0 left-0 w-72 h-72 bg-secondary-500/10 rounded-full blur-3xl -z-10"
       ></div>
       <div
         aria-hidden="true"
-        className="absolute bottom-0 right-0 w-72 h-72 bg-gold/10 rounded-full blur-3xl -z-10"
+        className="absolute bottom-0 right-0 w-72 h-72 bg-secondary-500/10 rounded-full blur-3xl -z-10"
       ></div>
     </section>
   );

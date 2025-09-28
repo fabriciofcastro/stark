@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { AnimatedBorder } from "./animated-border";
+import { ReflectionEffect } from "./reflection-effect";
 
 interface MinimalistCardProps {
 	title: string;
@@ -136,19 +138,23 @@ const MinimalistCard = ({
 	);
 
 	return (
-		<motion.div
-			className={`${styles.container} ${className}`}
-			whileHover={{ y: -2 }}
-			transition={{ duration: 0.2 }}
-		>
-			{link ? (
-				<Link href={link} className="block">
-					<CardContent />
-				</Link>
-			) : (
-				<CardContent />
-			)}
-		</motion.div>
+		<AnimatedBorder variant="shimmer" intensity="low">
+			<ReflectionEffect variant="shimmer" intensity="low">
+				<motion.div
+					className={`${styles.container} ${className}`}
+					whileHover={{ y: -2 }}
+					transition={{ duration: 0.2 }}
+				>
+					{link ? (
+						<Link href={link} className="block cursor-pointer">
+							<CardContent />
+						</Link>
+					) : (
+						<CardContent />
+					)}
+				</motion.div>
+			</ReflectionEffect>
+		</AnimatedBorder>
 	);
 };
 

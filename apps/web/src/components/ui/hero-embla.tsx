@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "./button";
+import { EnhancedButton } from "./enhanced-button";
 
 type Slide = {
   image: string;
@@ -150,7 +151,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
                 <div className="absolute inset-0 flex items-center px-6 md:px-10 pl-16 pr-16 md:pl-24 md:pr-24 pb-16 md:pb-20">
                   <div className="max-w-3xl">
-                    <div className="h-0.5 w-16 mb-5 bg-[hsl(var(--brand-gold-500))]" />
+                    <div className="h-0.5 w-16 mb-5 bg-secondary-500" />
                     <h2
                       className="mb-5 text-[clamp(32px,5.5vw,64px)] font-black tracking-tight leading-tight text-white"
                       style={{
@@ -165,22 +166,24 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
                       {s.ctaPrimary && (
-                        <Button
+                        <EnhancedButton
                           variant="primary"
-                          className="shadow-lg shadow-black/30 hover:translate-y-[0.5px] transition-transform focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] focus-visible:ring-offset-2 focus-visible:ring-offset-black/20"
+                          effect="border-animated"
+                          className="shadow-lg shadow-black/30 hover:translate-y-[0.5px] transition-transform focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black/20"
                           onClick={s.ctaPrimary.onClick}
                         >
                           {s.ctaPrimary.label}
-                        </Button>
+                        </EnhancedButton>
                       )}
                       {s.ctaSecondary && (
-                        <Button
+                        <EnhancedButton
                           variant="outline"
+                          effect="shimmer"
                           className="hover:bg-white/10 text-white border-white/20 transition"
                           onClick={s.ctaSecondary.onClick}
                         >
                           {s.ctaSecondary.label}
-                        </Button>
+                        </EnhancedButton>
                       )}
                     </div>
                   </div>
@@ -195,23 +198,25 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
       <div className="absolute inset-x-0 bottom-0 z-40 px-4 md:px-6 pb-4 md:pb-6 pointer-events-none">
         <div className="grid grid-cols-3 items-end gap-3">
           <div className="flex justify-start">
-                          <Button
+                          <EnhancedButton
                 type="button"
                 aria-label="Slide anterior"
                 variant="secondary"
                 size="sm"
-                className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-[hsl(var(--brand-gold-500))] hover:bg-white/20 hover:border-white/50"
+                effect="glow"
+                className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
                 onClick={scrollPrev}
               >
                 <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-              </Button>
+              </EnhancedButton>
           </div>
           <div className="flex justify-center">
-                          <Button
+                          <EnhancedButton
                 type="button"
                 aria-label={userPaused ? "Reproduzir" : "Pausar"}
                 variant="secondary"
                 size="sm"
+                effect="pulse"
                 className="pointer-events-auto rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white/90 hover:bg-white/20"
                 onClick={() => setUserPaused((p) => !p)}
                 onKeyDown={(e) => {
@@ -222,32 +227,33 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                 }}
               >
                 {userPaused ? "▶" : "⏸"}
-              </Button>
+              </EnhancedButton>
           </div>
           <div className="flex justify-end">
-                          <Button
+                          <EnhancedButton
                 type="button"
                 aria-label="Próximo slide"
                 variant="secondary"
                 size="sm"
-                className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-[hsl(var(--brand-gold-500))] hover:bg-white/20 hover:border-white/50"
+                effect="glow"
+                className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
                 onClick={scrollNext}
               >
                 <ChevronRight className="h-5 w-5" aria-hidden="true" />
-              </Button>
+              </EnhancedButton>
           </div>
         </div>
         <div className="mt-3">
           <div className="mb-1.5 text-center text-xs text-white/80">
             {selectedIndex + 1}/{total}
           </div>
-          <div className="group relative mx-auto h-1.5 w-[min(560px,80%)] overflow-hidden rounded-full bg-white/20 border border-white/25 hover:border-[hsl(var(--brand-gold-500))]/40 backdrop-blur-[1px] transition-colors">
+            <div className="group relative mx-auto h-1.5 w-[min(560px,80%)] overflow-hidden rounded-full bg-white/20 border border-white/25 hover:border-secondary-500/40 backdrop-blur-[1px] transition-colors">
             <div
               className="absolute inset-y-0 left-0 rounded-full shadow-[0_0_12px_rgba(212,160,23,0.45)] group-hover:shadow-[0_0_16px_rgba(212,160,23,0.6)] transition-[width] duration-150 linear"
               style={{
                 width: `${Math.round(progress * 100)}%`,
                 background:
-                  "linear-gradient(90deg, hsl(var(--brand-gold-500)), hsl(var(--brand-gold-500)))",
+                  "linear-gradient(90deg, hsl(var(--secondary-500)), hsl(var(--secondary-500)))",
               }}
               aria-hidden="true"
             >

@@ -46,17 +46,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-[hsl(var(--brand-gold-500))] text-black hover:bg-[hsl(var(--brand-gold-400))] focus-visible:ring-[hsl(var(--brand-gold-500))] focus-visible:ring-offset-[hsl(var(--brand-green-900))] shadow-soft",
+        "bg-secondary-500 text-black hover:bg-secondary-400 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 shadow-soft cursor-pointer",
       secondary:
-        "bg-white/10 text-white border border-white/20 hover:bg-white/20 focus-visible:ring-[hsl(var(--brand-gold-500))] focus-visible:ring-offset-[hsl(var(--brand-green-900))]",
+        "bg-white/10 text-white border border-white/20 hover:bg-white/20 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 cursor-pointer",
       outline:
-        "border-2 border-[hsl(var(--brand-gold-500))] text-[hsl(var(--brand-gold-500))] hover:bg-[hsl(var(--brand-gold-500))]/10 focus-visible:ring-[hsl(var(--brand-gold-500))] focus-visible:ring-offset-[hsl(var(--brand-green-900))]",
+        "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 cursor-pointer",
       ghost:
-        "bg-transparent text-white/90 hover:bg-white/10 focus-visible:ring-white/50",
+        "bg-transparent text-white/90 hover:bg-white/10 focus-visible:ring-white/50 cursor-pointer",
       destructive:
-        "bg-[hsl(var(--brand-red-500))] text-white hover:bg-[hsl(var(--brand-red-500))]/90 focus-visible:ring-[hsl(var(--brand-red-500))] focus-visible:ring-offset-[hsl(var(--brand-green-900))] shadow-soft",
+        "bg-error-500 text-white hover:bg-error-500/90 focus-visible:ring-error-500 focus-visible:ring-offset-neutral-900 shadow-soft cursor-pointer",
       success:
-        "bg-[hsl(var(--brand-green-500))] text-black hover:bg-[hsl(var(--brand-green-600))] focus-visible:ring-[hsl(var(--brand-green-500))] focus-visible:ring-offset-[hsl(var(--brand-green-900))] shadow-soft",
+        "bg-success-500 text-black hover:bg-success-600 focus-visible:ring-success-500 focus-visible:ring-offset-neutral-900 shadow-soft cursor-pointer",
     } as const;
 
     return (
