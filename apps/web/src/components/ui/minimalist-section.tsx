@@ -26,22 +26,27 @@ const MinimalistSection = ({
 				return {
 					container: "text-left",
 					title: "text-4xl md:text-5xl font-bold text-white mb-4",
-					subtitle: "text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
+					subtitle:
+						"text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
 					description: "text-lg text-neutral-300 leading-relaxed max-w-2xl",
 				};
 			case "right":
 				return {
 					container: "text-right",
 					title: "text-4xl md:text-5xl font-bold text-white mb-4",
-					subtitle: "text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
-					description: "text-lg text-neutral-300 leading-relaxed max-w-2xl ml-auto",
+					subtitle:
+						"text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
+					description:
+						"text-lg text-neutral-300 leading-relaxed max-w-2xl ml-auto",
 				};
 			default:
 				return {
 					container: "text-center",
 					title: "text-4xl md:text-5xl font-bold text-white mb-4",
-					subtitle: "text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
-					description: "text-lg text-neutral-300 leading-relaxed max-w-3xl mx-auto",
+					subtitle:
+						"text-sm text-secondary-400 font-medium mb-2 uppercase tracking-wider",
+					description:
+						"text-lg text-neutral-300 leading-relaxed max-w-3xl mx-auto",
 				};
 		}
 	};

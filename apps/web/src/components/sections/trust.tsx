@@ -154,7 +154,11 @@ export function TrustSection() {
 	}, [isInView]);
 
 	const tabs = [
-		{ id: "certifications", label: "Certificações", count: certifications.length },
+		{
+			id: "certifications",
+			label: "Certificações",
+			count: certifications.length,
+		},
 		{ id: "standards", label: "Padrões", count: securityStandards.length },
 		{ id: "slas", label: "SLAs", count: slas.length },
 	];

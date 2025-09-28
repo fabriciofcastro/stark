@@ -21,7 +21,8 @@ const About = () => {
 			number: "35%",
 			label: "Redução Média de Custos de TI",
 			icon: "💰",
-			description: "Empresas parceiras economizam em média 35% com nossa gestão proativa",
+			description:
+				"Empresas parceiras economizam em média 35% com nossa gestão proativa",
 			value: "R$ 2.1M economizados anualmente",
 		},
 		{
@@ -42,7 +43,8 @@ const About = () => {
 			number: "150+",
 			label: "Empresas Transformadas",
 			icon: "🚀",
-			description: "Parcerias que geraram crescimento real e segurança comprovada",
+			description:
+				"Parcerias que geraram crescimento real e segurança comprovada",
 			value: "Empresas de todos os portes e segmentos",
 		},
 	];
@@ -50,7 +52,8 @@ const About = () => {
 	const values = [
 		{
 			title: "Excelência Técnica",
-			description: "Conhecimento profundo em tecnologias emergentes e melhores práticas do mercado",
+			description:
+				"Conhecimento profundo em tecnologias emergentes e melhores práticas do mercado",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +74,8 @@ const About = () => {
 		},
 		{
 			title: "Inovação Contínua",
-			description: "Sempre buscando novas soluções e tecnologias para otimizar seus processos",
+			description:
+				"Sempre buscando novas soluções e tecnologias para otimizar seus processos",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +96,8 @@ const About = () => {
 		},
 		{
 			title: "Parceria Estratégica",
-			description: "Relacionamento de longo prazo baseado em confiança e resultados mensuráveis",
+			description:
+				"Relacionamento de longo prazo baseado em confiança e resultados mensuráveis",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +118,8 @@ const About = () => {
 		},
 		{
 			title: "Segurança Total",
-			description: "Proteção completa dos seus dados e infraestrutura com conformidade total",
+			description:
+				"Proteção completa dos seus dados e infraestrutura com conformidade total",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -162,9 +168,7 @@ const About = () => {
 							<div className="text-sm font-medium text-neutral-300 mb-2">
 								{stat.label}
 							</div>
-							<div className="text-xs text-neutral-400">
-								{stat.value}
-							</div>
+							<div className="text-xs text-neutral-400">{stat.value}</div>
 						</motion.div>
 					))}
 				</div>
@@ -195,7 +199,8 @@ const About = () => {
 							Pronto para Transformar Seu Negócio?
 						</h3>
 						<p className="text-neutral-300 mb-6 max-w-2xl mx-auto">
-							Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar novos patamares de eficiência e segurança.
+							Entre em contato conosco e descubra como podemos ajudar sua
+							empresa a alcançar novos patamares de eficiência e segurança.
 						</p>
 						<div className="flex flex-col sm:flex-row gap-4 justify-center">
 							<a

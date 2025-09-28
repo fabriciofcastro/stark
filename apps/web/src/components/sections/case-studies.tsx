@@ -9,11 +9,12 @@ const CaseStudies = () => {
 			id: 1,
 			title: "Transformação Digital em Indústria",
 			company: "Indústria Metalúrgica",
-			description: "Implementação de infraestrutura cloud com automação e monitoramento",
+			description:
+				"Implementação de infraestrutura cloud com automação e monitoramento",
 			results: [
 				"Redução de 40% nos custos operacionais",
 				"Aumento de 99.95% de uptime",
-				"Redução de 60% no tempo de resposta a incidentes"
+				"Redução de 60% no tempo de resposta a incidentes",
 			],
 			industry: "Manufatura",
 			timeframe: "6 meses",
@@ -44,7 +45,7 @@ const CaseStudies = () => {
 			results: [
 				"Conformidade com normas do BACEN",
 				"100% de compliance com LGPD",
-				"Redução de 85% nos riscos de segurança"
+				"Redução de 85% nos riscos de segurança",
 			],
 			industry: "Finanças",
 			timeframe: "8 meses",
@@ -75,7 +76,7 @@ const CaseStudies = () => {
 			results: [
 				"99.99% de disponibilidade",
 				"Redução de 50% nos custos de infra",
-				"Melhoria de 70% na performance"
+				"Melhoria de 70% na performance",
 			],
 			industry: "Varejo",
 			timeframe: "4 meses",
@@ -102,11 +103,12 @@ const CaseStudies = () => {
 			id: 4,
 			title: "E-commerce de Alto Tráfego",
 			company: "E-commerce Nacional",
-			description: "Otimização de performance e segurança para plataforma de e-commerce",
+			description:
+				"Otimização de performance e segurança para plataforma de e-commerce",
 			results: [
 				"Aumento de 300% na velocidade de carregamento",
 				"Redução de 90% no tempo de checkout",
-				"Aumento de 150% nas conversões"
+				"Aumento de 150% nas conversões",
 			],
 			industry: "E-commerce",
 			timeframe: "3 meses",

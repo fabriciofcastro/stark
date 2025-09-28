@@ -7,7 +7,8 @@ const DataGovernance = () => {
 	const governanceAreas = [
 		{
 			title: "Proteção de Dados",
-			description: "Políticas rigorosas de proteção de dados pessoais e sensíveis conforme LGPD, GDPR e normas setoriais.",
+			description:
+				"Políticas rigorosas de proteção de dados pessoais e sensíveis conforme LGPD, GDPR e normas setoriais.",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -29,12 +30,13 @@ const DataGovernance = () => {
 				"Conformidade LGPD/GDPR",
 				"Classificação de dados",
 				"Políticas de retenção",
-				"Consentimento e transparência"
+				"Consentimento e transparência",
 			],
 		},
 		{
 			title: "Segurança da Informação",
-			description: "Estruturas de segurança baseadas nos frameworks ISO 27001, NIST e COBIT para proteção de ativos críticos.",
+			description:
+				"Estruturas de segurança baseadas nos frameworks ISO 27001, NIST e COBIT para proteção de ativos críticos.",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -56,12 +58,13 @@ const DataGovernance = () => {
 				"ISO 27001 e NIST CSF",
 				"Controles de acesso",
 				"Criptografia end-to-end",
-				"Monitoramento contínuo"
+				"Monitoramento contínuo",
 			],
 		},
 		{
 			title: "Auditoria e Compliance",
-			description: "Relatórios de auditoria trimestrais, testes de penetração e conformidade contínua com normas regulatórias.",
+			description:
+				"Relatórios de auditoria trimestrais, testes de penetração e conformidade contínua com normas regulatórias.",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -83,12 +86,13 @@ const DataGovernance = () => {
 				"Auditorias trimestrais",
 				"Testes de penetração",
 				"Relatórios de conformidade",
-				"Certificações internacionais"
+				"Certificações internacionais",
 			],
 		},
 		{
 			title: "Continuidade de Negócios",
-			description: "Planos de continuidade com RTO e RPO definidos, testados regularmente com simulações de desastre.",
+			description:
+				"Planos de continuidade com RTO e RPO definidos, testados regularmente com simulações de desastre.",
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +114,7 @@ const DataGovernance = () => {
 				"RTO e RPO definidos",
 				"Backup automatizado",
 				"Simulações de desastre",
-				"Recuperação rápida"
+				"Recuperação rápida",
 			],
 		},
 	];
@@ -144,8 +148,8 @@ const DataGovernance = () => {
 							className="h-full"
 						/>
 					))}
-          </div>
-          
+				</div>
+
 				{/* Frameworks de Compliance */}
 				<div className="bg-gradient-to-r from-neutral-900/50 to-neutral-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
 					<h3 className="text-xl font-bold text-white mb-6 text-center">
@@ -159,20 +163,20 @@ const DataGovernance = () => {
 							>
 								<div className="text-sm font-semibold text-white mb-1">
 									{framework.name}
-          </div>
+								</div>
 								<div className="text-xs text-success-400 mb-1">
 									{framework.status}
-          </div>
+								</div>
 								<div className="text-xs text-neutral-400">
 									{framework.level}
-            </div>
-          </div>
+								</div>
+							</div>
 						))}
-              </div>
-            </div>
-          </div>
+					</div>
+				</div>
+			</div>
 		</MinimalistSection>
-  );
+	);
 };
 
 export default DataGovernance;

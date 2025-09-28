@@ -33,12 +33,15 @@ const MinimalistCard = ({
 		switch (variant) {
 			case "featured":
 				return {
-					container: "relative group bg-gradient-to-br from-neutral-900/50 to-neutral-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10",
-					title: "text-xl font-bold text-white mb-2 group-hover:text-secondary-400 transition-colors duration-300",
+					container:
+						"relative group bg-gradient-to-br from-neutral-900/50 to-neutral-800/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10",
+					title:
+						"text-xl font-bold text-white mb-2 group-hover:text-secondary-400 transition-colors duration-300",
 					subtitle: "text-sm text-neutral-400 mb-4 font-medium",
 					description: "text-neutral-300 leading-relaxed mb-6",
 					icon: "w-12 h-12 text-secondary-400 mb-4 group-hover:text-secondary-300 transition-colors duration-300",
-					badge: "absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full",
+					badge:
+						"absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full",
 					features: "space-y-2 mb-6",
 					feature: "text-sm text-neutral-400 flex items-center",
 					featureIcon: "w-2 h-2 bg-secondary-500 rounded-full mr-3",
@@ -46,12 +49,15 @@ const MinimalistCard = ({
 				};
 			case "minimal":
 				return {
-					container: "relative group bg-neutral-900/30 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-white/10 transition-all duration-300 hover:bg-neutral-900/40",
-					title: "text-lg font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300",
+					container:
+						"relative group bg-neutral-900/30 backdrop-blur-sm border border-white/5 rounded-xl p-6 hover:border-white/10 transition-all duration-300 hover:bg-neutral-900/40",
+					title:
+						"text-lg font-semibold text-white mb-2 group-hover:text-primary-400 transition-colors duration-300",
 					subtitle: "text-xs text-neutral-500 mb-3 font-medium",
 					description: "text-neutral-400 text-sm leading-relaxed mb-4",
 					icon: "w-8 h-8 text-primary-400 mb-3 group-hover:text-primary-300 transition-colors duration-300",
-					badge: "absolute top-3 right-3 px-2 py-1 text-xs font-medium rounded-full",
+					badge:
+						"absolute top-3 right-3 px-2 py-1 text-xs font-medium rounded-full",
 					features: "space-y-1 mb-4",
 					feature: "text-xs text-neutral-500 flex items-center",
 					featureIcon: "w-1.5 h-1.5 bg-primary-500 rounded-full mr-2",
@@ -59,12 +65,15 @@ const MinimalistCard = ({
 				};
 			default:
 				return {
-					container: "relative group bg-gradient-to-br from-neutral-900/40 to-neutral-800/20 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-white/15 transition-all duration-400 hover:shadow-xl hover:shadow-primary-500/5",
-					title: "text-lg font-bold text-white mb-2 group-hover:text-accent-400 transition-colors duration-300",
+					container:
+						"relative group bg-gradient-to-br from-neutral-900/40 to-neutral-800/20 backdrop-blur-sm border border-white/8 rounded-xl p-6 hover:border-white/15 transition-all duration-400 hover:shadow-xl hover:shadow-primary-500/5",
+					title:
+						"text-lg font-bold text-white mb-2 group-hover:text-accent-400 transition-colors duration-300",
 					subtitle: "text-sm text-neutral-400 mb-3 font-medium",
 					description: "text-neutral-300 text-sm leading-relaxed mb-4",
 					icon: "w-10 h-10 text-accent-400 mb-3 group-hover:text-accent-300 transition-colors duration-300",
-					badge: "absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-full",
+					badge:
+						"absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-full",
 					features: "space-y-1.5 mb-4",
 					feature: "text-sm text-neutral-400 flex items-center",
 					featureIcon: "w-1.5 h-1.5 bg-accent-500 rounded-full mr-2",
@@ -78,26 +87,16 @@ const MinimalistCard = ({
 	const CardContent = () => (
 		<>
 			{/* Badge */}
-			{badge && (
-				<div className={`${styles.badge} ${badgeColor}`}>
-					{badge}
-				</div>
-			)}
+			{badge && <div className={`${styles.badge} ${badgeColor}`}>{badge}</div>}
 
 			{/* Icon */}
-			{icon && (
-				<div className={styles.icon}>
-					{icon}
-				</div>
-			)}
+			{icon && <div className={styles.icon}>{icon}</div>}
 
 			{/* Title */}
 			<h3 className={styles.title}>{title}</h3>
 
 			{/* Subtitle */}
-			{subtitle && (
-				<p className={styles.subtitle}>{subtitle}</p>
-			)}
+			{subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
 			{/* Description */}
 			<p className={styles.description}>{description}</p>
