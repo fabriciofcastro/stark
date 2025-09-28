@@ -126,7 +126,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
 				<div className="flex touch-pan-y">
 					{slides.map((s, idx) => (
 						<div className="min-w-0 flex-[0_0_100%]" key={`${s.title}-${idx}`}>
-							<div className="relative w-full h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-[95vh] min-h-[500px] max-h-[900px]">
+							<div className="relative w-full h-[calc(70vh-5rem)] sm:h-[calc(80vh-5rem)] md:h-[calc(85vh-5rem)] lg:h-[calc(90vh-5rem)] xl:h-[calc(95vh-5rem)] min-h-[420px] max-h-[820px]">
 								<div
 									className="absolute inset-0 will-change-transform"
 									style={{ transform: `translateY(${parallaxY}px)` }}

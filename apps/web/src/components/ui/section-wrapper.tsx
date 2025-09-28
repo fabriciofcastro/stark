@@ -27,7 +27,8 @@ const SectionWrapper = ({
 		switch (variant) {
 			case "hero":
 				return {
-					container: "relative h-[70vh] sm:h-[80vh] md:h-[85vh] lg:h-[90vh] xl:h-[95vh] min-h-[500px] max-h-[900px]",
+					container:
+						"relative h-[calc(70vh-5rem)] sm:h-[calc(80vh-5rem)] md:h-[calc(85vh-5rem)] lg:h-[calc(90vh-5rem)] xl:h-[calc(95vh-5rem)] min-h-[420px] max-h-[820px]",
 					background:
 						"bg-gradient-to-br from-primary-900 via-neutral-950 to-accent-900",
 					overlay: "absolute inset-0 bg-black/20",
