@@ -55,17 +55,20 @@ const About = () => {
 
 	const clientFocusedValues = [
 		{
+			id: 1,
 			icon: "🚀",
 			title: "Resultados Medidos",
 			description: "Cada projeto entrega ROI comprovado e KPIs mensuráveis",
 		},
 		{
+			id: 2,
 			icon: "🛡️",
 			title: "Proteção Empresarial",
 			description:
 				"Segurança que previne perdas financeiras e danos à reputação",
 		},
 		{
+			id: 3,
 			icon: "⏱️",
 			title: "Tempo Que Vale Ouro",
 			description: "Soluções que aumentam produtividade e eliminam downtime",
@@ -74,18 +77,21 @@ const About = () => {
 
 	const transformations = [
 		{
+			id: 1,
 			icon: "📉➡️📈",
 			title: "Da Crise à Estabilidade",
 			description:
 				"Empresa X estava perdendo R$50k/mês com downtime. Hoje economiza R$120k/ano com nosso monitoring proativo.",
 		},
 		{
+			id: 2,
 			icon: "🛡️",
 			title: "Segurança que Protege",
 			description:
 				"Comércio Y evitou multa de R$200k com nossa implementação LGPD completa em 3 semanas.",
 		},
 		{
+			id: 3,
 			icon: "🚀",
 			title: "Crescimento Sem Interrupções",
 			description:
@@ -286,7 +292,7 @@ const About = () => {
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 						{transformations.map((transformation, index) => (
 							<div
-								key={index}
+								key={transformation.id}
 								className="bg-gradient-to-br from-brand-green-800/30 to-brand-gold-500/10 rounded-xl p-6 border border-white/10 hover:border-brand-gold-500/30 transition-all duration-300 group hover:-translate-y-2"
 							>
 								<div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
