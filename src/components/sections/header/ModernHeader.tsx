@@ -224,16 +224,20 @@ const ModernHeader = () => {
 									<div
 										className={`hidden sm:block transition-all duration-300 ${
 											isScrolled
-												? "opacity-0 max-w-0 overflow-hidden"
+												? "opacity-100 max-w-none"
 												: "opacity-100 max-w-none"
 										}`}
 									>
-										<h1 className="text-xl lg:text-2xl font-bold text-white group-hover:text-brand-gold-300 transition-colors duration-300">
+										<h1 className={`font-bold text-white group-hover:text-brand-gold-300 transition-all duration-300 ${
+											isScrolled ? "text-lg" : "text-xl lg:text-2xl"
+										}`}>
 											STARK
 										</h1>
-										<p className="text-xs lg:text-sm text-brand-gold-300 font-medium">
-											GESTÃO EM TECNOLOGIA
-										</p>
+										{!isScrolled && (
+											<p className="text-xs lg:text-sm text-brand-gold-300 font-medium">
+												GESTÃO EM TECNOLOGIA
+											</p>
+										)}
 									</div>
 								</Link>
 							</motion.div>
@@ -298,18 +302,18 @@ const ModernHeader = () => {
 										<Button
 											className={`font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ${
 												isScrolled
-													? "bg-brand-gold-500 hover:bg-brand-gold-600 text-white px-4 py-2"
+													? "bg-brand-gold-500 hover:bg-brand-gold-600 text-white px-3 py-1.5"
 													: "bg-gradient-to-r from-brand-gold-500 to-brand-gold-600 hover:from-brand-gold-600 hover:to-brand-gold-700 text-white px-6 py-2"
 											}`}
 										>
 											<Phone
-												className={`mr-2 transition-all duration-300 ${
-													isScrolled ? "w-4 h-4" : "w-4 h-4"
+												className={`transition-all duration-300 ${
+													isScrolled ? "w-3 h-3 mr-1.5" : "w-4 h-4 mr-2"
 												}`}
 											/>
 											<span
 												className={`transition-all duration-300 ${
-													isScrolled ? "text-sm" : "text-sm"
+													isScrolled ? "text-xs" : "text-sm"
 												}`}
 											>
 												{isScrolled ? "Contato" : "Fale Conosco"}
