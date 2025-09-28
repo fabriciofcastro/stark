@@ -1,49 +1,49 @@
 {
-  "buildCommand": "cd ../.. && pnpm build --filter=web",
-  "outputDirectory": "apps/web/.next",
-  "installCommand": "cd ../.. && pnpm install",
-  "framework": "nextjs",
-  "functions": {
-    "apps/web/src/app/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "env": {
-    "NEXT_PUBLIC_CHATWOOT_BASE_URL": "@next_public_chatwoot_base_url",
-    "NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "@next_public_chatwoot_website_token",
-    "NEXT_PUBLIC_WHATSAPP_NUMBER": "@next_public_whatsapp_number",
-    "NEXT_PUBLIC_GA_MEASUREMENT_ID": "@next_public_ga_measurement_id",
-    "NEXT_PUBLIC_API_URL": "@next_public_api_url"
-  },
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/contato",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/contato/",
-      "destination": "/contact",
-      "permanent": true
-    }
-  ]
+	"buildCommand": "cd ../.. && pnpm build --filter=web",
+	"outputDirectory": "apps/web/.next",
+	"installCommand": "cd ../.. && pnpm install",
+	"framework": "nextjs",
+	"functions": {
+		"apps/web/src/app/api/**/*.ts": {
+			"runtime": "nodejs18.x"
+		}
+	},
+	"env": {
+		"NEXT_PUBLIC_CHATWOOT_BASE_URL": "@next_public_chatwoot_base_url",
+		"NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "@next_public_chatwoot_website_token",
+		"NEXT_PUBLIC_WHATSAPP_NUMBER": "@next_public_whatsapp_number",
+		"NEXT_PUBLIC_GA_MEASUREMENT_ID": "@next_public_ga_measurement_id",
+		"NEXT_PUBLIC_API_URL": "@next_public_api_url"
+	},
+	"headers": [
+		{
+			"source": "/(.*)",
+			"headers": [
+				{
+					"key": "X-Content-Type-Options",
+					"value": "nosniff"
+				},
+				{
+					"key": "X-Frame-Options",
+					"value": "DENY"
+				},
+				{
+					"key": "X-XSS-Protection",
+					"value": "1; mode=block"
+				}
+			]
+		}
+	],
+	"redirects": [
+		{
+			"source": "/contato",
+			"destination": "/contact",
+			"permanent": true
+		},
+		{
+			"source": "/contato/",
+			"destination": "/contact",
+			"permanent": true
+		}
+	]
 }
