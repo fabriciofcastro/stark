@@ -1,0 +1,11 @@
+{
+  "project": "fernando",
+  "files": [
+    "workspace/src/app.module.ts",
+    "workspace/src/main.ts",
+    "workspace/src/users/user.service.ts",
+    "workspace/src/users/user.controller.ts",
+    "workspace/src/orders/order.service.ts",
+    "workspace/src/orders/order.controller.ts"
+  ]
+}
