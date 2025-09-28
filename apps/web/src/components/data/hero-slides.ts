@@ -1,11 +1,11 @@
-import type { Slide } from "@/components/ui/hero-carousel";
+import type { Slide } from "@/components/ui/hero-embla";
 import { logEvent } from "@/lib/gtag";
 
 export const heroSlides: Slide[] = [
   {
     // Governança de TI
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2000&auto=format&fit=crop&sat=-15",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop&sat=-20",
     title: "Governança de TI",
     subtitle:
       "Estruturamos processos, políticas e controles alinhados a COBIT, ITIL, ISO 27001 e NIST.",
@@ -17,7 +17,7 @@ export const heroSlides: Slide[] = [
   {
     // Criação de Sites
     image:
-      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2000&auto=format&fit=crop&sat=-20",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop&sat=-15",
     title: "Criação de Sites Profissionais",
     subtitle: "Performance, SEO técnico e conversão orientados a resultados.",
     ctaPrimary: {
@@ -47,7 +47,7 @@ export const heroSlides: Slide[] = [
   {
     // Segurança / Cibersegurança
     image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop&sat=-25",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000&auto=format&fit=crop&sat=-25",
     title: "Segurança em primeiro lugar",
     subtitle: "LGPD, NIST/ISO, backup, DR e resposta a incidentes.",
     ctaPrimary: {
@@ -58,7 +58,7 @@ export const heroSlides: Slide[] = [
   {
     // Engajamento Digital
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop&sat=-10",
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop&sat=-15",
     title: "Engajamento Digital",
     subtitle: "Estratégias completas para aumentar conversão e retenção dos visitantes.",
     ctaPrimary: {

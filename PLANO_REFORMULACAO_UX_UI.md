@@ -242,6 +242,11 @@ Criar um sistema de design verdadeiramente harmonioso com efeitos visuais avanç
 - [ ] onde for clicavel usar cursor pointer, e visualmente percepitivel
 - [ ] Animações complexas
 - [ ] Otimizações de performance
+- [ ] Backgrounds animados
+- [ ] Bordas animadas
+- [ ] Efeitos de reflexo
+- [ ] Botões com destaque
+- [ ] Ajustar cores de todos os botões de todas as páginas 
 
 ### **Fase 4: Refinamento (Semana 4)**
 - [ ] Testes de usabilidade

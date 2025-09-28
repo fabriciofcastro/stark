@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "./button";
 import { EnhancedButton } from "./enhanced-button";
 
-type Slide = {
+export type Slide = {
 	image: string;
 	title: string;
 	subtitle: string;
