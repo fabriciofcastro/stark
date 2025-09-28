@@ -126,7 +126,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
 				<div className="flex touch-pan-y">
 					{slides.map((s, idx) => (
 						<div className="min-w-0 flex-[0_0_100%]" key={`${s.title}-${idx}`}>
-							<div className="relative w-full h-[65svh] md:h-[72svh] lg:h-[78svh] xl:h-[82svh] min-h-[520px] max-h-[820px]">
+							<div className="relative w-full h-[100vh] min-h-[600px]">
 								<div
 									className="absolute inset-0 will-change-transform"
 									style={{ transform: `translateY(${parallaxY}px)` }}
@@ -168,7 +168,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
 											{s.ctaPrimary && (
 												<EnhancedButton
 													variant="primary"
-													effect="border-animated"
+													effect="none"
 													className="shadow-lg shadow-black/30 hover:translate-y-[0.5px] transition-transform focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black/20"
 													onClick={s.ctaPrimary.onClick}
 												>
@@ -178,7 +178,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
 											{s.ctaSecondary && (
 												<EnhancedButton
 													variant="outline"
-													effect="shimmer"
+													effect="none"
 													className="hover:bg-white/10 text-white border-white/20 transition"
 													onClick={s.ctaSecondary.onClick}
 												>
@@ -198,49 +198,49 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
 			<div className="absolute inset-x-0 bottom-0 z-40 px-4 md:px-6 pb-4 md:pb-6 pointer-events-none">
 				<div className="grid grid-cols-3 items-end gap-3">
 					<div className="flex justify-start">
-						<EnhancedButton
-							type="button"
-							aria-label="Slide anterior"
-							variant="secondary"
-							size="sm"
-							effect="glow"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
-							onClick={scrollPrev}
-						>
-							<ChevronLeft className="h-5 w-5" aria-hidden="true" />
-						</EnhancedButton>
+					<EnhancedButton
+						type="button"
+						aria-label="Slide anterior"
+						variant="secondary"
+						size="sm"
+						effect="none"
+						className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
+						onClick={scrollPrev}
+					>
+						<ChevronLeft className="h-5 w-5" aria-hidden="true" />
+					</EnhancedButton>
 					</div>
 					<div className="flex justify-center">
-						<EnhancedButton
-							type="button"
-							aria-label={userPaused ? "Reproduzir" : "Pausar"}
-							variant="secondary"
-							size="sm"
-							effect="pulse"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white/90 hover:bg-white/20"
-							onClick={() => setUserPaused((p) => !p)}
-							onKeyDown={(e) => {
-								if (e.key === "Enter" || e.key === " ") {
-									e.preventDefault();
-									setUserPaused((p) => !p);
-								}
-							}}
-						>
-							{userPaused ? "▶" : "⏸"}
-						</EnhancedButton>
+					<EnhancedButton
+						type="button"
+						aria-label={userPaused ? "Reproduzir" : "Pausar"}
+						variant="secondary"
+						size="sm"
+						effect="none"
+						className="pointer-events-auto rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white/90 hover:bg-white/20"
+						onClick={() => setUserPaused((p) => !p)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter" || e.key === " ") {
+								e.preventDefault();
+								setUserPaused((p) => !p);
+							}
+						}}
+					>
+						{userPaused ? "▶" : "⏸"}
+					</EnhancedButton>
 					</div>
 					<div className="flex justify-end">
-						<EnhancedButton
-							type="button"
-							aria-label="Próximo slide"
-							variant="secondary"
-							size="sm"
-							effect="glow"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
-							onClick={scrollNext}
-						>
-							<ChevronRight className="h-5 w-5" aria-hidden="true" />
-						</EnhancedButton>
+					<EnhancedButton
+						type="button"
+						aria-label="Próximo slide"
+						variant="secondary"
+						size="sm"
+						effect="none"
+						className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
+						onClick={scrollNext}
+					>
+						<ChevronRight className="h-5 w-5" aria-hidden="true" />
+					</EnhancedButton>
 					</div>
 				</div>
 				<div className="mt-3">
