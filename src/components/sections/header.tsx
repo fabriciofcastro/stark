@@ -4,7 +4,7 @@
 import { ModernHeader } from "./header/ModernHeader";
 
 const Header = () => {
-  return <ModernHeader />;
+	return <ModernHeader />;
 };
 
 export { Header };
