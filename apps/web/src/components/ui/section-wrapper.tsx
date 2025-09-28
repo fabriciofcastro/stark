@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { GeometricPattern } from "./geometric-pattern";
+import { DynamicBackground } from "./dynamic-background";
 
 interface SectionWrapperProps {
 	variant:
@@ -289,26 +290,13 @@ const SectionWrapper = ({
 		}
 	};
 
-
 	return (
-		<div className={`${styles.container} ${className}`}>
-			{/* Background */}
-			<div className={`absolute inset-0 ${styles.background}`} />
-
-			{/* Overlay */}
-			<div className={styles.overlay} />
-
-			{/* Animated Shapes */}
-			<div className="absolute inset-0 pointer-events-none overflow-hidden">
-				{styles.shapes.map((shape, index) => (
-					<motion.div
-						key={index}
-						className={`absolute ${shape.size} ${shape.position} bg-${shape.color} rounded-full blur-3xl`}
-						{...getAnimationProps(shape.animation)}
-					/>
-				))}
-			</div>
-
+		<DynamicBackground
+			variant={variant}
+			className={`${styles.container} ${className}`}
+			intensity="medium"
+			speed="medium"
+		>
 			{/* Pattern Overlay */}
 			{styles.pattern !== "none" && (
 				<GeometricPattern
@@ -323,7 +311,7 @@ const SectionWrapper = ({
 
 			{/* Content */}
 			<div className={styles.content}>{children}</div>
-		</div>
+		</DynamicBackground>
 	);
 };
 

@@ -4,91 +4,92 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface AnimatedBorderProps {
-  children: React.ReactNode;
-  variant?: "aurora" | "gradient" | "pulse" | "shimmer" | "glow";
-  className?: string;
-  intensity?: "low" | "medium" | "high";
+	children: React.ReactNode;
+	variant?: "aurora" | "gradient" | "pulse" | "shimmer" | "glow";
+	className?: string;
+	intensity?: "low" | "medium" | "high";
 }
 
 const AnimatedBorder = ({
-  children,
-  variant = "aurora",
-  className = "",
-  intensity = "medium",
+	children,
+	variant = "aurora",
+	className = "",
+	intensity = "medium",
 }: AnimatedBorderProps) => {
-  const getIntensityClasses = () => {
-    switch (intensity) {
-      case "low":
-        return "opacity-30";
-      case "high":
-        return "opacity-80";
-      default:
-        return "opacity-50";
-    }
-  };
+	const getIntensityClasses = () => {
+		switch (intensity) {
+			case "low":
+				return "opacity-30";
+			case "high":
+				return "opacity-80";
+			default:
+				return "opacity-50";
+		}
+	};
 
-  const getVariantStyles = () => {
-    switch (variant) {
-      case "aurora":
-        return {
-          background: "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)",
-          animation: "aurora-flow 3s ease infinite",
-          size: "400% 400%",
-        };
-      case "gradient":
-        return {
-          background: "linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c)",
-          animation: "gradient-shift 2s ease infinite",
-          size: "200% 200%",
-        };
-      case "pulse":
-        return {
-          background: "linear-gradient(45deg, #667eea, #764ba2)",
-          animation: "pulse-glow 2s ease-in-out infinite",
-          size: "100% 100%",
-        };
-      case "shimmer":
-        return {
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
-          animation: "shimmer-sweep 2s ease-in-out infinite",
-          size: "200% 100%",
-        };
-      case "glow":
-        return {
-          background: "linear-gradient(45deg, #667eea, #764ba2)",
-          animation: "glow-pulse 2s ease-in-out infinite",
-          size: "100% 100%",
-        };
-      default:
-        return {
-          background: "linear-gradient(45deg, #667eea, #764ba2)",
-          animation: "gradient-shift 2s ease infinite",
-          size: "200% 200%",
-        };
-    }
-  };
+	const getVariantStyles = () => {
+		switch (variant) {
+			case "aurora":
+				return {
+					background:
+						"linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57)",
+					animation: "aurora-flow 3s ease infinite",
+					size: "400% 400%",
+				};
+			case "gradient":
+				return {
+					background:
+						"linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c)",
+					animation: "gradient-shift 2s ease infinite",
+					size: "200% 200%",
+				};
+			case "pulse":
+				return {
+					background: "linear-gradient(45deg, #667eea, #764ba2)",
+					animation: "pulse-glow 2s ease-in-out infinite",
+					size: "100% 100%",
+				};
+			case "shimmer":
+				return {
+					background:
+						"linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
+					animation: "shimmer-sweep 2s ease-in-out infinite",
+					size: "200% 100%",
+				};
+			case "glow":
+				return {
+					background: "linear-gradient(45deg, #667eea, #764ba2)",
+					animation: "glow-pulse 2s ease-in-out infinite",
+					size: "100% 100%",
+				};
+			default:
+				return {
+					background: "linear-gradient(45deg, #667eea, #764ba2)",
+					animation: "gradient-shift 2s ease infinite",
+					size: "200% 200%",
+				};
+		}
+	};
 
-  const styles = getVariantStyles();
+	const styles = getVariantStyles();
 
-  return (
-    <div className={`relative ${className}`}>
-      {/* Animated Border */}
-      <div
-        className={`absolute inset-0 rounded-lg ${getIntensityClasses()}`}
-        style={{
-          background: styles.background,
-          backgroundSize: styles.size,
-          animation: styles.animation,
-        }}
-      />
-      
-      {/* Content */}
-      <div className="relative z-10">
-        {children}
-      </div>
+	return (
+		<div className={`relative ${className}`}>
+			{/* Animated Border */}
+			<div
+				className={`absolute inset-0 rounded-lg ${getIntensityClasses()}`}
+				style={{
+					background: styles.background,
+					backgroundSize: styles.size,
+					animation: styles.animation,
+				}}
+			/>
 
-      {/* CSS Animations */}
-      <style jsx>{`
+			{/* Content */}
+			<div className="relative z-10">{children}</div>
+
+			{/* CSS Animations */}
+			<style jsx>{`
         @keyframes aurora-flow {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -126,8 +127,8 @@ const AnimatedBorder = ({
           }
         }
       `}</style>
-    </div>
-  );
+		</div>
+	);
 };
 
 export { AnimatedBorder };

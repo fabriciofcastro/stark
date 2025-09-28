@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { AnimatedBorder } from "./animated-border";
 import { ReflectionEffect } from "./reflection-effect";
+import { AnimatedIcon } from "./animated-icon";
 
 interface MinimalistCardProps {
 	title: string;
@@ -92,7 +93,18 @@ const MinimalistCard = ({
 			{badge && <div className={`${styles.badge} ${badgeColor}`}>{badge}</div>}
 
 			{/* Icon */}
-			{icon && <div className={styles.icon}>{icon}</div>}
+			{icon && (
+				<AnimatedIcon
+					size="lg"
+					effect="glow"
+					color="secondary"
+					intensity="medium"
+					hover={true}
+					className={styles.icon}
+				>
+					{icon}
+				</AnimatedIcon>
+			)}
 
 			{/* Title */}
 			<h3 className={styles.title}>{title}</h3>
