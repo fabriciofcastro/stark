@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  userData  Json
+  context   Json
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages         ChatMessage[]
+  escalationTickets EscalationTicket[]
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  sessionId String
+  content   String
+  type      String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  session ChatSession @relation(fields: [sessionId], references: [sessionId])
+
+  @@map("chat_messages")
+}
+
+model EscalationTicket {
+  id        String   @id @default(cuid())
+  sessionId String
+  reason    String
+  priority  String
+  userData  Json
+  status    String   @default("pending")
+  assignedTo String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  session ChatSession @relation(fields: [sessionId], references: [sessionId])
+
+  @@map("escalation_tickets")
+}
+
+model ContactForm {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  company   String?
+  service   String
+  urgency   String?
+  message   String
+  source    String   @default("website")
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_forms")
+}
