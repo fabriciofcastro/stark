@@ -138,21 +138,21 @@ const MinimalistCard = ({
 		</>
 	);
 
-		return (
-			<motion.div
-				className={`${styles.container} ${className}`}
-				whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(0,0,0,0.15)" }}
-				transition={{ duration: 0.3 }}
-			>
-				{link ? (
-					<Link href={link} className="block cursor-pointer">
-						<CardContent />
-					</Link>
-				) : (
+	return (
+		<motion.div
+			className={`${styles.container} ${className}`}
+			whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(0,0,0,0.15)" }}
+			transition={{ duration: 0.3 }}
+		>
+			{link ? (
+				<Link href={link} className="block cursor-pointer">
 					<CardContent />
-				)}
-			</motion.div>
-		);
+				</Link>
+			) : (
+				<CardContent />
+			)}
+		</motion.div>
+	);
 };
 
 export { MinimalistCard };

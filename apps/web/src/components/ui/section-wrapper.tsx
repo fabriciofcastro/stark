@@ -62,9 +62,9 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24",
 					background:
-						"bg-gradient-to-b from-transparent via-primary-800/5 to-transparent",
+						"bg-gradient-to-b from-transparent via-primary-800/20 to-transparent",
 					overlay:
-						"absolute inset-0 bg-gradient-to-r from-primary-900/10 via-transparent to-accent-900/10",
+						"absolute inset-0 bg-gradient-to-r from-primary-900/15 via-transparent to-accent-900/15",
 					shapes: [
 						{
 							type: "blob",
@@ -89,9 +89,9 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24 border-y border-white/5",
 					background:
-						"bg-gradient-to-br from-primary-800/10 via-neutral-900/20 to-accent-800/10",
+						"bg-gradient-to-br from-primary-800/15 via-neutral-900/30 to-accent-800/15",
 					overlay:
-						"absolute inset-0 bg-gradient-to-l from-accent-900/5 to-primary-900/5",
+						"absolute inset-0 bg-gradient-to-l from-accent-900/8 to-primary-900/8",
 					shapes: [
 						{
 							type: "blob",
@@ -116,9 +116,9 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24",
 					background:
-						"bg-gradient-to-b from-accent-800/10 via-transparent to-primary-800/10",
+						"bg-gradient-to-b from-accent-800/20 via-transparent to-primary-800/20",
 					overlay:
-						"absolute inset-0 bg-gradient-to-t from-primary-900/5 to-accent-900/5",
+						"absolute inset-0 bg-gradient-to-t from-primary-900/8 to-accent-900/8",
 					shapes: [
 						{
 							type: "circle",
@@ -142,9 +142,9 @@ const SectionWrapper = ({
 			case "cases":
 				return {
 					container: "relative py-24 border-y border-white/5",
-					background: "bg-gradient-to-b from-transparent to-primary-800/15",
+					background: "bg-gradient-to-b from-transparent to-primary-800/25",
 					overlay:
-						"absolute inset-0 bg-gradient-to-br from-accent-900/5 via-transparent to-primary-900/5",
+						"absolute inset-0 bg-gradient-to-br from-accent-900/8 via-transparent to-primary-900/8",
 					shapes: [
 						{
 							type: "blob",
@@ -176,9 +176,9 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24",
 					background:
-						"bg-gradient-to-br from-primary-800/15 via-accent-800/10 to-transparent",
+						"bg-gradient-to-br from-primary-800/20 via-accent-800/20 to-transparent",
 					overlay:
-						"absolute inset-0 bg-gradient-to-l from-primary-900/5 to-accent-900/5",
+						"absolute inset-0 bg-gradient-to-l from-primary-900/8 to-accent-900/8",
 					shapes: [
 						{
 							type: "blob",
@@ -203,9 +203,9 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24 border-y border-white/5",
 					background:
-						"bg-gradient-to-br from-primary-800/15 via-neutral-900/20 to-accent-800/15",
+						"bg-gradient-to-br from-primary-800/20 via-neutral-900/30 to-accent-800/20",
 					overlay:
-						"absolute inset-0 bg-gradient-to-t from-neutral-950/10 to-transparent",
+						"absolute inset-0 bg-gradient-to-t from-neutral-950/15 to-transparent",
 					shapes: [
 						{
 							type: "circle",
