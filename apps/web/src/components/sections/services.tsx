@@ -1,10 +1,9 @@
-// components/sections/services-section.jsx
 "use client";
 
-import Link from "next/link";
+import { MinimalistSection } from "@/components/ui/minimalist-section";
+import { MinimalistCard } from "@/components/ui/minimalist-card";
 
 const Services = () => {
-	// Apenas 4 serviços principais com destaque visual
 	const featuredServices = [
 		{
 			title: "Suporte Técnico Empresarial",
@@ -31,7 +30,7 @@ const Services = () => {
 			features: ["Monitoramento 24/7", "SLA garantido", "Equipe especializada"],
 			link: "/suporte-tecnico-empresarial",
 			badge: "Popular",
-			badgeColor: "bg-green-500",
+			badgeColor: "bg-success-500",
 		},
 		{
 			title: "Consultoria Tecnológica",
@@ -62,7 +61,7 @@ const Services = () => {
 			],
 			link: "/consultoria-tecnologica",
 			badge: "Recomendado",
-			badgeColor: "bg-blue-500",
+			badgeColor: "bg-info-500",
 		},
 		{
 			title: "Cloud & Infraestrutura",
@@ -93,7 +92,7 @@ const Services = () => {
 			],
 			link: "/cloud-vps-linux",
 			badge: "Novo",
-			badgeColor: "bg-purple-500",
+			badgeColor: "bg-accent-500",
 		},
 		{
 			title: "Cibersegurança",
@@ -124,128 +123,33 @@ const Services = () => {
 			],
 			link: "/cyberseguranca",
 			badge: "Essencial",
-			badgeColor: "bg-red-500",
+			badgeColor: "bg-error-500",
 		},
 	];
 
 	return (
-		<section className="py-20 container-px reveal" id="servicos">
-			<div className="max-w-7xl mx-auto">
-				{/* Header */}
-				<div className="text-center mb-16">
-					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-gold-500/10 border border-brand-gold-500/20 mb-6">
-						<span className="text-brand-gold-400 text-sm font-medium">
-							✨ Nossos Serviços Principais
-						</span>
-					</div>
-					<h3 className="mb-4 font-bold text-3xl md:text-4xl text-white">
-						Soluções Tecnológicas Completas
-					</h3>
-					<p className="text-xl text-gray-300 max-w-2xl mx-auto">
-						Serviços especializados para atender todas as necessidades da sua
-						infraestrutura de TI
-					</p>
-				</div>
-
-				{/* Services Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-					{featuredServices.map((service) => (
-						<Link
-							key={service.title}
-							href={service.link}
-							className="group relative bg-card rounded-xl p-6 border border-white/10 hover:border-brand-gold-500/30 transition-all duration-300 hover:-translate-y-2 shadow-soft"
-						>
-							{/* Badge */}
-							<div
-								className={`absolute -top-2 -right-2 px-3 py-1 rounded-full text-xs font-medium text-black ${service.badgeColor}`}
-							>
-								{service.badge}
-							</div>
-
-							{/* Icon */}
-							<div className="w-16 h-16 rounded-lg flex items-center justify-center mb-6 text-brand-gold-500 border border-white/20 bg-brand-green-700/30 group-hover:bg-brand-gold-500/20 transition-colors">
-								{service.icon}
-							</div>
-
-							{/* Title and Subtitle */}
-							<h4 className="text-lg font-bold text-white mb-2 group-hover:text-brand-gold-500 transition-colors">
-								{service.title}
-							</h4>
-							<div className="text-xs text-brand-gold-500 mb-3 font-medium">
-								{service.subtitle}
-							</div>
-
-							{/* Description */}
-							<p className="text-brand-gray-300 text-sm mb-4">
-								{service.description}
-							</p>
-
-							{/* Features */}
-							<ul className="text-xs text-brand-gray-400 space-y-1">
-								{service.features.map((feature) => (
-									<li key={feature} className="flex items-center">
-										<svg
-											className="w-4 h-4 mr-2 text-brand-gold-500"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-											aria-hidden="true"
-											focusable="false"
-										>
-											<path
-												fillRule="evenodd"
-												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										{feature}
-									</li>
-								))}
-							</ul>
-						</Link>
-					))}
-				</div>
-
-				{/* CTA Section */}
-				<div className="text-center bg-gradient-to-r from-brand-green-800/50 via-brand-gold-500/10 to-brand-green-800/50 rounded-2xl p-8 border border-white/10 backdrop-blur-sm">
-					<h4 className="text-2xl font-bold text-white mb-4">
-						Precisa de uma solução personalizada?
-					</h4>
-					<p className="text-brand-gray-300 mb-8 max-w-2xl mx-auto">
-						Explore nosso catálogo completo de serviços ou converse com nossos
-						especialistas para encontrar a solução ideal para sua empresa.
-					</p>
-					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<Link
-							href="/services"
-							className="group inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-black bg-brand-gold-500 hover:bg-brand-gold-600 transition-all duration-300 shadow-lg hover:shadow-brand-gold-500/25 hover:-translate-y-1"
-						>
-							<span>Ver Todos os Serviços</span>
-							<svg
-								className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-								aria-hidden="true"
-							>
-								<title>Seta para direita</title>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M17 8l4 4m0 0l-4 4m4-4H3"
-								/>
-							</svg>
-						</Link>
-						<Link
-							href="/contact"
-							className="inline-flex items-center justify-center px-8 py-4 border border-brand-gold-500 text-base font-medium rounded-xl text-brand-gold-400 hover:bg-brand-gold-500/10 transition-all duration-300 hover:-translate-y-1"
-						>
-							Falar com Especialista
-						</Link>
-					</div>
-				</div>
+		<MinimalistSection
+			subtitle="Nossos Serviços"
+			title="Soluções Tecnológicas Completas"
+			description="Serviços especializados para atender todas as necessidades da sua infraestrutura de TI"
+		>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+				{featuredServices.map((service, index) => (
+					<MinimalistCard
+						key={index}
+						title={service.title}
+						subtitle={service.subtitle}
+						description={service.description}
+						icon={service.icon}
+						badge={service.badge}
+						badgeColor={service.badgeColor}
+						features={service.features}
+						link={service.link}
+						variant={index === 0 ? "featured" : "default"}
+					/>
+				))}
 			</div>
-		</section>
+		</MinimalistSection>
 	);
 };
 

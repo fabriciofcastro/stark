@@ -1,5 +1,8 @@
 "use client";
 
+import { MinimalistSection } from "@/components/ui/minimalist-section";
+import { MinimalistCard } from "@/components/ui/minimalist-card";
+
 const TechnicalExpertise = () => {
 	const expertiseAreas = [
 		{
@@ -14,6 +17,23 @@ const TechnicalExpertise = () => {
 				"Políticas de segurança, backup e acesso",
 				"Conformidade LGPD: DPA, registro de tratamento",
 			],
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Governança</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+					/>
+				</svg>
+			),
 		},
 		{
 			title: "Criação de Sites",
@@ -27,6 +47,23 @@ const TechnicalExpertise = () => {
 				"Sites responsivos e PWA",
 				"Análise e otimização de conversão",
 			],
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Desenvolvimento Web</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+					/>
+				</svg>
+			),
 		},
 		{
 			title: "Engajamento Digital",
@@ -39,6 +76,23 @@ const TechnicalExpertise = () => {
 				"Chatbots e automação",
 				"Relatórios e métricas personalizadas",
 			],
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Engajamento</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+					/>
+				</svg>
+			),
 		},
 		{
 			title: "E-mail Profissional",
@@ -48,119 +102,49 @@ const TechnicalExpertise = () => {
 				"E-mail Exchange e G Suite",
 				"Configuração e migração de domínios",
 				"Proteção contra SPAM e phishing",
-				"Backup e recuperação de e-mails",
-				"Integração com CRMs e sistemas",
+				"Arquivamento e backup de e-mails",
+				"Políticas de retenção e compliance",
 			],
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de E-mail</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+					/>
+				</svg>
+			),
 		},
 	];
 
 	return (
-		<section className="py-20 container-px reveal">
-			<div className="max-w-7xl mx-auto">
-				{/* Header */}
-				<div className="text-center mb-16">
-					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-gold-500/10 border border-brand-gold-500/20 mb-6">
-						<span className="text-brand-gold-400 text-sm font-medium">
-							🔧 Nossa Expertise Técnica
-						</span>
-					</div>
-					<h3 className="mb-4 font-bold text-3xl md:text-4xl text-white">
-						Competências Especializadas
-					</h3>
-					<p className="text-xl text-gray-300 max-w-2xl mx-auto">
-						Habilidades técnicas avançadas para resolver os desafios
-						tecnológicos mais complexos
-					</p>
-				</div>
-
-				{/* Expertise Areas Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-					{expertiseAreas.map((area, index) => (
-						<div
-							key={area.title}
-							className="bg-gradient-to-br from-card to-brand-green-800/30 rounded-2xl p-8 border border-white/10 hover:border-brand-gold-500/30 transition-all duration-500 hover:-translate-y-2"
-						>
-							<h4 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-								<span className="text-3xl">
-									{index === 0 && "📋"}
-									{index === 1 && "🌐"}
-									{index === 2 && "📈"}
-									{index === 3 && "📧"}
-								</span>
-								{area.title}
-							</h4>
-							<p className="text-brand-gray-300 mb-6 text-sm">
-								{area.description}
-							</p>
-							<ul className="text-sm text-brand-gray-400 space-y-2">
-								{area.services.map((service) => (
-									<li key={service} className="flex items-start">
-										<svg
-											className="w-4 h-4 mt-1 mr-3 text-brand-gold-500 flex-shrink-0"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-											aria-hidden="true"
-											focusable="false"
-										>
-											<path
-												fillRule="evenodd"
-												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										<span>{service}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					))}
-				</div>
-
-				{/* CTA */}
-				<div className="mt-16 text-center">
-					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-						<span className="text-gray-400 text-sm font-medium">
-							💬 Quer saber mais sobre nossas especialidades?
-						</span>
-					</div>
-					<h4 className="text-2xl font-bold text-white mb-4">
-						Converse com um Especialista
-					</h4>
-					<p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-						Nossa equipe técnica está pronta para discutir suas necessidades
-						específicas e encontrar as melhores soluções para sua empresa.
-					</p>
-					<div className="flex flex-col sm:flex-row gap-4 justify-center">
-						<a
-							href="/contact"
-							className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-black bg-brand-gold-500 hover:bg-brand-gold-600 transition-all duration-300 shadow-lg hover:shadow-brand-gold-500/25 hover:-translate-y-1"
-						>
-							<span>Agendar Consulta Técnica</span>
-							<svg
-								className="w-5 h-5 ml-2"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-								aria-hidden="true"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M17 8l4 4m0 0l-4 4m4-4H3"
-								/>
-							</svg>
-						</a>
-						<a
-							href="/services"
-							className="inline-flex items-center justify-center px-8 py-4 border border-brand-gold-500 text-base font-medium rounded-xl text-brand-gold-500 hover:bg-brand-gold-500/10 transition-all duration-300 hover:-translate-y-1"
-						>
-							Ver Todos os Serviços
-						</a>
-					</div>
-				</div>
+		<MinimalistSection
+			subtitle="Expertise Técnica"
+			title="Áreas de Especialização"
+			description="Conhecimento profundo em tecnologias e metodologias para entregar soluções de excelência"
+		>
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+				{expertiseAreas.map((area, index) => (
+					<MinimalistCard
+						key={index}
+						title={area.title}
+						description={area.description}
+						icon={area.icon}
+						features={area.services}
+						variant="minimal"
+						className="h-full"
+					/>
+				))}
 			</div>
-		</section>
+		</MinimalistSection>
 	);
 };
 
