@@ -48,7 +48,7 @@ const MinimalistCard = ({
 					features: "space-y-2 mb-6",
 					feature: "text-sm text-neutral-400 flex items-center",
 					featureIcon: "w-2 h-2 bg-secondary-500 rounded-full mr-3",
-					link: "inline-flex items-center text-secondary-400 hover:text-secondary-300 font-medium transition-colors duration-300 group-hover:translate-x-1",
+					link: "inline-flex items-center justify-center text-secondary-400 hover:text-secondary-300 font-medium transition-colors duration-300 group-hover:translate-x-1 mt-4",
 				};
 			case "minimal":
 				return {
@@ -118,7 +118,7 @@ const MinimalistCard = ({
 
 			{/* Link */}
 			{link && (
-				<Link href={link} className={styles.link}>
+				<div className={styles.link}>
 					Saiba mais
 					<svg
 						className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
@@ -133,26 +133,26 @@ const MinimalistCard = ({
 							d="M9 5l7 7-7 7"
 						/>
 					</svg>
-				</Link>
+				</div>
 			)}
 		</>
 	);
 
-	return (
-		<motion.div
-			className={`${styles.container} ${className}`}
-			whileHover={{ y: -2 }}
-			transition={{ duration: 0.3 }}
-		>
-			{link ? (
-				<Link href={link} className="block cursor-pointer">
+		return (
+			<motion.div
+				className={`${styles.container} ${className}`}
+				whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(0,0,0,0.15)" }}
+				transition={{ duration: 0.3 }}
+			>
+				{link ? (
+					<Link href={link} className="block cursor-pointer">
+						<CardContent />
+					</Link>
+				) : (
 					<CardContent />
-				</Link>
-			) : (
-				<CardContent />
-			)}
-		</motion.div>
-	);
+				)}
+			</motion.div>
+		);
 };
 
 export { MinimalistCard };

@@ -203,7 +203,7 @@ const SectionWrapper = ({
 				return {
 					container: "relative py-24 border-y border-white/5",
 					background:
-						"bg-gradient-to-br from-accent-800/20 via-primary-800/10 to-neutral-900/20",
+						"bg-gradient-to-br from-primary-800/15 via-neutral-900/20 to-accent-800/15",
 					overlay:
 						"absolute inset-0 bg-gradient-to-t from-neutral-950/10 to-transparent",
 					shapes: [
@@ -211,21 +211,21 @@ const SectionWrapper = ({
 							type: "circle",
 							size: "w-96 h-96",
 							position: "top-1/4 left-1/4",
-							color: "secondary-500/8",
+							color: "secondary-500/6",
 							animation: "float",
 						},
 						{
 							type: "blob",
 							size: "w-80 h-80",
 							position: "bottom-1/4 right-1/4",
-							color: "primary-500/8",
+							color: "primary-500/6",
 							animation: "pulse",
 						},
 						{
 							type: "circle",
 							size: "w-48 h-48",
 							position: "top-1/2 right-1/6",
-							color: "accent-500/6",
+							color: "accent-500/4",
 							animation: "float-reverse",
 						},
 					],
