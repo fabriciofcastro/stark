@@ -48,19 +48,19 @@ const EnhancedButton = ({
 	const getVariantClasses = () => {
 		switch (variant) {
 			case "primary":
-				return "bg-secondary-500 text-black hover:bg-secondary-400 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 shadow-soft";
+				return "bg-gradient-to-r from-secondary-500 to-secondary-600 text-black hover:from-secondary-400 hover:to-secondary-500 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 shadow-soft";
 			case "secondary":
 				return "bg-white/10 text-white border border-white/20 hover:bg-white/20 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900";
 			case "outline":
-				return "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900";
+				return "bg-transparent border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900";
 			case "ghost":
-				return "bg-transparent text-white/90 hover:bg-white/10 focus-visible:ring-white/50";
+				return "bg-transparent text-white/90 hover:bg-white/10 hover:border-white/30 border border-transparent focus-visible:ring-white/50";
 			case "destructive":
 				return "bg-error-500 text-white hover:bg-error-500/90 focus-visible:ring-error-500 focus-visible:ring-offset-neutral-900 shadow-soft";
 			case "success":
 				return "bg-success-500 text-black hover:bg-success-600 focus-visible:ring-success-500 focus-visible:ring-offset-neutral-900 shadow-soft";
 			default:
-				return "bg-secondary-500 text-black hover:bg-secondary-400 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 shadow-soft";
+				return "bg-gradient-to-r from-secondary-500 to-secondary-600 text-black hover:from-secondary-400 hover:to-secondary-500 focus-visible:ring-secondary-500 focus-visible:ring-offset-neutral-900 shadow-soft";
 		}
 	};
 

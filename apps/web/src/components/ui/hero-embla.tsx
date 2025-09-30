@@ -1,273 +1,655 @@
 "use client";
 
 import useEmblaCarousel from "embla-carousel-react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Button } from "./button";
-import { EnhancedButton } from "./enhanced-button";
+import { motion } from "framer-motion";
 
 export type Slide = {
-	image: string;
-	title: string;
-	subtitle: string;
-	ctaPrimary?: { label: string; onClick: () => void };
-	ctaSecondary?: { label: string; onClick: () => void };
-	videoUrl?: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  ctaPrimary?: { label: string; onClick: () => void };
+  ctaSecondary?: { label: string; onClick: () => void };
+  videoUrl?: string;
 };
 
 export default function HeroEmbla({ slides }: { slides: Slide[] }) {
-	const [emblaRef, embla] = useEmblaCarousel({
-		loop: true,
-		duration: 18,
-		align: "center",
-	});
-	const [selectedIndex, setSelectedIndex] = useState(0);
-	const total = slides.length;
-	const [userPaused, setUserPaused] = useState(false);
-	const [progress, setProgress] = useState(0);
-	const lastRef = useRef<number>(0);
-	const elapsedRef = useRef<number>(0);
-	const [parallaxY, setParallaxY] = useState(0);
+  const [emblaRef, embla] = useEmblaCarousel({
+    loop: true,
+    duration: 24,
+    align: "center",
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const total = slides.length;
+  const [userPaused, setUserPaused] = useState(false);
+  const lastRef = useRef<number>(0);
+  const elapsedRef = useRef<number>(0);
 
-	const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla]);
-	const scrollNext = useCallback(() => embla?.scrollNext(), [embla]);
+  // Advanced theme generator with unique backgrounds
+  const getThemeForSlide = (title: string) => {
+    const themes = {
+      Suporte: {
+        gradient: "from-blue-600 via-cyan-500 to-teal-600",
+        accent: "from-blue-400 to-cyan-400",
+        particles: "from-blue-400/30 to-cyan-400/30",
+        lines: "from-blue-400/20 to-cyan-400/20",
+        background: "support",
+        titlePosition: "left",
+      },
+      Nuvem: {
+        gradient: "from-purple-600 via-indigo-500 to-blue-600",
+        accent: "from-purple-400 to-indigo-400",
+        particles: "from-purple-400/30 to-indigo-400/30",
+        lines: "from-purple-400/20 to-indigo-400/20",
+        background: "cloud",
+        titlePosition: "center",
+      },
+      Consultoria: {
+        gradient: "from-emerald-600 via-teal-500 to-cyan-600",
+        accent: "from-emerald-400 to-teal-400",
+        particles: "from-emerald-400/30 to-teal-400/30",
+        lines: "from-emerald-400/20 to-teal-400/20",
+        background: "consulting",
+        titlePosition: "right",
+      },
+      Cibersegurança: {
+        gradient: "from-red-600 via-pink-500 to-rose-600",
+        accent: "from-red-400 to-pink-400",
+        particles: "from-red-400/30 to-pink-400/30",
+        lines: "from-red-400/20 to-pink-400/20",
+        background: "cybersecurity",
+        titlePosition: "left",
+      },
+      Desenvolvimento: {
+        gradient: "from-orange-600 via-amber-500 to-yellow-600",
+        accent: "from-orange-400 to-amber-400",
+        particles: "from-orange-400/30 to-amber-400/30",
+        lines: "from-orange-400/20 to-amber-400/20",
+        background: "development",
+        titlePosition: "center",
+      },
+      Governança: {
+        gradient: "from-slate-600 via-gray-500 to-zinc-600",
+        accent: "from-slate-400 to-gray-400",
+        particles: "from-slate-400/30 to-gray-400/30",
+        lines: "from-slate-400/20 to-gray-400/20",
+        background: "governance",
+        titlePosition: "right",
+      },
+    };
 
-	useEffect(() => {
-		if (!embla) return;
-		const onSelect = () => {
-			setSelectedIndex(embla.selectedScrollSnap());
-			// reinicia progresso ao trocar de slide
-			elapsedRef.current = 0;
-			setProgress(0);
-		};
-		embla.on("select", onSelect);
-		onSelect();
+    // Find matching theme based on title keywords
+    for (const [keyword, theme] of Object.entries(themes)) {
+      if (title.toLowerCase().includes(keyword.toLowerCase())) {
+        return theme;
+      }
+    }
 
-		const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-		let raf: number | null = null;
-		const AUTOPLAY_MS = 6000;
+    // Default theme
+    return {
+      gradient: "from-purple-600 via-cyan-500 to-indigo-600",
+      accent: "from-purple-400 to-cyan-400",
+      particles: "from-purple-400/30 to-cyan-400/30",
+      lines: "from-purple-400/20 to-cyan-400/20",
+      background: "default",
+      titlePosition: "center",
+    };
+  };
 
-		const tick = (now: number) => {
-			if (!lastRef.current) lastRef.current = now;
-			const delta = now - lastRef.current;
-			lastRef.current = now;
+  const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla]);
+  const scrollNext = useCallback(() => embla?.scrollNext(), [embla]);
 
-			if (!userPaused && !media.matches) {
-				elapsedRef.current += delta;
-				const ratio = Math.min(1, elapsedRef.current / AUTOPLAY_MS);
-				setProgress(ratio);
-				if (elapsedRef.current >= AUTOPLAY_MS) {
-					embla.scrollNext();
-					elapsedRef.current = 0;
-					setProgress(0);
-				}
-			}
-			raf = requestAnimationFrame(tick);
-		};
+  useEffect(() => {
+    if (!embla) return;
+    const onSelect = () => {
+      setSelectedIndex(embla.selectedScrollSnap());
+      elapsedRef.current = 0;
+    };
+    embla.on("select", onSelect);
+    onSelect();
 
-		raf = requestAnimationFrame(tick);
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let raf: number | null = null;
+    const AUTOPLAY_MS = 6000;
 
-		const root = embla.rootNode();
-		const stop = () => setUserPaused(true);
-		const start = () => setUserPaused(false);
-		root.addEventListener("mouseenter", stop);
-		root.addEventListener("mouseleave", start);
+    const tick = (timestamp: number) => {
+      if (!userPaused && !media.matches) {
+        const elapsed = timestamp - lastRef.current;
+        elapsedRef.current += elapsed;
+        const newProgress = Math.min(elapsedRef.current / AUTOPLAY_MS, 1);
 
-		const onVisibility = () => {
-			if (document.hidden) setUserPaused(true);
-			else setUserPaused(false);
-		};
-		document.addEventListener("visibilitychange", onVisibility);
+        if (newProgress >= 1) {
+          embla.scrollNext();
+          elapsedRef.current = 0;
+        }
+      }
+      lastRef.current = timestamp;
+      raf = requestAnimationFrame(tick);
+    };
 
-		// Parallax sutil no eixo Y (respeita reduced-motion)
-		const onScroll = () => {
-			if (media.matches) {
-				setParallaxY(0);
-				return;
-			}
-			const p = embla.scrollProgress();
-			const frac = p - Math.floor(p);
-			setParallaxY((frac - 0.5) * 10); // ~±5px
-		};
-		embla.on("scroll", onScroll);
-		onScroll();
+    raf = requestAnimationFrame(tick);
 
-		return () => {
-			if (raf) cancelAnimationFrame(raf);
-			root.removeEventListener("mouseenter", stop);
-			root.removeEventListener("mouseleave", start);
-			document.removeEventListener("visibilitychange", onVisibility);
-			embla.off("select", onSelect);
-			embla.off("scroll", onScroll);
-		};
-	}, [embla, userPaused]);
+    const root = embla.rootNode();
+    const start = () => {
+      if (raf) cancelAnimationFrame(raf);
+      setUserPaused(true);
+    };
+    const stop = () => setUserPaused(false);
 
-	// Prefetch da próxima imagem para troca suave
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		const next = (selectedIndex + 1) % total;
-		const url = slides[next]?.image;
-		if (!url) return;
-		const img = new window.Image();
-		img.src = url;
-	}, [selectedIndex, total, slides]);
+    root.addEventListener("mouseenter", start);
+    root.addEventListener("mouseleave", stop);
 
-	return (
-		<section
-			className="relative w-full"
-			aria-label="Destaques do site"
-			onKeyDown={(e) => {
-				if (e.key === "ArrowLeft") scrollPrev();
-				if (e.key === "ArrowRight") scrollNext();
-			}}
-		>
-			<div className="overflow-hidden rounded-none border-0" ref={emblaRef}>
-				<div className="flex touch-pan-y">
-					{slides.map((s, idx) => (
-						<div className="min-w-0 flex-[0_0_100%]" key={`${s.title}-${idx}`}>
-							<div className="relative w-full h-[calc(70vh-5rem)] sm:h-[calc(80vh-5rem)] md:h-[calc(85vh-5rem)] lg:h-[calc(90vh-5rem)] xl:h-[calc(95vh-5rem)] min-h-[420px] max-h-[820px]">
-								<div
-									className="absolute inset-0 will-change-transform"
-									style={{ transform: `translateY(${parallaxY}px)` }}
-									aria-hidden="true"
-								>
-									<Image
-										src={s.image}
-										alt={s.title}
-										fill
-										sizes="100vw"
-										className="object-cover"
-										style={{
-											objectPosition:
-												(s as unknown as { objectPosition?: string })
-													.objectPosition || "50% 50%",
-										}}
-										priority={idx === 0}
-										unoptimized
-									/>
-								</div>
-								<div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-transparent" />
-								<div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
-								<div className="absolute inset-0 flex items-center px-6 md:px-10 pl-16 pr-16 md:pl-24 md:pr-24 pb-16 md:pb-20">
-									<div className="max-w-3xl">
-										<div className="h-0.5 w-16 mb-5 bg-secondary-500" />
-										<h2
-											className="mb-5 text-[clamp(32px,5.5vw,64px)] font-black tracking-tight leading-tight text-white"
-											style={{
-												textShadow:
-													"0 2px 16px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-											}}
-										>
-											{s.title}
-										</h2>
-										<p className="mb-10 max-w-[44ch] text-[clamp(14px,1.4vw,20px)] leading-relaxed text-white/90">
-											{s.subtitle}
-										</p>
-										<div className="flex flex-col sm:flex-row gap-3">
-											{s.ctaPrimary && (
-												<EnhancedButton
-													variant="primary"
-													effect="none"
-													className="shadow-lg shadow-black/30 hover:translate-y-[0.5px] transition-transform focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black/20"
-													onClick={s.ctaPrimary.onClick}
-												>
-													{s.ctaPrimary.label}
-												</EnhancedButton>
-											)}
-											{s.ctaSecondary && (
-												<EnhancedButton
-													variant="outline"
-													effect="none"
-													className="hover:bg-white/10 text-white border-white/20 transition"
-													onClick={s.ctaSecondary.onClick}
-												>
-													{s.ctaSecondary.label}
-												</EnhancedButton>
-											)}
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
+    const onVisibility = () => {
+      if (document.hidden) setUserPaused(true);
+      else setUserPaused(false);
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
-			{/* Controls cluster at bottom */}
-			<div className="absolute inset-x-0 bottom-0 z-40 px-4 md:px-6 pb-4 md:pb-6 pointer-events-none">
-				<div className="grid grid-cols-3 items-end gap-3">
-					<div className="flex justify-start">
-						<EnhancedButton
-							type="button"
-							aria-label="Slide anterior"
-							variant="secondary"
-							size="sm"
-							effect="none"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
-							onClick={scrollPrev}
-						>
-							<ChevronLeft className="h-5 w-5" aria-hidden="true" />
-						</EnhancedButton>
-					</div>
-					<div className="flex justify-center">
-						<EnhancedButton
-							type="button"
-							aria-label={userPaused ? "Reproduzir" : "Pausar"}
-							variant="secondary"
-							size="sm"
-							effect="none"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white/90 hover:bg-white/20"
-							onClick={() => setUserPaused((p) => !p)}
-							onKeyDown={(e) => {
-								if (e.key === "Enter" || e.key === " ") {
-									e.preventDefault();
-									setUserPaused((p) => !p);
-								}
-							}}
-						>
-							{userPaused ? "▶" : "⏸"}
-						</EnhancedButton>
-					</div>
-					<div className="flex justify-end">
-						<EnhancedButton
-							type="button"
-							aria-label="Próximo slide"
-							variant="secondary"
-							size="sm"
-							effect="none"
-							className="pointer-events-auto rounded-full border border-white/30 bg-white/10 p-3 text-white hover:text-secondary-500 hover:bg-white/20 hover:border-white/50 cursor-pointer"
-							onClick={scrollNext}
-						>
-							<ChevronRight className="h-5 w-5" aria-hidden="true" />
-						</EnhancedButton>
-					</div>
-				</div>
-				<div className="mt-3">
-					<div className="mb-1.5 text-center text-xs text-white/80">
-						{selectedIndex + 1}/{total}
-					</div>
-					<div className="group relative mx-auto h-1.5 w-[min(560px,80%)] overflow-hidden rounded-full bg-white/20 border border-white/25 hover:border-secondary-500/40 backdrop-blur-[1px] transition-colors">
-						<div
-							className="absolute inset-y-0 left-0 rounded-full shadow-[0_0_12px_rgba(212,160,23,0.45)] group-hover:shadow-[0_0_16px_rgba(212,160,23,0.6)] transition-[width] duration-150 linear"
-							style={{
-								width: `${Math.round(progress * 100)}%`,
-								background:
-									"linear-gradient(90deg, hsl(var(--secondary-500)), hsl(var(--secondary-500)))",
-							}}
-							aria-hidden="true"
-						>
-							<div
-								className="absolute inset-0 pointer-events-none rounded-full"
-								style={{
-									background:
-										"linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.15) 45%, rgba(0,0,0,0.06))",
-								}}
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      root.removeEventListener("mouseenter", start);
+      root.removeEventListener("mouseleave", stop);
+      document.removeEventListener("visibilitychange", onVisibility);
+      embla.off("select", onSelect);
+    };
+  }, [embla, userPaused]);
+
+  // Prefetch da próxima imagem para troca suave
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const next = (selectedIndex + 1) % total;
+    const url = slides[next]?.image;
+    if (!url) return;
+    const img = new window.Image();
+    img.src = url;
+  }, [selectedIndex, total, slides]);
+
+  const renderUniqueBackground = (
+    theme: {
+      background: string;
+      gradient: string;
+      accent: string;
+      particles: string;
+      lines: string;
+    },
+    idx: number,
+  ) => {
+    switch (theme.background) {
+      case "support":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-cyan-500 to-teal-600 opacity-90">
+            {/* Support Icons Animation */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <motion.div
+                key={`support-icon-${Math.random()}-${i}`}
+                className="absolute text-blue-300/20 text-4xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  rotate: [0, 360, 0],
+                  opacity: [0.1, 0.3, 0.1],
+                }}
+                transition={{
+                  duration: 8 + Math.random() * 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                {i % 4 === 0
+                  ? "🔧"
+                  : i % 4 === 1
+                    ? "⚙️"
+                    : i % 4 === 2
+                      ? "🛠️"
+                      : "🔩"}
+              </motion.div>
+            ))}
+            {/* Floating Support Bubbles */}
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={`support-bubble-${Math.random()}-${i}`}
+                className="absolute bg-blue-400/20 rounded-full blur-sm"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 60 + 20}px`,
+                  height: `${Math.random() * 60 + 20}px`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 100 - 50, 0],
+                  y: [0, Math.random() * 100 - 50, 0],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: 10 + Math.random() * 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      case "cloud":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-indigo-500 to-blue-600 opacity-90">
+            {/* Cloud Particles */}
+            {Array.from({ length: 25 }).map((_, i) => (
+              <motion.div
+                key={`cloud-particle-${Math.random()}-${i}`}
+                className="absolute bg-purple-300/30 rounded-full blur-sm"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 8 + 4}px`,
+                  height: `${Math.random() * 8 + 4}px`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 200 - 100, 0],
+                  y: [0, Math.random() * 200 - 100, 0],
+                  scale: [0.5, 2, 0.5],
+                  opacity: [0.2, 0.8, 0.2],
+                }}
+                transition={{
+                  duration: 12 + Math.random() * 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            {/* Cloud Formation */}
+            {Array.from({ length: 8 }).map((_, i) => (
+              <motion.div
+                key={`cloud-formation-${Math.random()}-${i}`}
+                className="absolute bg-purple-400/20 rounded-full blur-xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 200 + 100}px`,
+                  height: `${Math.random() * 100 + 50}px`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 300 - 150, 0],
+                  y: [0, Math.random() * 100 - 50, 0],
+                  scale: [1, 1.3, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 15 + Math.random() * 10,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      case "consulting":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-600 opacity-90">
+            {/* Consulting Network */}
+            {Array.from({ length: 12 }).map((_, i) => (
+              <motion.div
+                key={`consulting-node-${Math.random()}-${i}`}
+                className="absolute bg-emerald-400/40 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 6 + 4}px`,
+                  height: `${Math.random() * 6 + 4}px`,
+                }}
+                animate={{
+                  scale: [1, 2, 1],
+                  opacity: [0.4, 0.8, 0.4],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            {/* Network Lines */}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <motion.div
+                key={`network-line-${Math.random()}-${i}`}
+                className="absolute h-px bg-emerald-400/30"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 200 + 100}px`,
+                  transform: `rotate(${Math.random() * 360}deg)`,
+                }}
+                animate={{
+                  opacity: [0.1, 0.4, 0.1],
+                  scaleX: [0.5, 1.5, 0.5],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      case "cybersecurity":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-red-600 via-pink-500 to-rose-600 opacity-90">
+            {/* Security Shield Pattern */}
+            {Array.from({ length: 18 }).map((_, i) => (
+              <motion.div
+                key={`security-shield-${Math.random()}-${i}`}
+                className="absolute text-red-300/20 text-3xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -20, 0],
+                  rotate: [0, 180, 360],
+                  opacity: [0.1, 0.4, 0.1],
+                }}
+                transition={{
+                  duration: 6 + Math.random() * 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                🛡️
+              </motion.div>
+            ))}
+            {/* Alert Pulses */}
+            {Array.from({ length: 10 }).map((_, i) => (
+              <motion.div
+                key={`alert-pulse-${Math.random()}-${i}`}
+                className="absolute bg-red-400/30 rounded-full blur-lg"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 100 + 50}px`,
+                  height: `${Math.random() * 100 + 50}px`,
+                }}
+                animate={{
+                  scale: [1, 2, 1],
+                  opacity: [0.2, 0.6, 0.2],
+                }}
+                transition={{
+                  duration: 2 + Math.random() * 1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      case "development":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-600 via-amber-500 to-yellow-600 opacity-90">
+            {/* Code Lines */}
+            {Array.from({ length: 30 }).map((_, i) => (
+              <motion.div
+                key={`code-line-${Math.random()}-${i}`}
+                className="absolute bg-orange-400/20 h-px"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 300 + 100}px`,
+                  transform: `rotate(${Math.random() * 45 - 22.5}deg)`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 200 - 100, 0],
+                  opacity: [0.1, 0.4, 0.1],
+                }}
+                transition={{
+                  duration: 5 + Math.random() * 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            {/* Code Brackets */}
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={`code-bracket-${Math.random()}-${i}`}
+                className="absolute text-orange-300/30 text-2xl font-mono"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  rotate: [0, 360],
+                  opacity: [0.2, 0.5, 0.2],
+                }}
+                transition={{
+                  duration: 8 + Math.random() * 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                {i % 3 === 0 ? "{" : i % 3 === 1 ? "}" : "()"}
+              </motion.div>
+            ))}
+          </div>
+        );
+
+      case "governance":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-600 via-gray-500 to-zinc-600 opacity-90">
+            {/* Governance Grid */}
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={`governance-grid-v-${Math.random()}-${i}`}
+                className="absolute w-px bg-slate-400/20"
+                style={{
+                  left: `${i * 6.66}%`,
+                  top: "0%",
+                  height: "100%",
+                }}
+                animate={{
+                  opacity: [0.1, 0.3, 0.1],
+                }}
+                transition={{
+                  duration: 4,
+                  delay: i * 0.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            {Array.from({ length: 20 }).map((_, i) => (
+              <motion.div
+                key={`governance-grid-h-${Math.random()}-${i}`}
+                className="absolute h-px bg-slate-400/20"
+                style={{
+                  left: "0%",
+                  top: `${i * 5}%`,
+                  width: "100%",
+                }}
+                animate={{
+                  opacity: [0.1, 0.3, 0.1],
+                }}
+                transition={{
+                  duration: 4,
+                  delay: i * 0.1,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+            {/* Compliance Icons */}
+            {Array.from({ length: 12 }).map((_, i) => (
+              <motion.div
+                key={`compliance-icon-${Math.random()}-${i}`}
+                className="absolute text-slate-300/20 text-2xl"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.4, 0.2],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                {i % 4 === 0
+                  ? "📋"
+                  : i % 4 === 1
+                    ? "✅"
+                    : i % 4 === 2
+                      ? "📊"
+                      : "🔒"}
+              </motion.div>
+            ))}
+          </div>
+        );
+
+      default:
+        return (
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-90`}
+          >
+            {/* Default Particles */}
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={`default-particle-${Math.random()}-${idx}-${i}`}
+                className={`absolute bg-gradient-to-r ${theme.particles} rounded-full blur-sm`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  width: `${Math.random() * 4 + 2}px`,
+                  height: `${Math.random() * 4 + 2}px`,
+                }}
+                animate={{
+                  x: [0, Math.random() * 100 - 50, 0],
+                  y: [0, Math.random() * 100 - 50, 0],
+                  scale: [1, 2, 1],
+                  opacity: [0.3, 0.8, 0.3],
+                }}
+                transition={{
+                  duration: 6 + Math.random() * 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+        );
+    }
+  };
+
+  const getContentPosition = (position: string) => {
+    switch (position) {
+      case "left":
+        return "items-start text-left pl-16 pr-32";
+      case "right":
+        return "items-end text-right pl-32 pr-16";
+      default:
+        return "items-center text-center px-24";
+    }
+  };
+
+  return (
+    <section
+      className="relative w-full overflow-hidden max-w-full"
+      aria-label="Destaques do site"
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") scrollPrev();
+        if (e.key === "ArrowRight") scrollNext();
+      }}
+    >
+      <div
+        className="overflow-hidden rounded-none border-0 w-full max-w-full relative"
+        ref={emblaRef}
+      >
+        <div className="flex touch-pan-y -ml-px w-full max-w-full">
+          {slides.map((s, idx) => {
+            const theme = getThemeForSlide(s.title);
+            return (
+              <div
+                className="min-w-0 flex-[0_0_100%] px-px w-full max-w-full"
+                key={`${s.title}-${idx}`}
+              >
+                <div className="relative w-full h-[calc(70vh-5rem)] sm:h-[calc(80vh-5rem)] md:h-[calc(85vh-5rem)] lg:h-[calc(90vh-5rem)] xl:h-[calc(95vh-5rem)] min-h-[420px] max-h-[820px]">
+                  {/* Unique Background per Theme */}
+                  {renderUniqueBackground(theme, idx)}
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
+
+                  <div
+                    className={`absolute inset-0 flex items-center px-6 md:px-10 pb-16 md:pb-20 ${getContentPosition(theme.titlePosition)}`}
+                  >
+                    <div className="max-w-4xl w-full">
+                      <div
+                        className={`h-1 w-24 mb-6 bg-gradient-to-r ${theme.accent} rounded-full`}
+                      />
+                      <motion.h2
+                        className="mb-6 text-[clamp(32px,5.5vw,64px)] font-bold tracking-tight leading-tight text-white"
+                        style={{
+                          textShadow:
+                            "0 2px 16px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
+                        }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                      >
+                        {s.title}
+                      </motion.h2>
+                      <motion.p
+                        className="mb-10 max-w-[52ch] text-[clamp(14px,1.4vw,20px)] leading-relaxed text-white/95 font-medium"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                      >
+                        {s.subtitle}
+                      </motion.p>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        {s.ctaPrimary && (
+                          <motion.button
+                            className={`inline-flex items-center px-8 py-3 bg-gradient-to-r ${theme.accent} text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
+                            onClick={s.ctaPrimary.onClick}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            {s.ctaPrimary.label}
+                          </motion.button>
+                        )}
+                        {s.ctaSecondary && (
+                          <motion.button
+                            className="inline-flex items-center px-8 py-3 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300"
+                            onClick={s.ctaSecondary.onClick}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            {s.ctaSecondary.label}
+                          </motion.button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }

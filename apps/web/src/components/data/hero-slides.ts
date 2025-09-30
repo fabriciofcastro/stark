@@ -5,10 +5,10 @@ export const heroSlides: Slide[] = [
 	{
 		// Governança de TI
 		image:
-			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop&sat=-20",
+			"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop&sat=-10",
 		title: "Governança de TI",
 		subtitle:
-			"Estruturamos processos, políticas e controles alinhados a COBIT, ITIL, ISO 27001 e NIST.",
+			"Estruturamos processos, políticas e controles alinhados a COBIT, ITIL, ISO 27001 e NIST. Garantimos conformidade, eficiência e segurança em seus ativos de tecnologia.",
 		ctaPrimary: {
 			label: "Consultar Governança",
 			onClick: () => logEvent("cta", "governanca_click", "hero_governanca"),
@@ -17,9 +17,9 @@ export const heroSlides: Slide[] = [
 	{
 		// Criação de Sites
 		image:
-			"https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop&sat=-15",
+			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&sat=-10",
 		title: "Criação de Sites Profissionais",
-		subtitle: "Performance, SEO técnico e conversão orientados a resultados.",
+		subtitle: "Sites otimizados para conversão com performance, SEO técnico e integrações personalizadas. Resultados mensuráveis em 30 dias.",
 		ctaPrimary: {
 			label: "Ver Portfólio",
 			onClick: () => logEvent("cta", "portfolio_click", "hero_sites"),
@@ -32,9 +32,9 @@ export const heroSlides: Slide[] = [
 	{
 		// Suporte / Help Desk
 		image:
-			"https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2000&auto=format&fit=crop&sat=-20",
+			"https://images.unsplash.com/photo-1551650975-9880bc9b6b9f?q=80&w=2070&auto=format&fit=crop&sat=-10",
 		title: "Suporte que resolve",
-		subtitle: "Help Desk, governança, automação e SLAs claros para seu time.",
+		subtitle: "SLA garantido com equipe especializada 24/7. Help Desk, monitoramento e automação para manter sua operação funcionando com 99.99% de uptime.",
 		ctaPrimary: {
 			label: "Abrir chamado",
 			onClick: () => logEvent("cta", "abrir_chamado_click", "hero_suporte"),
@@ -47,9 +47,9 @@ export const heroSlides: Slide[] = [
 	{
 		// Segurança / Cibersegurança
 		image:
-			"https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000&auto=format&fit=crop&sat=-25",
+			"https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop&sat=-10",
 		title: "Segurança em primeiro lugar",
-		subtitle: "LGPD, NIST/ISO, backup, DR e resposta a incidentes.",
+		subtitle: "Protegemos sua empresa com pentest, SOC/MDR, LGPD e resposta a incidentes. Conformidade NIST e ISO com relatórios em tempo real.",
 		ctaPrimary: {
 			label: "Falar com especialista",
 			onClick: () => logEvent("cta", "especialista_click", "hero_security"),
@@ -58,10 +58,10 @@ export const heroSlides: Slide[] = [
 	{
 		// Engajamento Digital
 		image:
-			"https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop&sat=-15",
+			"https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&sat=-10",
 		title: "Engajamento Digital",
 		subtitle:
-			"Estratégias completas para aumentar conversão e retenção dos visitantes.",
+			"Aumentamos conversão com estratégias de engajamento, analytics avançado e automação. Melhoramos métricas e retemos mais visitantes.",
 		ctaPrimary: {
 			label: "Analisar Site",
 			onClick: () => logEvent("cta", "engajamento_click", "hero_engajamento"),
