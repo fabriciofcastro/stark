@@ -294,6 +294,9 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
   const [dynamicFields, setDynamicFields] = useState<Record<string, string>>(
     {},
   );
+  const [autoSaveStatus, setAutoSaveStatus] = useState<string>("");
+  const [progress, setProgress] = useState<number>(0);
+  const [fieldFocus, setFieldFocus] = useState<string>("");
 
   const honeyRef = useRef<HTMLInputElement | null>(null);
   const MESSAGE_MAX = 500;
@@ -310,6 +313,47 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
   // Obter configuração do serviço selecionado
   const selectedServiceConfig = serviceConfigs.find((s) => s.id === service);
+
+  // Sistema de Auto-Save
+  useEffect(() => {
+    const autoSave = () => {
+      const formData = { name, email, company, phone, service, message, dynamicFields };
+      localStorage.setItem('contact-form-draft', JSON.stringify(formData));
+      setAutoSaveStatus("Salvo automaticamente");
+      setTimeout(() => setAutoSaveStatus(""), 2000);
+    };
+
+    const timer = setTimeout(autoSave, 1000);
+    return () => clearTimeout(timer);
+  }, [name, email, company, phone, service, message, dynamicFields]);
+
+  // Carregar dados salvos
+  useEffect(() => {
+    const saved = localStorage.getItem('contact-form-draft');
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        setAutoSaveStatus("Dados recuperados");
+        setTimeout(() => setAutoSaveStatus(""), 2000);
+      } catch (e) {
+        console.log('Erro ao carregar dados salvos');
+      }
+    }
+  }, []);
+
+  // Calcular progresso do formulário
+  useEffect(() => {
+    const fields = [name, email, company, phone, service, message];
+    const completed = fields.filter(field => field && field.trim().length > 0).length;
+    const dynamicCompleted = selectedServiceConfig 
+      ? selectedServiceConfig.fields.filter(field => dynamicFields[field.id]).length 
+      : 0;
+    
+    const totalFields = fields.length + (selectedServiceConfig?.fields.length || 0);
+    const totalCompleted = completed + dynamicCompleted;
+    
+    setProgress((totalCompleted / totalFields) * 100);
+  }, [name, email, company, phone, service, message, dynamicFields, selectedServiceConfig]);
 
   function validate(): Errors {
     const e: Errors = {};
@@ -399,6 +443,21 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           type: "success",
           message: "Mensagem enviada! Responderemos em breve.",
         });
+
+        // Limpar formulário e dados salvos
+        setTimeout(() => {
+          setName("");
+          setEmail("");
+          setCompany("");
+          setPhone("");
+          setService("");
+          setMessage("");
+          setDynamicFields({});
+          setConsent(false);
+          localStorage.removeItem('contact-form-draft');
+          setProgress(0);
+          setSent(false);
+        }, 3000);
       } else {
         throw new Error("Erro no servidor");
       }
@@ -593,6 +652,73 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 </span>
                 <span>Tempo estimado: ~3 min</span>
               </div>
+            </motion.div>
+
+            {/* Barra de Progresso e Status */}
+            <motion.div
+              className="mb-8 p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/20 backdrop-blur-sm"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Progresso do Formulário</h3>
+                <div className="flex items-center gap-3">
+                  {autoSaveStatus && (
+                    <motion.span 
+                      className="text-sm text-green-400 flex items-center gap-2"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                    >
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                      {autoSaveStatus}
+                    </motion.span>
+                  )}
+                  <span className="text-sm text-gray-300">
+                    {Math.round(progress)}% completo
+                  </span>
+                </div>
+              </div>
+              
+              {/* Barra de Progresso */}
+              <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                />
+              </div>
+              
+              {/* Dicas de Preenchimento */}
+              <motion.div 
+                className="mt-4 flex flex-wrap gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {!name && (
+                  <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
+                    Nome obrigatório
+                  </span>
+                )}
+                {!email && (
+                  <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
+                    Email obrigatório
+                  </span>
+                )}
+                {!service && (
+                  <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">
+                    Selecione um serviço
+                  </span>
+                )}
+                {progress > 80 && (
+                  <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">
+                    Quase pronto!
+                  </span>
+                )}
+              </motion.div>
             </motion.div>
 
             <form className="space-y-8" onSubmit={handleSubmit} noValidate>
@@ -887,11 +1013,11 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                                     {field.description}
                                   </p>
                                 )}
-                              </div>
+                              </motion.div>
                             );
                           })}
                         </div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -918,22 +1044,44 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   </div>
                 </div>
 
-                <Textarea
-                  id={messageId}
-                  label="Mensagem *"
-                  floating
-                  rows={5}
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                    setErrors((prev) => ({ ...prev, message: undefined }));
-                  }}
-                  onBlur={() => validateField("message")}
-                  maxLength={MESSAGE_MAX}
-                  required
-                  error={errors.message}
-                  showCounter
-                />
+                <div className="space-y-2">
+                  <Textarea
+                    id={messageId}
+                    label="Mensagem *"
+                    floating
+                    rows={5}
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                      setErrors((prev) => ({ ...prev, message: undefined }));
+                    }}
+                    onBlur={() => validateField("message")}
+                    maxLength={MESSAGE_MAX}
+                    required
+                    error={errors.message}
+                    showCounter
+                  />
+                  
+                  {/* Contador de Caracteres Melhorado */}
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-gray-400">
+                      {message.length} / {MESSAGE_MAX} caracteres
+                    </span>
+                    {message.length > MESSAGE_MAX * 0.8 && (
+                      <motion.span 
+                        className={`px-2 py-1 rounded-full text-xs ${
+                          message.length >= MESSAGE_MAX 
+                            ? 'bg-red-500/20 text-red-300' 
+                            : 'bg-yellow-500/20 text-yellow-300'
+                        }`}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                      >
+                        {message.length >= MESSAGE_MAX ? 'Limite atingido' : 'Quase no limite'}
+                      </motion.span>
+                    )}
+                  </div>
+                </div>
               </motion.div>
 
               {/* Seção de Consentimento */}
@@ -1069,6 +1217,38 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 <span>•</span>
                 <span>Dados protegidos pela LGPD</span>
               </div>
+
+              {/* Botão de Limpeza */}
+              <motion.div 
+                className="flex justify-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                <motion.button
+                  type="button"
+                  onClick={() => {
+                    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
+                      setName("");
+                      setEmail("");
+                      setCompany("");
+                      setPhone("");
+                      setService("");
+                      setMessage("");
+                      setDynamicFields({});
+                      setConsent(false);
+                      localStorage.removeItem('contact-form-draft');
+                      setProgress(0);
+                      setErrors({});
+                    }
+                  }}
+                  className="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-600 hover:border-gray-400 rounded-lg transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Limpar Formulário
+                </motion.button>
+              </motion.div>
             </form>
           </div>
         </motion.div>
