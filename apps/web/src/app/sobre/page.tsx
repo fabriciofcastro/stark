@@ -14,6 +14,7 @@ import {
   Star,
   Rocket,
   Brain,
+  Lightbulb,
   CheckCircle,
   ArrowRight,
   Play,
