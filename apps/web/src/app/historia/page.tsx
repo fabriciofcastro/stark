@@ -245,12 +245,20 @@ const HistoriaPage = () => {
             <motion.div
               className="inline-flex items-center justify-center w-32 h-32 mb-8 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 shadow-2xl"
               animate={{
-                rotate: [0, 360],
-                scale: [1, 1.1, 1],
+                x: [0, 10, -10, 0],
+                y: [0, -5, 0],
+                scale: [1, 1.05, 1],
+                boxShadow: [
+                  "0 0 30px rgba(139, 92, 246, 0.4)",
+                  "0 0 50px rgba(139, 92, 246, 0.7)",
+                  "0 0 30px rgba(139, 92, 246, 0.4)",
+                ],
               }}
               transition={{
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                x: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                 scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" },
               }}
             >
               <Zap className="w-16 h-16 text-white" />
@@ -338,12 +346,18 @@ const HistoriaPage = () => {
                     <motion.div
                       className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r ${stat.color} mb-6`}
                       animate={{
-                        rotate: [0, 360],
+                        scale: [1, 1.15, 1],
+                        opacity: [0.7, 1, 0.7],
+                        filter: [
+                          "brightness(1)",
+                          "brightness(1.2)",
+                          "brightness(1)",
+                        ],
                       }}
                       transition={{
-                        duration: 10,
+                        duration: 2.5,
                         repeat: Infinity,
-                        ease: "linear",
+                        ease: "easeInOut",
                       }}
                     >
                       <stat.icon className="w-10 h-10 text-white" />
@@ -420,8 +434,14 @@ const HistoriaPage = () => {
                   <div className="space-y-8">
                     <motion.div
                       className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r ${timeline[currentSlide].color} mb-6`}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
+                      whileHover={{ 
+                        scale: 1.3, 
+                        y: -8,
+                        x: 5,
+                        boxShadow: "0 15px 40px rgba(0,0,0,0.4)",
+                        filter: "brightness(1.3)"
+                      }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                     >
                       {React.createElement(timeline[currentSlide].icon, { className: "w-10 h-10 text-white" })}
                     </motion.div>

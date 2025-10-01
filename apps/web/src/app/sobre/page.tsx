@@ -245,12 +245,18 @@ const AboutPage = () => {
             <motion.div
               className="inline-flex items-center justify-center w-24 h-24 mb-8 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 shadow-2xl"
               animate={{
-                rotate: [0, 360],
-                scale: [1, 1.1, 1],
+                y: [0, -10, 0],
+                scale: [1, 1.05, 1],
+                boxShadow: [
+                  "0 0 20px rgba(139, 92, 246, 0.3)",
+                  "0 0 40px rgba(139, 92, 246, 0.6)",
+                  "0 0 20px rgba(139, 92, 246, 0.3)",
+                ],
               }}
               transition={{
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                 scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" },
               }}
             >
               <Zap className="w-12 h-12 text-white" />
@@ -343,12 +349,13 @@ const AboutPage = () => {
                     <motion.div
                       className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${stat.color} mb-4`}
                       animate={{
-                        rotate: [0, 360],
+                        scale: [1, 1.1, 1],
+                        opacity: [0.8, 1, 0.8],
                       }}
                       transition={{
-                        duration: 10,
+                        duration: 2,
                         repeat: Infinity,
-                        ease: "linear",
+                        ease: "easeInOut",
                       }}
                     >
                       <stat.icon className="w-8 h-8 text-white" />
@@ -408,8 +415,12 @@ const AboutPage = () => {
                   <div className="relative z-10">
                     <motion.div
                       className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${value.color} mb-6`}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.8 }}
+                      whileHover={{ 
+                        scale: 1.2, 
+                        y: -5,
+                        boxShadow: "0 10px 30px rgba(0,0,0,0.3)"
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                     >
                       <value.icon className="w-8 h-8 text-white" />
                     </motion.div>
