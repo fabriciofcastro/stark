@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useId } from "react";
+import { useRef, useState, useId, useEffect } from "react";
 import Input from "@/components/ui/input";
 import Textarea from "@/components/ui/textarea";
 import Select from "@/components/ui/select";
@@ -1021,6 +1021,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     </motion.div>
                   )}
                 </AnimatePresence>
+                </div>
               </motion.div>
 
               {/* Seção 3: Mensagem */}
