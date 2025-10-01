@@ -103,7 +103,15 @@ const ModernHeader = () => {
     Array<{ id: number; x: number; y: number; size: number }>
   >([]);
   const [neuralNodes, setNeuralNodes] = useState<
-    Array<{ id: number; x: number; y: number; connections: number[] }>
+    Array<{
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      delay: number;
+      type: string;
+    }>
   >([]);
   const [holographicActive, setHolographicActive] = useState(false);
 
@@ -119,50 +127,76 @@ const ModernHeader = () => {
 
   // Generate floating particles
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    
+    // Don't run animation effects if user prefers reduced motion
+    if (mediaQuery.matches) {
+      setParticles([]);
+      setNeuralNodes([]);
+      setHolographicActive(false);
+      return;
+    }
+
     const generateParticles = () => {
-      const newParticles = Array.from({ length: 15 }, (_, i) => ({
+      const newParticles = Array.from({ length: 8 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
+        size: Math.random() * 2 + 1,
       }));
       setParticles(newParticles);
     };
 
     generateParticles();
-    const interval = setInterval(generateParticles, 8000);
+    const interval = setInterval(generateParticles, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Generate Neural Network
+  // Generate Smart Floating Elements
   useEffect(() => {
-    const generateNeuralNetwork = () => {
-      const nodes = Array.from({ length: 12 }, (_, i) => ({
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    
+    // Don't run animation effects if user prefers reduced motion
+    if (mediaQuery.matches) {
+      setNeuralNodes([]);
+      return;
+    }
+
+    const generateSmartElements = () => {
+      const elements = Array.from({ length: 5 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        connections: Array.from(
-          { length: Math.floor(Math.random() * 3) + 1 },
-          () => Math.floor(Math.random() * 12),
-        ).filter(
-          (conn, index, arr) => arr.indexOf(conn) === index && conn !== i,
-        ),
+        size: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.15 + 0.05,
+        delay: Math.random() * 2,
+        type: Math.random() > 0.5 ? "circle" : "line",
       }));
-      setNeuralNodes(nodes);
+      setNeuralNodes(elements);
     };
 
-    generateNeuralNetwork();
-    const interval = setInterval(generateNeuralNetwork, 12000);
+    generateSmartElements();
+    const interval = setInterval(generateSmartElements, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
   // Holographic effect toggle
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    
+    // Don't run animation effects if user prefers reduced motion
+    if (mediaQuery.matches) {
+      setHolographicActive(false);
+      return;
+    }
+
     const interval = setInterval(() => {
       setHolographicActive((prev) => !prev);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -178,7 +212,7 @@ const ModernHeader = () => {
   const handleServicesMouseLeave = () => {
     servicesTimeoutRef.current = setTimeout(() => {
       setIsServicesOpen(false);
-    }, 300);
+    }, 2000); // Aumentado para 2 segundos para melhor experiência do usuário
   };
 
   // Fechar menu móvel
@@ -232,65 +266,65 @@ const ModernHeader = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        {/* Neural Network Background */}
+        {/* Smart Transparent Background */}
         {!isScrolled && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Neural Network Connections */}
-            {neuralNodes.map((node) =>
-              node.connections.map((connectionId, index) => {
-                const connectedNode = neuralNodes.find(
-                  (n) => n.id === connectionId,
-                );
-                if (!connectedNode) return null;
-                return (
-                  <motion.line
-                    key={`connection-${node.id}-${connectionId}-${index}`}
-                    x1={`${node.x}%`}
-                    y1={`${node.y}%`}
-                    x2={`${connectedNode.x}%`}
-                    y2={`${connectedNode.y}%`}
-                    stroke="url(#neuralGradient)"
-                    strokeWidth="1"
-                    opacity="0.3"
-                    animate={{
-                      opacity: [0.1, 0.4, 0.1],
-                      strokeWidth: [0.5, 1.5, 0.5],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                );
-              }),
-            )}
-
-            {/* Neural Nodes */}
-            {neuralNodes.map((node) => (
+            {/* Smart Transparent Elements - only if user doesn't prefer reduced motion */}
+            {neuralNodes.map((element) => {
+              const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              return (
               <motion.div
-                key={`neural-node-${node.id}`}
-                className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full"
+                key={`smart-element-${element.id}`}
+                className={`absolute ${
+                  element.type === "circle"
+                    ? "rounded-full bg-gradient-to-r from-white/10 to-white/5"
+                    : "bg-gradient-to-r from-white/10 to-transparent"
+                }`}
                 style={{
-                  left: `${node.x}%`,
-                  top: `${node.y}%`,
+                  left: `${element.x}%`,
+                  top: `${element.y}%`,
+                  width:
+                    element.type === "circle"
+                      ? `${element.size}px`
+                      : `${element.size * 20}px`,
+                  height:
+                    element.type === "circle" ? `${element.size}px` : "1px",
                 }}
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.6, 1, 0.6],
-                  boxShadow: [
-                    "0 0 0px rgba(168, 85, 247, 0.4)",
-                    "0 0 20px rgba(168, 85, 247, 0.8)",
-                    "0 0 0px rgba(168, 85, 247, 0.4)",
-                  ],
+                initial={{
+                  scale: 0,
+                  opacity: 0,
+                  x: element.type === "line" ? -20 : 0,
+                  rotate:
+                    element.type === "line"
+                      ? typeof window !== "undefined"
+                        ? Math.random() * 360
+                        : 0
+                      : 0,
+                }}
+                animate={prefersReducedMotion ? {
+                  scale: 1,
+                  opacity: element.opacity,
+                } : {
+                  scale: 1,
+                  opacity: element.opacity,
+                  x: element.type === "line" ? 20 : 0,
+                  rotate:
+                    element.type === "line"
+                      ? typeof window !== "undefined"
+                        ? Math.random() * 360
+                        : 0
+                      : 0,
                 }}
                 transition={{
                   duration: 3,
-                  repeat: Infinity,
+                  delay: element.delay,
                   ease: "easeInOut",
+                  repeat: prefersReducedMotion ? false : Infinity,
+                  repeatType: "reverse",
                 }}
               />
-            ))}
+              );
+            })}
 
             {/* Holographic Scan Lines */}
             {holographicActive && (
@@ -298,34 +332,38 @@ const ModernHeader = () => {
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
-                transition={{ duration: 2, ease: "easeInOut" }}
+                transition={{ duration: 3, ease: "easeInOut" }}
+                style={typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? { display: 'none' } : {}}
               />
             )}
 
-            {/* Floating Particles */}
-            {particles.map((particle) => (
-              <motion.div
-                key={particle.id}
-                className="absolute bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-full blur-sm"
-                style={{
-                  left: `${particle.x}%`,
-                  top: `${particle.y}%`,
-                  width: `${particle.size}px`,
-                  height: `${particle.size}px`,
-                }}
-                animate={{
-                  y: [0, -20, 0],
-                  x: [0, Math.random() * 10 - 5, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
+            {/* Floating Particles - only if user doesn't prefer reduced motion */}
+            {particles.map((particle) => {
+              const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              return (
+                <motion.div
+                  key={particle.id}
+                  className="absolute bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-full blur-sm"
+                  style={{
+                    left: `${particle.x}%`,
+                    top: `${particle.y}%`,
+                    width: `${particle.size}px`,
+                    height: `${particle.size}px`,
+                  }}
+                  animate={prefersReducedMotion ? {} : {
+                    y: [0, -20, 0],
+                    x: [0, Math.random() * 10 - 5, 0],
+                    opacity: [0.3, 0.8, 0.3],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 3 + Math.random() * 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              );
+            })}
 
             {/* SVG Gradient Definition */}
             <svg width="0" height="0" className="absolute">
@@ -399,63 +437,30 @@ const ModernHeader = () => {
                         isScrolled ? "w-8 h-8" : "w-10 h-10 lg:w-12 lg:h-12"
                       }`}
                     >
-                    {/* Holographic Scan Effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl overflow-hidden"
-                      initial={{ x: "-100%" }}
-                      animate={{ x: "100%" }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 3,
-                        ease: "easeInOut",
-                      }}
-                      style={{ zIndex: 1 }}
-                    />
-
+                      {/* Holographic Scan Effect */}
+                      {/* Holographic Scan Effect - Atrás do logo */}
                       <motion.div
-                        animate={{
-                          rotate: [0, 360],
-                        }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl overflow-hidden"
+                        initial={{ x: "-100%" }}
+                        animate={{ x: "100%" }}
                         transition={{
-                          duration: 8,
+                          duration: 2,
                           repeat: Infinity,
-                          ease: "linear",
+                          repeatDelay: 3,
+                          ease: "easeInOut",
                         }}
-                        style={{ zIndex: 2 }}
-                      >
+                        style={{ zIndex: 1 }}
+                      />
+
+                      {/* Logo - Sempre na frente */}
+                      <div className="relative" style={{ zIndex: 10 }}>
                         <Zap
-                          className={`text-white transition-all duration-300 ${
+                          className={`text-white transition-all duration-300 logo-static ${
                             isScrolled ? "w-4 h-4" : "w-6 h-6 lg:w-7 lg:h-7"
                           }`}
                         />
-                      </motion.div>
+                      </div>
                     </div>
-
-                    {/* Neural Network Connections to Logo */}
-                    {!isScrolled &&
-                      neuralNodes.slice(0, 3).map((node, index) => (
-                        <motion.line
-                          key={`logo-connection-${node.id}`}
-                          className="absolute pointer-events-none"
-                          x1="50%"
-                          y1="50%"
-                          x2={`${node.x}%`}
-                          y2={`${node.y}%`}
-                          stroke="url(#neuralGradient)"
-                          strokeWidth="1"
-                          opacity="0.2"
-                          animate={{
-                            opacity: [0.1, 0.3, 0.1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            delay: index * 0.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                        />
-                      ))}
                   </div>
                   <div
                     className={`hidden sm:block transition-all duration-300 ${
@@ -652,7 +657,7 @@ const ModernHeader = () => {
                           ease: "easeInOut",
                         }}
                       />
-                      
+
                       {/* Glow Effect */}
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -749,19 +754,21 @@ const ModernHeader = () => {
                 onMouseEnter={handleServicesMouseEnter}
                 onMouseLeave={handleServicesMouseLeave}
               >
-                {/* Holographic Background Effects */}
+                {/* Holographic Background Effects - only if user doesn't prefer reduced motion */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  {Array.from({ length: 8 }).map((_, i) => (
+                  {Array.from({ length: 5 }).map((_, i) => {
+                    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    return (
                     <motion.div
                       key={`dropdown-particle-${Math.random()}-${i}`}
                       className="absolute bg-gradient-to-r from-purple-400/20 to-cyan-400/20 rounded-full blur-sm"
                       style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
-                        width: `${Math.random() * 3 + 1}px`,
-                        height: `${Math.random() * 3 + 1}px`,
+                        width: `${Math.random() * 2.5 + 1}px`,
+                        height: `${Math.random() * 2.5 + 1}px`,
                       }}
-                      animate={{
+                      animate={prefersReducedMotion ? {} : {
                         x: [0, Math.random() * 50 - 25, 0],
                         y: [0, Math.random() * 50 - 25, 0],
                         scale: [1, 1.5, 1],
@@ -769,32 +776,47 @@ const ModernHeader = () => {
                       }}
                       transition={{
                         duration: 4 + Math.random() * 2,
-                        repeat: Infinity,
+                        repeat: prefersReducedMotion ? false : Infinity,
                         ease: "easeInOut",
                       }}
                     />
-                  ))}
+                    );
+                  })}
                 </div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto scrollbar-hide">
+                    {/* Scroll horizontal para muitos itens */}
+                    <style jsx>{`
+                      .scrollbar-hide {
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                      }
+                      .scrollbar-hide::-webkit-scrollbar {
+                        display: none;
+                      }
+                    `}</style>
                     {services.map((service) => {
                       const IconComponent = service.icon;
                       return (
                         <motion.div
                           key={service.id}
-                          className="group relative"
+                          className="group relative h-full"
                           whileHover={{ y: -8, scale: 1.02 }}
                           transition={{ duration: 0.3, ease: "easeOut" }}
                         >
                           <Link
                             href={service.href}
-                            className="block p-6 rounded-xl bg-gradient-to-br from-white/5 via-purple-500/5 to-cyan-500/5 hover:from-white/10 hover:via-purple-500/10 hover:to-cyan-500/10 border border-white/10 hover:border-purple-400/30 transition-all duration-300 relative overflow-hidden"
+                            className="block h-full p-4 sm:p-6 rounded-xl bg-gradient-to-br from-white/5 via-purple-500/5 to-cyan-500/5 hover:from-white/10 hover:via-purple-500/10 hover:to-cyan-500/10 border border-white/10 hover:border-purple-400/30 transition-all duration-300 relative overflow-hidden flex flex-col min-h-[200px] sm:min-h-[220px]"
                           >
                             {/* Holographic Background */}
                             <motion.div
                               className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                               animate={{
-                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                                backgroundPosition: [
+                                  "0% 50%",
+                                  "100% 50%",
+                                  "0% 50%",
+                                ],
                               }}
                               transition={{
                                 duration: 3,
@@ -817,37 +839,42 @@ const ModernHeader = () => {
                               }}
                             />
 
-                            <div className="relative z-10 flex items-start space-x-4">
-                              <motion.div
-                                className="p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 group-hover:from-purple-500/30 group-hover:to-cyan-500/30 transition-colors duration-300"
-                                whileHover={{ rotate: 360 }}
-                                transition={{ duration: 0.8 }}
-                              >
-                                <IconComponent className="w-6 h-6 text-white" />
-                              </motion.div>
-                              
-                              <div className="flex-1">
-                                <motion.h3 
-                                  className="text-lg font-semibold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300"
-                                  animate={{
-                                    textShadow: [
-                                      "0 0 0px rgba(168, 85, 247, 0)",
-                                      "0 0 10px rgba(168, 85, 247, 0.5)",
-                                      "0 0 0px rgba(168, 85, 247, 0)",
-                                    ],
-                                  }}
-                                  transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                  }}
+                            <div className="relative z-10 flex flex-col h-full">
+                              <div className="flex items-start space-x-4 mb-4">
+                                <motion.div
+                                  className="p-2 sm:p-3 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 group-hover:from-purple-500/30 group-hover:to-cyan-500/30 transition-colors duration-300 flex-shrink-0"
+                                  whileHover={{ rotate: 360 }}
+                                  transition={{ duration: 0.8 }}
                                 >
-                                  {service.title}
-                                </motion.h3>
-                                <p className="text-sm text-gray-300 mt-1">
-                                  {service.description}
-                                </p>
-                                <div className="flex flex-wrap gap-2 mt-3">
+                                  <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                                </motion.div>
+
+                                <div className="flex-1">
+                                  <motion.h3
+                                    className="text-base sm:text-lg font-semibold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300"
+                                    animate={{
+                                      textShadow: [
+                                        "0 0 0px rgba(168, 85, 247, 0)",
+                                        "0 0 10px rgba(168, 85, 247, 0.5)",
+                                        "0 0 0px rgba(168, 85, 247, 0)",
+                                      ],
+                                    }}
+                                    transition={{
+                                      duration: 2,
+                                      repeat: Infinity,
+                                      ease: "easeInOut",
+                                    }}
+                                  >
+                                    {service.title}
+                                  </motion.h3>
+                                  <p className="text-xs sm:text-sm text-gray-300 mt-1">
+                                    {service.description}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="flex-1 flex flex-col justify-between">
+                                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
                                   {service.features.map((feature) => (
                                     <motion.span
                                       key={feature}
@@ -858,14 +885,16 @@ const ModernHeader = () => {
                                     </motion.span>
                                   ))}
                                 </div>
+
+                                <div className="flex justify-end">
+                                  <motion.div
+                                    whileHover={{ x: 5 }}
+                                    transition={{ duration: 0.3 }}
+                                  >
+                                    <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+                                  </motion.div>
+                                </div>
                               </div>
-                              
-                              <motion.div
-                                whileHover={{ x: 5 }}
-                                transition={{ duration: 0.3 }}
-                              >
-                                <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
-                              </motion.div>
                             </div>
                           </Link>
                         </motion.div>
@@ -894,7 +923,7 @@ const ModernHeader = () => {
 
             {/* Menu Drawer */}
             <motion.div
-              className="fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-white/95 backdrop-blur-xl border-l border-white/20 shadow-2xl z-50 lg:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-gradient-to-b from-slate-900/95 via-purple-900/90 to-indigo-900/95 backdrop-blur-xl border-l border-purple-400/30 shadow-2xl shadow-black/30 z-50 lg:hidden"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -902,14 +931,14 @@ const ModernHeader = () => {
             >
               <div className="flex flex-col h-full">
                 {/* Header do menu móvel */}
-                <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                <div className="flex items-center justify-between p-6 border-b border-white/20">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-brand-gold-400 to-brand-gold-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-600 via-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                       <Zap className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-gray-900">STARK</h2>
-                      <p className="text-xs text-gray-600">
+                      <h2 className="text-lg font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">STARK</h2>
+                      <p className="text-xs bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium">
                         GESTÃO EM TECNOLOGIA
                       </p>
                     </div>
@@ -917,45 +946,58 @@ const ModernHeader = () => {
                   <button
                     type="button"
                     onClick={closeMobileMenu}
-                    className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors duration-200"
+                    className="p-2 rounded-lg text-white/80 hover:bg-white/10 transition-colors duration-200"
                   >
                     <X className="w-6 h-6" />
                   </button>
                 </div>
 
                 {/* Navegação móvel */}
-                <nav className="flex-1 px-6 py-6 space-y-2">
+                <nav className="flex-1 px-6 py-6 space-y-3 overflow-y-auto">
                   {navigation.map((item) => (
                     <div key={item.name}>
                       {item.hasDropdown ? (
-                        <div className="space-y-2">
-                          <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                        <div className="space-y-3">
+                          <div className="text-xs font-semibold text-cyan-300 uppercase tracking-wider pb-2 border-b border-white/10">
                             Serviços
                           </div>
-                          <div className="space-y-1">
+                          <div className="space-y-2">
                             {services.map((service) => {
                               const IconComponent = service.icon;
+                              // Obter as classes de cor do serviço
+                              const colorClasses = {
+                                green: "from-green-500/20 to-green-600/30 text-green-400",
+                                blue: "from-blue-500/20 to-blue-600/30 text-blue-400",
+                                purple: "from-purple-500/20 to-purple-600/30 text-purple-400",
+                                red: "from-red-500/20 to-red-600/30 text-red-400",
+                                orange: "from-orange-500/20 to-orange-600/30 text-orange-400",
+                                indigo: "from-indigo-500/20 to-indigo-600/30 text-indigo-400",
+                              };
+                              const serviceColorClasses = colorClasses[service.color as keyof typeof colorClasses] || colorClasses.purple;
+                              
                               return (
                                 <Link
                                   key={service.id}
                                   href={service.href}
                                   onClick={closeMobileMenu}
-                                  className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                                  className="group flex items-center space-x-3 p-4 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-white/5 hover:to-transparent border border-transparent hover:border-2 hover:border-white/30 hover:shadow-2xl hover:shadow-white/20 transition-all duration-300 cursor-pointer"
                                 >
-                                  <div
-                                    className={`p-2 rounded-lg bg-${service.color}-500/20`}
-                                  >
+                                  <div className={`p-3 rounded-lg bg-gradient-to-br ${serviceColorClasses} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}>
                                     <IconComponent
-                                      className={`w-5 h-5 text-${service.color}-500`}
+                                      className="w-5 h-5"
+                                      aria-hidden="true"
                                     />
                                   </div>
-                                  <div>
-                                    <div className="font-medium">
+                                  <div className="flex-1 min-w-0">
+                                    <div className="font-medium text-white group-hover:text-cyan-300 transition-colors">
                                       {service.title}
                                     </div>
-                                    <div className="text-sm text-gray-500">
+                                    <p className="text-sm text-gray-400 group-hover:text-white/90 transition-colors leading-relaxed">
                                       {service.description}
-                                    </div>
+                                    </p>
+                                  </div>
+                                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <ArrowRight className="w-4 h-4 text-cyan-400" />
                                   </div>
                                 </Link>
                               );
@@ -966,9 +1008,9 @@ const ModernHeader = () => {
                         <Link
                           href={item.href}
                           onClick={closeMobileMenu}
-                          className={`block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200 ${
+                          className={`block px-4 py-4 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-cyan-500/10 border border-transparent hover:border-2 hover:border-white/30 hover:shadow-2xl hover:shadow-white/20 transition-all duration-300 ${
                             isActive(item.href)
-                              ? "bg-brand-gold-50 text-brand-gold-700 font-semibold"
+                              ? "bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-white border border-purple-400/30"
                               : ""
                           }`}
                         >
@@ -980,28 +1022,57 @@ const ModernHeader = () => {
                 </nav>
 
                 {/* Footer do menu móvel */}
-                <div className="p-6 border-t border-gray-200 space-y-4">
-                  <Link href="/contact" onClick={closeMobileMenu}>
-                    <Button className="w-full bg-gradient-to-r from-brand-gold-500 to-brand-gold-600 hover:from-brand-gold-600 hover:to-brand-gold-700 text-white font-semibold py-3 rounded-lg">
-                      <Phone className="w-4 h-4 mr-2" />
-                      Fale Conosco
+                <div className="p-6 border-t border-white/10">
+                  <Link href="/contact" onClick={closeMobileMenu} className="block mb-5">
+                    <Button className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative">
+                      {/* Holographic Background */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        animate={{
+                          backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      
+                      {/* Glow Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-xl blur-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          opacity: [0, 0.3, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      
+                      <div className="relative z-10 flex items-center justify-center">
+                        <Phone className="w-5 h-5 mr-3" />
+                        <span className="text-base font-semibold">Fale Conosco</span>
+                      </div>
                     </Button>
                   </Link>
 
-                  <div className="flex space-x-4 text-sm text-gray-600">
+                  <div className="flex flex-col space-y-3 text-sm">
                     <a
                       href="tel:+5511994396469"
-                      className="flex items-center space-x-2 hover:text-brand-gold-600 transition-colors"
+                      className="flex items-center justify-center space-x-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
                     >
-                      <Phone className="w-4 h-4" />
-                      <span>(11) 99439-6469</span>
+                      <Phone className="w-4 h-4 text-cyan-400" />
+                      <span className="text-gray-300">(11) 99439-6469</span>
                     </a>
                     <a
                       href="mailto:contato@fernandohenrique.dev"
-                      className="flex items-center space-x-2 hover:text-brand-gold-600 transition-colors"
+                      className="flex items-center justify-center space-x-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
                     >
-                      <Mail className="w-4 h-4" />
-                      <span>E-mail</span>
+                      <Mail className="w-4 h-4 text-cyan-400" />
+                      <span className="text-gray-300">E-mail</span>
                     </a>
                   </div>
                 </div>

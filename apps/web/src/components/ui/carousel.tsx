@@ -26,6 +26,13 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
   useEffect(() => {
     if (!isAutoPlaying) return;
 
+    // Verificar preferência do usuário por animações reduzidas
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery.matches) {
+      setIsAutoPlaying(false);
+      return;
+    }
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
     }, 5000);
@@ -56,13 +63,25 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
         "relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-md border border-white/20",
         className,
       )}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Carrossel de serviços"
     >
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        role="listbox"
+        aria-atomic="false"
+        aria-live={isAutoPlaying ? "off" : "polite"}
       >
         {items.map((item, index) => (
-          <div key={item.title} className="w-full flex-shrink-0">
+          <div 
+            key={item.title} 
+            className="w-full flex-shrink-0"
+            role="option"
+            aria-selected={index === currentIndex}
+            aria-label={`Slide ${index + 1} de ${items.length}: ${item.title}`}
+          >
             <div className="p-8 md:p-12">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div>
@@ -114,9 +133,15 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+        className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 w-14 h-14 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300"
         type="button"
         aria-label="Slide anterior"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            prevSlide();
+          }
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -124,6 +149,7 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <title id="prev-slide-title">Slide anterior</title>
           <path
@@ -136,9 +162,15 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300"
+        className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 w-14 h-14 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300"
         type="button"
         aria-label="Próximo slide"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            nextSlide();
+          }
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -146,6 +178,7 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <title id="next-slide-title">Próximo slide</title>
           <path
@@ -158,7 +191,7 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
       </button>
 
       {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" role="tablist" aria-label="Indicadores de slides">
         {items.map((item, index) => (
           <button
             key={`${item.title}-indicator`}
@@ -170,6 +203,14 @@ const Carousel = ({ items, className = "", onServiceClick }: CarouselProps) => {
             }`}
             type="button"
             aria-label={`Ir para slide ${index + 1}`}
+            role="tab"
+            aria-selected={index === currentIndex}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(index);
+              }
+            }}
           />
         ))}
       </div>

@@ -32,7 +32,7 @@ const MobileMenu = ({
 			>
 				<Link
 					href="/services"
-					className={`text-white link-brand block px-3 py-4 rounded-lg hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
+					className={`text-white link-brand block px-3 py-3 rounded hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
 						activeAnchor === "servicos" ||
 						pathname?.startsWith("/services") ||
 						pathname?.startsWith("/suporte-tecnico") ||
@@ -53,7 +53,7 @@ const MobileMenu = ({
 				</Link>
 				<Link
 					href="/#sobre"
-					className={`text-white link-brand block px-3 py-4 rounded-lg hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
+					className={`text-white link-brand block px-3 py-3 rounded hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
 						pathname === "/" && activeAnchor === "sobre" ? "is-active" : ""
 					}`}
 					aria-current={
@@ -65,7 +65,7 @@ const MobileMenu = ({
 				</Link>
 				<Link
 					href="/contact"
-					className={`text-white link-brand block px-3 py-4 rounded-lg hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
+					className={`text-white link-brand block px-3 py-3 rounded hover:bg-white/5 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))] ${
 						pathname === "/contact" ? "is-active" : ""
 					}`}
 					aria-current={pathname === "/contact" ? "page" : undefined}
@@ -75,7 +75,7 @@ const MobileMenu = ({
 				</Link>
 				<Link
 					href="/contact"
-					className="mt-3 text-center btn-reflect-sweep btn-border-aurora rounded-xl px-6 py-4 text-white ring-1 ring-white/20 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))]"
+					className="mt-2 text-center btn-reflect-sweep btn-border-aurora rounded-lg px-4 py-3 text-white ring-1 ring-white/20 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-gold-500))]"
 					onClick={onClose}
 				>
 					Fale conosco

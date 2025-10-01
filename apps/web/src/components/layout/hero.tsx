@@ -2,7 +2,7 @@
 "use client";
 
 import { heroSlides } from "@/components/data/hero-slides";
-import HeroEmbla from "@/components/ui/hero-embla";
+import RevolutionaryCarousel from "@/components/ui/revolutionary-carousel";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -137,7 +137,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-full overflow-hidden">
-        <HeroEmbla slides={heroSlides} />
+        <RevolutionaryCarousel slides={heroSlides} />
       </div>
 
       {/* Holographic Scan Lines */}

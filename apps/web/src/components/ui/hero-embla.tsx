@@ -20,6 +20,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
     align: "center",
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
   const total = slides.length;
   const [userPaused, setUserPaused] = useState(false);
   const lastRef = useRef<number>(0);
@@ -58,7 +59,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
         particles: "from-red-400/30 to-pink-400/30",
         lines: "from-red-400/20 to-pink-400/20",
         background: "cybersecurity",
-        titlePosition: "left",
+        titlePosition: "center", // Ajustado para center
       },
       Desenvolvimento: {
         gradient: "from-orange-600 via-amber-500 to-yellow-600",
@@ -66,7 +67,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
         particles: "from-orange-400/30 to-amber-400/30",
         lines: "from-orange-400/20 to-amber-400/20",
         background: "development",
-        titlePosition: "center",
+        titlePosition: "left", // Ajustado para left
       },
       Governança: {
         gradient: "from-slate-600 via-gray-500 to-zinc-600",
@@ -74,7 +75,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
         particles: "from-slate-400/30 to-gray-400/30",
         lines: "from-slate-400/20 to-gray-400/20",
         background: "governance",
-        titlePosition: "right",
+        titlePosition: "center", // Ajustado para center
       },
     };
 
@@ -105,12 +106,17 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
       setSelectedIndex(embla.selectedScrollSnap());
       elapsedRef.current = 0;
     };
+    const onScroll = () => {
+      const progress = embla.scrollProgress();
+      setProgress(progress);
+    };
     embla.on("select", onSelect);
+    embla.on("scroll", onScroll);
     onSelect();
 
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf: number | null = null;
-    const AUTOPLAY_MS = 6000;
+    const AUTOPLAY_MS = 8000; // Aumentar tempo de transição para melhor experiência
 
     const tick = (timestamp: number) => {
       if (!userPaused && !media.matches) {
@@ -151,6 +157,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
       root.removeEventListener("mouseleave", stop);
       document.removeEventListener("visibilitychange", onVisibility);
       embla.off("select", onSelect);
+      embla.off("scroll", onScroll);
     };
   }, [embla, userPaused]);
 
@@ -550,26 +557,27 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
   const getContentPosition = (position: string) => {
     switch (position) {
       case "left":
-        return "items-start text-left pl-16 pr-32";
+        return "items-start justify-start text-left pl-4 sm:pl-8 md:pl-16 lg:pl-24 xl:pl-32 pr-4 sm:pr-8 md:pr-16 lg:pr-24 xl:pr-32";
       case "right":
-        return "items-end text-right pl-32 pr-16";
+        return "items-end justify-end text-right pl-4 sm:pl-8 md:pl-16 lg:pl-24 xl:pl-32 pr-4 sm:pr-8 md:pr-16 lg:pr-24 xl:pr-32";
       default:
-        return "items-center text-center px-24";
+        return "items-center justify-center text-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32";
     }
   };
 
   return (
     <section
-      className="relative w-full overflow-hidden max-w-full"
+      className="relative w-full h-[calc(100vh-120px)] overflow-hidden max-w-full"
       aria-label="Destaques do site"
-      onKeyDown={(e) => {
-        if (e.key === "ArrowLeft") scrollPrev();
-        if (e.key === "ArrowRight") scrollNext();
-      }}
+      role="region"
+      aria-roledescription="carousel"
     >
       <div
         className="overflow-hidden rounded-none border-0 w-full max-w-full relative"
         ref={emblaRef}
+        role="listbox"
+        aria-atomic="false"
+        aria-live={userPaused ? "polite" : "off"}
       >
         <div className="flex touch-pan-y -ml-px w-full max-w-full">
           {slides.map((s, idx) => {
@@ -578,8 +586,11 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
               <div
                 className="min-w-0 flex-[0_0_100%] px-px w-full max-w-full"
                 key={`${s.title}-${idx}`}
+                role="option"
+                aria-selected={idx === selectedIndex}
+                aria-label={`Slide ${idx + 1} de ${total}: ${s.title}`}
               >
-                <div className="relative w-full h-[calc(70vh-5rem)] sm:h-[calc(80vh-5rem)] md:h-[calc(85vh-5rem)] lg:h-[calc(90vh-5rem)] xl:h-[calc(95vh-5rem)] min-h-[420px] max-h-[820px]">
+                <div className="relative w-full full-height-corrected min-h-[420px] max-h-[820px]">
                   {/* Unique Background per Theme */}
                   {renderUniqueBackground(theme, idx)}
 
@@ -588,7 +599,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
 
                   <div
-                    className={`absolute inset-0 flex items-center px-6 md:px-10 pb-16 md:pb-20 ${getContentPosition(theme.titlePosition)}`}
+                    className={`absolute inset-0 flex pb-32 md:pb-40 ${getContentPosition(theme.titlePosition)}`}
                   >
                     <div className="max-w-4xl w-full">
                       <div
@@ -649,6 +660,111 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
             );
           })}
         </div>
+      </div>
+
+      {/* Controles de Navegação */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 z-20">
+        {/* Botão Anterior */}
+        <motion.button
+          onClick={scrollPrev}
+          className="p-4 sm:p-3 rounded-full bg-gradient-to-r from-purple-600/80 to-cyan-600/80 hover:from-purple-600 hover:to-cyan-600 backdrop-blur-sm border border-white/20 transition-all duration-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Slide anterior"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              scrollPrev();
+            }
+          }}
+        >
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </motion.button>
+
+        {/* Status de Posição */}
+        <div className="flex items-center space-x-2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+          <span className="text-white text-sm font-medium">
+            {selectedIndex + 1} / {total}
+          </span>
+        </div>
+
+        {/* Barra de Progresso */}
+        <div className="w-32 h-2 bg-white/20 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"
+            style={{ width: `${((selectedIndex + 1) / total) * 100}%` }}
+            transition={{ duration: 0.3 }}
+          />
+        </div>
+
+        {/* Botão Próximo */}
+        <motion.button
+          onClick={scrollNext}
+          className="p-4 sm:p-3 rounded-full bg-gradient-to-r from-purple-600/80 to-cyan-600/80 hover:from-purple-600 hover:to-cyan-600 backdrop-blur-sm border border-white/20 transition-all duration-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Próximo slide"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              scrollNext();
+            }
+          }}
+        >
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </motion.button>
+      </div>
+
+      {/* Indicadores de Posição (Dots) - Agora visíveis com melhor contraste */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-50" role="tablist" aria-label="Indicadores de slides">
+        {slides.map((_, index) => (
+          <motion.button
+            key={`dot-${Math.random()}-${index}`}
+            onClick={() => embla?.scrollTo(index)}
+            className={`w-3 h-3 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
+              index === selectedIndex
+                ? "bg-gradient-to-r from-purple-500 to-cyan-500 scale-125"
+                : "bg-white/40 hover:bg-white/60"
+            }`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            aria-label={`Ir para slide ${index + 1}`}
+            aria-selected={index === selectedIndex}
+            role="tab"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                embla?.scrollTo(index);
+              }
+            }}
+          />
+        ))}
       </div>
     </section>
   );

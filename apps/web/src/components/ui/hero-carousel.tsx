@@ -82,7 +82,7 @@ export function HeroCarousel({
 
   if (mode === "split") {
     return (
-      <section aria-label="Destaques do site" className={className}>
+      <section aria-label="Destaques do site" className={className} role="region" aria-roledescription="carousel">
         <div className="grid w-full grid-cols-1 items-center gap-8 md:grid-cols-2">
           {/* Left: Content */}
           <div className="order-2 md:order-1 px-4 md:px-0">
@@ -142,12 +142,18 @@ export function HeroCarousel({
           </div>
         </div>
         {/* Controls */}
-        <div className="mt-6 flex items-center justify-center gap-6">
+        <div className="mt-6 flex items-center justify-center gap-6" role="toolbar" aria-label="Controles do carrossel">
           <button
             type="button"
             aria-label="Slide anterior"
             className="rounded-full bg-white/10 p-3 backdrop-blur-md hover:bg-white/20"
             onClick={() => go(index - 1)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                go(index - 1);
+              }
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -157,6 +163,7 @@ export function HeroCarousel({
               stroke="currentColor"
               role="img"
               aria-labelledby="hero-prev-title"
+              aria-hidden="true"
             >
               <title id="hero-prev-title">Anterior</title>
               <path
@@ -167,7 +174,7 @@ export function HeroCarousel({
               />
             </svg>
           </button>
-          <div className="flex gap-3">
+          <div className="flex gap-3" role="tablist" aria-label="Indicadores de slides">
             {slides.map((s, i) => (
               <button
                 key={`${s.title}-${i}`}
@@ -179,6 +186,14 @@ export function HeroCarousel({
                 }`}
                 onClick={() => go(i)}
                 type="button"
+                role="tab"
+                aria-selected={i === index}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    go(i);
+                  }
+                }}
               />
             ))}
           </div>
@@ -187,6 +202,12 @@ export function HeroCarousel({
             aria-label="Próximo slide"
             className="rounded-full bg-white/10 p-3 backdrop-blur-md hover:bg-white/20"
             onClick={() => go(index + 1)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                go(index + 1);
+              }
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +217,7 @@ export function HeroCarousel({
               stroke="currentColor"
               role="img"
               aria-labelledby="hero-next-title"
+              aria-hidden="true"
             >
               <title id="hero-next-title">Próximo</title>
               <path
@@ -218,6 +240,8 @@ export function HeroCarousel({
         "relative overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md"
       }
       aria-label="Destaques do site"
+      role="region"
+      aria-roledescription="carousel"
       onMouseEnter={() => setAuto(false)}
       onMouseLeave={() => setAuto(true)}
     >
@@ -276,6 +300,12 @@ export function HeroCarousel({
         aria-label="Slide anterior"
         className="absolute left-2 md:left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur-md hover:bg-white/20"
         onClick={() => go(index - 1)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            go(index - 1);
+          }
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -285,6 +315,7 @@ export function HeroCarousel({
           stroke="currentColor"
           role="img"
           aria-labelledby="hero-prev-title"
+          aria-hidden="true"
         >
           <title id="hero-prev-title">Anterior</title>
           <path
@@ -300,6 +331,12 @@ export function HeroCarousel({
         aria-label="Próximo slide"
         className="absolute right-2 md:right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur-md hover:bg-white/20"
         onClick={() => go(index + 1)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            go(index + 1);
+          }
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -309,6 +346,7 @@ export function HeroCarousel({
           stroke="currentColor"
           role="img"
           aria-labelledby="hero-next-title"
+          aria-hidden="true"
         >
           <title id="hero-next-title">Próximo</title>
           <path
@@ -322,7 +360,7 @@ export function HeroCarousel({
 
       {/* Indicators */}
       <div className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 w-full max-w-4xl px-6">
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center gap-3" role="tablist" aria-label="Indicadores de slides">
           {slides.map((s, i) => (
             <button
               key={`${s.title}-${i}`}
@@ -334,6 +372,14 @@ export function HeroCarousel({
               }`}
               onClick={() => go(i)}
               type="button"
+              role="tab"
+              aria-selected={i === index}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  go(i);
+                }
+              }}
             />
           ))}
         </div>
