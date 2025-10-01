@@ -87,6 +87,7 @@ const navigation = [
   { name: "Início", href: "/" },
   { name: "Serviços", href: "/services", hasDropdown: true },
   { name: "Sobre", href: "/sobre" },
+  { name: "História", href: "/historia" },
   { name: "Blog", href: "/blog" },
   { name: "Contato", href: "/contact" },
 ];

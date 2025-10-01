@@ -282,7 +282,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                 {/* Overlay com gradiente */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-                {/* Conteúdo principal */}
+                {/* Conteúdo principal com melhor espaçamento para leitura esquerda-direita */}
                 <div
                   className={`absolute inset-0 flex ${getContentPosition(theme.position)} p-6 sm:p-8 md:p-12 lg:p-16 pb-32`}
                 >
@@ -294,7 +294,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                   >
                     {/* Linha de destaque */}
                     <motion.div
-                      className={`h-1 w-24 mb-8 bg-gradient-to-r ${theme.accent} rounded-full`}
+                      className={`h-1 w-24 mb-6 sm:mb-8 bg-gradient-to-r ${theme.accent} rounded-full`}
                       initial={{ width: 0 }}
                       animate={{ width: 96 }}
                       transition={{ duration: 1, delay: 0.5 }}
@@ -302,7 +302,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
 
                     {/* Título principal */}
                     <motion.h1
-                      className="mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight text-white"
+                      className="mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight text-white max-w-3xl"
                       style={{
                         textShadow:
                           "0 4px 20px rgba(0,0,0,0.8), 0 0 4px rgba(0,0,0,0.9)",
@@ -314,7 +314,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                       {slide.title}
                     </motion.h1>
 
-                    {/* Subtítulo */}
+                    {/* Subtítulo com melhor espaçamento para leitura */}
                     <motion.p
                       className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed max-w-2xl"
                       initial={{ opacity: 0, y: 20 }}

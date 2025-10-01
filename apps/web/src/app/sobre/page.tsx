@@ -513,7 +513,6 @@ const AboutPage = () => {
                     className={`absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-r ${item.color} border-4 border-slate-900 z-10`}
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
                     viewport={{ once: true }}
                     animate={{
                       boxShadow: [
