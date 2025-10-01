@@ -213,28 +213,29 @@ export const themes: Record<string, ThemeConfig> = {
     position: "center",
   },
 
-  // 📞 CONTATO
+  // 📞 CONTATO - Design Elegante e Moderno
   contact: {
     name: "Contato",
-    primary: "from-green-600 via-lime-500 to-yellow-600",
-    accent: "from-green-400 to-lime-400",
-    particles: "from-green-400/30 to-lime-400/30",
-    lines: "from-green-400/20 to-lime-400/20",
-    icons: ["📞", "📧", "💬", "🌐", "📍", "📱"],
+    primary: "from-slate-900 via-indigo-900 to-purple-900",
+    accent: "from-cyan-400 via-blue-500 to-purple-500",
+    particles: "from-cyan-400/20 to-purple-400/20",
+    lines: "from-cyan-400/10 to-purple-400/10",
+    icons: ["💎", "✨", "🌟", "💫", "🔮", "⚡"],
     animations: [
-      { type: "waves", count: 12, speed: 4, intensity: "high", duration: 4 },
+      { type: "waves", count: 8, speed: 6, intensity: "medium", duration: 8 },
       {
         type: "particles",
-        count: 20,
-        speed: 6,
-        intensity: "medium",
-        duration: 6,
+        count: 15,
+        speed: 4,
+        intensity: "low",
+        duration: 10,
       },
+      { type: "grid", count: 16, speed: 3, intensity: "low", duration: 6 },
     ],
     background: {
-      gradient: "from-green-600 via-lime-500 to-yellow-600",
-      particles: "from-green-400/30 to-lime-400/30",
-      overlay: "from-black/60 via-black/40 to-transparent",
+      gradient: "from-slate-900 via-indigo-900 to-purple-900",
+      particles: "from-cyan-400/15 to-purple-400/15",
+      overlay: "from-black/80 via-black/60 to-black/40",
       effects: [],
     },
     position: "center",

@@ -25,8 +25,8 @@ export default function ContactPage() {
             melhor solução para sua empresa.
           </p>
 
-          {/* Accent Line */}
-          <div className="h-1 w-24 mx-auto mt-8 bg-gradient-to-r from-green-400 to-lime-400 rounded-full" />
+          {/* Accent Line - Design Elegante */}
+          <div className="h-1 w-32 mx-auto mt-8 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full shadow-lg shadow-cyan-500/30" />
         </header>
       </ThemedContainer>
 

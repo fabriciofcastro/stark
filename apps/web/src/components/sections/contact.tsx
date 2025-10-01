@@ -681,10 +681,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 </div>
               </div>
               
-              {/* Barra de Progresso */}
-              <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+              {/* Barra de Progresso - Design Elegante */}
+              <div className="w-full bg-slate-800/50 rounded-full h-3 overflow-hidden border border-slate-700/50">
                 <motion.div 
-                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full"
+                  className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full shadow-lg shadow-cyan-500/30"
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
@@ -699,22 +699,22 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 transition={{ delay: 0.3 }}
               >
                 {!name && (
-                  <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30">
                     Nome obrigatório
                   </span>
                 )}
                 {!email && (
-                  <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30">
                     Email obrigatório
                   </span>
                 )}
                 {!service && (
-                  <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
                     Selecione um serviço
                   </span>
                 )}
                 {progress > 80 && (
-                  <span className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30">
                     Quase pronto!
                   </span>
                 )}
@@ -1157,16 +1157,17 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 >
                   <motion.button
                     type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold rounded-2xl shadow-2xl cursor-pointer relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-slate-800 via-indigo-800 to-purple-800 text-white font-bold rounded-2xl shadow-2xl cursor-pointer relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed border border-slate-700/50"
                     disabled={submitting || !consent}
                     whileHover={{ 
-                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)",
-                      y: -2
+                      boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
+                      y: -2,
+                      borderColor: "rgba(34, 197, 94, 0.5)"
                     }}
                     transition={{ duration: 0.3 }}
                   >
                     {/* Background animado */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Conteúdo do botão */}
                     <span className="relative z-10 flex items-center justify-center gap-3 text-lg">
@@ -1199,13 +1200,13 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     </span>
 
                     {/* Efeito de brilho */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     
                     {/* Efeito de partículas */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute top-2 left-4 w-1 h-1 bg-white rounded-full animate-ping" />
-                      <div className="absolute top-4 right-6 w-1 h-1 bg-white rounded-full animate-ping delay-100" />
-                      <div className="absolute bottom-3 left-8 w-1 h-1 bg-white rounded-full animate-ping delay-200" />
+                      <div className="absolute top-2 left-4 w-1 h-1 bg-cyan-400 rounded-full animate-ping" />
+                      <div className="absolute top-4 right-6 w-1 h-1 bg-blue-400 rounded-full animate-ping delay-100" />
+                      <div className="absolute bottom-3 left-8 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-200" />
                     </div>
                   </motion.button>
                 </motion.div>
@@ -1243,7 +1244,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                       setErrors({});
                     }
                   }}
-                  className="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-600 hover:border-gray-400 rounded-lg transition-all duration-300"
+                  className="px-4 py-2 text-sm text-slate-400 hover:text-white border border-slate-600 hover:border-slate-400 rounded-lg transition-all duration-300 bg-slate-800/30 hover:bg-slate-700/50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -1269,12 +1270,12 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
             }}
           >
             {/* Background Pattern */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 opacity-50" />
-            <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-xl" />
-            <div className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 rounded-full blur-xl" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-800/20 via-indigo-800/10 to-purple-800/20 opacity-50" />
+            <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-xl" />
+            <div className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
             
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                 Outros Meios de Contato
               </h3>
               <p className="text-gray-300 mb-8">
@@ -1348,14 +1349,14 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Status de Disponibilidade */}
               <motion.div 
-                className="mt-8 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl"
+                className="mt-8 p-4 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
               >
                 <div className="flex items-center justify-center gap-3">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-green-300 font-semibold">
+                  <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse" />
+                  <span className="text-emerald-300 font-semibold">
                     Online agora - Resposta em até 15 minutos
                   </span>
                 </div>
