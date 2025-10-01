@@ -322,13 +322,13 @@ const ModernHeader = () => {
                               : 0,
                         }
                   }
-                   transition={{
-                     duration: 3,
-                     delay: element.delay,
-                     ease: "easeInOut",
-                     repeat: prefersReducedMotion ? 0 : Infinity,
-                     repeatType: "reverse",
-                   }}
+                  transition={{
+                    duration: 3,
+                    delay: element.delay,
+                    ease: "easeInOut",
+                    repeat: prefersReducedMotion ? 0 : Infinity,
+                    repeatType: "reverse",
+                  }}
                 />
               );
             })}

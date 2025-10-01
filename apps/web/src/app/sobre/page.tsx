@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Zap,
   Shield,
   Users,
-  Target,
   Award,
   TrendingUp,
   Globe,
@@ -14,17 +14,16 @@ import {
   Star,
   Rocket,
   Brain,
-  Lightbulb,
   CheckCircle,
   ArrowRight,
   Play,
-  Pause,
   Volume2,
+  X,
 } from "lucide-react";
 
 const AboutPage = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   // Dados da empresa
   const companyStats = [
@@ -185,7 +184,7 @@ const AboutPage = () => {
         {/* Floating Orbs */}
         {[...Array(20)].map((_, i) => (
           <motion.div
-            key={`orb-${i}`}
+            key={`orb-${Math.random()}-${i}`}
             className="absolute rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-xl"
             style={{
               left: `${Math.random() * 100}%`,
@@ -211,7 +210,7 @@ const AboutPage = () => {
         <div className="absolute inset-0 opacity-10">
           {[...Array(50)].map((_, i) => (
             <motion.div
-              key={`grid-${i}`}
+              key={`grid-${Math.random()}-${i}`}
               className="absolute border border-white/20"
               style={{
                 left: `${(i % 10) * 10}%`,
@@ -285,16 +284,19 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <motion.button
-                className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Play className="w-5 h-5" />
-                Conheça Nossa História
-              </motion.button>
+              <Link href="/historia">
+                <motion.button
+                  className="px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Play className="w-5 h-5" />
+                  Conheça Nossa História
+                </motion.button>
+              </Link>
 
               <motion.button
+                onClick={() => setShowVideoModal(true)}
                 className="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
@@ -568,7 +570,7 @@ const AboutPage = () => {
                   {[...Array(testimonials[currentTestimonial].rating)].map(
                     (_, i) => (
                       <Star
-                        key={i}
+                        key={`star-${Math.random()}-${i}`}
                         className="w-6 h-6 text-yellow-400 fill-current"
                       />
                     ),
@@ -602,7 +604,7 @@ const AboutPage = () => {
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
                 <motion.button
-                  key={index}
+                  key={`testimonial-dot-${Math.random()}-${index}`}
                   onClick={() => setCurrentTestimonial(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentTestimonial
@@ -676,8 +678,63 @@ const AboutPage = () => {
           </motion.div>
 					</div>
 				</section>
+
+        {/* Modal de Vídeo */}
+        {showVideoModal && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowVideoModal(false)}
+          >
+            <motion.div
+              className="relative w-full max-w-4xl bg-slate-900 rounded-xl overflow-hidden shadow-2xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header do Modal */}
+              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-600 to-cyan-600">
+                <h3 className="text-white font-semibold text-lg">Nossa História em Vídeo</h3>
+                <motion.button
+                  onClick={() => setShowVideoModal(false)}
+                  className="p-2 text-white hover:bg-white/20 rounded-lg transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X className="w-5 h-5" />
+                </motion.button>
+              </div>
+
+              {/* Player de Vídeo */}
+              <div className="aspect-video bg-slate-800 flex items-center justify-center">
+                <div className="text-center">
+                  <motion.div
+                    className="w-20 h-20 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Play className="w-8 h-8 text-white ml-1" />
+                  </motion.div>
+                  <h4 className="text-white text-xl font-semibold mb-2">Vídeo Institucional</h4>
+                  <p className="text-gray-400 mb-4">Em breve - Conheça nossa jornada de inovação</p>
+                  <motion.button
+                    onClick={() => setShowVideoModal(false)}
+                    className="px-6 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Fechar
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
 		</div>
-	);
+  );
 };
 
 export default AboutPage;
