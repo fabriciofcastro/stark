@@ -182,7 +182,7 @@ const AboutPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
       {/* Background Animations */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Orbs */}
+        {/* Floating Orbs - Movimento Fluido e Contínuo */}
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={`orb-${Math.random()}-${i}`}
@@ -194,20 +194,21 @@ const AboutPage = () => {
               height: `${Math.random() * 200 + 100}px`,
             }}
             animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
+              x: [0, 100, -100, 0],
+              y: [0, 50, -50, 0],
+              scale: [1, 1.3, 0.8, 1],
+              opacity: [0.2, 0.5, 0.3, 0.2],
+              rotate: [0, 180, 360],
             }}
             transition={{
-              duration: 10 + Math.random() * 5,
+              duration: 20 + Math.random() * 10,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "linear",
             }}
           />
         ))}
 
-        {/* Grid Pattern */}
+        {/* Grid Pattern - Movimento Fluido Contínuo */}
         <div className="absolute inset-0 opacity-10">
           {[...Array(50)].map((_, i) => (
             <motion.div
@@ -220,14 +221,16 @@ const AboutPage = () => {
                 height: "1px",
               }}
               animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
+                opacity: [0, 0.8, 0],
+                scale: [0.5, 1.5, 0.5],
+                x: [0, 10, -10, 0],
+                y: [0, 5, -5, 0],
               }}
               transition={{
-                duration: 2,
-                delay: i * 0.1,
+                duration: 15 + i * 0.2,
+                delay: i * 0.05,
                 repeat: Infinity,
-                repeatDelay: 5,
+                ease: "linear",
               }}
             />
           ))}

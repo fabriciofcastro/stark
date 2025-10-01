@@ -169,65 +169,36 @@ const HistoriaPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
-      {/* Background Animations */}
+      {/* Background Fixo - Sem Animações */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Particles */}
+        {/* Partículas Fixas */}
         {[...Array(30)].map((_, i) => (
-          <motion.div
+          <div
             key={`particle-${i}`}
-            className="absolute rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 blur-sm"
+            className="absolute rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 blur-sm"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               width: `${Math.random() * 4 + 2}px`,
               height: `${Math.random() * 4 + 2}px`,
             }}
-            animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           />
         ))}
         
-        {/* Grid Lines */}
+        {/* Grid Fixo */}
         <div className="absolute inset-0 opacity-5">
           {[...Array(20)].map((_, i) => (
-            <motion.div
+            <div
               key={`grid-h-${i}`}
               className="absolute w-full h-px bg-gradient-to-r from-transparent via-white to-transparent"
               style={{ top: `${i * 5}%` }}
-              animate={{
-                opacity: [0, 0.5, 0],
-              }}
-              transition={{
-                duration: 3,
-                delay: i * 0.1,
-                repeat: Infinity,
-                repeatDelay: 5,
-              }}
             />
           ))}
           {[...Array(20)].map((_, i) => (
-            <motion.div
+            <div
               key={`grid-v-${i}`}
               className="absolute h-full w-px bg-gradient-to-b from-transparent via-white to-transparent"
               style={{ left: `${i * 5}%` }}
-              animate={{
-                opacity: [0, 0.5, 0],
-              }}
-              transition={{
-                duration: 3,
-                delay: i * 0.1,
-                repeat: Infinity,
-                repeatDelay: 5,
-              }}
             />
           ))}
         </div>
