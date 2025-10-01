@@ -692,26 +692,39 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 </div>
               </motion.div>
 
-              {/* Seção 2: Serviços */}
+              {/* Seção 2: Serviços - Design Modernizado */}
               <motion.div
-                className="p-6 bg-white/5 rounded-2xl border border-white/10"
+                className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                whileHover={{ 
+                  borderColor: "rgba(255,255,255,0.3)",
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                }}
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-blue-500/20 rounded-lg">
-                    <Settings className="w-5 h-5 text-blue-400" />
+                {/* Background Pattern */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 opacity-50" />
+                <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-8">
+                    <motion.div 
+                      className="p-3 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-xl border border-blue-400/30"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Settings className="w-6 h-6 text-blue-300" />
+                    </motion.div>
+                    <div>
+                      <h4 className="text-white text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                        O que você precisa
+                      </h4>
+                      <p className="text-sm text-gray-300">
+                        Selecione o serviço de interesse para personalizar o formulário
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-white text-lg font-semibold">
-                      O que você precisa
-                    </h4>
-                    <p className="text-sm text-gray-400">
-                      Selecione o serviço de interesse
-                    </p>
-                  </div>
-                </div>
 
                 <Select
                   id={serviceId}
@@ -727,55 +740,81 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   description="Selecione o assunto principal."
                   required
                   error={errors.service}
-                  options={serviceConfigs.map((config) => ({
-                    value: config.id,
-                    label: config.label,
-                  }))}
+                  options={[
+                    { value: "", label: "Selecione um serviço..." },
+                    ...serviceConfigs.map((config) => ({
+                      value: config.id,
+                      label: config.label,
+                    }))
+                  ]}
                 />
 
-                {/* Campos dinâmicos baseados no serviço selecionado */}
+                {/* Campos dinâmicos baseados no serviço selecionado - Design Modernizado */}
                 <AnimatePresence>
                   {selectedServiceConfig && (
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-6 space-y-4"
+                      initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, height: "auto", scale: 1 }}
+                      exit={{ opacity: 0, height: 0, scale: 0.95 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="mt-8 space-y-6"
                     >
-                      <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div
-                            className={`p-2 rounded-lg bg-${selectedServiceConfig.color}-500/20`}
+                      <motion.div 
+                        className="relative p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/20 backdrop-blur-sm"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {/* Service Header */}
+                        <div className="flex items-center gap-4 mb-6">
+                          <motion.div
+                            className={`p-3 rounded-xl bg-gradient-to-br from-${selectedServiceConfig.color}-500/30 to-${selectedServiceConfig.color}-600/20 border border-${selectedServiceConfig.color}-400/30`}
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            transition={{ duration: 0.2 }}
                           >
                             <selectedServiceConfig.icon
-                              className={`w-5 h-5 text-${selectedServiceConfig.color}-400`}
+                              className={`w-6 h-6 text-${selectedServiceConfig.color}-300`}
                             />
-                          </div>
+                          </motion.div>
                           <div>
-                            <h5 className="text-white font-semibold">
+                            <h5 className="text-white text-lg font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
                               {selectedServiceConfig.label}
                             </h5>
-                            <p className="text-sm text-gray-400">
+                            <p className="text-sm text-gray-300">
                               {selectedServiceConfig.description}
                             </p>
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4">
+                        <div className="grid grid-cols-1 gap-6">
                           {selectedServiceConfig.fields.map((field, index) => {
                             const IconComponent = field.icon;
                             const fieldId = `${field.id}-${index}`;
                             return (
-                              <div key={field.id} className="space-y-2">
+                              <motion.div 
+                                key={field.id} 
+                                className="space-y-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 + 0.3 }}
+                                whileHover={{ 
+                                  backgroundColor: "rgba(255,255,255,0.08)",
+                                  borderColor: "rgba(255,255,255,0.3)"
+                                }}
+                              >
                                 <label
                                   htmlFor={fieldId}
-                                  className="flex items-center gap-2 text-sm font-medium text-gray-200"
+                                  className="flex items-center gap-3 text-sm font-semibold text-white"
                                 >
-                                  <IconComponent className="w-4 h-4" />
+                                  <motion.div
+                                    className={`p-2 rounded-lg bg-gradient-to-br from-${selectedServiceConfig.color}-500/20 to-${selectedServiceConfig.color}-600/10`}
+                                    whileHover={{ scale: 1.1 }}
+                                  >
+                                    <IconComponent className={`w-4 h-4 text-${selectedServiceConfig.color}-400`} />
+                                  </motion.div>
                                   {field.label}
                                   {field.required && (
-                                    <span className="text-red-400">*</span>
+                                    <span className="text-red-400 ml-1">*</span>
                                   )}
                                 </label>
 
@@ -955,42 +994,71 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 </motion.output>
               )}
 
-              {/* Botões de Ação */}
+              {/* Botão de Envio Modernizado */}
               <motion.div
                 className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                <motion.div className="flex-1" whileTap={{ scale: 0.98 }}>
-                  <Button
+                <motion.div 
+                  className="relative flex-1"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <motion.button
                     type="submit"
-                    variant="primary"
-                    className="w-full cursor-pointer relative overflow-hidden group"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 text-white font-bold rounded-2xl shadow-2xl cursor-pointer relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={submitting || !consent}
+                    whileHover={{ 
+                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)",
+                      y: -2
+                    }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
+                    {/* Background animado */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Conteúdo do botão */}
+                    <span className="relative z-10 flex items-center justify-center gap-3 text-lg">
                       {submitting ? (
                         <>
-                          <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                          Enviando...
+                          <motion.div 
+                            className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                          Enviando sua mensagem...
                         </>
                       ) : sent ? (
                         <>
-                          <CheckCircle className="w-4 h-4" />
-                          Enviado!
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: "spring", stiffness: 200 }}
+                          >
+                            <CheckCircle className="w-5 h-5" />
+                          </motion.div>
+                          Mensagem enviada com sucesso!
                         </>
                       ) : (
                         <>
-                          <Mail className="w-4 h-4" />
+                          <Mail className="w-5 h-5" />
                           Enviar Mensagem
                         </>
                       )}
                     </span>
 
                     {/* Efeito de brilho */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  </Button>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    
+                    {/* Efeito de partículas */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-2 left-4 w-1 h-1 bg-white rounded-full animate-ping" />
+                      <div className="absolute top-4 right-6 w-1 h-1 bg-white rounded-full animate-ping delay-100" />
+                      <div className="absolute bottom-3 left-8 w-1 h-1 bg-white rounded-full animate-ping delay-200" />
+                    </div>
+                  </motion.button>
                 </motion.div>
               </motion.div>
 
@@ -1005,51 +1073,114 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           </div>
         </motion.div>
 
-        {/* Informações de contato alternativas */}
+        {/* Informações de Contato Modernizadas */}
         <motion.div
-          className="mt-12 text-center"
+          className="mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
-          <p className="text-gray-300 mb-6">
-            Prefere outro meio de contato? Estamos disponíveis em:
-          </p>
+          <motion.div 
+            className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
+            whileHover={{ 
+              borderColor: "rgba(255,255,255,0.3)",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+            }}
+          >
+            {/* Background Pattern */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 opacity-50" />
+            <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-xl" />
+            <div className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-cyan-400/20 rounded-full blur-xl" />
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                Outros Meios de Contato
+              </h3>
+              <p className="text-gray-300 mb-8">
+                Prefere falar diretamente? Estamos disponíveis em múltiplos canais:
+              </p>
 
-          <div className="flex flex-wrap justify-center gap-6">
-            <motion.a
-              href="https://wa.me/5511994396469"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-lg text-green-400 hover:bg-green-500/20 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Contato via WhatsApp"
-            >
-              <Phone className="w-4 h-4" />
-              <span>WhatsApp</span>
-            </motion.a>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* WhatsApp */}
+                <motion.a
+                  href="https://wa.me/5511994396469"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-6 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-2xl text-green-400 hover:from-green-500/30 hover:to-green-600/20 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Contato via WhatsApp"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-green-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative z-10">
+                    <motion.div 
+                      className="p-3 bg-green-500/30 rounded-xl mb-4 w-fit mx-auto"
+                      whileHover={{ rotate: 5 }}
+                    >
+                      <Phone className="w-6 h-6" />
+                    </motion.div>
+                    <h4 className="font-bold text-lg mb-2">WhatsApp</h4>
+                    <p className="text-sm text-green-300">Resposta instantânea</p>
+                  </div>
+                </motion.a>
 
-            <motion.a
-              href="mailto:contato@fernandohenrique.dev"
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-lg text-blue-400 hover:bg-blue-500/20 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Contato via e-mail"
-            >
-              <Mail className="w-4 h-4" />
-              <span>E-mail</span>
-            </motion.a>
+                {/* Email */}
+                <motion.a
+                  href="mailto:contato@fernandohenrique.dev"
+                  className="group relative p-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-2xl text-blue-400 hover:from-blue-500/30 hover:to-blue-600/20 transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Contato via e-mail"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative z-10">
+                    <motion.div 
+                      className="p-3 bg-blue-500/30 rounded-xl mb-4 w-fit mx-auto"
+                      whileHover={{ rotate: 5 }}
+                    >
+                      <Mail className="w-6 h-6" />
+                    </motion.div>
+                    <h4 className="font-bold text-lg mb-2">E-mail</h4>
+                    <p className="text-sm text-blue-300">Resposta em 24h</p>
+                  </div>
+                </motion.a>
 
-            <motion.div
-              className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-lg text-purple-400"
-              whileHover={{ scale: 1.05 }}
-              aria-label="Localização"
-            >
-              <MapPin className="w-4 h-4" />
-              <span>São Paulo, SP</span>
-            </motion.div>
-          </div>
+                {/* Localização */}
+                <motion.div
+                  className="group relative p-6 bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-2xl text-purple-400"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  aria-label="Localização"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative z-10">
+                    <motion.div 
+                      className="p-3 bg-purple-500/30 rounded-xl mb-4 w-fit mx-auto"
+                      whileHover={{ rotate: 5 }}
+                    >
+                      <MapPin className="w-6 h-6" />
+                    </motion.div>
+                    <h4 className="font-bold text-lg mb-2">São Paulo, SP</h4>
+                    <p className="text-sm text-purple-300">Atendimento presencial</p>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Status de Disponibilidade */}
+              <motion.div 
+                className="mt-8 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                  <span className="text-green-300 font-semibold">
+                    Online agora - Resposta em até 15 minutos
+                  </span>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
