@@ -297,6 +297,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
   const [autoSaveStatus, setAutoSaveStatus] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
   const [fieldFocus, setFieldFocus] = useState<string>("");
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
 
   const honeyRef = useRef<HTMLInputElement | null>(null);
   const MESSAGE_MAX = 500;
@@ -354,6 +355,19 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
     
     setProgress((totalCompleted / totalFields) * 100);
   }, [name, email, company, phone, service, message, dynamicFields, selectedServiceConfig]);
+
+  // Efeito de scroll para barra de progresso
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      setScrollProgress(scrollPercent);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   function validate(): Errors {
     const e: Errors = {};
@@ -475,53 +489,72 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8 reveal relative overflow-x-hidden min-h-screen">
-      {/* Background animado melhorado */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-green-900/95 via-brand-green-800/90 to-brand-gold-900/85" />
-
-        {/* Padrão geométrico */}
-        <div className="absolute inset-0 opacity-5">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            role="img"
-            aria-label="Padrão geométrico decorativo"
-          >
-            <defs>
-              <pattern
-                id={patternId}
-                width="10"
-                height="10"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 10 0 L 0 0 0 10"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.5"
-                />
-              </pattern>
-            </defs>
-            <rect
-              width="100"
-              height="100"
-              fill={`url(#${patternId})`}
-              className="text-white"
-            />
-          </svg>
+      {/* Barra de Progresso Sticky */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-800/50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <motion.div 
+          className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-lg shadow-cyan-500/30"
+          style={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.1 }}
+        />
+      </motion.div>
+      {/* Background Elegante e Moderno */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {/* Gradiente Principal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900" />
+        
+        {/* Overlay com padrão radial */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(34,197,94,0.1)_0%,transparent_50%)]" />
+        
+        {/* Linhas de energia sutis */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent" />
+          <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-400/30 to-transparent" />
+          <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-indigo-400/30 to-transparent" />
         </div>
 
-        {/* Elementos flutuantes */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-brand-gold-500/10 rounded-full blur-3xl animate-pulse" />
+        {/* Elementos flutuantes elegantes */}
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-brand-green-500/10 rounded-full blur-2xl animate-pulse"
+          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 right-1/3 w-16 h-16 bg-brand-gold-500/5 rounded-full blur-xl animate-pulse"
+          className="absolute top-1/2 right-1/3 w-16 h-16 bg-blue-400/10 rounded-full blur-xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
+
+        {/* Partículas flutuantes */}
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-full blur-sm"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+            }}
+            animate={{
+              x: [0, Math.random() * 100 - 50, 0],
+              y: [0, Math.random() * 100 - 50, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 12 + Math.random() * 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
       </div>
 
       <div className="mx-auto max-w-4xl relative z-10">
@@ -593,50 +626,54 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="relative rounded-3xl border border-white/20 bg-white/5 backdrop-blur-xl shadow-2xl overflow-hidden"
+          className="relative rounded-3xl border border-slate-700/50 bg-slate-800/30 backdrop-blur-xl shadow-2xl overflow-hidden"
         >
           {/* Glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-gold-500/5 via-transparent to-brand-green-500/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
           {/* Content container */}
           <div className="relative p-8 md:p-12">
-            {/* Indicador de progresso inteligente */}
+            {/* Cabeçalho Modernizado */}
             <motion.div
-              className="mb-8 p-6 bg-white/5 rounded-2xl border border-white/10"
+              className="mb-8 p-8 bg-gradient-to-br from-slate-900/80 via-indigo-900/60 to-purple-900/80 rounded-2xl border border-slate-600/50 backdrop-blur-sm shadow-xl"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h4 className="text-lg font-semibold text-white">
-                  Progresso do Formulário
+                <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
+                  ✨ Formulário Inteligente
                 </h4>
-                <span className="text-sm text-brand-gold-400 font-medium">
-                  {Math.round(
-                    (((name ? 1 : 0) +
-                      (email ? 1 : 0) +
-                      (company ? 1 : 0) +
-                      (phone ? 1 : 0) +
-                      (service ? 1 : 0) +
-                      (message ? 1 : 0)) /
-                      6) *
-                      100,
+                <div className="flex items-center gap-3">
+                  {autoSaveStatus && (
+                    <motion.span 
+                      className="text-sm text-emerald-400 flex items-center gap-2"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                    >
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                      {autoSaveStatus}
+                    </motion.span>
                   )}
-                  % completo
-                </span>
+                  <span className="text-sm text-cyan-300 font-semibold bg-slate-800/50 px-3 py-1 rounded-full border border-slate-600/50">
+                    {Math.round(progress)}% completo
+                  </span>
+                </div>
               </div>
 
               <div className="relative">
-                <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden border border-slate-600/30">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-brand-gold-500 to-brand-gold-400 rounded-full"
+                    className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full shadow-lg shadow-cyan-500/30"
                     initial={{ width: 0 }}
                     animate={{
-                      width: `${(((name ? 1 : 0) + (email ? 1 : 0) + (company ? 1 : 0) + (phone ? 1 : 0) + (service ? 1 : 0) + (message ? 1 : 0)) / 6) * 100}%`,
+                      width: `${Math.round(progress)}%`,
                     }}
                     transition={{ duration: 0.5 }}
                   />
                 </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent rounded-full animate-pulse" />
               </div>
 
               <div className="flex items-center justify-between mt-3 text-xs text-gray-400">
@@ -733,20 +770,24 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 1: Dados Pessoais */}
               <motion.div
-                className="p-6 bg-white/5 rounded-2xl border border-white/10"
+                className="p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
+                whileHover={{
+                  borderColor: "rgba(34, 197, 94, 0.3)",
+                  boxShadow: "0 10px 30px rgba(34, 197, 94, 0.1)",
+                }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-brand-gold-500/20 rounded-lg">
-                    <User className="w-5 h-5 text-brand-gold-400" />
+                  <div className="p-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl">
+                    <User className="w-6 h-6 text-cyan-400" />
                   </div>
                   <div>
-                    <h4 className="text-white text-lg font-semibold">
+                    <h4 className="text-white text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
                       Seus Dados
                     </h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-slate-300">
                       Informações básicas para contato
                     </p>
                   </div>
@@ -820,18 +861,18 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 2: Serviços - Design Modernizado */}
               <motion.div
-                className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
+                className="relative p-8 bg-gradient-to-br from-slate-800/50 to-slate-700/40 rounded-3xl border border-slate-600/50 backdrop-blur-sm shadow-2xl"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                whileHover={{ 
-                  borderColor: "rgba(255,255,255,0.3)",
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                whileHover={{
+                  borderColor: "rgba(147, 51, 234, 0.3)",
+                  boxShadow: "0 15px 40px rgba(147, 51, 234, 0.1)",
                 }}
               >
                 {/* Background Pattern */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-cyan-500/10 opacity-50" />
-                <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl" />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-blue-500/10 opacity-50" />
+                <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-8">
@@ -1026,20 +1067,24 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 3: Mensagem */}
               <motion.div
-                className="p-6 bg-white/5 rounded-2xl border border-white/10"
+                className="p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
+                whileHover={{
+                  borderColor: "rgba(59, 130, 246, 0.3)",
+                  boxShadow: "0 10px 30px rgba(59, 130, 246, 0.1)",
+                }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-orange-500/20 rounded-lg">
-                    <MessageSquare className="w-5 h-5 text-orange-400" />
+                  <div className="p-3 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl">
+                    <MessageSquare className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
-                    <h4 className="text-white text-lg font-semibold">
+                    <h4 className="text-white text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
                       Sua Mensagem
                     </h4>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-slate-300">
                       Descreva sua necessidade com detalhes
                     </p>
                   </div>
