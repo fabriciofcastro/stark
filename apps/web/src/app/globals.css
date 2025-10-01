@@ -59,11 +59,11 @@ html {
   overflow-x: hidden;
 }
 
-body {
+  body {
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: white;
   background: linear-gradient(135deg, hsl(var(--color-primary-900)) 0%, hsl(var(--color-neutral-950)) 50%, hsl(var(--color-accent-900)) 100%);
-  min-height: 100vh;
+    min-height: 100vh;
   overflow-x: hidden;
 }

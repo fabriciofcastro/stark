@@ -32,7 +32,7 @@ const AboutPage = () => {
       icon: Users,
       value: "500+",
       label: "Clientes Atendidos",
-      color: "from-blue-500 to-cyan-500",
+			color: "from-blue-500 to-cyan-500",
     },
     {
       icon: Award,
@@ -71,7 +71,7 @@ const AboutPage = () => {
     {
       icon: Shield,
       title: "Segurança Absoluta",
-      description:
+			description:
         "Protegemos seus dados com os mais altos padrões de segurança e compliance do mercado.",
       color: "from-blue-600 to-cyan-600",
       features: ["ISO 27001", "LGPD Compliance", "Auditoria Contínua"],
@@ -79,7 +79,7 @@ const AboutPage = () => {
     {
       icon: Heart,
       title: "Foco no Cliente",
-      description:
+			description:
         "Cada projeto é único. Entendemos suas necessidades e entregamos soluções personalizadas.",
       color: "from-pink-600 to-rose-600",
       features: [
@@ -91,7 +91,7 @@ const AboutPage = () => {
     {
       icon: Rocket,
       title: "Crescimento Acelerado",
-      description:
+			description:
         "Transformamos ideias em resultados tangíveis, acelerando o crescimento dos nossos clientes.",
       color: "from-orange-600 to-yellow-600",
       features: ["ROI Mensurável", "Escalabilidade", "Time-to-Market"],
@@ -139,31 +139,31 @@ const AboutPage = () => {
     {
       year: "2012",
       title: "Primeira Certificação",
-      description:
+			description:
         "Conquistamos nossa primeira certificação ISO, estabelecendo padrões de qualidade.",
       icon: Award,
       color: "from-purple-500 to-pink-500",
-    },
-    {
+		},
+		{
       year: "2016",
       title: "Expansão Internacional",
-      description:
+			description:
         "Iniciamos operações em múltiplos países, expandindo nosso impacto global.",
       icon: Globe,
       color: "from-pink-500 to-red-500",
-    },
-    {
+		},
+		{
       year: "2020",
       title: "Transformação Digital",
-      description:
+			description:
         "Lideramos a transformação digital de 200+ empresas durante a pandemia.",
       icon: Zap,
       color: "from-red-500 to-orange-500",
-    },
-    {
+		},
+		{
       year: "2024",
       title: "Futuro Presente",
-      description:
+			description:
         "Implementando IA, IoT e tecnologias quânticas para o próximo nível.",
       icon: Rocket,
       color: "from-orange-500 to-yellow-500",
@@ -178,7 +178,7 @@ const AboutPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
+	return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
       {/* Background Animations */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -232,7 +232,7 @@ const AboutPage = () => {
             />
           ))}
         </div>
-      </div>
+					</div>
 
       {/* Hero Section */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -304,7 +304,7 @@ const AboutPage = () => {
               </motion.button>
             </motion.div>
           </motion.div>
-        </div>
+												</div>
       </section>
 
       {/* Stats Section */}
@@ -365,13 +365,13 @@ const AboutPage = () => {
                     <p className="text-gray-300 text-sm font-medium">
                       {stat.label}
                     </p>
-                  </div>
-                </div>
+										</div>
+									</div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+							))}
+						</div>
+					</div>
+				</section>
 
       {/* Values Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
@@ -414,7 +414,7 @@ const AboutPage = () => {
 
                     <h3 className="text-2xl font-bold text-white mb-4">
                       {value.title}
-                    </h3>
+								</h3>
 
                     <p className="text-gray-300 mb-6 leading-relaxed">
                       {value.description}
@@ -440,13 +440,13 @@ const AboutPage = () => {
                         </motion.div>
                       ))}
                     </div>
-                  </div>
-                </div>
+								</div>
+							</div>
               </motion.div>
-            ))}
+						))}
           </div>
-        </div>
-      </section>
+					</div>
+				</section>
 
       {/* Timeline Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
@@ -495,18 +495,18 @@ const AboutPage = () => {
                           <span className="text-2xl font-bold text-white">
                             {item.year}
                           </span>
-                        </div>
+								</div>
 
                         <h3 className="text-xl font-bold text-white mb-2">
                           {item.title}
-                        </h3>
+									</h3>
 
                         <p className="text-gray-300 text-sm">
                           {item.description}
-                        </p>
-                      </div>
+									</p>
+								</div>
                     </motion.div>
-                  </div>
+								</div>
 
                   {/* Timeline Dot */}
                   <motion.div
@@ -533,10 +533,10 @@ const AboutPage = () => {
                   />
                 </motion.div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
+							</div>
+						</div>
+					</div>
+				</section>
 
       {/* Testimonials Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
@@ -573,7 +573,7 @@ const AboutPage = () => {
                       />
                     ),
                   )}
-                </div>
+								</div>
 
                 {/* Testimonial Content */}
                 <blockquote className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
@@ -584,18 +584,18 @@ const AboutPage = () => {
                 <div className="flex items-center justify-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xl">
                     {testimonials[currentTestimonial].avatar}
-                  </div>
+					</div>
 
                   <div className="text-left">
                     <div className="text-white font-semibold text-lg">
                       {testimonials[currentTestimonial].name}
-                    </div>
+								</div>
                     <div className="text-gray-400 text-sm">
                       {testimonials[currentTestimonial].role}
-                    </div>
-                  </div>
-                </div>
-              </div>
+									</div>
+								</div>
+							</div>
+						</div>
             </motion.div>
 
             {/* Testimonial Indicators */}
@@ -613,10 +613,10 @@ const AboutPage = () => {
                   whileTap={{ scale: 0.8 }}
                 />
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
+							</div>
+						</div>
+					</div>
+				</section>
 
       {/* CTA Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
@@ -674,10 +674,10 @@ const AboutPage = () => {
               </motion.button>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+					</div>
+				</section>
+		</div>
+	);
 };
 
 export default AboutPage;

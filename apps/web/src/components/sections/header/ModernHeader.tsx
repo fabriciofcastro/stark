@@ -129,7 +129,7 @@ const ModernHeader = () => {
   // Generate floating particles
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    
+
     // Don't run animation effects if user prefers reduced motion
     if (mediaQuery.matches) {
       setParticles([]);
@@ -159,7 +159,7 @@ const ModernHeader = () => {
     if (typeof window === "undefined") return;
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    
+
     // Don't run animation effects if user prefers reduced motion
     if (mediaQuery.matches) {
       setNeuralNodes([]);
@@ -188,7 +188,7 @@ const ModernHeader = () => {
   // Holographic effect toggle
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    
+
     // Don't run animation effects if user prefers reduced motion
     if (mediaQuery.matches) {
       setHolographicActive(false);
@@ -272,58 +272,64 @@ const ModernHeader = () => {
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {/* Smart Transparent Elements - only if user doesn't prefer reduced motion */}
             {neuralNodes.map((element) => {
-              const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              const prefersReducedMotion =
+                typeof window !== "undefined" &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
               return (
-              <motion.div
-                key={`smart-element-${element.id}`}
-                className={`absolute ${
-                  element.type === "circle"
-                    ? "rounded-full bg-gradient-to-r from-white/10 to-white/5"
-                    : "bg-gradient-to-r from-white/10 to-transparent"
-                }`}
-                style={{
-                  left: `${element.x}%`,
-                  top: `${element.y}%`,
-                  width:
+                <motion.div
+                  key={`smart-element-${element.id}`}
+                  className={`absolute ${
                     element.type === "circle"
-                      ? `${element.size}px`
-                      : `${element.size * 20}px`,
-                  height:
-                    element.type === "circle" ? `${element.size}px` : "1px",
-                }}
-                initial={{
-                  scale: 0,
-                  opacity: 0,
-                  x: element.type === "line" ? -20 : 0,
-                  rotate:
-                    element.type === "line"
-                      ? typeof window !== "undefined"
-                        ? Math.random() * 360
-                        : 0
-                      : 0,
-                }}
-                animate={prefersReducedMotion ? {
-                  scale: 1,
-                  opacity: element.opacity,
-                } : {
-                  scale: 1,
-                  opacity: element.opacity,
-                  x: element.type === "line" ? 20 : 0,
-                  rotate:
-                    element.type === "line"
-                      ? typeof window !== "undefined"
-                        ? Math.random() * 360
-                        : 0
-                      : 0,
-                }}
-                transition={{
-                  duration: 3,
-                  delay: element.delay,
-                  ease: "easeInOut",
-                  repeat: prefersReducedMotion ? false : Infinity,
-                  repeatType: "reverse",
-                }}
-              />
+                      ? "rounded-full bg-gradient-to-r from-white/10 to-white/5"
+                      : "bg-gradient-to-r from-white/10 to-transparent"
+                  }`}
+                  style={{
+                    left: `${element.x}%`,
+                    top: `${element.y}%`,
+                    width:
+                      element.type === "circle"
+                        ? `${element.size}px`
+                        : `${element.size * 20}px`,
+                    height:
+                      element.type === "circle" ? `${element.size}px` : "1px",
+                  }}
+                  initial={{
+                    scale: 0,
+                    opacity: 0,
+                    x: element.type === "line" ? -20 : 0,
+                    rotate:
+                      element.type === "line"
+                        ? typeof window !== "undefined"
+                          ? Math.random() * 360
+                          : 0
+                        : 0,
+                  }}
+                  animate={
+                    prefersReducedMotion
+                      ? {
+                          scale: 1,
+                          opacity: element.opacity,
+                        }
+                      : {
+                          scale: 1,
+                          opacity: element.opacity,
+                          x: element.type === "line" ? 20 : 0,
+                          rotate:
+                            element.type === "line"
+                              ? typeof window !== "undefined"
+                                ? Math.random() * 360
+                                : 0
+                              : 0,
+                        }
+                  }
+                   transition={{
+                     duration: 3,
+                     delay: element.delay,
+                     ease: "easeInOut",
+                     repeat: prefersReducedMotion ? 0 : Infinity,
+                     repeatType: "reverse",
+                   }}
+                />
               );
             })}
 
@@ -334,13 +340,20 @@ const ModernHeader = () => {
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{ duration: 3, ease: "easeInOut" }}
-                style={typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? { display: 'none' } : {}}
+                style={
+                  typeof window !== "undefined" &&
+                  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    ? { display: "none" }
+                    : {}
+                }
               />
             )}
 
             {/* Floating Particles - only if user doesn't prefer reduced motion */}
             {particles.map((particle) => {
-              const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+              const prefersReducedMotion =
+                typeof window !== "undefined" &&
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches;
               return (
                 <motion.div
                   key={particle.id}
@@ -351,12 +364,16 @@ const ModernHeader = () => {
                     width: `${particle.size}px`,
                     height: `${particle.size}px`,
                   }}
-                  animate={prefersReducedMotion ? {} : {
-                    y: [0, -20, 0],
-                    x: [0, Math.random() * 10 - 5, 0],
-                    opacity: [0.3, 0.8, 0.3],
-                    scale: [1, 1.2, 1],
-                  }}
+                  animate={
+                    prefersReducedMotion
+                      ? {}
+                      : {
+                          y: [0, -20, 0],
+                          x: [0, Math.random() * 10 - 5, 0],
+                          opacity: [0.3, 0.8, 0.3],
+                          scale: [1, 1.2, 1],
+                        }
+                  }
                   transition={{
                     duration: 3 + Math.random() * 2,
                     repeat: Infinity,
@@ -758,29 +775,36 @@ const ModernHeader = () => {
                 {/* Holographic Background Effects - only if user doesn't prefer reduced motion */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   {Array.from({ length: 5 }).map((_, i) => {
-                    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                    const prefersReducedMotion =
+                      typeof window !== "undefined" &&
+                      window.matchMedia("(prefers-reduced-motion: reduce)")
+                        .matches;
                     return (
-                    <motion.div
-                      key={`dropdown-particle-${Math.random()}-${i}`}
-                      className="absolute bg-gradient-to-r from-purple-400/20 to-cyan-400/20 rounded-full blur-sm"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        width: `${Math.random() * 2.5 + 1}px`,
-                        height: `${Math.random() * 2.5 + 1}px`,
-                      }}
-                      animate={prefersReducedMotion ? {} : {
-                        x: [0, Math.random() * 50 - 25, 0],
-                        y: [0, Math.random() * 50 - 25, 0],
-                        scale: [1, 1.5, 1],
-                        opacity: [0.3, 0.7, 0.3],
-                      }}
-                      transition={{
-                        duration: 4 + Math.random() * 2,
-                        repeat: prefersReducedMotion ? false : Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
+                      <motion.div
+                        key={`dropdown-particle-${Math.random()}-${i}`}
+                        className="absolute bg-gradient-to-r from-purple-400/20 to-cyan-400/20 rounded-full blur-sm"
+                        style={{
+                          left: `${Math.random() * 100}%`,
+                          top: `${Math.random() * 100}%`,
+                          width: `${Math.random() * 2.5 + 1}px`,
+                          height: `${Math.random() * 2.5 + 1}px`,
+                        }}
+                        animate={
+                          prefersReducedMotion
+                            ? {}
+                            : {
+                                x: [0, Math.random() * 50 - 25, 0],
+                                y: [0, Math.random() * 50 - 25, 0],
+                                scale: [1, 1.5, 1],
+                                opacity: [0.3, 0.7, 0.3],
+                              }
+                        }
+                        transition={{
+                          duration: 4 + Math.random() * 2,
+                          repeat: prefersReducedMotion ? 0 : Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
                     );
                   })}
                 </div>
@@ -938,7 +962,9 @@ const ModernHeader = () => {
                       <Zap className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">STARK</h2>
+                      <h2 className="text-lg font-bold bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent">
+                        STARK
+                      </h2>
                       <p className="text-xs bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium">
                         GESTÃO EM TECNOLOGIA
                       </p>
@@ -967,15 +993,22 @@ const ModernHeader = () => {
                               const IconComponent = service.icon;
                               // Obter as classes de cor do serviço
                               const colorClasses = {
-                                green: "from-green-500/20 to-green-600/30 text-green-400",
+                                green:
+                                  "from-green-500/20 to-green-600/30 text-green-400",
                                 blue: "from-blue-500/20 to-blue-600/30 text-blue-400",
-                                purple: "from-purple-500/20 to-purple-600/30 text-purple-400",
+                                purple:
+                                  "from-purple-500/20 to-purple-600/30 text-purple-400",
                                 red: "from-red-500/20 to-red-600/30 text-red-400",
-                                orange: "from-orange-500/20 to-orange-600/30 text-orange-400",
-                                indigo: "from-indigo-500/20 to-indigo-600/30 text-indigo-400",
+                                orange:
+                                  "from-orange-500/20 to-orange-600/30 text-orange-400",
+                                indigo:
+                                  "from-indigo-500/20 to-indigo-600/30 text-indigo-400",
                               };
-                              const serviceColorClasses = colorClasses[service.color as keyof typeof colorClasses] || colorClasses.purple;
-                              
+                              const serviceColorClasses =
+                                colorClasses[
+                                  service.color as keyof typeof colorClasses
+                                ] || colorClasses.purple;
+
                               return (
                                 <Link
                                   key={service.id}
@@ -983,7 +1016,9 @@ const ModernHeader = () => {
                                   onClick={closeMobileMenu}
                                   className="group flex items-center space-x-3 p-4 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-white/5 hover:to-transparent border border-transparent hover:border-2 hover:border-white/30 hover:shadow-2xl hover:shadow-white/20 transition-all duration-300 cursor-pointer"
                                 >
-                                  <div className={`p-3 rounded-lg bg-gradient-to-br ${serviceColorClasses} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}>
+                                  <div
+                                    className={`p-3 rounded-lg bg-gradient-to-br ${serviceColorClasses} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}
+                                  >
                                     <IconComponent
                                       className="w-5 h-5"
                                       aria-hidden="true"
@@ -1024,7 +1059,11 @@ const ModernHeader = () => {
 
                 {/* Footer do menu móvel */}
                 <div className="p-6 border-t border-white/10">
-                  <Link href="/contact" onClick={closeMobileMenu} className="block mb-5">
+                  <Link
+                    href="/contact"
+                    onClick={closeMobileMenu}
+                    className="block mb-5"
+                  >
                     <Button className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative">
                       {/* Holographic Background */}
                       <motion.div
@@ -1038,7 +1077,7 @@ const ModernHeader = () => {
                           ease: "easeInOut",
                         }}
                       />
-                      
+
                       {/* Glow Effect */}
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-xl blur-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
@@ -1052,10 +1091,12 @@ const ModernHeader = () => {
                           ease: "easeInOut",
                         }}
                       />
-                      
+
                       <div className="relative z-10 flex items-center justify-center">
                         <Phone className="w-5 h-5 mr-3" />
-                        <span className="text-base font-semibold">Fale Conosco</span>
+                        <span className="text-base font-semibold">
+                          Fale Conosco
+                        </span>
                       </div>
                     </Button>
                   </Link>
