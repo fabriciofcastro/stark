@@ -5,26 +5,26 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 export type Slide = {
-  image: string;
-  title: string;
-  subtitle: string;
-  ctaPrimary?: { label: string; onClick: () => void };
-  ctaSecondary?: { label: string; onClick: () => void };
-  videoUrl?: string;
+	image: string;
+	title: string;
+	subtitle: string;
+	ctaPrimary?: { label: string; onClick: () => void };
+	ctaSecondary?: { label: string; onClick: () => void };
+	videoUrl?: string;
 };
 
 export default function HeroEmbla({ slides }: { slides: Slide[] }) {
-  const [emblaRef, embla] = useEmblaCarousel({
-    loop: true,
-    duration: 24,
-    align: "center",
-  });
-  const [selectedIndex, setSelectedIndex] = useState(0);
+	const [emblaRef, embla] = useEmblaCarousel({
+		loop: true,
+		duration: 24,
+		align: "center",
+	});
+	const [selectedIndex, setSelectedIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const total = slides.length;
-  const [userPaused, setUserPaused] = useState(false);
-  const lastRef = useRef<number>(0);
-  const elapsedRef = useRef<number>(0);
+	const total = slides.length;
+	const [userPaused, setUserPaused] = useState(false);
+	const lastRef = useRef<number>(0);
+	const elapsedRef = useRef<number>(0);
 
   // Advanced theme generator with unique backgrounds
   const getThemeForSlide = (title: string) => {
@@ -97,45 +97,45 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
     };
   };
 
-  const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla]);
-  const scrollNext = useCallback(() => embla?.scrollNext(), [embla]);
+	const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla]);
+	const scrollNext = useCallback(() => embla?.scrollNext(), [embla]);
 
-  useEffect(() => {
-    if (!embla) return;
-    const onSelect = () => {
-      setSelectedIndex(embla.selectedScrollSnap());
-      elapsedRef.current = 0;
+	useEffect(() => {
+		if (!embla) return;
+		const onSelect = () => {
+			setSelectedIndex(embla.selectedScrollSnap());
+			elapsedRef.current = 0;
     };
     const onScroll = () => {
       const progress = embla.scrollProgress();
       setProgress(progress);
-    };
-    embla.on("select", onSelect);
+		};
+		embla.on("select", onSelect);
     embla.on("scroll", onScroll);
-    onSelect();
+		onSelect();
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let raf: number | null = null;
+		const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+		let raf: number | null = null;
     const AUTOPLAY_MS = 8000; // Aumentar tempo de transição para melhor experiência
 
     const tick = (timestamp: number) => {
-      if (!userPaused && !media.matches) {
+			if (!userPaused && !media.matches) {
         const elapsed = timestamp - lastRef.current;
         elapsedRef.current += elapsed;
         const newProgress = Math.min(elapsedRef.current / AUTOPLAY_MS, 1);
 
         if (newProgress >= 1) {
-          embla.scrollNext();
-          elapsedRef.current = 0;
-        }
-      }
+					embla.scrollNext();
+					elapsedRef.current = 0;
+				}
+			}
       lastRef.current = timestamp;
-      raf = requestAnimationFrame(tick);
-    };
+			raf = requestAnimationFrame(tick);
+		};
 
-    raf = requestAnimationFrame(tick);
+		raf = requestAnimationFrame(tick);
 
-    const root = embla.rootNode();
+		const root = embla.rootNode();
     const start = () => {
       if (raf) cancelAnimationFrame(raf);
       setUserPaused(true);
@@ -145,31 +145,31 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
     root.addEventListener("mouseenter", start);
     root.addEventListener("mouseleave", stop);
 
-    const onVisibility = () => {
-      if (document.hidden) setUserPaused(true);
-      else setUserPaused(false);
-    };
-    document.addEventListener("visibilitychange", onVisibility);
+		const onVisibility = () => {
+			if (document.hidden) setUserPaused(true);
+			else setUserPaused(false);
+		};
+		document.addEventListener("visibilitychange", onVisibility);
 
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
+		return () => {
+			if (raf) cancelAnimationFrame(raf);
       root.removeEventListener("mouseenter", start);
       root.removeEventListener("mouseleave", stop);
-      document.removeEventListener("visibilitychange", onVisibility);
-      embla.off("select", onSelect);
-      embla.off("scroll", onScroll);
-    };
-  }, [embla, userPaused]);
+			document.removeEventListener("visibilitychange", onVisibility);
+			embla.off("select", onSelect);
+			embla.off("scroll", onScroll);
+		};
+	}, [embla, userPaused]);
 
-  // Prefetch da próxima imagem para troca suave
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const next = (selectedIndex + 1) % total;
-    const url = slides[next]?.image;
-    if (!url) return;
-    const img = new window.Image();
-    img.src = url;
-  }, [selectedIndex, total, slides]);
+	// Prefetch da próxima imagem para troca suave
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		const next = (selectedIndex + 1) % total;
+		const url = slides[next]?.image;
+		if (!url) return;
+		const img = new window.Image();
+		img.src = url;
+	}, [selectedIndex, total, slides]);
 
   const renderUniqueBackground = (
     theme: {
@@ -446,7 +446,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
         );
 
       case "governance":
-        return (
+	return (
           <div className="absolute inset-0 bg-gradient-to-br from-slate-600 via-gray-500 to-zinc-600 opacity-90">
             {/* Governance Grid */}
             {Array.from({ length: 15 }).map((_, i) => (
@@ -530,7 +530,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
               <motion.div
                 key={`default-particle-${Math.random()}-${idx}-${i}`}
                 className={`absolute bg-gradient-to-r ${theme.particles} rounded-full blur-sm`}
-                style={{
+									style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                   width: `${Math.random() * 4 + 2}px`,
@@ -549,7 +549,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                 }}
               />
             ))}
-          </div>
+							</div>
         );
     }
   };
@@ -601,66 +601,66 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
                   <div
                     className={`absolute inset-0 flex pb-32 md:pb-40 ${getContentPosition(theme.titlePosition)}`}
                   >
-                    <div className="max-w-4xl w-full">
+								<div className="max-w-4xl w-full">
                       <div
                         className={`h-1 w-24 mb-6 bg-gradient-to-r ${theme.accent} rounded-full`}
                       />
-                      <motion.h2
-                        className="mb-6 text-[clamp(32px,5.5vw,64px)] font-bold tracking-tight leading-tight text-white"
-                        style={{
-                          textShadow:
-                            "0 2px 16px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-                        }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.1 }}
-                      >
-                        {s.title}
-                      </motion.h2>
-                      <motion.p
-                        className="mb-10 max-w-[52ch] text-[clamp(14px,1.4vw,20px)] leading-relaxed text-white/95 font-medium"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                      >
-                        {s.subtitle}
-                      </motion.p>
+									<motion.h2
+										className="mb-6 text-[clamp(32px,5.5vw,64px)] font-bold tracking-tight leading-tight text-white"
+										style={{
+											textShadow:
+												"0 2px 16px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
+										}}
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.1 }}
+									>
+										{s.title}
+									</motion.h2>
+									<motion.p 
+										className="mb-10 max-w-[52ch] text-[clamp(14px,1.4vw,20px)] leading-relaxed text-white/95 font-medium"
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.2 }}
+									>
+										{s.subtitle}
+									</motion.p>
                       <div className="flex flex-col sm:flex-row gap-4">
                         {s.ctaPrimary && (
                           <motion.button
                             className={`inline-flex items-center px-8 py-3 bg-gradient-to-r ${theme.accent} text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
                             onClick={s.ctaPrimary.onClick}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.8, delay: 0.3 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                          >
-                            {s.ctaPrimary.label}
+											>
+												{s.ctaPrimary.label}
                           </motion.button>
-                        )}
-                        {s.ctaSecondary && (
+										)}
+										{s.ctaSecondary && (
                           <motion.button
                             className="inline-flex items-center px-8 py-3 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300"
-                            onClick={s.ctaSecondary.onClick}
+												onClick={s.ctaSecondary.onClick}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                          >
-                            {s.ctaSecondary.label}
+											>
+												{s.ctaSecondary.label}
                           </motion.button>
-                        )}
+										)}
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+								</div>
+							</div>
+						</div>
+					</div>
             );
           })}
-        </div>
-      </div>
+			</div>
+		</div>
 
       {/* Controles de Navegação */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 z-20">
@@ -670,7 +670,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
           className="p-4 sm:p-3 rounded-full bg-gradient-to-r from-purple-600/80 to-cyan-600/80 hover:from-purple-600 hover:to-cyan-600 backdrop-blur-sm border border-white/20 transition-all duration-300"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          aria-label="Slide anterior"
+						aria-label="Slide anterior"
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -699,7 +699,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
           <span className="text-white text-sm font-medium">
             {selectedIndex + 1} / {total}
           </span>
-        </div>
+				</div>
 
         {/* Barra de Progresso */}
         <div className="w-32 h-2 bg-white/20 rounded-full overflow-hidden">
@@ -708,7 +708,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
             style={{ width: `${((selectedIndex + 1) / total) * 100}%` }}
             transition={{ duration: 0.3 }}
           />
-        </div>
+					</div>
 
         {/* Botão Próximo */}
         <motion.button
@@ -716,7 +716,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
           className="p-4 sm:p-3 rounded-full bg-gradient-to-r from-purple-600/80 to-cyan-600/80 hover:from-purple-600 hover:to-cyan-600 backdrop-blur-sm border border-white/20 transition-all duration-300"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          aria-label="Próximo slide"
+						aria-label="Próximo slide"
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -729,8 +729,8 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
+						aria-hidden="true"
+					>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -765,7 +765,7 @@ export default function HeroEmbla({ slides }: { slides: Slide[] }) {
             }}
           />
         ))}
-      </div>
-    </section>
-  );
+		</div>
+	</section>
+);
 }

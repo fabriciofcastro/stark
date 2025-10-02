@@ -318,10 +318,18 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
   // Sistema de Auto-Save
   useEffect(() => {
     const autoSave = () => {
-      const formData = { name, email, company, phone, service, message, dynamicFields };
-      localStorage.setItem('contact-form-draft', JSON.stringify(formData));
-      setAutoSaveStatus("Salvo automaticamente");
-      setTimeout(() => setAutoSaveStatus(""), 2000);
+      const formData = {
+        name,
+        email,
+        company,
+        phone,
+        service,
+        message,
+        dynamicFields,
+      };
+      localStorage.setItem("contact-form-draft", JSON.stringify(formData));
+      setAutoSaveStatus("✅ Salvo automaticamente");
+      setTimeout(() => setAutoSaveStatus(""), 3000);
     };
 
     const timer = setTimeout(autoSave, 1000);
@@ -330,57 +338,127 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
   // Carregar dados salvos
   useEffect(() => {
-    const saved = localStorage.getItem('contact-form-draft');
+    const saved = localStorage.getItem("contact-form-draft");
     if (saved) {
       try {
         const data = JSON.parse(saved);
-        setAutoSaveStatus("Dados recuperados");
-        setTimeout(() => setAutoSaveStatus(""), 2000);
+        setName(data.name || "");
+        setEmail(data.email || "");
+        setCompany(data.company || "");
+        setPhone(data.phone || "");
+        setService(data.service || "");
+        setMessage(data.message || "");
+        setDynamicFields(data.dynamicFields || {});
+        setAutoSaveStatus("🔄 Dados recuperados");
+        setTimeout(() => setAutoSaveStatus(""), 3000);
+        pushToast({
+          type: "success",
+          message: "Formulário restaurado com dados salvos automaticamente.",
+        });
       } catch (e) {
-        console.log('Erro ao carregar dados salvos');
+        console.log("Erro ao carregar dados salvos");
+        pushToast({
+          type: "error",
+          message:
+            "Erro ao carregar dados salvos. Por favor, preencha novamente.",
+        });
       }
     }
   }, []);
 
-  // Calcular progresso do formulário
+  // Hotkeys para envio rápido
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + Enter para enviar
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        if (!submitting && consent) {
+          handleSubmit();
+        }
+      }
+
+      // Esc para fechar popup de validação
+      if (e.key === "Escape" && showValidationPopup) {
+        setShowValidationPopup(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [submitting, consent, showValidationPopup]);
   useEffect(() => {
     const fields = [name, email, company, phone, service, message];
-    const completed = fields.filter(field => field && field.trim().length > 0).length;
-    const dynamicCompleted = selectedServiceConfig 
-      ? selectedServiceConfig.fields.filter(field => dynamicFields[field.id]).length 
+    const completed = fields.filter(
+      (field) => field && field.trim().length > 0,
+    ).length;
+    const dynamicCompleted = selectedServiceConfig
+      ? selectedServiceConfig.fields.filter((field) => dynamicFields[field.id])
+          .length
       : 0;
-    
-    const totalFields = fields.length + (selectedServiceConfig?.fields.length || 0);
+
+    const totalFields =
+      fields.length + (selectedServiceConfig?.fields.length || 0);
     const totalCompleted = completed + dynamicCompleted;
-    
+
     setProgress((totalCompleted / totalFields) * 100);
-  }, [name, email, company, phone, service, message, dynamicFields, selectedServiceConfig]);
+  }, [
+    name,
+    email,
+    company,
+    phone,
+    service,
+    message,
+    dynamicFields,
+    selectedServiceConfig,
+  ]);
 
   // Efeito de scroll para barra de progresso
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
       setScrollProgress(scrollPercent);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Hotkeys para envio rápido
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl/Cmd + Enter para enviar
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        if (!submitting && consent) {
+          handleSubmit();
+        }
+      }
+
+      // Esc para fechar popup de validação
+      if (e.key === "Escape" && showValidationPopup) {
+        setShowValidationPopup(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [submitting, consent, showValidationPopup]);
 
   function validate(): Errors {
     const e: Errors = {};
-    if (!name || name.trim().length < 3)
+    if (name !== undefined && (!name || name.trim().length < 3))
       e.name = "Informe seu nome completo (mín. 3 caracteres).";
-    if (!email || !emailRegex.test(email))
+    if (email !== undefined && (!email || !emailRegex.test(email)))
       e.email = "Informe um e-mail válido.";
-    if (!company || company.trim().length < 2)
+    if (company !== undefined && (!company || company.trim().length < 2))
       e.company = "Informe o nome da empresa.";
-    const digits = (phone || "").replace(/\D/g, "");
-    if (digits.length < 10) e.phone = "Telefone inválido. Use DDD + número.";
-    if (!service) e.service = "Selecione um serviço.";
-    if (!message || message.trim().length < 10)
+    if (phone !== undefined) {
+      const digits = (phone || "").replace(/\D/g, "");
+      if (digits.length < 10) e.phone = "Telefone inválido. Use DDD + número.";
+    }
+    if (service !== undefined && !service) e.service = "Selecione um serviço.";
+    if (message !== undefined && (!message || message.trim().length < 10))
       e.message = "Mensagem deve ter pelo menos 10 caracteres.";
 
     // Validar campos dinâmicos do serviço selecionado
@@ -388,6 +466,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
       selectedServiceConfig.fields.forEach((field) => {
         if (
           field.required &&
+          dynamicFields[field.id] !== undefined &&
           (!dynamicFields[field.id] ||
             dynamicFields[field.id].trim().length === 0)
         ) {
@@ -468,7 +547,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           setMessage("");
           setDynamicFields({});
           setConsent(false);
-          localStorage.removeItem('contact-form-draft');
+          localStorage.removeItem("contact-form-draft");
           setProgress(0);
           setSent(false);
         }, 3000);
@@ -490,13 +569,13 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
   return (
     <section className="px-4 py-20 sm:px-6 lg:px-8 reveal relative overflow-x-hidden min-h-screen">
       {/* Barra de Progresso Sticky */}
-      <motion.div 
+      <motion.div
         className="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-800/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.div 
+        <motion.div
           className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-lg shadow-cyan-500/30"
           style={{ width: `${scrollProgress}%` }}
           transition={{ duration: 0.1 }}
@@ -506,12 +585,12 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Gradiente Principal */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900" />
-        
+
         {/* Overlay com padrão radial */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1)_0%,transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1)_0%,transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(34,197,94,0.1)_0%,transparent_50%)]" />
-        
+
         {/* Linhas de energia sutis */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
@@ -632,25 +711,26 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 bg-clip-border">
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/10 via-blue-500/10 to-purple-500/10" />
           </div>
-          
+
           {/* Animação de reflexo que percorre a borda */}
           <div className="absolute inset-0 rounded-3xl overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
               style={{
-                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
                 width: "200%",
                 height: "100%",
-                transform: "translateX(-100%)"
+                transform: "translateX(-100%)",
               }}
               animate={{
-                transform: "translateX(100%)"
+                transform: "translateX(100%)",
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
                 repeatType: "loop",
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             />
           </div>
@@ -667,8 +747,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               style={{
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)'
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
               }}
             >
               <div className="flex items-center justify-between mb-4">
@@ -677,7 +757,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 </h4>
                 <div className="flex items-center gap-3">
                   {autoSaveStatus && (
-                    <motion.span 
+                    <motion.span
                       className="text-sm text-emerald-400 flex items-center gap-2"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -721,7 +801,6 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 <span>Tempo estimado: ~3 min</span>
               </div>
             </motion.div>
-
 
             <form className="space-y-8" onSubmit={handleSubmit} noValidate>
               <input
@@ -774,22 +853,41 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     error={errors.name}
                     autoComplete="name"
                   />
-                  <Input
-                    id={emailId}
-                    label="Email *"
-                    type="email"
-                    floating
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setErrors((prev) => ({ ...prev, email: undefined }));
-                    }}
-                    onBlur={() => validateField("email")}
-                    description="Nunca compartilharemos seu e-mail."
-                    required
-                    error={errors.email}
-                    autoComplete="email"
-                  />
+                  <div className="relative">
+                    <Input
+                      id={emailId}
+                      label="Email *"
+                      type="email"
+                      floating
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setErrors((prev) => ({ ...prev, email: undefined }));
+                      }}
+                      onBlur={() => validateField("email")}
+                      description="Nunca compartilharemos seu e-mail."
+                      required
+                      error={errors.email}
+                      autoComplete="email"
+                    />
+                    {email && (
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-cyan-400 hover:text-cyan-300 bg-slate-700/50 px-2 py-1 rounded-md"
+                        onClick={() => {
+                          navigator.clipboard.writeText(email);
+                          pushToast({
+                            type: "success",
+                            message:
+                              "E-mail copiado para a área de transferência!",
+                          });
+                        }}
+                        aria-label="Copiar e-mail"
+                      >
+                        Copiar
+                      </button>
+                    )}
+                  </div>
                   <Input
                     id={companyId}
                     label="Empresa *"
@@ -804,23 +902,42 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     error={errors.company}
                     autoComplete="organization"
                   />
-                  <Input
-                    id={phoneId}
-                    label="Telefone *"
-                    type="tel"
-                    floating
-                    value={phone}
-                    onChange={(e) => {
-                      const m = maskPhone(e.target.value);
-                      setPhone(m);
-                      setErrors((prev) => ({ ...prev, phone: undefined }));
-                    }}
-                    onBlur={() => validateField("phone")}
-                    description="Inclua DDD. Ex: (11) 91234-5678."
-                    required
-                    error={errors.phone}
-                    autoComplete="tel"
-                  />
+                  <div className="relative">
+                    <Input
+                      id={phoneId}
+                      label="Telefone *"
+                      type="tel"
+                      floating
+                      value={phone}
+                      onChange={(e) => {
+                        const m = maskPhone(e.target.value);
+                        setPhone(m);
+                        setErrors((prev) => ({ ...prev, phone: undefined }));
+                      }}
+                      onBlur={() => validateField("phone")}
+                      description="Inclua DDD. Ex: (11) 91234-5678."
+                      required
+                      error={errors.phone}
+                      autoComplete="tel"
+                    />
+                    {phone && (
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-cyan-400 hover:text-cyan-300 bg-slate-700/50 px-2 py-1 rounded-md"
+                        onClick={() => {
+                          navigator.clipboard.writeText(phone);
+                          pushToast({
+                            type: "success",
+                            message:
+                              "Telefone copiado para a área de transferência!",
+                          });
+                        }}
+                        aria-label="Copiar número de telefone"
+                      >
+                        Copiar
+                      </button>
+                    )}
+                  </div>
                 </div>
               </motion.div>
 
@@ -838,10 +955,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 {/* Background Pattern */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/10 via-indigo-500/5 to-blue-500/10 opacity-50" />
                 <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
-                
+
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-8">
-                    <motion.div 
+                    <motion.div
                       className="p-3 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 rounded-xl border border-blue-400/30"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ duration: 0.2 }}
@@ -853,180 +970,213 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                         O que você precisa
                       </h4>
                       <p className="text-sm text-gray-300">
-                        Selecione o serviço de interesse para personalizar o formulário
+                        Selecione o serviço de interesse para personalizar o
+                        formulário
                       </p>
                     </div>
                   </div>
 
-                <Select
-                  id={serviceId}
-                  label="Serviço de Interesse *"
-                  value={service}
-                  onChange={(e) => {
-                    setService(e.target.value);
-                    setErrors((prev) => ({ ...prev, service: undefined }));
-                    // Limpar campos dinâmicos quando mudar o serviço
-                    setDynamicFields({});
-                  }}
-                  onBlur={() => validateField("service")}
-                  description="Selecione o assunto principal."
-                  required
-                  error={errors.service}
-                  options={[
-                    { value: "", label: "Selecione um serviço..." },
-                    ...serviceConfigs.map((config) => ({
-                      value: config.id,
-                      label: config.label,
-                    }))
-                  ]}
-                />
+                  <Select
+                    id={serviceId}
+                    label="Serviço de Interesse *"
+                    value={service}
+                    onChange={(e) => {
+                      setService(e.target.value);
+                      setErrors((prev) => ({ ...prev, service: undefined }));
+                      // Limpar campos dinâmicos quando mudar o serviço
+                      setDynamicFields({});
+                    }}
+                    onBlur={() => validateField("service")}
+                    description="Selecione o assunto principal."
+                    required
+                    error={errors.service}
+                    options={[
+                      { value: "", label: "Selecione um serviço..." },
+                      ...serviceConfigs.map((config) => ({
+                        value: config.id,
+                        label: config.label,
+                      })),
+                    ]}
+                    aria-required="true"
+                    aria-describedby={`${serviceId}-description ${errors.service ? `${serviceId}-error` : ""}`}
+                  />
+                  <p id={`${serviceId}-description`} className="sr-only">
+                    Selecione o serviço de interesse para personalizar os campos
+                    do formulário
+                  </p>
 
-                {/* Campos dinâmicos baseados no serviço selecionado - Design Modernizado */}
-                <AnimatePresence>
-                  {selectedServiceConfig && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, height: "auto", scale: 1 }}
-                      exit={{ opacity: 0, height: 0, scale: 0.95 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="mt-8 space-y-6"
-                    >
-                      <motion.div 
-                        className="relative p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/20 backdrop-blur-sm"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                  {/* Campos dinâmicos baseados no serviço selecionado - Design Modernizado */}
+                  <AnimatePresence>
+                    {selectedServiceConfig && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, height: "auto", scale: 1 }}
+                        exit={{ opacity: 0, height: 0, scale: 0.95 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        className="mt-8 space-y-6"
                       >
-                        {/* Service Header */}
-                        <div className="flex items-center gap-4 mb-6">
-                          <motion.div
-                            className={`p-3 rounded-xl bg-gradient-to-br from-${selectedServiceConfig.color}-500/30 to-${selectedServiceConfig.color}-600/20 border border-${selectedServiceConfig.color}-400/30`}
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <selectedServiceConfig.icon
-                              className={`w-6 h-6 text-${selectedServiceConfig.color}-300`}
-                            />
-                          </motion.div>
-                          <div>
-                            <h5 className="text-white text-lg font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-                              {selectedServiceConfig.label}
-                            </h5>
-                            <p className="text-sm text-gray-300">
-                              {selectedServiceConfig.description}
-                            </p>
+                        <motion.div
+                          className="relative p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/20 backdrop-blur-sm"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {/* Service Header */}
+                          <div className="flex items-center gap-4 mb-6">
+                            <motion.div
+                              className={`p-3 rounded-xl bg-gradient-to-br from-${selectedServiceConfig.color}-500/30 to-${selectedServiceConfig.color}-600/20 border border-${selectedServiceConfig.color}-400/30`}
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <selectedServiceConfig.icon
+                                className={`w-6 h-6 text-${selectedServiceConfig.color}-300`}
+                              />
+                            </motion.div>
+                            <div>
+                              <h5 className="text-white text-lg font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                                {selectedServiceConfig.label}
+                              </h5>
+                              <p className="text-sm text-gray-300">
+                                {selectedServiceConfig.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
 
-                        <div className="grid grid-cols-1 gap-6">
-                          {selectedServiceConfig.fields.map((field, index) => {
-                            const IconComponent = field.icon;
-                            const fieldId = `${field.id}-${index}`;
-                            return (
-                              <motion.div 
-                                key={field.id} 
-                                className="space-y-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: index * 0.1 + 0.3 }}
-                                whileHover={{ 
-                                  backgroundColor: "rgba(255,255,255,0.08)",
-                                  borderColor: "rgba(255,255,255,0.3)"
-                                }}
-                              >
-                                <label
-                                  htmlFor={fieldId}
-                                  className="flex items-center gap-3 text-sm font-semibold text-white"
-                                >
+                          <div className="grid grid-cols-1 gap-6">
+                            {selectedServiceConfig.fields.map(
+                              (field, index) => {
+                                const IconComponent = field.icon;
+                                const fieldId = `${field.id}-${index}`;
+                                return (
                                   <motion.div
-                                    className={`p-2 rounded-lg bg-gradient-to-br from-${selectedServiceConfig.color}-500/20 to-${selectedServiceConfig.color}-600/10`}
-                                    whileHover={{ scale: 1.1 }}
+                                    key={field.id}
+                                    className="space-y-3 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.1 + 0.3 }}
+                                    whileHover={{
+                                      backgroundColor: "rgba(255,255,255,0.08)",
+                                      borderColor: "rgba(255,255,255,0.3)",
+                                    }}
                                   >
-                                    <IconComponent className={`w-4 h-4 text-${selectedServiceConfig.color}-400`} />
+                                    <label
+                                      htmlFor={fieldId}
+                                      className="flex items-center gap-3 text-sm font-semibold text-white"
+                                    >
+                                      <motion.div
+                                        className={`p-2 rounded-lg bg-gradient-to-br from-${selectedServiceConfig.color}-500/20 to-${selectedServiceConfig.color}-600/10`}
+                                        whileHover={{ scale: 1.1 }}
+                                      >
+                                        <IconComponent
+                                          className={`w-4 h-4 text-${selectedServiceConfig.color}-400`}
+                                        />
+                                      </motion.div>
+                                      {field.label}
+                                      {field.required && (
+                                        <span className="text-red-400 ml-1">
+                                          *
+                                        </span>
+                                      )}
+                                    </label>
+
+                                    {field.type === "select" ? (
+                                      <Select
+                                        id={fieldId}
+                                        value={dynamicFields[field.id] || ""}
+                                        onChange={(e) => {
+                                          setDynamicFields((prev) => ({
+                                            ...prev,
+                                            [field.id]: e.target.value,
+                                          }));
+                                          setErrors((prev) => ({
+                                            ...prev,
+                                            [field.id]: undefined,
+                                          }));
+                                        }}
+                                        onBlur={() =>
+                                          validateField(
+                                            field.id as keyof Errors,
+                                          )
+                                        }
+                                        options={field.options || []}
+                                        error={errors[field.id as keyof Errors]}
+                                        aria-required={field.required}
+                                        aria-describedby={`${fieldId}-description ${errors[field.id as keyof Errors] ? `${fieldId}-error` : ""}`}
+                                      />
+                                    ) : field.type === "textarea" ? (
+                                      <Textarea
+                                        id={fieldId}
+                                        value={dynamicFields[field.id] || ""}
+                                        onChange={(e) => {
+                                          setDynamicFields((prev) => ({
+                                            ...prev,
+                                            [field.id]: e.target.value,
+                                          }));
+                                          setErrors((prev) => ({
+                                            ...prev,
+                                            [field.id]: undefined,
+                                          }));
+                                        }}
+                                        onBlur={() =>
+                                          validateField(
+                                            field.id as keyof Errors,
+                                          )
+                                        }
+                                        placeholder={field.placeholder}
+                                        error={errors[field.id as keyof Errors]}
+                                        rows={3}
+                                        aria-required={field.required}
+                                        aria-describedby={`${fieldId}-description ${errors[field.id as keyof Errors] ? `${fieldId}-error` : ""}`}
+                                      />
+                                    ) : (
+                                      <Input
+                                        id={fieldId}
+                                        type={field.type}
+                                        value={dynamicFields[field.id] || ""}
+                                        onChange={(e) => {
+                                          setDynamicFields((prev) => ({
+                                            ...prev,
+                                            [field.id]: e.target.value,
+                                          }));
+                                          setErrors((prev) => ({
+                                            ...prev,
+                                            [field.id]: undefined,
+                                          }));
+                                        }}
+                                        onBlur={() =>
+                                          validateField(
+                                            field.id as keyof Errors,
+                                          )
+                                        }
+                                        placeholder={field.placeholder}
+                                        error={errors[field.id as keyof Errors]}
+                                        aria-required={field.required}
+                                        aria-describedby={`${fieldId}-description ${errors[field.id as keyof Errors] ? `${fieldId}-error` : ""}`}
+                                      />
+                                    )}
+                                    {field.description && (
+                                      <p
+                                        id={`${fieldId}-description`}
+                                        className="sr-only"
+                                      >
+                                        {field.description}
+                                      </p>
+                                    )}
+
+                                    {field.description && (
+                                      <p className="text-xs text-gray-400">
+                                        {field.description}
+                                      </p>
+                                    )}
                                   </motion.div>
-                                  {field.label}
-                                  {field.required && (
-                                    <span className="text-red-400 ml-1">*</span>
-                                  )}
-                                </label>
-
-                                {field.type === "select" ? (
-                                  <Select
-                                    id={fieldId}
-                                    value={dynamicFields[field.id] || ""}
-                                    onChange={(e) => {
-                                      setDynamicFields((prev) => ({
-                                        ...prev,
-                                        [field.id]: e.target.value,
-                                      }));
-                                      setErrors((prev) => ({
-                                        ...prev,
-                                        [field.id]: undefined,
-                                      }));
-                                    }}
-                                    onBlur={() =>
-                                      validateField(field.id as keyof Errors)
-                                    }
-                                    options={field.options || []}
-                                    error={errors[field.id as keyof Errors]}
-                                  />
-                                ) : field.type === "textarea" ? (
-                                  <Textarea
-                                    id={fieldId}
-                                    value={dynamicFields[field.id] || ""}
-                                    onChange={(e) => {
-                                      setDynamicFields((prev) => ({
-                                        ...prev,
-                                        [field.id]: e.target.value,
-                                      }));
-                                      setErrors((prev) => ({
-                                        ...prev,
-                                        [field.id]: undefined,
-                                      }));
-                                    }}
-                                    onBlur={() =>
-                                      validateField(field.id as keyof Errors)
-                                    }
-                                    placeholder={field.placeholder}
-                                    error={errors[field.id as keyof Errors]}
-                                    rows={3}
-                                  />
-                                ) : (
-                                  <Input
-                                    id={fieldId}
-                                    type={field.type}
-                                    value={dynamicFields[field.id] || ""}
-                                    onChange={(e) => {
-                                      setDynamicFields((prev) => ({
-                                        ...prev,
-                                        [field.id]: e.target.value,
-                                      }));
-                                      setErrors((prev) => ({
-                                        ...prev,
-                                        [field.id]: undefined,
-                                      }));
-                                    }}
-                                    onBlur={() =>
-                                      validateField(field.id as keyof Errors)
-                                    }
-                                    placeholder={field.placeholder}
-                                    error={errors[field.id as keyof Errors]}
-                                  />
-                                )}
-
-                                {field.description && (
-                                  <p className="text-xs text-gray-400">
-                                    {field.description}
-                                  </p>
-                                )}
-                              </motion.div>
-                            );
-                          })}
-                        </div>
+                                );
+                              },
+                            )}
+                          </div>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
 
@@ -1072,23 +1222,25 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     error={errors.message}
                     showCounter
                   />
-                  
+
                   {/* Contador de Caracteres Melhorado */}
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-gray-400">
                       {message.length} / {MESSAGE_MAX} caracteres
                     </span>
                     {message.length > MESSAGE_MAX * 0.8 && (
-                      <motion.span 
+                      <motion.span
                         className={`px-2 py-1 rounded-full text-xs ${
-                          message.length >= MESSAGE_MAX 
-                            ? 'bg-red-500/20 text-red-300' 
-                            : 'bg-yellow-500/20 text-yellow-300'
+                          message.length >= MESSAGE_MAX
+                            ? "bg-red-500/20 text-red-300"
+                            : "bg-yellow-500/20 text-yellow-300"
                         }`}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                       >
-                        {message.length >= MESSAGE_MAX ? 'Limite atingido' : 'Quase no limite'}
+                        {message.length >= MESSAGE_MAX
+                          ? "Limite atingido"
+                          : "Quase no limite"}
                       </motion.span>
                     )}
                   </div>
@@ -1121,6 +1273,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     className="mt-1 h-5 w-5 rounded border-white/30 bg-transparent text-brand-gold-500 focus:outline-none focus:ring-2 focus:ring-brand-gold-500/50"
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
+                    aria-describedby="consent-help"
                   />
                   <span className="leading-relaxed">
                     Autorizo o uso dos meus dados para contato e envio de
@@ -1128,12 +1281,33 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     <a
                       href="/politica-de-privacidade"
                       className="text-brand-gold-400 hover:text-brand-gold-300 underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Política de Privacidade
                     </a>{" "}
                     e em conformidade com a LGPD. *
                   </span>
                 </label>
+
+                <p
+                  id="consent-help"
+                  className="text-xs text-gray-400 mt-2 ml-8"
+                >
+                  Seus dados serão tratados com segurança e confidencialidade.
+                </p>
+
+                {!consent && (
+                  <motion.p
+                    className="text-xs text-red-400 mt-2 ml-8 flex items-center gap-1"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                  >
+                    <AlertCircle className="w-3 h-3" />É necessário aceitar os
+                    termos para enviar sua mensagem.
+                  </motion.p>
+                )}
               </motion.div>
 
               {statusType !== "idle" && (
@@ -1154,73 +1328,101 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               )}
 
               {/* Botão de Envio Modernizado */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-              >
-                <motion.div 
-                  className="relative flex-1"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+              <div className="space-y-4">
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
                 >
-                  <motion.button
-                    type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-slate-800 via-indigo-800 to-purple-800 text-white font-bold rounded-2xl shadow-2xl cursor-pointer relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed border border-slate-700/50"
-                    disabled={submitting || !consent}
-                    whileHover={{ 
-                      boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
-                      y: -2,
-                      borderColor: "rgba(34, 197, 94, 0.5)"
-                    }}
+                  <motion.div
+                    className="relative flex-1"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.button
+                      type="submit"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-slate-800 via-indigo-800 to-purple-800 text-white font-bold rounded-2xl shadow-2xl cursor-pointer relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed border border-slate-700/50"
+                      disabled={submitting || !consent}
+                      whileHover={{
+                        boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)",
+                        y: -2,
+                        borderColor: "rgba(34, 197, 94, 0.5)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                      aria-busy={submitting}
+                      aria-describedby={
+                        submitting ? "submit-progress" : undefined
+                      }
+                    >
+                      {/* Background animado */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Conteúdo do botão */}
+                      <span className="relative z-10 flex items-center justify-center gap-3 text-lg">
+                        {submitting ? (
+                          <>
+                            <motion.div
+                              className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                              }}
+                            />
+                            Enviando sua mensagem...
+                          </>
+                        ) : sent ? (
+                          <>
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ type: "spring", stiffness: 200 }}
+                            >
+                              <CheckCircle className="w-5 h-5" />
+                            </motion.div>
+                            Mensagem enviada com sucesso!
+                          </>
+                        ) : (
+                          <>
+                            <Mail className="w-5 h-5" />
+                            Enviar Mensagem
+                          </>
+                        )}
+                      </span>
+
+                      {/* Efeito de brilho */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
+                      {/* Efeito de partículas */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="absolute top-2 left-4 w-1 h-1 bg-cyan-400 rounded-full animate-ping" />
+                        <div className="absolute top-4 right-6 w-1 h-1 bg-blue-400 rounded-full animate-ping delay-100" />
+                        <div className="absolute bottom-3 left-8 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-200" />
+                      </div>
+                    </motion.button>
+                  </motion.div>
+                </motion.div>
+
+                {/* Barra de progresso durante envio */}
+                {submitting && (
+                  <motion.div
+                    id="submit-progress"
+                    className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 8 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {/* Background animado */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Conteúdo do botão */}
-                    <span className="relative z-10 flex items-center justify-center gap-3 text-lg">
-                      {submitting ? (
-                        <>
-                          <motion.div 
-                            className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                          Enviando sua mensagem...
-                        </>
-                      ) : sent ? (
-                        <>
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ type: "spring", stiffness: 200 }}
-                          >
-                            <CheckCircle className="w-5 h-5" />
-                          </motion.div>
-                          Mensagem enviada com sucesso!
-                        </>
-                      ) : (
-                        <>
-                          <Mail className="w-5 h-5" />
-                          Enviar Mensagem
-                        </>
-                      )}
-                    </span>
-
-                    {/* Efeito de brilho */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    
-                    {/* Efeito de partículas */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute top-2 left-4 w-1 h-1 bg-cyan-400 rounded-full animate-ping" />
-                      <div className="absolute top-4 right-6 w-1 h-1 bg-blue-400 rounded-full animate-ping delay-100" />
-                      <div className="absolute bottom-3 left-8 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-200" />
-                    </div>
-                  </motion.button>
-                </motion.div>
-              </motion.div>
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-cyan-400 to-blue-500"
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: 5, ease: "linear" }}
+                    />
+                  </motion.div>
+                )}
+              </div>
 
               <div className="flex items-center justify-center gap-4 text-xs text-gray-500">
                 <span>Ctrl/Cmd + Enter para enviar</span>
@@ -1231,7 +1433,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               </div>
 
               {/* Botão de Limpeza */}
-              <motion.div 
+              <motion.div
                 className="flex justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -1240,7 +1442,11 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 <motion.button
                   type="button"
                   onClick={() => {
-                    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
+                    if (
+                      confirm(
+                        "Tem certeza que deseja limpar todo o formulário?",
+                      )
+                    ) {
                       setName("");
                       setEmail("");
                       setCompany("");
@@ -1249,7 +1455,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                       setMessage("");
                       setDynamicFields({});
                       setConsent(false);
-                      localStorage.removeItem('contact-form-draft');
+                      localStorage.removeItem("contact-form-draft");
                       setProgress(0);
                       setErrors({});
                     }
@@ -1272,61 +1478,91 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
-          <motion.div 
+          <motion.div
             className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
-            whileHover={{ 
+            whileHover={{
               borderColor: "rgba(255,255,255,0.3)",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
             }}
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-800/20 via-indigo-800/10 to-purple-800/20 opacity-50" />
             <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-xl" />
             <div className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
-            
+
             <div className="relative z-10">
               <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                 Outros Meios de Contato
               </h3>
               <p className="text-gray-300 mb-8">
-                Prefere falar diretamente? Estamos disponíveis em múltiplos canais:
+                Prefere falar diretamente? Estamos disponíveis em múltiplos
+                canais:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* WhatsApp */}
-                <motion.a
-                  href="https://wa.me/5511994396469"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative p-6 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-2xl text-green-400 hover:from-green-500/30 hover:to-green-600/20 transition-all duration-300"
+                <motion.div
+                  className="group relative p-6 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-2xl text-green-400 transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  aria-label="Contato via WhatsApp"
+                  onClick={() => {
+                    // Copiar número para a área de transferência e abrir WhatsApp
+                    navigator.clipboard.writeText("(11) 99439-6469");
+                    window.open("https://wa.me/5511994396469", "_blank");
+                    pushToast({
+                      type: "success",
+                      message: "Número copiado! Abrindo WhatsApp...",
+                    });
+                  }}
+                  aria-label="Contato via WhatsApp: clique para copiar número e abrir o WhatsApp"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-green-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10">
-                    <motion.div 
+                    <motion.div
                       className="p-3 bg-green-500/30 rounded-xl mb-4 w-fit mx-auto"
                       whileHover={{ rotate: 5 }}
                     >
                       <Phone className="w-6 h-6" />
                     </motion.div>
                     <h4 className="font-bold text-lg mb-2">WhatsApp</h4>
-                    <p className="text-sm text-green-300">Resposta instantânea</p>
+                    <p className="text-sm text-green-300">
+                      Resposta instantânea
+                    </p>
+                    <p className="text-xs text-green-500 mt-2">
+                      (11) 99439-6469
+                    </p>
+                    <div className="mt-3 text-center">
+                      <span className="inline-block px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded-md">
+                        Clique para copiar e abrir
+                      </span>
+                    </div>
                   </div>
-                </motion.a>
+                </motion.div>
 
                 {/* Email */}
-                <motion.a
-                  href="mailto:contato@fernandohenrique.dev"
-                  className="group relative p-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-2xl text-blue-400 hover:from-blue-500/30 hover:to-blue-600/20 transition-all duration-300"
+                <motion.div
+                  className="group relative p-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-2xl text-blue-400 transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  aria-label="Contato via e-mail"
+                  onClick={() => {
+                    // Copiar e-mail para a área de transferência e abrir cliente de e-mail
+                    navigator.clipboard.writeText(
+                      "contato@fernandohenrique.dev",
+                    );
+                    window.open(
+                      "mailto:contato@fernandohenrique.dev",
+                      "_blank",
+                    );
+                    pushToast({
+                      type: "success",
+                      message: "E-mail copiado! Abrindo cliente de e-mail...",
+                    });
+                  }}
+                  aria-label="Contato via e-mail: clique para copiar e-mail e abrir cliente de e-mail"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10">
-                    <motion.div 
+                    <motion.div
                       className="p-3 bg-blue-500/30 rounded-xl mb-4 w-fit mx-auto"
                       whileHover={{ rotate: 5 }}
                     >
@@ -1334,8 +1570,16 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     </motion.div>
                     <h4 className="font-bold text-lg mb-2">E-mail</h4>
                     <p className="text-sm text-blue-300">Resposta em 24h</p>
+                    <p className="text-xs text-blue-500 mt-2">
+                      contato@fernandohenrique.dev
+                    </p>
+                    <div className="mt-3 text-center">
+                      <span className="inline-block px-2 py-1 text-xs bg-blue-500/20 text-blue-300 rounded-md">
+                        Clique para copiar e enviar
+                      </span>
+                    </div>
                   </div>
-                </motion.a>
+                </motion.div>
 
                 {/* Localização */}
                 <motion.div
@@ -1345,20 +1589,27 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10">
-                    <motion.div 
+                    <motion.div
                       className="p-3 bg-purple-500/30 rounded-xl mb-4 w-fit mx-auto"
                       whileHover={{ rotate: 5 }}
                     >
                       <MapPin className="w-6 h-6" />
                     </motion.div>
                     <h4 className="font-bold text-lg mb-2">São Paulo, SP</h4>
-                    <p className="text-sm text-purple-300">Atendimento presencial</p>
+                    <p className="text-sm text-purple-300">
+                      Atendimento presencial
+                    </p>
+                    <div className="mt-3 text-center">
+                      <span className="inline-block px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded-md">
+                        Agende uma visita
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
               </div>
 
               {/* Status de Disponibilidade */}
-              <motion.div 
+              <motion.div
                 className="mt-8 p-4 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 rounded-xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -1389,7 +1640,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
                 🚀 Por que escolher nossa empresa?
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 <motion.div
                   className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
@@ -1397,8 +1648,12 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-3xl mb-3">⚡</div>
-                  <h4 className="text-white font-semibold mb-2">Resposta Rápida</h4>
-                  <p className="text-slate-300 text-sm">Resposta em até 15 minutos durante horário comercial</p>
+                  <h4 className="text-white font-semibold mb-2">
+                    Resposta Rápida
+                  </h4>
+                  <p className="text-slate-300 text-sm">
+                    Resposta em até 15 minutos durante horário comercial
+                  </p>
                 </motion.div>
 
                 <motion.div
@@ -1407,8 +1662,12 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-3xl mb-3">🎯</div>
-                  <h4 className="text-white font-semibold mb-2">Soluções Personalizadas</h4>
-                  <p className="text-slate-300 text-sm">Cada projeto é único e adaptado às suas necessidades</p>
+                  <h4 className="text-white font-semibold mb-2">
+                    Soluções Personalizadas
+                  </h4>
+                  <p className="text-slate-300 text-sm">
+                    Cada projeto é único e adaptado às suas necessidades
+                  </p>
                 </motion.div>
 
                 <motion.div
@@ -1417,8 +1676,12 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-3xl mb-3">🔒</div>
-                  <h4 className="text-white font-semibold mb-2">Dados Seguros</h4>
-                  <p className="text-slate-300 text-sm">Seus dados são protegidos conforme a LGPD</p>
+                  <h4 className="text-white font-semibold mb-2">
+                    Dados Seguros
+                  </h4>
+                  <p className="text-slate-300 text-sm">
+                    Seus dados são protegidos conforme a LGPD
+                  </p>
                 </motion.div>
               </div>
             </div>
@@ -1435,42 +1698,54 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setShowValidationPopup(false)}
+            role="dialog"
+            aria-labelledby="validation-popup-title"
+            aria-describedby="validation-popup-description"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl"
+              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 max-w-md w-full shadow-2xl border border-slate-700"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-red-100 rounded-lg">
-                  <AlertCircle className="w-6 h-6 text-red-600" />
+                <div className="p-2 bg-red-500/20 rounded-lg">
+                  <AlertCircle className="w-6 h-6 text-red-400" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Campos Obrigatórios
-                </h3>
+                <div>
+                  <h3
+                    id="validation-popup-title"
+                    className="text-lg font-semibold text-white"
+                  >
+                    Campos Obrigatórios
+                  </h3>
+                  <p
+                    id="validation-popup-description"
+                    className="text-sm text-gray-400"
+                  >
+                    Por favor, preencha os campos marcados com *
+                  </p>
+                </div>
                 <button
                   type="button"
                   onClick={() => setShowValidationPopup(false)}
-                  className="ml-auto p-1 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="ml-auto p-1 hover:bg-gray-700 rounded-lg transition-colors"
+                  aria-label="Fechar popup de validação"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-gray-400" />
                 </button>
               </div>
 
               <div className="space-y-3 mb-6">
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   Por favor, preencha os seguintes campos obrigatórios:
                 </p>
                 <ul className="space-y-2">
                   {Object.entries(errors).map(([field, error]) => (
-                    <li
-                      key={field}
-                      className="flex items-center gap-2 text-sm text-red-600"
-                    >
-                      <div className="w-1.5 h-1.5 bg-red-500 rounded-full" />
-                      <span>{error}</span>
+                    <li key={field} className="flex items-start gap-2 text-sm">
+                      <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0" />
+                      <span className="text-red-300">{error}</span>
                     </li>
                   ))}
                 </ul>
@@ -1481,6 +1756,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   onClick={() => setShowValidationPopup(false)}
                   variant="secondary"
                   className="flex-1"
+                  aria-label="Fechar e voltar ao formulário"
                 >
                   Entendi
                 </Button>
@@ -1491,15 +1767,18 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     const firstErrorField = Object.keys(errors)[0];
                     if (firstErrorField) {
                       const element = document.getElementById(firstErrorField);
-                      element?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center",
-                      });
-                      element?.focus();
+                      if (element) {
+                        element.scrollIntoView({
+                          behavior: "smooth",
+                          block: "center",
+                        });
+                        element.focus();
+                      }
                     }
                   }}
                   variant="primary"
                   className="flex-1"
+                  aria-label="Corrigir campos obrigatórios"
                 >
                   Corrigir Agora
                 </Button>

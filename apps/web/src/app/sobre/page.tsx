@@ -744,12 +744,12 @@ const AboutPage = () => {
                     Fechar
                   </motion.button>
                 </div>
-              </div>
+			</div>
             </motion.div>
           </motion.div>
         )}
 		</div>
-  );
+	);
 };
 
 export default AboutPage;
