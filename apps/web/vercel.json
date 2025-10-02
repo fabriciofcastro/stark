@@ -9,11 +9,11 @@
 		}
 	},
 	"env": {
-		"NEXT_PUBLIC_CHATWOOT_BASE_URL": "@next_public_chatwoot_base_url",
-		"NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "@next_public_chatwoot_website_token",
-		"NEXT_PUBLIC_WHATSAPP_NUMBER": "@next_public_whatsapp_number",
-		"NEXT_PUBLIC_GA_MEASUREMENT_ID": "@next_public_ga_measurement_id",
-		"NEXT_PUBLIC_API_URL": "@next_public_api_url"
+		"NEXT_PUBLIC_CHATWOOT_BASE_URL": "https://app.chatwoot.com",
+		"NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "",
+		"NEXT_PUBLIC_WHATSAPP_NUMBER": "+5511999999999",
+		"NEXT_PUBLIC_GA_MEASUREMENT_ID": "",
+		"NEXT_PUBLIC_API_URL": "https://api.stark.com.br"
 	},
 	"headers": [
 		{
