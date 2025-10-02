@@ -1,0 +1,17 @@
+// Schema vazio para evitar erro do Prisma no frontend
+// O Prisma real está em apps/api/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://dummy:dummy@localhost:5432/dummy"
+}
+
+// Model vazio para evitar erro
+model Dummy {
+  id String @id @default(cuid())
+}
