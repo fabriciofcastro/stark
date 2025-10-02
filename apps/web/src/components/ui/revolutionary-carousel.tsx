@@ -26,7 +26,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
   const lastRef = useRef<number>(0);
   const elapsedRef = useRef<number>(0);
 
-  // Cores temáticas únicas para cada slide
+  // Cores temáticas únicas para cada slide com imagens de background
   const getSlideTheme = (index: number) => {
     const themes = [
       {
@@ -35,6 +35,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-blue-500 to-teal-400",
         particles: "blue-400",
         position: "left",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDc0RjY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMENDQzQ7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBCNkY2O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
       {
         primary: "from-purple-600 to-indigo-500",
@@ -42,6 +43,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-purple-500 to-blue-400",
         particles: "purple-400",
         position: "center",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5MzM0RkY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0RjQ2RTE7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNzg1NkY3O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
       {
         primary: "from-emerald-600 to-teal-500",
@@ -49,6 +51,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-emerald-500 to-cyan-400",
         particles: "emerald-400",
         position: "right",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwNUQ0OEQ7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNERyOEI7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMkRENDE4O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
       {
         primary: "from-red-600 to-pink-500",
@@ -56,6 +59,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-red-500 to-rose-400",
         particles: "red-400",
         position: "center",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNEOEMxQzY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjEwN0E7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkM4NThEO3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
       {
         primary: "from-orange-600 to-amber-500",
@@ -63,6 +67,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-orange-500 to-yellow-400",
         particles: "orange-400",
         position: "left",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjQ5MDA7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjEwN0E7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkM4NzAwO3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
       {
         primary: "from-slate-600 to-gray-500",
@@ -70,6 +75,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         accent: "from-slate-500 to-zinc-400",
         particles: "slate-400",
         position: "center",
+        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0NzU1Njk7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2QjcyODA7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOTQ5NEE5O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
       },
     ];
     return themes[index % themes.length];
@@ -220,15 +226,15 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
     );
   };
 
-  // Obter posicionamento do conteúdo
+  // Obter posicionamento do conteúdo melhorado
   const getContentPosition = (position: string) => {
     switch (position) {
       case "left":
-        return "justify-start items-end text-left pl-4 sm:pl-8 md:pl-12 lg:pl-16 xl:pl-20";
+        return "justify-start items-center text-left pl-6 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24";
       case "right":
-        return "justify-end items-end text-right pr-4 sm:pr-8 md:pr-12 lg:pr-16 xl:pr-20";
+        return "justify-end items-center text-right pr-6 sm:pr-12 md:pr-16 lg:pr-20 xl:pr-24";
       default:
-        return "justify-center items-end text-center px-4 sm:px-8 md:px-12 lg:px-16";
+        return "justify-center items-center text-center px-6 sm:px-12 md:px-16 lg:px-20";
     }
   };
 
@@ -268,9 +274,10 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                 aria-selected={idx === selectedIndex}
                 aria-label={`Slide ${idx + 1} de ${total}: ${slide.title}`}
               >
-                {/* Background com gradiente */}
+                {/* Background com gradiente e imagem */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${theme.primary}`}
+                  style={{ backgroundImage: theme.backgroundImage }}
                 />
 
                 {/* Partículas animadas */}
@@ -282,12 +289,12 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                 {/* Overlay com gradiente */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-                {/* Conteúdo principal com melhor espaçamento para leitura esquerda-direita */}
+                {/* Conteúdo principal com melhor espaçamento e alinhamento */}
                 <div
-                  className={`absolute inset-0 flex ${getContentPosition(theme.position)} p-6 sm:p-8 md:p-12 lg:p-16 pb-32`}
+                  className={`absolute inset-0 flex ${getContentPosition(theme.position)} p-4 sm:p-6 md:p-8 lg:p-10 pb-24`}
                 >
                   <motion.div
-                    className="max-w-4xl w-full"
+                    className="max-w-5xl w-full"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -302,7 +309,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
 
                     {/* Título principal */}
                     <motion.h1
-                      className="mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight text-white max-w-3xl"
+                      className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight text-white"
                       style={{
                         textShadow:
                           "0 4px 20px rgba(0,0,0,0.8), 0 0 4px rgba(0,0,0,0.9)",
@@ -316,7 +323,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
 
                     {/* Subtítulo com melhor espaçamento para leitura */}
                     <motion.p
-                      className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed max-w-2xl"
+                      className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.5 }}
@@ -366,12 +373,12 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
       </div>
 
       {/* Controles de navegação revolucionários */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex items-center space-x-4 bg-black/40 backdrop-blur-xl rounded-xl px-4 py-3 border border-white/20 shadow-2xl">
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-xl rounded-2xl px-6 py-4 border border-white/20 shadow-2xl">
           {/* Botão Anterior */}
           <motion.button
             onClick={scrollPrev}
-            className="p-3 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
+            className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
             whileHover={{ scale: 1.1, rotate: -5 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Slide anterior"
@@ -383,7 +390,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
             }}
           >
             <svg
-              className="w-5 h-5 text-white group-hover:text-cyan-300 transition-colors"
+              className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -399,14 +406,14 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
           </motion.button>
 
           {/* Indicadores de posição */}
-          <div className="flex items-center space-x-2">
-            <span className="text-white text-xs font-medium min-w-[40px] text-center">
+          <div className="flex items-center space-x-4">
+            <span className="text-white text-sm font-medium min-w-[60px] text-center">
               {selectedIndex + 1} / {total}
             </span>
 
             {/* Barra de progresso circular */}
-            <div className="relative w-8 h-8">
-              <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 44 44">
+            <div className="relative w-10 h-10">
+              <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 44 44">
                 <circle
                   cx="22"
                   cy="22"
@@ -441,7 +448,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                 </defs>
               </svg>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white text-[10px] font-bold">
+                <span className="text-white text-xs font-bold">
                   {Math.round(((selectedIndex + 1) / total) * 100)}%
                 </span>
               </div>
@@ -451,7 +458,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
           {/* Botão Próximo */}
           <motion.button
             onClick={scrollNext}
-            className="p-3 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
+            className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Próximo slide"
@@ -463,7 +470,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
             }}
           >
             <svg
-              className="w-5 h-5 text-white group-hover:text-cyan-300 transition-colors"
+              className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -480,31 +487,6 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         </div>
       </div>
 
-      {/* Indicadores de slides (dots) - Agora visíveis com melhor contraste */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-50" role="tablist" aria-label="Indicadores de slides">
-        {slides.map((_, index) => (
-          <motion.button
-            key={`dot-${index}`}
-            onClick={() => embla?.scrollTo(index)}
-            className={`w-3 h-3 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
-              index === selectedIndex
-                ? "bg-gradient-to-r from-purple-500 to-cyan-500 scale-125 shadow-lg"
-                : "bg-white/40 hover:bg-white/60 hover:scale-110"
-            }`}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            aria-label={`Ir para slide ${index + 1}`}
-            aria-selected={index === selectedIndex}
-            role="tab"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                embla?.scrollTo(index);
-              }
-            }}
-          />
-        ))}
-      </div>
 
       {/* Indicador de progresso linear no topo */}
       <div className="absolute top-0 left-0 w-full h-1 bg-black/20 z-30" aria-hidden="true">
