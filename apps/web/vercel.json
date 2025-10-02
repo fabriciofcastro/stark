@@ -13,7 +13,7 @@
 		"NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "",
 		"NEXT_PUBLIC_WHATSAPP_NUMBER": "+5511999999999",
 		"NEXT_PUBLIC_GA_MEASUREMENT_ID": "",
-		"NEXT_PUBLIC_API_URL": "https://api.stark.com.br"
+		"NEXT_PUBLIC_API_URL": "https://api.starksolutions.com.br"
 	},
 	"headers": [
 		{
