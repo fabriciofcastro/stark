@@ -1,0 +1,61 @@
+
+> web@0.1.0 build /home/fabricio/projects/fernando/apps/web
+> next build
+
+   ▲ Next.js 15.5.3
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.8s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/33) ...
+   Generating static pages (8/33) 
+   Generating static pages (16/33) 
+   Generating static pages (24/33) 
+ ✓ Generating static pages (33/33)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    27.8 kB         176 kB
+├ ○ /_not-found                            181 B         102 kB
+├ ƒ /.well-known/security.txt              181 B         102 kB
+├ ƒ /api/chatwoot/lead                     181 B         102 kB
+├ ƒ /api/chatwoot/webhook                  181 B         102 kB
+├ ƒ /api/contact                           181 B         102 kB
+├ ƒ /api/health                            181 B         102 kB
+├ ○ /blog                                  783 B         106 kB
+├ ƒ /blog/[slug]                           651 B         102 kB
+├ ○ /cases-de-sucesso                      181 B         102 kB
+├ ○ /cloud-vps-linux                     2.02 kB         153 kB
+├ ○ /consultoria-tecnologica               181 B         102 kB
+├ ○ /contact                             13.1 kB         154 kB
+├ ○ /create-site                         1.27 kB         111 kB
+├ ○ /cyberseguranca                        655 B         148 kB
+├ ○ /faq                                   181 B         102 kB
+├ ○ /governance                            443 B         144 kB
+├ ○ /helpdesk                            3.14 kB         109 kB
+├ ○ /historia                            8.43 kB         146 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ○ /lgpd                                  181 B         102 kB
+├ ○ /manifest.webmanifest                  181 B         102 kB
+├ ○ /politica-de-cookies                   181 B         102 kB
+├ ○ /politica-de-privacidade               181 B         102 kB
+├ ○ /portfolio                             181 B         102 kB
+├ ○ /robots.txt                            181 B         102 kB
+├ ○ /services                            3.87 kB         148 kB
+├ ○ /sitemap.xml                           181 B         102 kB
+├ ○ /sobre                               6.58 kB         148 kB
+├ ○ /suporte-tecnico                     6.64 kB         152 kB
+├ ○ /suporte-tecnico-empresarial           181 B         102 kB
+├ ƒ /suporte-tecnico/[cidade]              978 B         106 kB
+└ ○ /termos-de-uso                         181 B         102 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/1192-fe575109678f8111.js      45.6 kB
+  ├ chunks/fa8da9f6-d85204fe04bff55c.js  54.2 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -59,6 +59,17 @@ export class ChatService {
 		return ticket;
 	}
 
+	async getSession(sessionId: string) {
+		return this.prisma.chatSession.findUnique({
+			where: { sessionId },
+			include: {
+				messages: {
+					orderBy: { createdAt: 'asc' }
+				}
+			}
+		});
+	}
+
 	private async processMessageWithAI(data: SendMessageDto) {
 		// Aqui você integraria com OpenAI, Claude, ou outro serviço de IA
 		// Por enquanto, retornamos uma resposta simples
