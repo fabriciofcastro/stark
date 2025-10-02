@@ -3,11 +3,6 @@
 	"outputDirectory": "apps/web/.next",
 	"installCommand": "cd ../.. && pnpm install",
 	"framework": "nextjs",
-	"functions": {
-		"apps/web/src/app/api/**/*.ts": {
-			"runtime": "nodejs18.x"
-		}
-	},
 	"env": {
 		"NEXT_PUBLIC_CHATWOOT_BASE_URL": "https://app.chatwoot.com",
 		"NEXT_PUBLIC_CHATWOOT_WEBSITE_TOKEN": "",
