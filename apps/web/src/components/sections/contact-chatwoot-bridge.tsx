@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { CHATWOOT_BASE_URL } from "@/lib/site";
 
 export const ContactChatwootBridge = () => {
   const [lastPayload, setLastPayload] = useState<Record<
@@ -10,15 +9,17 @@ export const ContactChatwootBridge = () => {
   > | null>(null);
 
   useEffect(() => {
+    // Verifica se está no cliente
+    if (typeof window === 'undefined') return;
+
     const onSent = (e: Event) => {
       const detail = (e as CustomEvent).detail;
       setLastPayload(detail);
       try {
         // Identifica o usuário no widget (quando disponível)
-        // @ts-expect-error chatwoot global
-        if (window.$chatwoot) {
-          // @ts-expect-error chatwoot global
-          window.$chatwoot.setUser(
+        const chatwoot = (window as any).$chatwoot;
+        if (chatwoot) {
+          chatwoot.setUser(
             detail.email || detail.phone || detail.name || "lead",
             {
               email: detail.email,
@@ -39,23 +40,28 @@ export const ContactChatwootBridge = () => {
             },
           );
         }
-      } catch {}
+      } catch (error) {
+        console.warn('Chatwoot integration error:', error);
+      }
     };
+
     window.addEventListener("contact:sent", onSent as EventListener);
     return () =>
       window.removeEventListener("contact:sent", onSent as EventListener);
   }, []);
 
   useEffect(() => {
-    if (!lastPayload) return;
+    if (!lastPayload || typeof window === 'undefined') return;
+    
     // Mostra um atalho visual para abrir o chat já identificado
     try {
-      // @ts-expect-error chatwoot global
-      const api = window.$chatwoot;
-      if (api) {
-        api.toggle("open");
+      const chatwoot = (window as any).$chatwoot;
+      if (chatwoot) {
+        chatwoot.toggle("open");
       }
-    } catch {}
+    } catch (error) {
+      console.warn('Chatwoot toggle error:', error);
+    }
 
     // Envia nota e tags via API privada
     (async () => {
@@ -72,13 +78,19 @@ export const ContactChatwootBridge = () => {
         if (res.ok && data?.conversationId) {
           // opcional: exibir protocolo para o usuário
           try {
-            // @ts-expect-error chatwoot global
-            window.$chatwoot?.setCustomAttributes?.({
-              last_protocol: data?.protocol || String(data.conversationId),
-            });
-          } catch {}
+            const chatwoot = (window as any).$chatwoot;
+            if (chatwoot?.setCustomAttributes) {
+              chatwoot.setCustomAttributes({
+                last_protocol: data?.protocol || String(data.conversationId),
+              });
+            }
+          } catch (error) {
+            console.warn('Chatwoot custom attributes error:', error);
+          }
         }
-      } catch {}
+      } catch (error) {
+        console.warn('Chatwoot API error:', error);
+      }
     })();
   }, [lastPayload]);
 
