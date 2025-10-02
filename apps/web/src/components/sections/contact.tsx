@@ -628,17 +628,48 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           transition={{ duration: 0.35, ease: "easeOut" }}
           className="relative rounded-3xl border border-slate-700/50 bg-slate-800/30 backdrop-blur-xl shadow-2xl overflow-hidden"
         >
+          {/* Borda estilo vidro com animação de reflexo */}
+          <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 bg-clip-border">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/10 via-blue-500/10 to-purple-500/10" />
+          </div>
+          
+          {/* Animação de reflexo que percorre a borda */}
+          <div className="absolute inset-0 rounded-3xl overflow-hidden">
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              style={{
+                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
+                width: "200%",
+                height: "100%",
+                transform: "translateX(-100%)"
+              }}
+              animate={{
+                transform: "translateX(100%)"
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut"
+              }}
+            />
+          </div>
+
           {/* Glow effect */}
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
           {/* Content container */}
           <div className="relative p-8 md:p-12">
-            {/* Cabeçalho Modernizado */}
+            {/* Cabeçalho Modernizado - Sticky */}
             <motion.div
-              className="mb-8 p-8 bg-gradient-to-br from-slate-900/80 via-indigo-900/60 to-purple-900/80 rounded-2xl border border-slate-600/50 backdrop-blur-sm shadow-xl"
+              className="sticky top-4 z-40 mb-8 p-8 bg-gradient-to-br from-slate-900/90 via-indigo-900/80 to-purple-900/90 rounded-2xl border border-slate-600/50 backdrop-blur-md shadow-xl"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
+              style={{
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)'
+              }}
             >
               <div className="flex items-center justify-between mb-4">
                 <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
@@ -691,72 +722,6 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               </div>
             </motion.div>
 
-            {/* Barra de Progresso e Status */}
-            <motion.div
-              className="mb-8 p-6 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl border border-white/20 backdrop-blur-sm"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">Progresso do Formulário</h3>
-                <div className="flex items-center gap-3">
-                  {autoSaveStatus && (
-                    <motion.span 
-                      className="text-sm text-green-400 flex items-center gap-2"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                    >
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                      {autoSaveStatus}
-                    </motion.span>
-                  )}
-                  <span className="text-sm text-gray-300">
-                    {Math.round(progress)}% completo
-                  </span>
-                </div>
-              </div>
-              
-              {/* Barra de Progresso - Design Elegante */}
-              <div className="w-full bg-slate-800/50 rounded-full h-3 overflow-hidden border border-slate-700/50">
-                <motion.div 
-                  className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full shadow-lg shadow-cyan-500/30"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                />
-              </div>
-              
-              {/* Dicas de Preenchimento */}
-              <motion.div 
-                className="mt-4 flex flex-wrap gap-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                {!name && (
-                  <span className="text-xs bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30">
-                    Nome obrigatório
-                  </span>
-                )}
-                {!email && (
-                  <span className="text-xs bg-red-500/20 text-red-300 px-3 py-1 rounded-full border border-red-500/30">
-                    Email obrigatório
-                  </span>
-                )}
-                {!service && (
-                  <span className="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
-                    Selecione um serviço
-                  </span>
-                )}
-                {progress > 80 && (
-                  <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30">
-                    Quase pronto!
-                  </span>
-                )}
-              </motion.div>
-            </motion.div>
 
             <form className="space-y-8" onSubmit={handleSubmit} noValidate>
               <input
@@ -1406,6 +1371,56 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                   </span>
                 </div>
               </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Seção de Informações Adicionais */}
+          <motion.div
+            className="mt-8 p-8 bg-gradient-to-br from-slate-800/60 via-indigo-800/40 to-purple-800/60 rounded-2xl border border-slate-600/50 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            whileHover={{
+              borderColor: "rgba(147, 51, 234, 0.3)",
+              boxShadow: "0 15px 40px rgba(147, 51, 234, 0.1)",
+            }}
+          >
+            <div className="text-center">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
+                🚀 Por que escolher nossa empresa?
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <motion.div
+                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-3xl mb-3">⚡</div>
+                  <h4 className="text-white font-semibold mb-2">Resposta Rápida</h4>
+                  <p className="text-slate-300 text-sm">Resposta em até 15 minutos durante horário comercial</p>
+                </motion.div>
+
+                <motion.div
+                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-3xl mb-3">🎯</div>
+                  <h4 className="text-white font-semibold mb-2">Soluções Personalizadas</h4>
+                  <p className="text-slate-300 text-sm">Cada projeto é único e adaptado às suas necessidades</p>
+                </motion.div>
+
+                <motion.div
+                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="text-3xl mb-3">🔒</div>
+                  <h4 className="text-white font-semibold mb-2">Dados Seguros</h4>
+                  <p className="text-slate-300 text-sm">Seus dados são protegidos conforme a LGPD</p>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         </motion.div>
