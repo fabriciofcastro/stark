@@ -4,6 +4,7 @@ node_modules/
 
 # Next.js
 .next/
+.next/**
 out/
 build/
 dist/
@@ -40,6 +41,7 @@ jspm_packages/
 
 # TypeScript cache
 *.tsbuildinfo
+tsconfig.tsbuildinfo
 
 # Optional npm cache directory
 .npm
@@ -103,3 +105,23 @@ Thumbs.db
 
 # Sentry
 .sentryclirc
+
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+ENV/
+
+# IDE and Editor files
+*.sublime-project
+*.sublime-workspace
+.atom/
+.brackets.json
+
+# Local development
+.local/
+.cache/
