@@ -1,18 +1,13 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import { Trophy, TrendingUp, Users, Clock, DollarSign, Target, Star, ExternalLink, CheckCircle, Quote } from "lucide-react";
 
 export const metadata: Metadata = {
-	title: "Cases de Sucesso | Projetos Reais - STARK Gestão em Tecnologia",
-	description:
-		"Conheça cases de sucesso reais da STARK. Projetos que transformaram negócios através da tecnologia, com resultados mensuráveis e depoimentos de clientes.",
-	keywords:
-		"cases de sucesso, projetos TI, transformação digital, resultados stark, clientes satisfeitos, depoimentos",
-	robots: {
-		index: true,
-		follow: true,
-	},
+	title: "Cases de Sucesso - Projetos Reais - STARK Tecnologia",
+	description: "Conheça cases de sucesso reais da STARK. Projetos que transformaram negócios através da tecnologia, com resultados mensuráveis e depoimentos de clientes.",
+	keywords: "cases de sucesso, projetos TI, transformação digital, resultados stark, clientes satisfeitos, depoimentos",
 };
 
-export default function CasesDeSucesso() {
+const CasesDeSucessoPage = () => {
 	const cases = [
 		{
 			id: 1,
@@ -32,6 +27,8 @@ export default function CasesDeSucesso() {
 			duration: "8 meses",
 			investment: "R$ 150.000",
 			roi: "300% em 18 meses",
+			icon: TrendingUp,
+			color: "from-blue-500 to-cyan-600"
 		},
 		{
 			id: 2,
@@ -51,6 +48,8 @@ export default function CasesDeSucesso() {
 			duration: "6 meses",
 			investment: "R$ 200.000",
 			roi: "Evitou multas de R$ 500.000+",
+			icon: Target,
+			color: "from-green-500 to-emerald-600"
 		},
 		{
 			id: 3,
@@ -70,6 +69,8 @@ export default function CasesDeSucesso() {
 			duration: "5 meses",
 			investment: "R$ 120.000",
 			roi: "400% em 12 meses",
+			icon: Users,
+			color: "from-purple-500 to-indigo-600"
 		},
 		{
 			id: 4,
@@ -89,6 +90,8 @@ export default function CasesDeSucesso() {
 			duration: "4 meses",
 			investment: "R$ 80.000",
 			roi: "250% em 15 meses",
+			icon: TrendingUp,
+			color: "from-cyan-500 to-blue-600"
 		},
 		{
 			id: 5,
@@ -108,14 +111,15 @@ export default function CasesDeSucesso() {
 			duration: "3 meses",
 			investment: "R$ 60.000",
 			roi: "350% em 10 meses",
+			icon: CheckCircle,
+			color: "from-orange-500 to-red-600"
 		},
 		{
 			id: 6,
 			title: "Segurança Avançada para Rede de Farmácias",
 			client: "Farmácia Popular Network",
 			challenge: "50+ unidades com sistemas desprotegidos e dados sensíveis",
-			solution:
-				"Implementação de segurança unificada e monitoramento centralizado",
+			solution: "Implementação de segurança unificada e monitoramento centralizado",
 			results: [
 				"Zero vazamentos de dados",
 				"Monitoramento 24/7 de todas as unidades",
@@ -128,165 +132,198 @@ export default function CasesDeSucesso() {
 			duration: "5 meses",
 			investment: "R$ 180.000",
 			roi: "Evitou multas de R$ 1M+",
+			icon: Target,
+			color: "from-indigo-500 to-purple-600"
 		},
 	];
 
 	const stats = [
-		{ number: "200+", label: "Projetos Concluídos", icon: "🎯" },
-		{ number: "98%", label: "Taxa de Satisfação", icon: "⭐" },
-		{ number: "R$ 2M+", label: "Economia Gerada", icon: "💰" },
-		{ number: "24/7", label: "Suporte Disponível", icon: "🛡️" },
+		{ number: "200+", label: "Projetos Concluídos", icon: Target, color: "from-blue-500 to-cyan-500" },
+		{ number: "98%", label: "Taxa de Satisfação", icon: Star, color: "from-purple-500 to-indigo-500" },
+		{ number: "R$ 2M+", label: "Economia Gerada", icon: DollarSign, color: "from-green-500 to-emerald-500" },
+		{ number: "24/7", label: "Suporte Disponível", icon: Clock, color: "from-orange-500 to-red-500" },
 	];
 
 	return (
-		<div className="container mx-auto px-4 py-16">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white">
 			{/* Hero Section */}
-			<section className="text-center mb-16">
-				<h1 className="text-5xl font-bold mb-6 text-brand-gold-500">
-					Cases de Sucesso
-				</h1>
-				<p className="text-xl text-brand-gray-300 max-w-3xl mx-auto">
-					Conheça projetos reais que transformaram negócios através da
-					tecnologia. Cada case representa resultados mensuráveis e clientes
-					satisfeitos.
-				</p>
-			</section>
+			<div className="relative overflow-hidden">
+				<div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-cyan-500/20 to-indigo-600/20" />
+				<div className="absolute inset-0 bg-[url('/images/patterns/grid.svg')] opacity-10" />
+				
+				<div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-32">
+					<div className="text-center">
+						<div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-2xl mb-8">
+							<Trophy className="w-10 h-10 text-white" />
+						</div>
+						
+						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
+							Cases de Sucesso
+						</h1>
+						
+						<p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+							Conheça projetos reais que transformaram negócios através da tecnologia. 
+							Cada case representa resultados mensuráveis e clientes satisfeitos.
+						</p>
+					</div>
+				</div>
+			</div>
 
 			{/* Estatísticas */}
-			<section className="mb-16">
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+			<div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+				<div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
 					{stats.map((stat, index) => (
 						<div
 							key={index}
-							className="bg-brand-green-800 p-6 rounded-lg text-center"
+							className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 text-center hover:border-white/20 transition-all duration-300"
 						>
-							<div className="text-3xl mb-3">{stat.icon}</div>
-							<div className="text-3xl font-bold text-brand-gold-500 mb-2">
+							<div className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+								<stat.icon className="w-8 h-8 text-white" />
+							</div>
+							<div className="text-3xl font-bold text-white mb-2">
 								{stat.number}
 							</div>
-							<div className="text-brand-gray-300 text-sm">{stat.label}</div>
+							<div className="text-white/70 text-sm">{stat.label}</div>
 						</div>
 					))}
 				</div>
-			</section>
+			</div>
 
 			{/* Cases */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Projetos que Transformaram Negócios
-				</h2>
-				<div className="space-y-12">
+			<div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+				<div className="text-center mb-12">
+					<h2 className="text-3xl font-bold text-white mb-4">
+						Projetos que Transformaram Negócios
+					</h2>
+					<p className="text-white/70 text-lg max-w-2xl mx-auto">
+						Cada projeto é uma história de sucesso, com resultados reais e clientes satisfeitos
+					</p>
+				</div>
+
+				<div className="space-y-16">
 					{cases.map((caseItem, index) => (
 						<div
 							key={caseItem.id}
-							className={`grid lg:grid-cols-2 gap-8 items-center ${
-								index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-							}`}
+							className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300"
 						>
-							<div className={`${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-								<div className="bg-brand-green-800 p-8 rounded-lg">
-									<div className="flex items-center gap-3 mb-4">
-										<span className="bg-brand-gold-500 text-black px-3 py-1 rounded-full text-sm font-semibold">
-											Case #{caseItem.id}
-										</span>
-										<span className="text-brand-gray-400 text-sm">
-											{caseItem.duration} • {caseItem.investment}
-										</span>
+							<div className="lg:flex lg:items-start lg:space-x-12">
+								{/* Case Info */}
+								<div className="flex-1">
+									<div className="flex items-center space-x-4 mb-6">
+										<div className={`w-16 h-16 bg-gradient-to-br ${caseItem.color} rounded-2xl flex items-center justify-center`}>
+											<caseItem.icon className="w-8 h-8 text-white" />
+										</div>
+										<div>
+											<div className="flex items-center space-x-2 mb-2">
+												<span className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+													Case #{caseItem.id}
+												</span>
+												<span className="text-white/60 text-sm">
+													{caseItem.duration}
+												</span>
+											</div>
+											<h3 className="text-2xl font-bold text-white mb-2">
+												{caseItem.title}
+											</h3>
+											<p className="text-white/80 font-medium">
+												{caseItem.client}
+											</p>
+										</div>
 									</div>
 
-									<h3 className="text-2xl font-bold mb-4 text-brand-gray-200">
-										{caseItem.title}
-									</h3>
-									<p className="text-brand-gold-400 font-semibold mb-4">
-										Cliente: {caseItem.client}
-									</p>
-
-									<div className="mb-6">
-										<h4 className="font-semibold mb-2 text-brand-red-400">
-											Desafio:
-										</h4>
-										<p className="text-brand-gray-300 text-sm">
-											{caseItem.challenge}
-										</p>
+									{/* Challenge & Solution */}
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+										<div className="bg-white/10 rounded-xl p-4">
+											<h4 className="font-semibold text-red-400 mb-2 flex items-center">
+												<Target className="w-4 h-4 mr-2" />
+												Desafio:
+											</h4>
+											<p className="text-white/80 text-sm">
+												{caseItem.challenge}
+											</p>
+										</div>
+										<div className="bg-white/10 rounded-xl p-4">
+											<h4 className="font-semibold text-blue-400 mb-2 flex items-center">
+												<CheckCircle className="w-4 h-4 mr-2" />
+												Solução:
+											</h4>
+											<p className="text-white/80 text-sm">
+												{caseItem.solution}
+											</p>
+										</div>
 									</div>
 
+									{/* Results */}
 									<div className="mb-6">
-										<h4 className="font-semibold mb-2 text-brand-blue-400">
-											Solução:
-										</h4>
-										<p className="text-brand-gray-300 text-sm">
-											{caseItem.solution}
-										</p>
-									</div>
-
-									<div className="mb-6">
-										<h4 className="font-semibold mb-3 text-brand-cyan-400">
+										<h4 className="font-semibold text-cyan-400 mb-3 flex items-center">
+											<TrendingUp className="w-5 h-5 mr-2" />
 											Principais Resultados:
 										</h4>
-										<ul className="space-y-2">
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 											{caseItem.results.map((result, resultIndex) => (
-												<li
-													key={resultIndex}
-													className="flex items-start gap-2 text-brand-gray-300 text-sm"
-												>
-													<span className="text-brand-green-500 mt-1">✓</span>
-													<span>{result}</span>
-												</li>
+												<div key={resultIndex} className="flex items-center space-x-2">
+													<div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full" />
+													<span className="text-white/80 text-sm">{result}</span>
+												</div>
 											))}
-										</ul>
+										</div>
 									</div>
 
-									<div className="bg-brand-green-700 p-4 rounded-lg">
+									{/* ROI */}
+									<div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-500/30">
 										<div className="text-center">
-											<div className="text-2xl font-bold text-brand-gold-500 mb-2">
+											<div className="text-2xl font-bold text-green-400 mb-2">
 												ROI: {caseItem.roi}
 											</div>
-											<div className="text-brand-gray-300 text-sm">
+											<div className="text-white/60 text-sm">
 												Retorno sobre Investimento
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<div className={`${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-								<div className="bg-brand-green-900 p-8 rounded-lg">
-									<div className="text-center mb-6">
-										<div className="text-6xl mb-4">💬</div>
-										<h4 className="text-xl font-bold text-brand-gold-400 mb-4">
-											Depoimento do Cliente
-										</h4>
-									</div>
-
-									<blockquote className="text-brand-gray-300 italic mb-6 text-lg leading-relaxed">
-										"{caseItem.quote}"
-									</blockquote>
-
-									<div className="text-center">
-										<div className="font-semibold text-brand-gold-400">
-											{caseItem.author}
-										</div>
-										<div className="text-brand-gray-400 text-sm">
-											{caseItem.client}
-										</div>
-									</div>
-
-									<div className="mt-6 pt-6 border-t border-brand-green-700">
-										<div className="grid grid-cols-2 gap-4 text-center">
-											<div>
-												<div className="text-brand-gold-500 font-bold">
-													{caseItem.duration}
-												</div>
-												<div className="text-brand-gray-400 text-xs">
-													Duração
-												</div>
+								{/* Testimonial */}
+								<div className="lg:w-80 lg:flex-shrink-0 mt-8 lg:mt-0">
+									<div className="bg-gradient-to-br from-white/10 to-white/5 rounded-xl p-6 border border-white/20">
+										<div className="text-center mb-6">
+											<div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+												<Quote className="w-6 h-6 text-white" />
 											</div>
-											<div>
-												<div className="text-brand-gold-500 font-bold">
-													{caseItem.investment}
+											<h4 className="text-lg font-bold text-white mb-4">
+												Depoimento do Cliente
+											</h4>
+										</div>
+
+										<blockquote className="text-white/90 italic mb-6 text-base leading-relaxed">
+											"{caseItem.quote}"
+										</blockquote>
+
+										<div className="text-center">
+											<div className="font-semibold text-purple-300">
+												{caseItem.author}
+											</div>
+											<div className="text-white/60 text-sm">
+												{caseItem.client}
+											</div>
+										</div>
+
+										<div className="mt-6 pt-4 border-t border-white/20">
+											<div className="flex justify-between text-center">
+												<div>
+													<div className="text-white font-bold text-sm">
+														{caseItem.duration}
+													</div>
+													<div className="text-white/60 text-xs">
+														Duração
+													</div>
 												</div>
-												<div className="text-brand-gray-400 text-xs">
-													Investimento
+												<div>
+													<div className="text-white font-bold text-sm">
+														{caseItem.investment}
+													</div>
+													<div className="text-white/60 text-xs">
+														Investimento
+													</div>
 												</div>
 											</div>
 										</div>
@@ -296,81 +333,46 @@ export default function CasesDeSucesso() {
 						</div>
 					))}
 				</div>
-			</section>
+			</div>
 
-			{/* Processo de Trabalho */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Como Trabalhamos
-				</h2>
-				<div className="grid md:grid-cols-4 gap-6">
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">🔍</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							1. Análise
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Mapeamos suas necessidades e desafios atuais para entender
-							exatamente o que precisa ser resolvido.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">📋</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							2. Planejamento
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Desenvolvemos um plano estratégico personalizado com cronograma,
-							recursos e metas claras.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">⚡</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							3. Execução
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Implementamos a solução com nossa equipe especializada, mantendo
-							você informado do progresso.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">📊</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							4. Resultados
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Medimos e demonstramos os resultados alcançados, garantindo o
-							retorno sobre seu investimento.
-						</p>
+			{/* CTA Section */}
+			<div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+				<div className="bg-gradient-to-r from-purple-600/20 to-cyan-500/20 backdrop-blur-xl rounded-2xl p-8 border border-white/10 text-center">
+					<h2 className="text-3xl font-bold text-white mb-4">
+						Seu Próximo Case de Sucesso
+					</h2>
+					<p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+						Que tal transformar seu negócio em mais um case de sucesso? 
+						Entre em contato e vamos discutir como podemos ajudar.
+					</p>
+					
+					<div className="flex flex-col sm:flex-row gap-4 justify-center">
+						<a
+							href="/contato"
+							className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-500 text-white rounded-xl font-medium hover:from-purple-700 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+						>
+							<ExternalLink className="w-5 h-5 mr-2" />
+							Solicitar Consultoria Gratuita
+						</a>
+						
+						<a
+							href="/portfolio"
+							className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-all duration-300 border border-white/20"
+						>
+							<Trophy className="w-5 h-5 mr-2" />
+							Ver Mais Projetos
+						</a>
 					</div>
 				</div>
-			</section>
+			</div>
 
-			{/* CTA */}
-			<section className="text-center bg-brand-green-800 p-12 rounded-lg">
-				<h2 className="text-3xl font-bold mb-6 text-brand-gray-200">
-					Seu Próximo Case de Sucesso
-				</h2>
-				<p className="text-xl text-brand-gray-300 mb-8 max-w-2xl mx-auto">
-					Que tal transformar seu negócio em mais um case de sucesso? Entre em
-					contato e vamos discutir como podemos ajudar.
-				</p>
-				<div className="flex flex-col sm:flex-row gap-4 justify-center">
-					<a
-						href="/contact"
-						className="bg-brand-gold-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-400 transition-colors"
-					>
-						Solicitar Consultoria Gratuita
-					</a>
-					<a
-						href="/portfolio"
-						className="border border-brand-gold-500 text-brand-gold-500 px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-500 hover:text-black transition-colors"
-					>
-						Ver Mais Projetos
-					</a>
-				</div>
-			</section>
+			{/* Background Effects */}
+			<div className="fixed inset-0 pointer-events-none">
+				<div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+				<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+			</div>
 		</div>
 	);
-}
+};
+
+export default CasesDeSucessoPage;
