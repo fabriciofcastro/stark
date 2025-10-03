@@ -1,3 +1,1 @@
-export { GlobalChat } from "./global-chat";
-export { PageChat } from "./page-chat";
-export { FloatingChatButton } from "./floating-chat-button";
+// Chat components will be recreated with new professional design

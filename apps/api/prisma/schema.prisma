@@ -10,63 +10,177 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ChatSession {
-  id        String   @id @default(cuid())
-  sessionId String   @unique
-  userData  Json
-  context   Json
-  status    String   @default("active")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// ===== USUÁRIOS E PERFIS =====
+model User {
+  id          String   @id @default(cuid())
+  email       String?  @unique
+  name        String
+  avatar      String?
+  role        String   @default("visitor") // visitor, customer, agent, admin, bot
+  isOnline    Boolean  @default(false)
+  lastSeen    DateTime?
+  metadata    Json?
+  preferences Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
+  // Relacionamentos
+  sessions        ChatSession[]
+  sentMessages    ChatMessage[] @relation("MessageSender")
+  assignedTickets EscalationTicket[]
+  notifications   Notification[]
+
+  @@map("users")
+}
+
+// ===== SESSÕES DE CHAT =====
+model ChatSession {
+  id            String   @id @default(cuid())
+  userId        String
+  status        String   @default("active") // active, inactive, archived, escalated
+  mode          String   @default("auto") // auto, human, hybrid
+  priority      String   @default("normal") // low, normal, high, urgent
+  title         String?
+  description   String?
+  tags          String[]
+  context       Json
+  metadata      Json?
+  assignedAgent String?
+  escalatedAt   DateTime?
+  resolvedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  lastActivity  DateTime @default(now())
+
+  // Relacionamentos
+  user             User                @relation(fields: [userId], references: [id])
   messages         ChatMessage[]
   escalationTickets EscalationTicket[]
+  analytics        ChatAnalytics?
 
   @@map("chat_sessions")
 }
 
+// ===== MENSAGENS =====
 model ChatMessage {
   id        String   @id @default(cuid())
   sessionId String
+  senderId  String
   content   String
-  type      String
+  type      String   @default("text") // text, image, file, system, typing, read, delivered
+  status    String   @default("sent") // sending, sent, delivered, read, failed
   metadata  Json?
+  replyTo   String?
+  reactions Json? // Array de reações
+  attachments Json? // Array de anexos
   createdAt DateTime @default(now())
 
-  session ChatSession @relation(fields: [sessionId], references: [sessionId])
+  // Relacionamentos
+  session ChatSession @relation(fields: [sessionId], references: [id])
+  sender  User        @relation("MessageSender", fields: [senderId], references: [id])
 
   @@map("chat_messages")
 }
 
+// ===== TICKETS DE ESCALAÇÃO =====
 model EscalationTicket {
-  id        String   @id @default(cuid())
-  sessionId String
-  reason    String
-  priority  String
-  userData  Json
-  status    String   @default("pending")
-  assignedTo String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  sessionId   String
+  reason      String
+  priority    String   @default("normal") // low, normal, high, urgent
+  status      String   @default("pending") // pending, in_progress, resolved, closed
+  assignedTo  String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resolvedAt  DateTime?
 
-  session ChatSession @relation(fields: [sessionId], references: [sessionId])
+  // Relacionamentos
+  session    ChatSession @relation(fields: [sessionId], references: [id])
+  assignedAgent User?    @relation(fields: [assignedTo], references: [id])
 
   @@map("escalation_tickets")
 }
 
+// ===== ANÁLISES E ESTATÍSTICAS =====
+model ChatAnalytics {
+  id              String   @id @default(cuid())
+  sessionId       String   @unique
+  duration        Int      @default(0) // em segundos
+  messageCount    Int      @default(0)
+  userSatisfaction Int?    // 1-5
+  escalationCount Int      @default(0)
+  resolutionTime  Int?     // em segundos
+  botAccuracy     Float?   // 0-1
+  popularTopics   String[]
+  sentiment       Json     // { positive: number, neutral: number, negative: number }
+  createdAt       DateTime @default(now())
+
+  // Relacionamentos
+  session ChatSession @relation(fields: [sessionId], references: [id])
+
+  @@map("chat_analytics")
+}
+
+// ===== NOTIFICAÇÕES =====
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // message, escalation, system, reminder
+  title     String
+  message   String
+  data      Json?
+  read      Boolean  @default(false)
+  expiresAt DateTime?
+  createdAt DateTime @default(now())
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
+
+// ===== CONFIGURAÇÕES DO SISTEMA =====
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  category  String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}
+
+// ===== FORMULÁRIOS DE CONTATO =====
 model ContactForm {
   id        String   @id @default(cuid())
   name      String
   email     String
-  phone     String
+  phone     String?
   company   String?
   service   String
   urgency   String?
   message   String
   source    String   @default("website")
-  status    String   @default("new")
+  status    String   @default("new") // new, contacted, qualified, converted, closed
+  metadata  Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("contact_forms")
+}
+
+// ===== LOGS DE ATIVIDADE =====
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  sessionId String?
+  action    String
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@map("activity_logs")
 }

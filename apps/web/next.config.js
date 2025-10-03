@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  outputFileTracingRoot: '/home/fabricio/projects/fernando',
+  outputFileTracingRoot: '../../',
   trailingSlash: false,
   async rewrites() {
     return [

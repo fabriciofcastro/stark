@@ -4,18 +4,18 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const About = () => {
-  const [activeStat, setActiveStat] = useState(0);
+	const [activeStat, setActiveStat] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveStat((prev) => (prev + 1) % 4);
-    }, 3000);
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setActiveStat((prev) => (prev + 1) % 4);
+		}, 3000);
 
-    return () => clearInterval(timer);
-  }, []);
+		return () => clearInterval(timer);
+	}, []);
 
-  const impactStats = [
-    {
+	const impactStats = [
+		{
       number: "500+",
       label: "Clientes Atendidos",
       icon: "👥",
@@ -28,17 +28,17 @@ const About = () => {
     {
       number: "99.99%",
       label: "Uptime Garantido",
-      icon: "⚡",
+			icon: "⚡",
       description: "Disponibilidade que mantém seu negócio sempre funcionando",
       value: "SLA com penalidades contratuais",
       color: "text-accent-400",
       bgColor: "bg-accent-500/10",
       borderColor: "border-accent-500/20",
-    },
-    {
-      number: "<15min",
+		},
+		{
+			number: "<15min",
       label: "Resposta Emergencial",
-      icon: "🎯",
+			icon: "🎯",
       description: "Suporte imediato para situações críticas",
       value: "Tempo de resposta garantido",
       color: "text-warning-400",
@@ -48,111 +48,111 @@ const About = () => {
     {
       number: "13+",
       label: "Anos de Experiência",
-      icon: "🚀",
+			icon: "🚀",
       description: "Trajetória sólida em transformação digital e inovação",
       value: "Expertise consolidada no mercado",
       color: "text-secondary-400",
       bgColor: "bg-secondary-500/10",
       borderColor: "border-secondary-500/20",
-    },
-  ];
+		},
+	];
 
-  const values = [
-    {
-      title: "Excelência Técnica",
-      description:
+	const values = [
+		{
+			title: "Excelência Técnica",
+			description:
         "Especialistas certificados em tecnologias de ponta e melhores práticas do mercado",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8 text-primary-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Excelência</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Excelência</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+					/>
+				</svg>
+			),
       highlight: "Certificações Internacionais",
-    },
-    {
-      title: "Inovação Contínua",
-      description:
+		},
+		{
+			title: "Inovação Contínua",
+			description:
         "Adotamos as tecnologias mais avançadas para manter seu negócio sempre à frente",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8 text-accent-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Inovação</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 10V3L4 14h7v7l9-11h-7z"
-          />
-        </svg>
-      ),
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Inovação</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M13 10V3L4 14h7v7l9-11h-7z"
+					/>
+				</svg>
+			),
       highlight: "Tecnologias Emergentes",
-    },
-    {
-      title: "Parceria Estratégica",
-      description:
+		},
+		{
+			title: "Parceria Estratégica",
+			description:
         "Relacionamentos duradouros baseados em confiança, transparência e resultados",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8 text-secondary-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Parceria</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
-      ),
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Parceria</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+					/>
+				</svg>
+			),
       highlight: "Relacionamento Duradouro",
-    },
-    {
-      title: "Segurança Total",
-      description:
+		},
+		{
+			title: "Segurança Total",
+			description:
         "Proteção completa com conformidade total às principais normas internacionais",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8 text-warning-400"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Segurança</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-          />
-        </svg>
-      ),
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Segurança</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+					/>
+				</svg>
+			),
       highlight: "Conformidade Internacional",
-    },
-  ];
+		},
+	];
 
-  return (
+	return (
     <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-900">
       {/* Liquid Explosions Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -264,13 +264,13 @@ const About = () => {
           </motion.p>
         </motion.div>
         <div className="space-y-12">
-          {/* Estatísticas de Impacto */}
+				{/* Estatísticas de Impacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {impactStats.map((stat, index) => (
-              <motion.div
+					{impactStats.map((stat, index) => (
+						<motion.div
                 key={`stat-${stat.label}`}
                 initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+							whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="group"
                 whileHover={{ scale: 1.05, y: -5 }}
@@ -285,33 +285,33 @@ const About = () => {
                       color: "#06b6d4",
                     }}
                   >
-                    {stat.number}
+								{stat.number}
                   </motion.div>
                   <div className="text-lg font-semibold text-cyan-300 mb-2">
-                    {stat.label}
-                  </div>
+								{stat.label}
+							</div>
                   <div className="text-sm text-gray-300 mb-2">
                     {stat.description}
                   </div>
                   <div className="text-xs text-gray-400">{stat.value}</div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+						</motion.div>
+					))}
+				</div>
 
-          {/* Nossos Valores */}
-          <div>
+				{/* Nossos Valores */}
+				<div>
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 O que nos Move
-              </h3>
+					</h3>
               <p className="text-neutral-400 max-w-2xl mx-auto">
                 Valores fundamentais que guiam nossa jornada de transformação
                 digital
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {values.map((value, index) => (
+						{values.map((value, index) => (
                 <motion.div
                   key={`value-${value.title}`}
                   initial={{ opacity: 0, y: 50 }}
@@ -338,17 +338,17 @@ const About = () => {
                     </div>
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          </div>
+						))}
+					</div>
+				</div>
 
-          {/* Nossa História */}
-          <div>
+				{/* Nossa História */}
+						<div>
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 Nossa Jornada de{" "}
                 <span className="text-secondary-400">Transformação</span>
-              </h3>
+							</h3>
               <p className="text-neutral-400 max-w-3xl mx-auto">
                 Uma trajetória construída com excelência, inovação e resultados
                 comprovados
@@ -357,7 +357,7 @@ const About = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="space-y-4 text-neutral-300">
+							<div className="space-y-4 text-neutral-300">
                   <div className="bg-gradient-to-r from-primary-500/10 to-accent-500/10 border border-primary-500/20 rounded-lg p-4">
                     <h4 className="text-xl font-bold text-white mb-2 flex items-center">
                       <span className="w-2 h-2 bg-primary-500 rounded-full mr-3"></span>
@@ -395,19 +395,19 @@ const About = () => {
                     </div>
                     <div className="flex items-center space-x-2 bg-neutral-800/30 px-3 py-1.5 rounded-lg">
                       <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
-                      <span className="text-sm font-medium text-white">
+										<span className="text-sm font-medium text-white">
                         500+ Empresas Atendidas
-                      </span>
-                    </div>
+										</span>
+									</div>
                     <div className="flex items-center space-x-2 bg-neutral-800/30 px-3 py-1.5 rounded-lg">
                       <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
-                      <span className="text-sm font-medium text-white">
+										<span className="text-sm font-medium text-white">
                         99.99% Uptime
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
 
               <div className="space-y-4">
                 <div className="bg-gradient-to-br from-primary-800/30 to-accent-800/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
@@ -416,12 +416,12 @@ const About = () => {
                       <span className="text-white font-bold">M</span>
                     </div>
                     <h4 className="text-xl font-bold text-white">
-                      Nossa Missão
-                    </h4>
+									Nossa Missão
+								</h4>
                   </div>
                   <p className="text-neutral-300 leading-relaxed">
-                    Democratizar o acesso à tecnologia de ponta, oferecendo
-                    soluções inovadoras que impulsionam o crescimento e a
+									Democratizar o acesso à tecnologia de ponta, oferecendo
+									soluções inovadoras que impulsionam o crescimento e a
                     transformação digital das empresas, garantindo segurança,
                     eficiência e resultados mensuráveis.
                   </p>
@@ -433,8 +433,8 @@ const About = () => {
                       <span className="text-white font-bold">V</span>
                     </div>
                     <h4 className="text-xl font-bold text-white">
-                      Nossa Visão
-                    </h4>
+									Nossa Visão
+								</h4>
                   </div>
                   <p className="text-neutral-300 leading-relaxed">
                     Ser a referência em tecnologia e inovação no Brasil,
@@ -442,11 +442,11 @@ const About = () => {
                     digital efetiva e pelo impacto positivo no crescimento dos
                     nossos parceiros.
                   </p>
-                </div>
-              </div>
-            </div>
+						</div>
+					</div>
+				</div>
 
-            {/* Call to Action */}
+				{/* Call to Action */}
             <div className="text-center mt-12">
               <div className="bg-gradient-to-br from-primary-900/40 via-neutral-900/30 to-accent-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6 relative overflow-hidden">
                 {/* Background Effects */}
@@ -458,7 +458,7 @@ const About = () => {
                     Pronto para{" "}
                     <span className="text-secondary-400">Transformar</span> Seu
                     Negócio?
-                  </h3>
+						</h3>
                   <p className="text-neutral-300 mb-6 max-w-3xl mx-auto text-base leading-relaxed">
                     Junte-se a mais de 500 empresas que já confiam na STARK para
                     sua transformação digital. Descubra como podemos ajudar sua
@@ -497,15 +497,15 @@ const About = () => {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a
-                      href="/contact"
+							<a
+								href="/contact"
                       className="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white font-semibold rounded-xl hover:from-secondary-600 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-secondary-500/25"
-                    >
+							>
                       <span className="mr-2">💬</span>
                       Fale Conosco Agora
-                    </a>
-                    <a
-                      href="/services"
+							</a>
+							<a
+								href="/services"
                       className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-primary-500 text-primary-400 font-semibold rounded-xl hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-105"
                     >
                       <span className="mr-2">🔧</span>
@@ -517,16 +517,16 @@ const About = () => {
                     >
                       <span className="mr-2">📊</span>
                       Ver Cases de Sucesso
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
           </div>
         </div>
       </div>
     </section>
-  );
+	);
 };
 
 export default About;

@@ -9,10 +9,10 @@ import { JsonLd, organizationData } from "@/components/seo/structured-data";
 import {
   RevealOnScroll,
   HashRedirector,
-  GA4,
 } from "@/components/wrappers";
+import { AnalyticsProvider } from "@/lib/analytics-unified";
 import ModernCookieConsent from "@/components/ui/modern-cookie-consent";
-import { GlobalChat } from "@/components/global/global-chat";
+// Chat system will be recreated
 import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
 
@@ -83,8 +83,32 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Footer />
         <RevealOnScroll />
         <HashRedirector />
-        <GlobalChat />
-        <GA4 />
+        <ChatWidget
+          config={{
+            theme: 'stark',
+            position: 'bottom-right',
+            size: 'md',
+            autoOpen: false,
+            showAvatar: true,
+            showTyping: true,
+            showStatus: true,
+            enableSounds: true,
+            enableNotifications: true,
+            maxMessages: 50,
+            apiEndpoint: '/api/v1/chat',
+            websocketEndpoint: '/api/v1/chat/ws',
+          }}
+          onSessionStart={(session) => {
+            console.log('Chat session started:', session.id);
+          }}
+          onSessionEnd={(session) => {
+            console.log('Chat session ended:', session.id);
+          }}
+          onEscalation={(ticket) => {
+            console.log('Escalation ticket created:', ticket.id);
+          }}
+        />
+        <AnalyticsProvider />
         <ModernCookieConsent />
         <Toaster />
       </body>

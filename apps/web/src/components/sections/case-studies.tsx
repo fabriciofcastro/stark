@@ -3,105 +3,105 @@
 import { motion } from "framer-motion";
 
 const CaseStudies = () => {
-  const cases = [
-    {
-      id: 1,
-      title: "Transformação Digital em Indústria",
-      company: "Indústria Metalúrgica",
-      description:
-        "Implementação de infraestrutura cloud com automação e monitoramento",
-      results: [
-        "Redução de 40% nos custos operacionais",
-        "Aumento de 99.95% de uptime",
-        "Redução de 60% no tempo de resposta a incidentes",
-      ],
-      industry: "Manufatura",
-      timeframe: "6 meses",
-      investment: "R$ 1.2M",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Indústria</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-          />
-        </svg>
-      ),
+	const cases = [
+		{
+			id: 1,
+			title: "Transformação Digital em Indústria",
+			company: "Indústria Metalúrgica",
+			description:
+				"Implementação de infraestrutura cloud com automação e monitoramento",
+			results: [
+				"Redução de 40% nos custos operacionais",
+				"Aumento de 99.95% de uptime",
+				"Redução de 60% no tempo de resposta a incidentes",
+			],
+			industry: "Manufatura",
+			timeframe: "6 meses",
+			investment: "R$ 1.2M",
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Indústria</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+					/>
+				</svg>
+			),
       gradient: "from-purple-500/20 via-pink-500/10 to-rose-500/20",
       glow: "shadow-purple-500/25",
-    },
-    {
-      id: 2,
-      title: "Governança e Segurança para Finanças",
-      company: "Instituição Financeira",
-      description: "Estruturação de governança de TI e segurança da informação",
-      results: [
-        "Conformidade com normas do BACEN",
-        "100% de compliance com LGPD",
-        "Redução de 85% nos riscos de segurança",
-      ],
-      industry: "Finanças",
-      timeframe: "8 meses",
+		},
+		{
+			id: 2,
+			title: "Governança e Segurança para Finanças",
+			company: "Instituição Financeira",
+			description: "Estruturação de governança de TI e segurança da informação",
+			results: [
+				"Conformidade com normas do BACEN",
+				"100% de compliance com LGPD",
+				"Redução de 85% nos riscos de segurança",
+			],
+			industry: "Finanças",
+			timeframe: "8 meses",
       investment: "R$ 2.8M",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <title>Ícone de Finanças</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-          />
-        </svg>
-      ),
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<title>Ícone de Finanças</title>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+					/>
+				</svg>
+			),
       gradient: "from-emerald-500/20 via-teal-500/10 to-cyan-500/20",
       glow: "shadow-emerald-500/25",
-    },
-    {
-      id: 3,
+		},
+		{
+			id: 3,
       title: "Migração para Nuvem",
       company: "Empresa de Varejo",
       description:
         "Migração completa para infraestrutura cloud com alta disponibilidade",
-      results: [
+			results: [
         "Escalabilidade automática implementada",
         "Redução de 70% nos custos de infraestrutura",
         "Melhoria de 300% na performance",
-      ],
-      industry: "Varejo",
-      timeframe: "4 meses",
-      investment: "R$ 800K",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
+			],
+			industry: "Varejo",
+			timeframe: "4 meses",
+			investment: "R$ 800K",
+			icon: (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-8 w-8"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
           <title>Ícone de Nuvem</title>
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
             d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
-          />
-        </svg>
-      ),
+					/>
+				</svg>
+			),
       gradient: "from-blue-500/20 via-indigo-500/10 to-purple-500/20",
       glow: "shadow-blue-500/25",
     },
@@ -370,25 +370,25 @@ const CaseStudies = () => {
             Ver Todos os Cases
             <motion.svg
               className="ml-2 w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-            >
+				>
               <title>Ícone de seta</title>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </motion.svg>
           </motion.button>
         </motion.div>
-      </div>
+			</div>
     </section>
-  );
+	);
 };
 
 export default CaseStudies;
