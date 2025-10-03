@@ -4,8 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChatwootIntegration } from "./chatwoot-integration";
 import { WhatsAppWidget } from "./whatsapp-widget";
-import PremiumChatInterface from "@/components/ui/premium-chat-interface";
-import PremiumChatButton from "@/components/ui/premium-chat-button";
+import StarkChatSystem from "@/components/ui/stark-chat-system";
+import StarkContactSystem from "@/components/ui/stark-contact-system";
 import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
 
 interface ContactExperienceProps {
@@ -20,7 +20,6 @@ const ContactExperience = ({
 	onContactFormSubmit,
 }: ContactExperienceProps) => {
 	const [showSuccess, setShowSuccess] = useState(false);
-	const [isChatOpen, setIsChatOpen] = useState(false);
 
 	// Handler para solicitação de contato via chatbot
 	const handleContactRequest = (data: {
@@ -58,37 +57,15 @@ const ContactExperience = ({
 
 	return (
 		<>
-			{/* Chatwoot Integration */}
-			<ChatwootIntegration
-				token={chatwootToken}
-				settings={{
-					hideMessageBubble: false,
-					position: "right",
-					locale: "pt",
-					type: "standard",
-					launcherTitle: "Fale conosco",
-				}}
+			{/* Sistema de Contato STARK */}
+			<StarkContactSystem
+				chatwootToken={chatwootToken}
+				whatsappNumber={whatsappNumber}
+				onContactFormSubmit={onContactFormSubmit}
 			/>
 
-			{/* WhatsApp Widget */}
-			<WhatsAppWidget
-				phoneNumber={whatsappNumber}
-				message="Olá! Gostaria de saber mais sobre os serviços da STARK. Pode me ajudar?"
-				position="right"
-				showOnScroll={true}
-				scrollThreshold={200}
-			/>
-
-			{/* Premium Chat Interface */}
-			<PremiumChatButton 
-				onClick={() => setIsChatOpen(true)}
-				isActive={isChatOpen}
-				position="bottom-right"
-			/>
-			
-			<PremiumChatInterface
-				isOpen={isChatOpen}
-				onClose={() => setIsChatOpen(false)}
+			{/* Sistema de Chat STARK */}
+			<StarkChatSystem
 				onContactRequest={handleContactRequest}
 				onWhatsAppRedirect={handleWhatsAppRedirect}
 				onEscalateToHuman={handleEscalateToHuman}
@@ -111,64 +88,6 @@ const ContactExperience = ({
 				</motion.div>
 			)}
 
-			{/* Contact Options Bar - Mobile */}
-			<div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40 md:hidden">
-				<div className="flex justify-around">
-					<motion.button
-						whileTap={{ scale: 0.95 }}
-						className="flex flex-col items-center space-y-1 text-gray-600 hover:text-blue-500 transition-colors"
-						onClick={() =>
-							document
-								.getElementById("contact-form")
-								?.scrollIntoView({ behavior: "smooth" })
-						}
-					>
-						<div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-							<Mail className="w-5 h-5" />
-						</div>
-						<span className="text-xs">Formulário</span>
-					</motion.button>
-
-					<motion.button
-						whileTap={{ scale: 0.95 }}
-						className="flex flex-col items-center space-y-1 text-gray-600 hover:text-green-500 transition-colors"
-						onClick={() =>
-							handleWhatsAppRedirect(
-								"Olá! Gostaria de saber mais sobre os serviços da STARK.",
-							)
-						}
-					>
-						<div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-							<MessageCircle className="w-5 h-5" />
-						</div>
-						<span className="text-xs">WhatsApp</span>
-					</motion.button>
-
-					<motion.button
-						whileTap={{ scale: 0.95 }}
-						className="flex flex-col items-center space-y-1 text-gray-600 hover:text-blue-500 transition-colors"
-						onClick={() => window.open(`tel:${whatsappNumber}`, "_self")}
-					>
-						<div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-							<Phone className="w-5 h-5" />
-						</div>
-						<span className="text-xs">Ligar</span>
-					</motion.button>
-
-					<motion.button
-						whileTap={{ scale: 0.95 }}
-						className="flex flex-col items-center space-y-1 text-gray-600 hover:text-purple-500 transition-colors"
-						onClick={() =>
-							window.open("https://calendly.com/stark-tecnologia", "_blank")
-						}
-					>
-						<div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-							<Calendar className="w-5 h-5" />
-						</div>
-						<span className="text-xs">Agendar</span>
-					</motion.button>
-				</div>
-			</div>
 		</>
 	);
 };
