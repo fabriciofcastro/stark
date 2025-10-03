@@ -169,7 +169,7 @@ const ModernCookieConsent: React.FC<ModernCookieConsentProps> = ({
           initial={{ opacity: 0, y: 100, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 100, scale: 0.95 }}
-          className="relative w-full max-w-2xl bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-xl overflow-hidden"
+          className="relative w-full max-w-2xl max-h-[90vh] bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 rounded-2xl shadow-2xl border border-white/10 backdrop-blur-xl overflow-hidden flex flex-col"
         >
           {/* Header */}
           <div className="relative p-6 border-b border-white/10">
@@ -206,7 +206,7 @@ const ModernCookieConsent: React.FC<ModernCookieConsentProps> = ({
           </div>
 
           {/* Conteúdo */}
-          <div className="p-6">
+          <div className="p-6 flex-1 overflow-y-auto">
             {!showDetails ? (
               /* Vista resumida */
               <div className="space-y-4">
@@ -391,11 +391,11 @@ const ModernCookieConsent: React.FC<ModernCookieConsentProps> = ({
           <div className="px-6 py-4 bg-gradient-to-r from-white/5 to-white/10 border-t border-white/10">
             <p className="text-white/60 text-xs text-center">
               Ao continuar, você concorda com nossa{' '}
-              <a href="/privacy" className="text-purple-400 hover:text-purple-300 underline">
+              <a href="/politica-privacidade" className="text-purple-400 hover:text-purple-300 underline">
                 Política de Privacidade
               </a>
               {' '}e{' '}
-              <a href="/cookies" className="text-purple-400 hover:text-purple-300 underline">
+              <a href="/politica-cookies" className="text-purple-400 hover:text-purple-300 underline">
                 Política de Cookies
               </a>
               .

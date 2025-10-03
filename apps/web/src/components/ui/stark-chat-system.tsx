@@ -35,7 +35,11 @@ import {
   ChevronDown,
   ChevronUp,
   Minimize,
-  Plus
+  Plus,
+  Download,
+  Copy,
+  RotateCcw,
+  Star
 } from 'lucide-react';
 
 interface Message {
@@ -56,6 +60,7 @@ interface Message {
     thumbsUp: number;
     thumbsDown: number;
     heart: number;
+    star: number;
   };
   suggestions?: string[];
 }
@@ -78,6 +83,14 @@ interface UserProfile {
   avatar?: string;
 }
 
+interface ConversationHistory {
+  id: string;
+  title: string;
+  timestamp: Date;
+  unread: boolean;
+  preview: string;
+}
+
 interface StarkChatSystemProps {
   onContactRequest: (data: any) => void;
   onWhatsAppRedirect: (message: string) => void;
@@ -97,6 +110,12 @@ const StarkChatSystem: React.FC<StarkChatSystemProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(false);
+  const [showConversationHistory, setShowConversationHistory] = useState(false);
+  const [conversations, setConversations] = useState<ConversationHistory[]>([]);
+  const [currentSatisfaction, setCurrentSatisfaction] = useState(0);
+  const [showRating, setShowRating] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   // Contexto da conversa
   const [chatContext, setChatContext] = useState({
