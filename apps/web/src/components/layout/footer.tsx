@@ -1,339 +1,319 @@
-// components/layout/footer.jsx
+// components/layout/footer.tsx
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { 
+  MapPin, 
+  Mail, 
+  Phone, 
+  ArrowUpRight,
+  Shield,
+  FileText,
+  Cookie,
+  Scale
+} from "lucide-react";
 
 const Footer = () => {
-  const [particles, setParticles] = useState<
-    Array<{ id: number; x: number; y: number; size: number }>
+  const [floatingElements, setFloatingElements] = useState<
+    Array<{ id: number; x: number; y: number; size: number; delay: number }>
   >([]);
 
-  // Generate floating particles
+  // Generate subtle floating elements
   useEffect(() => {
-    const generateParticles = () => {
-      const newParticles = Array.from({ length: 20 }, (_, i) => ({
+    const generateElements = () => {
+      const newElements = Array.from({ length: 12 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 4 + 2,
+        size: Math.random() * 3 + 1,
+        delay: Math.random() * 2,
       }));
-      setParticles(newParticles);
+      setFloatingElements(newElements);
     };
 
-    generateParticles();
-    const interval = setInterval(generateParticles, 10000);
+    generateElements();
+    const interval = setInterval(generateElements, 15000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="relative border-white/20 border-t bg-gradient-to-br from-slate-900 via-green-900 to-emerald-900 px-4 py-12 backdrop-blur-md sm:px-6 lg:px-8 overflow-hidden">
-      {/* Floating Particles Background */}
+    <footer className="relative border-t border-white/10 bg-gradient-to-br from-slate-950/95 via-neutral-900/98 to-slate-950/95 backdrop-blur-xl overflow-hidden">
+      {/* Subtle Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="h-full w-full" style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }} />
+        </div>
+        
+        {/* Floating Elements */}
+        {floatingElements.map((element) => (
           <motion.div
-            key={particle.id}
-            className="absolute bg-gradient-to-r from-green-400/20 to-emerald-400/20 rounded-full blur-sm"
+            key={element.id}
+            className="absolute bg-gradient-to-r from-cyan-400/5 to-blue-500/5 rounded-full blur-sm"
             style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
+              left: `${element.x}%`,
+              top: `${element.y}%`,
+              width: `${element.size}px`,
+              height: `${element.size}px`,
             }}
             animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.3, 1],
+              y: [0, -20, 0],
+              x: [0, Math.random() * 10 - 5, 0],
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 4 + Math.random() * 3,
+              duration: 8 + Math.random() * 4,
               repeat: Infinity,
               ease: "easeInOut",
+              delay: element.delay,
             }}
           />
         ))}
       </div>
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
+          {/* Brand Section */}
           <motion.div
-            className="col-span-1 md:col-span-2"
-            initial={{ opacity: 0, y: 50 }}
+            className="lg:col-span-2"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <div className="mb-4 flex items-center space-x-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-gold-500 ring-2 ring-[hsl(var(--brand-gold-400))]/40">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <title id="footer-logo-title">Logotipo STARK</title>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                  />
-                </svg>
+            <div className="mb-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 backdrop-blur-sm border border-white/10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <title>STARK Logo</title>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    STARK
+                  </h3>
+                  <p className="text-sm text-cyan-400 font-medium">GESTÃO EM TECNOLOGIA</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-2xl text-white">STARK</h4>
-                <p className="text-brand-gold-500">GESTÃO EM TECNOLOGIA</p>
+              
+              <p className="text-gray-400 leading-relaxed mb-6 max-w-md">
+                Transformamos infraestrutura tecnológica em ativos estratégicos. 
+                Especialistas em governança, segurança e inovação digital.
+              </p>
+              
+              <div className="flex items-center space-x-4 text-sm text-gray-500">
+                <span>© 2024 STARK Tecnologia</span>
+                <span>•</span>
+                <span>Todos os direitos reservados</span>
               </div>
             </div>
-            <p className="mb-4 text-brand-gray-400">
-              Especialistas em governança e serviços de TI, ajudando empresas a
-              transformar sua infraestrutura tecnológica em um ativo
-              estratégico.
-            </p>
-            <p className="text-brand-gray-400 text-sm">
-              © 2024 STARK Gestão em Tecnologia. Todos os direitos reservados.
-            </p>
           </motion.div>
 
-          {/* Serviços */}
+          {/* Services */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
-            <h5 className="mb-4 font-semibold text-lg text-white">Serviços</h5>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/suporte-tecnico"
-                  className="text-brand-gray-400 link-brand"
+            <h4 className="text-lg font-semibold text-white mb-6">Serviços</h4>
+            <nav className="space-y-3">
+              {[
+                { href: "/suporte-tecnico", label: "Suporte Técnico" },
+                { href: "/consultoria-tecnologica", label: "Consultoria" },
+                { href: "/cloud-vps-linux", label: "Soluções em Nuvem" },
+                { href: "/governance", label: "Governança de TI" },
+                { href: "/cyberseguranca", label: "Cibersegurança" },
+                { href: "/create-site", label: "Desenvolvimento Web" }
+              ].map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
                 >
-                  Suporte Técnico
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/suporte-tecnico-empresarial"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Suporte Empresarial
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/consultoria-tecnologica"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Consultoria Tecnológica
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cloud-vps-linux"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Soluções em Nuvem
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/governanca"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Governança de TI
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cyberseguranca"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Cibersegurança
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/create-site"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Criação de Sites
-                </Link>
-              </li>
-            </ul>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center text-gray-400 hover:text-white transition-all duration-300 text-sm"
+                  >
+                    <ArrowUpRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
           </motion.div>
 
-          {/* Empresa */}
+          {/* Company */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h5 className="mb-4 font-semibold text-lg text-white">Empresa</h5>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/sobre" className="text-brand-gray-400 link-brand">
-                  Sobre Nós
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/portfolio"
-                  className="text-brand-gray-400 link-brand"
+            <h4 className="text-lg font-semibold text-white mb-6">Empresa</h4>
+            <nav className="space-y-3">
+              {[
+                { href: "/sobre", label: "Sobre Nós" },
+                { href: "/portfolio", label: "Portfólio" },
+                { href: "/cases-de-sucesso", label: "Cases de Sucesso" },
+                { href: "/faq", label: "FAQ" },
+                { href: "/blog", label: "Blog" },
+                { href: "/contact", label: "Contato" }
+              ].map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
                 >
-                  Portfólio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cases-de-sucesso"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Cases de Sucesso
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-brand-gray-400 link-brand">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-brand-gray-400 link-brand">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-brand-gray-400 link-brand"
-                >
-                  Contato
-                </Link>
-              </li>
-            </ul>
-          </motion.div>
-
-          {/* Contato */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <h5 className="mb-4 font-semibold text-lg text-white">Contato</h5>
-            <ul className="space-y-2 text-brand-gray-400">
-              <li className="flex items-start">
-                <svg
-                  className="mt-0.5 mr-2 h-5 w-5 text-brand-gold-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  role="img"
-                  aria-labelledby="addr-title"
-                >
-                  <title id="addr-title">Endereço</title>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                Av. Paulista, 1000
-                <br />
-                Itaquaquecetuba - SP
-              </li>
-              <li className="flex items-center">
-                <svg
-                  className="mr-2 h-5 w-5 text-brand-gold-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  role="img"
-                  aria-labelledby="email-title"
-                >
-                  <title id="email-title">E-mail</title>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                contato@starkgestao.com.br
-              </li>
-              <li className="flex items-center">
-                <svg
-                  className="mr-2 h-5 w-5 text-brand-gold-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <title id="phone-title">Telefone</title>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
-                (11) 99439-6469
-              </li>
-            </ul>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center text-gray-400 hover:text-white transition-all duration-300 text-sm"
+                  >
+                    <ArrowUpRight className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
           </motion.div>
         </div>
-        {/* Links Legais */}
-        <div className="mt-8 border-white/20 border-t pt-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <Link
-              href="/politica-de-privacidade"
-              className="text-brand-gray-400 text-sm hover:text-brand-gold-400 transition-colors"
-            >
-              Política de Privacidade
-            </Link>
-            <Link
-              href="/termos-de-uso"
-              className="text-brand-gray-400 text-sm hover:text-brand-gold-400 transition-colors"
-            >
-              Termos de Uso
-            </Link>
-            <Link
-              href="/politica-de-cookies"
-              className="text-brand-gray-400 text-sm hover:text-brand-gold-400 transition-colors"
-            >
-              Política de Cookies
-            </Link>
-            <Link
-              href="/lgpd"
-              className="text-brand-gray-400 text-sm hover:text-brand-gold-400 transition-colors"
-            >
-              LGPD
-            </Link>
+
+        {/* Contact Info */}
+        <motion.div
+          className="mt-12 pt-8 border-t border-white/10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-start space-x-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-white/10">
+                <MapPin className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div>
+                <h5 className="text-white font-medium mb-1">Endereço</h5>
+                <p className="text-gray-400 text-sm">
+                  Av. Paulista, 1000<br />
+                  Itaquaquecetuba - SP
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-white/10">
+                <Mail className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div>
+                <h5 className="text-white font-medium mb-1">E-mail</h5>
+                <p className="text-gray-400 text-sm">
+                  contato@starkgestao.com.br
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start space-x-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-white/10">
+                <Phone className="h-4 w-4 text-cyan-400" />
+              </div>
+              <div>
+                <h5 className="text-white font-medium mb-1">Telefone</h5>
+                <p className="text-gray-400 text-sm">
+                  (11) 99439-6469
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
+        {/* Legal Links */}
+        <motion.div
+          className="mt-12 pt-8 border-t border-white/10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+        >
+          <div className="flex flex-wrap items-center justify-between gap-6">
+            {/* Legal Links */}
+            <div className="flex flex-wrap items-center gap-6">
+              {[
+                { href: "/politica-privacidade", label: "Política de Privacidade", icon: Shield },
+                { href: "/termos-uso", label: "Termos de Uso", icon: FileText },
+                { href: "/politica-cookies", label: "Política de Cookies", icon: Cookie },
+                { href: "/lgpd", label: "LGPD", icon: Scale }
+              ].map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    className="group flex items-center space-x-2 text-gray-500 hover:text-cyan-400 transition-all duration-300 text-sm"
+                  >
+                    <link.icon className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <span>{link.label}</span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
 
-        <div className="mt-6 border-white/20 border-t pt-6 text-center text-brand-gray-400">
-          <p>
-            Observabilidade e análise de métricas integradas | Google Analytics
-            | Vercel Analytics
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              window.dispatchEvent(new Event("cookie:open-preferences"));
-            }}
-            className="mt-3 rounded-lg border border-white/15 px-3 py-1.5 text-sm text-white hover:bg-white/5"
-          >
-            Rever preferências de cookies
-          </button>
-        </div>
+            {/* Analytics & Cookie Preferences */}
+            <div className="flex items-center space-x-4">
+              <span className="text-xs text-gray-600">
+                Google Analytics • Vercel Analytics
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  window.dispatchEvent(new Event("cookie:open-preferences"));
+                }}
+                className="text-xs text-gray-500 hover:text-cyan-400 transition-colors duration-300"
+              >
+                Gerenciar Cookies
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <motion.button
+        onClick={scrollToTop}
+        className="fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 backdrop-blur-sm border border-white/10 hover:border-cyan-400/50 transition-all duration-300 group"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <ArrowUpRight className="h-5 w-5 text-cyan-400 group-hover:text-white transition-colors duration-300" />
+      </motion.button>
     </footer>
   );
 };
