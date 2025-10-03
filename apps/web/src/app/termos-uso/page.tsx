@@ -127,7 +127,7 @@ const TermsPage = () => {
 
             <div className="flex items-center justify-center space-x-2 mt-6 text-sm text-white/60">
               <Clock className="w-4 h-4" />
-              <span>Última atualização: {new Date().toLocaleDateString('pt-BR')}</span>
+              <span>Última atualização: {new Date().toLocaleDateString('pt-BR')} - Deploy v2</span>
             </div>
           </div>
         </div>
