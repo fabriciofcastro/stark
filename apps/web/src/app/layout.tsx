@@ -14,7 +14,6 @@ import {
   GA4,
 } from "@/components/wrappers";
 import { GlobalChat } from "@/components/global/global-chat";
-import RevolutionaryChatbot from "@/components/ai/revolutionary-chatbot";
 import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
 
@@ -87,7 +86,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <RevealOnScroll />
         <HashRedirector />
         <GlobalChat />
-        <RevolutionaryChatbot />
         <GA4 />
         <CookieConsent />
         <Toaster />

@@ -4,7 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChatwootIntegration } from "./chatwoot-integration";
 import { WhatsAppWidget } from "./whatsapp-widget";
-import { HumanChatbot } from "./human-chatbot";
+import PremiumChatInterface from "@/components/ui/premium-chat-interface";
+import PremiumChatButton from "@/components/ui/premium-chat-button";
 import { Phone, Mail, MessageCircle, Calendar } from "lucide-react";
 
 interface ContactExperienceProps {
@@ -19,6 +20,7 @@ const ContactExperience = ({
 	onContactFormSubmit,
 }: ContactExperienceProps) => {
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [isChatOpen, setIsChatOpen] = useState(false);
 
 	// Handler para solicitação de contato via chatbot
 	const handleContactRequest = (data: {
@@ -77,8 +79,16 @@ const ContactExperience = ({
 				scrollThreshold={200}
 			/>
 
-			{/* Human Chatbot */}
-			<HumanChatbot
+			{/* Premium Chat Interface */}
+			<PremiumChatButton 
+				onClick={() => setIsChatOpen(true)}
+				isActive={isChatOpen}
+				position="bottom-right"
+			/>
+			
+			<PremiumChatInterface
+				isOpen={isChatOpen}
+				onClose={() => setIsChatOpen(false)}
 				onContactRequest={handleContactRequest}
 				onWhatsAppRedirect={handleWhatsAppRedirect}
 				onEscalateToHuman={handleEscalateToHuman}

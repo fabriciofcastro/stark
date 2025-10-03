@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Bot, User, Phone, Mail, Calendar, ArrowRight, Loader2 } from "lucide-react";
+import { 
+  MessageCircle, X, Send, Bot, User, Phone, Mail, Calendar, ArrowRight, Loader2,
+  Mic, MicOff, Brain, Zap, Sparkles, Volume2, VolumeX, Settings, Target, TrendingUp,
+  Heart, ThumbsUp, ThumbsDown, Star, Award, Activity, Eye, Clock, Users, Building
+} from "lucide-react";
 
 interface Message {
 	id: string;
@@ -12,6 +16,19 @@ interface Message {
 	options?: { id: string; text: string; action: string; icon?: string }[];
 	typing?: boolean;
 	escalated?: boolean;
+	metadata?: {
+		confidence?: number;
+		sentiment?: 'positive' | 'neutral' | 'negative';
+		intent?: string;
+		processingTime?: number;
+		model?: string;
+	};
+	reactions?: {
+		thumbsUp: number;
+		thumbsDown: number;
+		heart: number;
+	};
+	suggestions?: string[];
 }
 
 interface HumanChatbotProps {
@@ -53,7 +70,22 @@ const HumanChatbot = ({
 		attempts: 0,
 		maxAttempts: 3,
 	});
+	const [isListening, setIsListening] = useState(false);
+	const [voiceEnabled, setVoiceEnabled] = useState(true);
+	const [showAnalytics, setShowAnalytics] = useState(false);
+	const [analytics, setAnalytics] = useState({
+		totalMessages: 0,
+		userMessages: 0,
+		botMessages: 0,
+		averageConfidence: 0,
+		satisfactionScore: 0,
+		sessionDuration: 0,
+		topIntents: [] as string[],
+		sentimentDistribution: { positive: 0, neutral: 0, negative: 0 }
+	});
 	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const recognitionRef = useRef<any>(null);
+	const synthesisRef = useRef<any>(null);
 
 	// Respostas mais humanas e naturais
 	const humanResponses = {
