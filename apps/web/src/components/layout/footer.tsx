@@ -502,88 +502,62 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Contact Info - Holographic Cards */}
+        {/* Contact Info - Elegant Text Only */}
         <motion.div
           className="mt-16 pt-12 border-t border-gradient-to-r from-cyan-500/30 via-transparent to-purple-500/30"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
               { 
                 icon: MapPin, 
                 title: "Endereço", 
-                content: "Av. Paulista, 1000\nItaquaquecetuba - SP",
-                color: "cyan",
-                gradient: "from-cyan-500/20 to-blue-600/20"
+                content: "Av. Paulista, 1000\nItaquaquecetuba - SP"
               },
               { 
                 icon: Mail, 
                 title: "E-mail", 
-                content: "contato@starkgestao.com.br",
-                color: "purple",
-                gradient: "from-purple-500/20 to-pink-600/20"
+                content: "contato@starkgestao.com.br"
               },
               { 
                 icon: Phone, 
                 title: "Telefone", 
-                content: "(11) 99439-6469",
-                color: "emerald",
-                gradient: "from-emerald-500/20 to-teal-600/20"
+                content: "(11) 99439-6469"
               }
             ].map((contact, index) => (
               <motion.div
                 key={contact.title}
-                initial={{ opacity: 0, y: 30, rotateX: -10 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                 className="group"
               >
-                <motion.div 
-                  className="relative p-6 rounded-2xl backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-500"
-                  style={{
-                    background: `
-                      linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%),
-                      linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)
-                    `,
-                    boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.3)',
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    rotateY: 5,
-                    boxShadow: '0 20px 40px -8px rgba(6, 182, 212, 0.2)',
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Holographic Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="flex flex-col items-center space-y-4">
+                  <motion.div 
+                    className="flex h-12 w-12 items-center justify-center"
+                    animate={{ 
+                      y: [0, -8, 0],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.3,
+                    }}
+                  >
+                    <contact.icon className="h-6 w-6 text-cyan-400" />
+                  </motion.div>
                   
-                  <div className="relative z-10">
-                    <motion.div 
-                      className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-600/30 border border-white/20 mb-4"
-                      animate={{ 
-                        rotateY: [0, 360],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{ 
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.5,
-                      }}
-                    >
-                      <contact.icon className="h-6 w-6 text-cyan-400" />
-                    </motion.div>
-                    
-                    <h5 className="text-white font-bold mb-3 text-lg">
-                      {contact.title}
-                    </h5>
-                    <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
-                      {contact.content}
-                    </p>
-                  </div>
-                </motion.div>
+                  <h5 className="text-white font-semibold text-lg">
+                    {contact.title}
+                  </h5>
+                  <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                    {contact.content}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -677,7 +651,7 @@ const Footer = () => {
       {/* Extraordinary Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 group"
+        className="fixed bottom-24 right-8 z-[60] group"
         initial={{ opacity: 0, scale: 0, rotate: -180 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         whileHover={{ 
