@@ -502,29 +502,32 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Contact Info - Elegant Text Only */}
+        {/* Contact Info - Elegant Text Layout */}
         <motion.div
           className="mt-16 pt-12 border-t border-gradient-to-r from-cyan-500/30 via-transparent to-purple-500/30"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { 
                 icon: MapPin, 
                 title: "Endereço", 
-                content: "Av. Paulista, 1000\nItaquaquecetuba - SP"
+                content: "Av. Paulista, 1000\nItaquaquecetuba - SP",
+                color: "cyan"
               },
               { 
                 icon: Mail, 
                 title: "E-mail", 
-                content: "contato@starkgestao.com.br"
+                content: "contato@starkgestao.com.br",
+                color: "purple"
               },
               { 
                 icon: Phone, 
                 title: "Telefone", 
-                content: "(11) 99439-6469"
+                content: "(11) 99439-6469",
+                color: "emerald"
               }
             ].map((contact, index) => (
               <motion.div
@@ -532,31 +535,67 @@ const Footer = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="group"
+                className="group text-center"
               >
                 <div className="flex flex-col items-center space-y-4">
                   <motion.div 
-                    className="flex h-12 w-12 items-center justify-center"
+                    className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-600/20 border border-white/10"
                     animate={{ 
-                      y: [0, -8, 0],
-                      scale: [1, 1.1, 1],
+                      rotate: [0, 360],
+                      scale: [1, 1.05, 1],
                     }}
                     transition={{ 
-                      duration: 2,
+                      duration: 8,
                       repeat: Infinity,
-                      ease: "easeInOut",
+                      ease: "linear",
                       delay: index * 0.3,
                     }}
                   >
-                    <contact.icon className="h-6 w-6 text-cyan-400" />
+                    <motion.div
+                      animate={{
+                        y: [0, -8, 0],
+                        rotate: [0, 10, -10, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.5,
+                      }}
+                    >
+                      <contact.icon className="h-8 w-8 text-cyan-400" />
+                    </motion.div>
                   </motion.div>
                   
-                  <h5 className="text-white font-semibold text-lg">
+                  <motion.h5 
+                    className="text-white font-bold text-xl"
+                    animate={{
+                      color: ["#ffffff", "#06b6d4", "#ffffff"],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.2,
+                    }}
+                  >
                     {contact.title}
-                  </h5>
-                  <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                  </motion.h5>
+                  
+                  <motion.p 
+                    className="text-gray-300 text-base leading-relaxed whitespace-pre-line max-w-xs"
+                    animate={{
+                      opacity: [0.7, 1, 0.7],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.4,
+                    }}
+                  >
                     {contact.content}
-                  </p>
+                  </motion.p>
                 </div>
               </motion.div>
             ))}
@@ -648,7 +687,7 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      {/* Extraordinary Scroll to Top Button */}
+      {/* Fixed Scroll to Top Button - Above Chatbot */}
       <motion.button
         onClick={scrollToTop}
         className="fixed bottom-24 right-8 z-[60] group"
