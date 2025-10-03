@@ -1,310 +1,300 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import { HelpCircle, ChevronDown, ChevronUp, Search, MessageCircle, Phone, Mail, Clock, Star, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-	title: "FAQ - Perguntas Frequentes | STARK Gestão em Tecnologia",
-	description:
-		"Encontre respostas para as principais dúvidas sobre nossos serviços de TI, suporte técnico, soluções em nuvem e consultoria em tecnologia.",
-	keywords:
-		"faq stark, perguntas frequentes, dúvidas TI, suporte técnico, consultoria tecnologia, soluções nuvem",
-	robots: {
-		index: true,
-		follow: true,
-	},
+  title: "FAQ - Perguntas Frequentes - STARK Tecnologia",
+  description: "Encontre respostas para as perguntas mais frequentes sobre os serviços da STARK Tecnologia.",
+  keywords: "FAQ, perguntas frequentes, dúvidas, STARK, tecnologia, suporte, ajuda",
 };
 
-export default function FAQ() {
-	const faqCategories = [
-		{
-			category: "Serviços Gerais",
-			icon: "🔧",
-			questions: [
-				{
-					question: "Quais serviços a STARK oferece?",
-					answer:
-						"Oferecemos suporte técnico especializado, consultoria em tecnologia, soluções em nuvem, segurança da informação, infraestrutura de TI, desenvolvimento de sistemas e muito mais. Nossa equipe está preparada para atender desde pequenas empresas até grandes corporações.",
-				},
-				{
-					question: "A STARK atende empresas de todos os portes?",
-					answer:
-						"Sim! Atendemos desde micro e pequenas empresas até grandes corporações. Nossas soluções são adaptadas para cada porte de negócio, garantindo que você receba exatamente o que precisa, sem pagar por recursos desnecessários.",
-				},
-				{
-					question: "Qual é a área de atendimento da STARK?",
-					answer:
-						"Atendemos toda a região metropolitana de São Paulo, com foco em Itaquaquecetuba, Suzano, Mogi das Cruzes, Arujá, Ferraz de Vasconcelos, Poá, São Paulo (Capital) e Guarulhos. Para outras regiões, consulte nossa equipe comercial.",
-				},
-				{
-					question: "Como funciona o atendimento de emergência?",
-					answer:
-						"Oferecemos suporte técnico 24/7 para emergências críticas. Nosso sistema de priorização garante resposta rápida para problemas que afetam a operação do seu negócio. Entre em contato através dos nossos canais de emergência.",
-				},
-			],
-		},
-		{
-			category: "Suporte Técnico",
-			icon: "💻",
-			questions: [
-				{
-					question: "Qual é o tempo de resposta do suporte técnico?",
-					answer:
-						"Para emergências críticas: até 1 hora. Para problemas de alta prioridade: até 4 horas. Para demandas normais: até 24 horas. Temos diferentes níveis de SLA conforme o tipo de contrato e criticidade do problema.",
-				},
-				{
-					question: "O suporte técnico inclui manutenção preventiva?",
-					answer:
-						"Sim! Nossos contratos de suporte incluem manutenção preventiva regular, monitoramento proativo, atualizações de segurança e relatórios mensais de performance. A prevenção é sempre mais eficiente que a correção.",
-				},
-				{
-					question: "Posso ter suporte remoto e presencial?",
-					answer:
-						"Claro! Oferecemos suporte remoto para a maioria dos problemas, o que garante resposta mais rápida. Quando necessário, nossa equipe técnica se desloca até sua empresa para atendimento presencial.",
-				},
-				{
-					question: "Como é feito o backup dos dados?",
-					answer:
-						"Implementamos estratégias de backup automatizado com múltiplas camadas: backup local diário, backup na nuvem e backup em localização geográfica distinta. Testamos regularmente a integridade dos backups.",
-				},
-			],
-		},
-		{
-			category: "Soluções em Nuvem",
-			icon: "☁️",
-			questions: [
-				{
-					question: "Quais são os benefícios de migrar para a nuvem?",
-					answer:
-						"Migração para nuvem oferece redução de custos (até 40%), maior segurança, escalabilidade automática, acesso remoto, backup automático, atualizações automáticas e melhor performance. Além disso, você paga apenas pelo que usa.",
-				},
-				{
-					question: "A nuvem é segura para dados sensíveis?",
-					answer:
-						"Sim! Utilizamos as melhores práticas de segurança, criptografia de dados, controle de acesso rigoroso e conformidade com LGPD. Trabalhamos com provedores certificados como AWS, Azure e Google Cloud.",
-				},
-				{
-					question: "Quanto tempo leva uma migração para nuvem?",
-					answer:
-						"Depende da complexidade do ambiente atual. Migrações simples podem ser concluídas em 2-4 semanas, enquanto ambientes mais complexos podem levar 3-6 meses. Fazemos um planejamento detalhado antes de iniciar qualquer migração.",
-				},
-				{
-					question: "Posso migrar gradualmente para a nuvem?",
-					answer:
-						"Sim! Recomendamos uma abordagem gradual, migrando aplicações menos críticas primeiro. Isso permite testar e ajustar o ambiente antes de migrar sistemas essenciais, reduzindo riscos.",
-				},
-			],
-		},
-		{
-			category: "Segurança da Informação",
-			icon: "🔒",
-			questions: [
-				{
-					question: "Como a STARK garante a segurança dos dados?",
-					answer:
-						"Implementamos múltiplas camadas de segurança: firewall avançado, antivírus corporativo, backup seguro, monitoramento 24/7, treinamento da equipe, políticas de acesso e conformidade com LGPD. A segurança é nossa prioridade.",
-				},
-				{
-					question: "O que é LGPD e como a STARK ajuda na conformidade?",
-					answer:
-						"LGPD é a Lei Geral de Proteção de Dados. Ajudamos na adequação através de auditorias, implementação de políticas de privacidade, controles de acesso, criptografia de dados e treinamento da equipe em boas práticas de proteção de dados.",
-				},
-				{
-					question: "Como funciona o monitoramento de segurança?",
-					answer:
-						"Utilizamos ferramentas de SIEM (Security Information and Event Management) que monitoram 24/7 todos os eventos de segurança, detectam ameaças em tempo real e geram alertas automáticos para nossa equipe de segurança.",
-				},
-				{
-					question: "A STARK oferece treinamento em segurança?",
-					answer:
-						"Sim! Oferecemos treinamentos regulares para sua equipe sobre conscientização em segurança, boas práticas, identificação de ameaças (phishing, malware) e procedimentos de resposta a incidentes.",
-				},
-			],
-		},
-		{
-			category: "Consultoria e Desenvolvimento",
-			icon: "🎯",
-			questions: [
-				{
-					question: "Como funciona a consultoria em tecnologia?",
-					answer:
-						"Nossa consultoria começa com uma análise detalhada do seu ambiente atual, identificação de oportunidades de melhoria e desenvolvimento de um plano estratégico personalizado. Acompanhamos a implementação e medimos os resultados.",
-				},
-				{
-					question: "A STARK desenvolve sistemas personalizados?",
-					answer:
-						"Sim! Desenvolvemos sistemas web, aplicações mobile, integrações entre sistemas, automação de processos e muito mais. Utilizamos tecnologias modernas e metodologias ágeis para garantir qualidade e prazo.",
-				},
-				{
-					question: "Quanto tempo leva o desenvolvimento de um sistema?",
-					answer:
-						"Depende da complexidade do projeto. Sistemas simples podem ser desenvolvidos em 1-3 meses, enquanto projetos mais complexos podem levar 6-12 meses. Fazemos entregas incrementais para você acompanhar o progresso.",
-				},
-				{
-					question: "Oferecem suporte pós-desenvolvimento?",
-					answer:
-						"Sim! Todos os nossos desenvolvimentos incluem suporte pós-entrega, correção de bugs, atualizações de segurança e evolução conforme suas necessidades. Oferecemos diferentes planos de manutenção.",
-				},
-			],
-		},
-		{
-			category: "Comercial e Contratos",
-			icon: "💰",
-			questions: [
-				{
-					question: "Como funciona o processo de contratação?",
-					answer:
-						"Iniciamos com uma reunião para entender suas necessidades, elaboramos uma proposta personalizada, apresentamos a solução e, após aprovação, formalizamos o contrato. Todo o processo é transparente e sem surpresas.",
-				},
-				{
-					question: "Quais são as formas de pagamento aceitas?",
-					answer:
-						"Aceitamos pagamento à vista com desconto, parcelamento em até 12x no cartão, boleto bancário, transferência bancária e para empresas, faturamento mensal conforme contrato.",
-				},
-				{
-					question: "Há garantia nos serviços prestados?",
-					answer:
-						"Sim! Oferecemos garantia de 90 dias para serviços de desenvolvimento e 30 dias para serviços de suporte técnico. Nossa política de qualidade garante sua satisfação ou devolvemos seu investimento.",
-				},
-				{
-					question: "Posso cancelar o contrato a qualquer momento?",
-					answer:
-						"Sim, mas recomendamos o período mínimo de 3 meses para que você possa avaliar os resultados. Oferecemos flexibilidade para ajustes no contrato conforme suas necessidades evoluem.",
-				},
-			],
-		},
-	];
+const FAQPage = () => {
+  const faqs = [
+    {
+      category: "Serviços Gerais",
+      icon: "🔧",
+      questions: [
+        {
+          question: "Quais serviços a STARK oferece?",
+          answer: "Oferecemos soluções completas em tecnologia: consultoria estratégica, desenvolvimento de software, migração para nuvem, cibersegurança, suporte técnico 24/7, e infraestrutura de TI. Nossa expertise abrange desde pequenas empresas até grandes corporações."
+        },
+        {
+          question: "Como funciona o processo de consultoria?",
+          answer: "Nosso processo de consultoria inclui: análise inicial da infraestrutura atual, identificação de oportunidades de melhoria, desenvolvimento de roadmap personalizado, implementação gradual das soluções e acompanhamento contínuo para garantir resultados."
+        },
+        {
+          question: "Vocês atendem empresas de todos os portes?",
+          answer: "Sim! Atendemos desde startups e pequenas empresas até grandes corporações. Nossas soluções são escaláveis e adaptáveis às necessidades específicas de cada cliente, independentemente do tamanho da empresa."
+        }
+      ]
+    },
+    {
+      category: "Cibersegurança",
+      icon: "🔒",
+      questions: [
+        {
+          question: "Que tipos de testes de segurança vocês realizam?",
+          answer: "Realizamos pentest completo (web, infraestrutura, Wi-Fi), auditoria de segurança, análise de vulnerabilidades, testes de penetração em aplicações, e avaliação de compliance com LGPD e outras regulamentações."
+        },
+        {
+          question: "Como funciona o SOC/MDR?",
+          answer: "Nosso SOC (Security Operations Center) oferece monitoramento 24/7, detecção proativa de ameaças, resposta rápida a incidentes, análise forense e relatórios detalhados. O MDR (Managed Detection and Response) inclui resposta automatizada e manual a ameaças."
+        },
+        {
+          question: "Quanto tempo leva para implementar a segurança?",
+          answer: "O tempo varia conforme a complexidade, mas geralmente: auditoria inicial (1-2 semanas), implementação de controles básicos (2-4 semanas), configuração do SOC/MDR (1-2 semanas), e treinamento da equipe (1 semana)."
+        }
+      ]
+    },
+    {
+      category: "Nuvem e Infraestrutura",
+      icon: "☁️",
+      questions: [
+        {
+          question: "Qual é o processo de migração para nuvem?",
+          answer: "Nosso processo inclui: análise da infraestrutura atual, planejamento da migração, criação de ambiente piloto, migração gradual sem downtime, testes de performance, otimização de custos e treinamento da equipe."
+        },
+        {
+          question: "Vocês trabalham com quais provedores de nuvem?",
+          answer: "Trabalhamos com AWS, Microsoft Azure, Google Cloud Platform e provedores nacionais. Escolhemos o melhor provedor baseado nas necessidades específicas de cada cliente, considerando custos, performance e requisitos regulatórios."
+        },
+        {
+          question: "Como garantem a alta disponibilidade?",
+          answer: "Implementamos redundância em múltiplas camadas: servidores duplicados, balanceamento de carga, backup automático, disaster recovery, monitoramento 24/7 e SLA de 99.9% de uptime garantido."
+        }
+      ]
+    },
+    {
+      category: "Suporte e SLA",
+      icon: "📞",
+      questions: [
+        {
+          question: "Qual é o tempo de resposta do suporte?",
+          answer: "Nosso SLA garante: resposta em 4 horas para problemas críticos, 8 horas para problemas altos, 24 horas para problemas médios, e 48 horas para consultas gerais. Disponibilidade 24/7 para clientes com contrato premium."
+        },
+        {
+          question: "Como funciona o suporte remoto?",
+          answer: "Oferecemos suporte remoto seguro através de conexões criptografadas, acesso sob demanda com aprovação prévia, sessões gravadas para auditoria, e relatórios detalhados de todas as atividades realizadas."
+        },
+        {
+          question: "Vocês oferecem treinamento para nossa equipe?",
+          answer: "Sim! Oferecemos treinamentos personalizados em segurança, gestão de nuvem, boas práticas de TI, e uso de ferramentas específicas. Incluímos certificação e material didático atualizado."
+        }
+      ]
+    },
+    {
+      category: "Preços e Contratos",
+      icon: "💰",
+      questions: [
+        {
+          question: "Como são calculados os preços?",
+          answer: "Nossos preços são baseados no escopo do projeto, complexidade técnica, tempo de implementação e nível de suporte necessário. Oferecemos modelos flexíveis: projeto único, mensalidade, ou pay-per-use para serviços de nuvem."
+        },
+        {
+          question: "Existe garantia nos serviços?",
+          answer: "Sim! Oferecemos garantia de 90 dias em implementações, SLA de disponibilidade, garantia de segurança em pentests, e suporte gratuito por 30 dias após a conclusão de projetos."
+        },
+        {
+          question: "Posso cancelar o contrato a qualquer momento?",
+          answer: "Sim, mas recomendamos aviso prévio de 30 dias para serviços contínuos. Para projetos únicos, o cancelamento pode gerar custos de desmobilização. Detalhes específicos estão no contrato de cada cliente."
+        }
+      ]
+    }
+  ];
 
-	return (
-		<div className="container mx-auto px-4 py-16">
-			{/* Hero Section */}
-			<section className="text-center mb-16">
-				<h1 className="text-5xl font-bold mb-6 text-brand-gold-500">
-					Perguntas Frequentes
-				</h1>
-				<p className="text-xl text-brand-gray-300 max-w-3xl mx-auto">
-					Encontre respostas rápidas para as principais dúvidas sobre nossos
-					serviços de tecnologia. Se não encontrar sua resposta, entre em
-					contato!
-				</p>
-			</section>
+  const contactMethods = [
+    {
+      icon: Phone,
+      title: "Telefone",
+      description: "Atendimento direto",
+      contact: "+55 11 99439-6469",
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      description: "Resposta rápida",
+      contact: "Chat direto",
+      color: "from-green-500 to-emerald-600"
+    },
+    {
+      icon: Mail,
+      title: "E-mail",
+      description: "Consultas detalhadas",
+      contact: "contato@stark.com.br",
+      color: "from-blue-500 to-cyan-600"
+    },
+    {
+      icon: Clock,
+      title: "Horário",
+      description: "Disponibilidade",
+      contact: "24/7 para emergências",
+      color: "from-purple-500 to-indigo-600"
+    }
+  ];
 
-			{/* Search Bar */}
-			<section className="mb-12">
-				<div className="max-w-2xl mx-auto">
-					<div className="relative">
-						<input
-							type="text"
-							placeholder="Digite sua dúvida aqui..."
-							className="w-full bg-brand-green-800 border border-brand-green-700 rounded-lg px-4 py-3 pr-12 text-brand-gray-200 placeholder-brand-gray-400 focus:outline-none focus:border-brand-gold-500"
-						/>
-						<div className="absolute right-3 top-3 text-brand-gray-400">🔍</div>
-					</div>
-				</div>
-			</section>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-cyan-500/20 to-indigo-600/20" />
+        <div className="absolute inset-0 bg-[url('/images/patterns/grid.svg')] opacity-10" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pb-32">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-2xl mb-8">
+              <HelpCircle className="w-10 h-10 text-white" />
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
+              Perguntas Frequentes
+            </h1>
+            
+            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+              Encontre respostas para as dúvidas mais comuns sobre nossos serviços. 
+              Se não encontrar o que procura, nossa equipe está pronta para ajudar.
+            </p>
 
-			{/* FAQ Categories */}
-			<div className="space-y-12">
-				{faqCategories.map((category, categoryIndex) => (
-					<section key={categoryIndex} className="mb-16">
-						<div className="flex items-center gap-3 mb-8">
-							<span className="text-3xl">{category.icon}</span>
-							<h2 className="text-3xl font-bold text-brand-gray-200">
-								{category.category}
-							</h2>
-						</div>
+            <div className="flex items-center justify-center space-x-2 mt-6 text-sm text-white/60">
+              <Search className="w-4 h-4" />
+              <span>Use Ctrl+F para buscar uma pergunta específica</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-						<div className="grid gap-6">
-							{category.questions.map((faq, faqIndex) => (
-								<div
-									key={faqIndex}
-									className="bg-brand-green-800 p-6 rounded-lg border-l-4 border-brand-gold-500"
-								>
-									<h3 className="text-xl font-semibold mb-4 text-brand-gold-400">
-										{faq.question}
-									</h3>
-									<p className="text-brand-gray-300 leading-relaxed">
-										{faq.answer}
-									</p>
-								</div>
-							))}
-						</div>
-					</section>
-				))}
-			</div>
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        {/* FAQ Categories */}
+        <div className="space-y-12">
+          {faqs.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+              <div className="flex items-center space-x-4 mb-8">
+                <div className="text-4xl">{category.icon}</div>
+                <h2 className="text-2xl font-bold text-white">
+                  {category.category}
+                </h2>
+              </div>
+              
+              <div className="space-y-6">
+                {category.questions.map((faq, faqIndex) => (
+                  <div
+                    key={faqIndex}
+                    className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+                  >
+                    <details className="group">
+                      <summary className="flex items-center justify-between cursor-pointer list-none">
+                        <h3 className="text-lg font-semibold text-white group-open:text-purple-300 transition-colors">
+                          {faq.question}
+                        </h3>
+                        <div className="flex items-center space-x-2">
+                          <ChevronDown className="w-5 h-5 text-white/60 group-open:rotate-180 transition-transform" />
+                        </div>
+                      </summary>
+                      
+                      <div className="mt-4 pt-4 border-t border-white/10">
+                        <p className="text-white/80 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </details>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-			{/* Still Have Questions */}
-			<section className="mt-16 bg-brand-green-800 p-12 rounded-lg text-center">
-				<h2 className="text-3xl font-bold mb-6 text-brand-gray-200">
-					Ainda tem Dúvidas?
-				</h2>
-				<p className="text-xl text-brand-gray-300 mb-8 max-w-2xl mx-auto">
-					Não encontrou a resposta que procurava? Nossa equipe está pronta para
-					esclarecer todas as suas dúvidas sobre nossos serviços.
-				</p>
-				<div className="flex flex-col sm:flex-row gap-4 justify-center">
-					<a
-						href="/contact"
-						className="bg-brand-gold-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-400 transition-colors"
-					>
-						Falar com Especialista
-					</a>
-					<a
-						href="tel:+5511999999999"
-						className="border border-brand-gold-500 text-brand-gold-500 px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-500 hover:text-black transition-colors"
-					>
-						Ligar Agora
-					</a>
-				</div>
-			</section>
+        {/* Contact Section */}
+        <div className="mt-16 bg-gradient-to-r from-purple-600/20 to-cyan-500/20 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Não encontrou sua resposta?
+            </h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              Nossa equipe de especialistas está pronta para esclarecer qualquer dúvida 
+              e ajudar você a encontrar a solução ideal para sua empresa.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {contactMethods.map((method, index) => (
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300"
+              >
+                <div className={`w-16 h-16 bg-gradient-to-br ${method.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                  <method.icon className="w-8 h-8 text-white" />
+                </div>
+                
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  {method.title}
+                </h3>
+                
+                <p className="text-white/70 text-sm mb-3">
+                  {method.description}
+                </p>
+                
+                <p className="text-white font-medium">
+                  {method.contact}
+                </p>
+              </div>
+            ))}
+          </div>
 
-			{/* Quick Links */}
-			<section className="mt-16">
-				<h2 className="text-2xl font-bold text-center mb-8 text-brand-gray-200">
-					Links Úteis
-				</h2>
-				<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-					<a
-						href="/services"
-						className="bg-brand-green-800 p-6 rounded-lg text-center hover:bg-brand-green-700 transition-colors"
-					>
-						<div className="text-3xl mb-3">🔧</div>
-						<h3 className="font-semibold text-brand-gold-400">
-							Nossos Serviços
-						</h3>
-						<p className="text-brand-gray-300 text-sm mt-2">
-							Conheça todos os serviços que oferecemos
-						</p>
-					</a>
-					<a
-						href="/portfolio"
-						className="bg-brand-green-800 p-6 rounded-lg text-center hover:bg-brand-green-700 transition-colors"
-					>
-						<div className="text-3xl mb-3">📊</div>
-						<h3 className="font-semibold text-brand-gold-400">Portfólio</h3>
-						<p className="text-brand-gray-300 text-sm mt-2">
-							Veja nossos projetos de sucesso
-						</p>
-					</a>
-					<a
-						href="/sobre"
-						className="bg-brand-green-800 p-6 rounded-lg text-center hover:bg-brand-green-700 transition-colors"
-					>
-						<div className="text-3xl mb-3">🏢</div>
-						<h3 className="font-semibold text-brand-gold-400">Sobre Nós</h3>
-						<p className="text-brand-gray-300 text-sm mt-2">
-							Conheça nossa história e valores
-						</p>
-					</a>
-					<a
-						href="/blog"
-						className="bg-brand-green-800 p-6 rounded-lg text-center hover:bg-brand-green-700 transition-colors"
-					>
-						<div className="text-3xl mb-3">📝</div>
-						<h3 className="font-semibold text-brand-gold-400">Blog</h3>
-						<p className="text-brand-gray-300 text-sm mt-2">
-							Artigos e dicas sobre tecnologia
-						</p>
-					</a>
-				</div>
-			</section>
-		</div>
-	);
-}
+          {/* Quick Actions */}
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/contato"
+              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-600 to-cyan-500 text-white rounded-xl font-medium hover:from-purple-700 hover:to-cyan-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Fale Conosco
+            </a>
+            
+            <a
+              href="/suporte"
+              className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white rounded-xl font-medium hover:bg-white/20 transition-all duration-300 border border-white/20"
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Suporte Técnico
+            </a>
+          </div>
+        </div>
+
+        {/* Testimonial */}
+        <div className="mt-16 bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+              ))}
+            </div>
+            
+            <blockquote className="text-xl text-white/90 italic mb-6 max-w-3xl mx-auto">
+              "A STARK transformou nossa infraestrutura de TI. O suporte é excepcional 
+              e sempre estão disponíveis quando precisamos. Recomendo sem hesitação!"
+            </blockquote>
+            
+            <div className="flex items-center justify-center space-x-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-left">
+                <p className="text-white font-semibold">Cliente Premium</p>
+                <p className="text-white/60 text-sm">Empresa de Tecnologia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+      </div>
+    </div>
+  );
+};
+
+export default FAQPage;
