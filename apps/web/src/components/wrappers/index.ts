@@ -1,4 +1,3 @@
-export { default as ClientLeadModal } from "./client-lead-modal";
 export { default as RevealOnScroll } from "./reveal-on-scroll";
 export { default as HashRedirector } from "./hash-redirector";
 export { default as ChatwootWidget } from "./chatwoot-widget";

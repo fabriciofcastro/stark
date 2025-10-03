@@ -7,12 +7,11 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/sections/header";
 import { JsonLd, organizationData } from "@/components/seo/structured-data";
 import {
-  ClientLeadModal,
   RevealOnScroll,
   HashRedirector,
-  CookieConsent,
   GA4,
 } from "@/components/wrappers";
+import ModernCookieConsent from "@/components/ui/modern-cookie-consent";
 import { GlobalChat } from "@/components/global/global-chat";
 import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
@@ -82,12 +81,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
-        <ClientLeadModal />
         <RevealOnScroll />
         <HashRedirector />
         <GlobalChat />
         <GA4 />
-        <CookieConsent />
+        <ModernCookieConsent />
         <Toaster />
       </body>
     </html>
