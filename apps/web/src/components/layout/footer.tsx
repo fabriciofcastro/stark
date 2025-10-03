@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
+  console.log("🚀 Footer com layout elegante carregado!");
   const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; delay: number; type: string; color: string }>>([]);
   const [isHovered, setIsHovered] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
