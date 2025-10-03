@@ -57,10 +57,10 @@ interface Message {
     processingTime?: number;
   };
   reactions?: {
-    thumbsUp: number;
-    thumbsDown: number;
-    heart: number;
-    star: number;
+    thumbsUp?: number;
+    thumbsDown?: number;
+    heart?: number;
+    star?: number;
   };
   suggestions?: string[];
 }
@@ -265,6 +265,7 @@ Estou aqui para te ajudar a encontrar a **solução tecnológica perfeita** para
   const generateContextualResponse = (option: ChatOption): Message => {
     const responses: Record<string, Message> = {
       consultoria: {
+        id: `bot-${Date.now()}-${Math.random()}`,
         type: 'bot',
         content: `🎯 **Consultoria Estratégica STARK**
 
@@ -277,6 +278,7 @@ Excelente escolha! Nossa consultoria é focada em **transformação digital** e 
 • Implementação de melhores práticas
 
 **Para começarmos, preciso conhecer melhor sua empresa.**`,
+        timestamp: new Date(),
         status: 'sent',
         options: [
           {
@@ -301,6 +303,7 @@ Excelente escolha! Nossa consultoria é focada em **transformação digital** e 
         }
       },
       suporte: {
+        id: `bot-${Date.now()}-${Math.random()}`,
         type: 'bot',
         content: `🔧 **Suporte Técnico Especializado**
 
@@ -313,6 +316,7 @@ Entendi! Nossa equipe de suporte está pronta para resolver seu problema.
 • Monitoramento proativo
 
 **Qual é a urgência do seu problema?**`,
+        timestamp: new Date(),
         status: 'sent',
         options: [
           {
@@ -344,6 +348,7 @@ Entendi! Nossa equipe de suporte está pronta para resolver seu problema.
         }
       },
       nuvem: {
+        id: `bot-${Date.now()}-${Math.random()}`,
         type: 'bot',
         content: `☁️ **Soluções em Nuvem STARK**
 
@@ -356,6 +361,7 @@ Perfeito! Migração para nuvem é uma estratégia essencial para o crescimento.
 • Segurança enterprise
 
 **Qual é sua situação atual?**`,
+        timestamp: new Date(),
         status: 'sent',
         options: [
           {
@@ -380,6 +386,7 @@ Perfeito! Migração para nuvem é uma estratégia essencial para o crescimento.
         }
       },
       seguranca: {
+        id: `bot-${Date.now()}-${Math.random()}`,
         type: 'bot',
         content: `🔒 **Cibersegurança & Compliance**
 
@@ -392,6 +399,7 @@ Segurança é fundamental! Vamos proteger seu negócio com as melhores práticas
 • Auditoria de segurança
 
 **Como posso ajudar com sua segurança?**`,
+        timestamp: new Date(),
         status: 'sent',
         options: [
           {
@@ -418,8 +426,10 @@ Segurança é fundamental! Vamos proteger seu negócio com as melhores práticas
     };
 
     return responses[option.action] || {
+      id: `bot-${Date.now()}-${Math.random()}`,
       type: 'bot',
       content: 'Entendi sua solicitação. Vou te conectar com um especialista.',
+      timestamp: new Date(),
       status: 'sent',
       metadata: {
         confidence: 0.8,
@@ -444,12 +454,14 @@ Segurança é fundamental! Vamos proteger seu negócio com as melhores práticas
 
     simulateTyping('Analisando sua mensagem...', () => {
       const response: Message = {
+        id: `bot-${Date.now()}-${Math.random()}`,
         type: 'bot',
         content: `Entendi! "${userMessage}"
 
 Para te ajudar melhor, preciso conhecer alguns detalhes sobre sua empresa e necessidades.
 
 Podemos continuar nossa conversa ou prefere agendar uma reunião estratégica?`,
+        timestamp: new Date(),
         status: 'sent',
         options: [
           {
@@ -509,7 +521,7 @@ Podemos continuar nossa conversa ou prefere agendar uma reunião estratégica?`,
   }, []);
 
   // Tratar reações
-  const handleReaction = (messageId: string, reaction: keyof Message['reactions']) => {
+  const handleReaction = (messageId: string, reaction: keyof NonNullable<Message['reactions']>) => {
     setMessages(prev => 
       prev.map(msg => 
         msg.id === messageId 
