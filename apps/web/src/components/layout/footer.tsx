@@ -509,6 +509,12 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
+          {/* TESTE VISUAL - MUDANÇAS APLICADAS */}
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-red-500 bg-yellow-300 p-4 rounded-lg">
+              🚀 MUDANÇAS APLICADAS COM SUCESSO! 🚀
+            </h3>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { 
