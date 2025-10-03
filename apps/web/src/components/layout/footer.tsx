@@ -502,109 +502,71 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* Contact Info - Elegant Text Layout */}
+        {/* Contact Info - Simple Elegant Text */}
         <motion.div
           className="mt-16 pt-12 border-t border-gradient-to-r from-cyan-500/30 via-transparent to-purple-500/30"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
-          {/* TESTE VISUAL - MUDANÇAS APLICADAS */}
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-red-500 bg-yellow-300 p-4 rounded-lg">
-              🚀 MUDANÇAS APLICADAS COM SUCESSO! 🚀
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { 
-                icon: MapPin, 
-                title: "Endereço", 
-                content: "Av. Paulista, 1000\nItaquaquecetuba - SP",
-                color: "cyan"
-              },
-              { 
-                icon: Mail, 
-                title: "E-mail", 
-                content: "contato@starkgestao.com.br",
-                color: "purple"
-              },
-              { 
-                icon: Phone, 
-                title: "Telefone", 
-                content: "(11) 99439-6469",
-                color: "emerald"
-              }
-            ].map((contact, index) => (
-              <motion.div
-                key={contact.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="group text-center"
+          <div className="text-center space-y-8">
+            <div className="space-y-2">
+              <motion.h4 
+                className="text-2xl font-bold text-white mb-2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
               >
-                <div className="flex flex-col items-center space-y-4">
-                  <motion.div 
-                    className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-600/20 border border-white/10"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.05, 1],
-                    }}
-                    transition={{ 
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: index * 0.3,
-                    }}
-                  >
-                    <motion.div
-                      animate={{
-                        y: [0, -8, 0],
-                        rotate: [0, 10, -10, 0],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.5,
-                      }}
-                    >
-                      <contact.icon className="h-8 w-8 text-cyan-400" />
-                    </motion.div>
-                  </motion.div>
-                  
-                  <motion.h5 
-                    className="text-white font-bold text-xl"
-                    animate={{
-                      color: ["#ffffff", "#06b6d4", "#ffffff"],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: index * 0.2,
-                    }}
-                  >
-                    {contact.title}
-                  </motion.h5>
-                  
-                  <motion.p 
-                    className="text-gray-300 text-base leading-relaxed whitespace-pre-line max-w-xs"
-                    animate={{
-                      opacity: [0.7, 1, 0.7],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: index * 0.4,
-                    }}
-                  >
-                    {contact.content}
-                  </motion.p>
-                </div>
-              </motion.div>
-            ))}
+                Endereço
+              </motion.h4>
+              <motion.p 
+                className="text-gray-300 text-lg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
+              >
+                Av. Paulista, 1000<br />
+                Itaquaquecetuba - SP
+              </motion.p>
+            </div>
+
+            <div className="space-y-2">
+              <motion.h4 
+                className="text-2xl font-bold text-white mb-2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 1.0 }}
+              >
+                E-mail
+              </motion.h4>
+              <motion.p 
+                className="text-gray-300 text-lg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 1.1 }}
+              >
+                contato@starkgestao.com.br
+              </motion.p>
+            </div>
+
+            <div className="space-y-2">
+              <motion.h4 
+                className="text-2xl font-bold text-white mb-2"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 1.2 }}
+              >
+                Telefone
+              </motion.h4>
+              <motion.p 
+                className="text-gray-300 text-lg"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 1.3 }}
+              >
+                (11) 99439-6469
+              </motion.p>
+            </div>
           </div>
         </motion.div>
         {/* Legal Links - Holographic */}
