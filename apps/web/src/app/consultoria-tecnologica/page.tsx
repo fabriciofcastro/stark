@@ -1,504 +1,593 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-	title: "Consultoria Tecnológica Estratégica | STARK Solutions",
-	description:
-		"Consultoria tecnológica estratégica para transformação digital. Análise de processos, otimização de TI, planejamento estratégico e implementação de soluções inovadoras.",
-	keywords:
-		"consultoria tecnológica, transformação digital, estratégia TI, otimização processos, planejamento tecnológico, inovação empresarial",
-	robots: {
-		index: true,
-		follow: true,
-	},
-};
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { 
+  Brain, 
+  Zap, 
+  Target, 
+  Rocket, 
+  Shield, 
+  Cpu, 
+  Network, 
+  Database,
+  ArrowRight,
+  CheckCircle,
+  Star,
+  Sparkles,
+  Lightbulb,
+  TrendingUp,
+  Users,
+  Globe,
+  Lock,
+  Code,
+  Cloud,
+  BarChart3,
+  Clock,
+  Award,
+  ChevronRight,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX
+} from "lucide-react";
 
 export default function ConsultoriaTecnologica() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const [neuralParticles, setNeuralParticles] = useState<Array<{ 
+    id: number; 
+    x: number; 
+    y: number; 
+    vx: number; 
+    vy: number; 
+    connections: number[];
+    opacity: number;
+  }>>([]);
+  const [floatingElements, setFloatingElements] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    size: number;
+    speed: number;
+    direction: number;
+  }>>([]);
+  
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Neural Network Particles Animation
+  useEffect(() => {
+    let animationFrameId: number;
+    let isAnimating = false;
+
+    const generateNeuralNetwork = () => {
+      const particles = Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        connections: [] as number[],
+        opacity: Math.random() * 0.6 + 0.2
+      }));
+
+      // Create neural connections
+      particles.forEach((particle, i) => {
+        const connections: number[] = [];
+        for (let j = 0; j < particles.length; j++) {
+          if (i !== j && Math.random() > 0.7) {
+            connections.push(j);
+          }
+        }
+        particle.connections = connections;
+      });
+
+      setNeuralParticles(particles);
+    };
+
+    const generateFloatingElements = () => {
+      const elements = Array.from({ length: 15 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 20 + 10,
+        speed: Math.random() * 0.5 + 0.2,
+        direction: Math.random() * 360
+      }));
+      setFloatingElements(elements);
+    };
+
+    const animateParticles = () => {
+      if (!isAnimating) return;
+      
+      setNeuralParticles(prev => prev.map(particle => ({
+        ...particle,
+        x: (particle.x + particle.vx + 100) % 100,
+        y: (particle.y + particle.vy + 100) % 100,
+        opacity: Math.sin(Date.now() * 0.001 + particle.id) * 0.3 + 0.4
+      })));
+
+      setFloatingElements(prev => prev.map(element => ({
+        ...element,
+        x: (element.x + Math.cos(element.direction * Math.PI / 180) * element.speed + 100) % 100,
+        y: (element.y + Math.sin(element.direction * Math.PI / 180) * element.speed + 100) % 100,
+        direction: element.direction + 0.5
+      })));
+
+      animationFrameId = requestAnimationFrame(animateParticles);
+    };
+
+    // Iniciar animação apenas quando visível
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isAnimating = entry.isIntersecting;
+        if (isAnimating) {
+          animationFrameId = requestAnimationFrame(animateParticles);
+        } else if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    generateNeuralNetwork();
+    generateFloatingElements();
+    const interval = setInterval(generateNeuralNetwork, 30000);
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
 	const services = [
 		{
 			title: "Auditoria Tecnológica",
-			icon: "🔍",
-			description:
-				"Análise completa da infraestrutura atual e identificação de oportunidades",
-			features: [
-				"Mapeamento da infraestrutura atual",
-				"Análise de vulnerabilidades de segurança",
-				"Identificação de gargalos de performance",
-				"Relatório detalhado com recomendações",
-			],
+			icon: Brain,
+			description: "Análise completa da infraestrutura atual e identificação de oportunidades",
+			features: ["Mapeamento da infraestrutura atual", "Análise de vulnerabilidades de segurança", "Identificação de gargalos de performance", "Relatório detalhado com recomendações"],
+			color: "from-blue-500 to-cyan-500"
 		},
 		{
 			title: "Planejamento Estratégico",
-			icon: "📋",
-			description:
-				"Desenvolvimento de roadmap tecnológico alinhado aos objetivos de negócio",
-			features: [
-				"Roadmap de TI de 3-5 anos",
-				"Alinhamento com estratégia empresarial",
-				"Priorização de investimentos",
-				"Cronograma de implementação",
-			],
+			icon: Target,
+			description: "Desenvolvimento de roadmap tecnológico alinhado aos objetivos de negócio",
+			features: ["Roadmap de TI de 3-5 anos", "Alinhamento com estratégia empresarial", "Priorização de investimentos", "Cronograma de implementação"],
+			color: "from-purple-500 to-pink-500"
 		},
 		{
 			title: "Transformação Digital",
-			icon: "🚀",
-			description:
-				"Modernização de processos e implementação de tecnologias inovadoras",
-			features: [
-				"Automação de processos",
-				"Migração para soluções modernas",
-				"Capacitação de equipes",
-				"Acompanhamento de resultados",
-			],
+			icon: Rocket,
+			description: "Modernização de processos e implementação de tecnologias inovadoras",
+			features: ["Automação de processos", "Migração para soluções modernas", "Capacitação de equipes", "Acompanhamento de resultados"],
+			color: "from-orange-500 to-red-500"
 		},
 		{
 			title: "Governança de TI",
-			icon: "⚖️",
-			description:
-				"Estruturação de políticas e processos para gestão eficiente de TI",
-			features: [
-				"Políticas de segurança e uso",
-				"Processos de aprovação e controle",
-				"Métricas de performance",
-				"Compliance e conformidade",
-			],
-		},
+			icon: Shield,
+			description: "Estruturação de políticas e processos para gestão eficiente de TI",
+			features: ["Políticas de segurança e uso", "Processos de aprovação e controle", "Métricas de performance", "Compliance e conformidade"],
+			color: "from-green-500 to-emerald-500"
+		}
 	];
 
-	const methodologies = [
-		{
-			phase: "1. Análise",
-			title: "Diagnóstico Completo",
-			description:
-				"Mapeamos sua infraestrutura atual, processos e necessidades",
-			deliverables: [
-				"Auditoria técnica detalhada",
-				"Análise de gaps tecnológicos",
-				"Benchmarking com mercado",
-				"Relatório executivo",
-			],
-		},
-		{
-			phase: "2. Estratégia",
-			title: "Planejamento Estratégico",
-			description: "Desenvolvemos um plano personalizado para seus objetivos",
-			deliverables: [
-				"Roadmap tecnológico",
-				"Análise de ROI",
-				"Cronograma de implementação",
-				"Plano de investimentos",
-			],
-		},
-		{
-			phase: "3. Implementação",
-			title: "Execução Orientada",
-			description: "Acompanhamos a implementação garantindo o sucesso",
-			deliverables: [
-				"Gestão de projetos",
-				"Suporte na implementação",
-				"Treinamento de equipes",
-				"Acompanhamento semanal",
-			],
-		},
-		{
-			phase: "4. Otimização",
-			title: "Melhoria Contínua",
-			description: "Monitoramos resultados e otimizamos continuamente",
-			deliverables: [
-				"Métricas de performance",
-				"Relatórios mensais",
-				"Ajustes e melhorias",
-				"Suporte contínuo",
-			],
-		},
-	];
-
-	const benefits = [
-		{
-			title: "Redução de Custos",
-			description:
-				"Identificação de oportunidades de economia e otimização de investimentos",
-			icon: "💰",
-			percentage: "30%",
-		},
-		{
-			title: "Aumento de Produtividade",
-			description:
-				"Automação de processos e eliminação de gargalos operacionais",
-			icon: "⚡",
-			percentage: "40%",
-		},
-		{
-			title: "Melhoria de Segurança",
-			description:
-				"Implementação de políticas e controles de segurança robustos",
-			icon: "🔒",
-			percentage: "95%",
-		},
-		{
-			title: "Inovação Tecnológica",
-			description: "Adoção de tecnologias modernas e competitivas",
-			icon: "🚀",
-			percentage: "200%",
-		},
-	];
 
 	return (
-		<div className="container mx-auto px-4 py-16">
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
+			{/* Animated Background */}
+			<div className="fixed inset-0 overflow-hidden pointer-events-none">
+				{/* Neural Network Background */}
+				<svg className="absolute inset-0 w-full h-full opacity-20">
+					{neuralParticles.map((particle) => 
+						particle.connections.map((connectionId) => {
+							const connection = neuralParticles[connectionId];
+							if (!connection) return null;
+							
+							const distance = Math.sqrt(
+								Math.pow(particle.x - connection.x, 2) + 
+								Math.pow(particle.y - connection.y, 2)
+							);
+							
+							if (distance < 40) {
+								return (
+									<motion.line
+										key={`${particle.id}-${connectionId}`}
+										x1={`${particle.x}%`}
+										y1={`${particle.y}%`}
+										x2={`${connection.x}%`}
+										y2={`${connection.y}%`}
+										stroke="url(#neuralGradient)"
+										strokeWidth="0.5"
+										opacity={particle.opacity}
+										initial={{ pathLength: 0 }}
+										animate={{ pathLength: [0, 1, 0] }}
+										transition={{
+											duration: 4,
+											repeat: Infinity,
+											ease: "easeInOut",
+											delay: Math.random() * 2
+										}}
+									/>
+								);
+							}
+							return null;
+						})
+					)}
+					
+					<defs>
+						<linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+							<stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.4" />
+							<stop offset="100%" stopColor="#ec4899" stopOpacity="0.8" />
+						</linearGradient>
+					</defs>
+				</svg>
+
+				{/* Floating Tech Icons */}
+				{[Cpu, Network, Database, Lock, Rocket, Code, Cloud, Brain].map((Icon, index) => (
+					<motion.div
+						key={index}
+						className="absolute text-white/10"
+						style={{
+							left: `${10 + (index * 12)}%`,
+							top: `${20 + (index % 3) * 30}%`,
+						}}
+						animate={{
+							y: [0, -30, 0],
+							rotate: [0, 360],
+							scale: [0.8, 1.2, 0.8],
+						}}
+						transition={{
+							duration: 10 + index * 2,
+							repeat: Infinity,
+							ease: "easeInOut",
+							delay: index * 0.5,
+						}}
+					>
+						<Icon size={32} />
+					</motion.div>
+				))}
+
+				{/* Floating Elements */}
+				{floatingElements.map((element) => (
+					<motion.div
+						key={element.id}
+						className="absolute rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-sm"
+						style={{
+							left: `${element.x}%`,
+							top: `${element.y}%`,
+							width: `${element.size}px`,
+							height: `${element.size}px`,
+						}}
+						animate={{
+							scale: [1, 1.5, 1],
+							opacity: [0.3, 0.8, 0.3],
+						}}
+						transition={{
+							duration: 3 + Math.random() * 2,
+							repeat: Infinity,
+							ease: "easeInOut",
+						}}
+					/>
+				))}
+			</div>
+
 			{/* Hero Section */}
-			<section className="text-center mb-16">
-				<h1 className="text-5xl font-bold mb-6 text-brand-gold-500">
-					Consultoria Tecnológica Estratégica
-				</h1>
-				<p className="text-xl text-brand-gray-300 max-w-3xl mx-auto">
-					Transforme sua empresa através da tecnologia. Nossa consultoria
-					estratégica ajuda você a tomar decisões inteligentes, otimizar
-					processos e implementar soluções inovadoras.
-				</p>
-			</section>
-
-			{/* Services Overview */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Nossos Serviços de Consultoria
-				</h2>
-				<div className="grid md:grid-cols-2 gap-8">
-					{services.map((service, index) => (
-						<div key={index} className="bg-brand-green-800 p-8 rounded-lg">
-							<div className="flex items-center gap-4 mb-6">
-								<span className="text-4xl">{service.icon}</span>
-								<div>
-									<h3 className="text-xl font-bold text-brand-gold-400">
-										{service.title}
-									</h3>
-									<p className="text-brand-gray-300 text-sm">
-										{service.description}
-									</p>
-								</div>
-							</div>
-							<ul className="space-y-3">
-								{service.features.map((feature, featureIndex) => (
-									<li
-										key={featureIndex}
-										className="flex items-start gap-2 text-brand-gray-300"
-									>
-										<span className="text-brand-green-500 mt-1">✓</span>
-										<span>{feature}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					))}
-				</div>
-			</section>
-
-			{/* Methodologies */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Nossa Metodologia
-				</h2>
-				<div className="space-y-8">
-					{methodologies.map((method, index) => (
-						<div key={index} className="grid lg:grid-cols-3 gap-8 items-center">
-							<div className="lg:col-span-1">
-								<div className="bg-brand-gold-500 text-black p-6 rounded-lg text-center">
-									<div className="text-2xl font-bold mb-2">{method.phase}</div>
-									<h3 className="text-xl font-bold">{method.title}</h3>
-								</div>
-							</div>
-							<div className="lg:col-span-2">
-								<div className="bg-brand-green-800 p-6 rounded-lg">
-									<p className="text-brand-gray-300 mb-4">
-										{method.description}
-									</p>
-									<h4 className="font-semibold mb-3 text-brand-gold-400">
-										Principais Entregas:
-									</h4>
-									<ul className="grid md:grid-cols-2 gap-2">
-										{method.deliverables.map(
-											(deliverable, deliverableIndex) => (
-												<li
-													key={deliverableIndex}
-													className="flex items-start gap-2 text-brand-gray-300 text-sm"
-												>
-													<span className="text-brand-green-500 mt-1">•</span>
-													<span>{deliverable}</span>
-												</li>
-											),
-										)}
-									</ul>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-
-			{/* Benefits */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Resultados Esperados
-				</h2>
-				<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{benefits.map((benefit, index) => (
-						<div
-							key={index}
-							className="bg-brand-green-800 p-6 rounded-lg text-center"
+			<section 
+				ref={heroRef}
+				className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+			>
+				<motion.div 
+					className="max-w-6xl mx-auto text-center"
+					style={{ y, opacity }}
+				>
+					<motion.div
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+					>
+						{/* Animated Logo */}
+						<motion.div
+							className="inline-flex items-center justify-center w-32 h-32 mb-8 rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 shadow-2xl"
+							animate={{
+								x: [0, 10, -10, 0],
+								y: [0, -5, 0],
+								scale: [1, 1.05, 1],
+								boxShadow: [
+									"0 0 30px rgba(6, 182, 212, 0.4)",
+									"0 0 50px rgba(139, 92, 246, 0.7)",
+									"0 0 30px rgba(6, 182, 212, 0.4)",
+								],
+							}}
+							transition={{
+								x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+								y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+								scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+								boxShadow: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+							}}
 						>
-							<div className="text-4xl mb-4">{benefit.icon}</div>
-							<div className="text-3xl font-bold text-brand-gold-500 mb-2">
-								{benefit.percentage}
-							</div>
-							<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-								{benefit.title}
-							</h3>
-							<p className="text-brand-gray-300 text-sm">
-								{benefit.description}
-							</p>
-						</div>
-					))}
-				</div>
-			</section>
+							<Brain className="w-16 h-16 text-white" />
+						</motion.div>
 
-			{/* Case Study */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Case de Sucesso
-				</h2>
-				<div className="bg-brand-green-800 p-8 rounded-lg">
-					<div className="grid lg:grid-cols-2 gap-8">
-						<div>
-							<h3 className="text-2xl font-bold mb-4 text-brand-gold-400">
-								Transformação Digital - Indústria Metalúrgica
-							</h3>
-							<div className="space-y-4 text-brand-gray-300">
-								<p>
-									<strong className="text-brand-gold-400">Desafio:</strong>
-									Sistema legado causando lentidão e perda de competitividade.
-								</p>
-								<p>
-									<strong className="text-brand-gold-400">Solução:</strong>
-									Auditoria completa, planejamento estratégico e migração para
-									sistema moderno.
-								</p>
-								<p>
-									<strong className="text-brand-gold-400">Resultados:</strong>
-								</p>
-								<ul className="list-disc pl-6 space-y-2">
-									<li>40% aumento na produtividade</li>
-									<li>60% redução no tempo de processos</li>
-									<li>30% economia de custos operacionais</li>
-									<li>ROI de 300% em 18 meses</li>
-								</ul>
-							</div>
-						</div>
-						<div className="bg-brand-green-700 p-6 rounded-lg">
-							<div className="text-center mb-6">
-								<div className="text-6xl mb-4">💬</div>
-								<h4 className="text-xl font-bold text-brand-gold-400">
-									Depoimento do Cliente
-								</h4>
-							</div>
-							<blockquote className="text-brand-gray-300 italic mb-6 text-lg">
-								"A consultoria da STARK foi fundamental para nossa transformação
-								digital. Eles não apenas modernizaram nossa TI, mas
-								transformaram completamente nossa operação. Os resultados
-								superaram todas as expectativas."
-							</blockquote>
-							<div className="text-center">
-								<div className="font-semibold text-brand-gold-400">
-									Carlos Silva, CEO
-								</div>
-								<div className="text-brand-gray-400 text-sm">
-									Indústria Metalúrgica São Paulo
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			{/* Technologies */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Tecnologias que Trabalhamos
-				</h2>
-				<div className="grid md:grid-cols-3 gap-8">
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Cloud Computing
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• AWS (Amazon Web Services)</li>
-							<li>• Microsoft Azure</li>
-							<li>• Google Cloud Platform</li>
-							<li>• Estratégias de migração</li>
-						</ul>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Automação e IA
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• RPA (Robotic Process Automation)</li>
-							<li>• Machine Learning</li>
-							<li>• Inteligência Artificial</li>
-							<li>• Chatbots e Assistência Virtual</li>
-						</ul>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Modernização
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• Microserviços</li>
-							<li>• DevOps e CI/CD</li>
-							<li>• Containers (Docker, Kubernetes)</li>
-							<li>• APIs e Integrações</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-
-			{/* Pricing */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Investimento em Consultoria
-				</h2>
-				<div className="grid md:grid-cols-3 gap-8">
-					<div className="bg-brand-green-800 p-8 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Auditoria Básica
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							R$ 8.000
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Análise de infraestrutura atual</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Identificação de vulnerabilidades</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Relatório executivo detalhado</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Recomendações prioritárias</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
+						<motion.h1
+							className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent"
+							initial={{ opacity: 0, y: 30 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
 						>
-							Solicitar Orçamento
-						</a>
-					</div>
-					<div className="bg-brand-green-800 p-8 rounded-lg border-2 border-brand-gold-500 relative">
-						<div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-							<span className="bg-brand-gold-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
-								Mais Procurado
+							Consultoria
+						</motion.h1>
+
+						<motion.h2
+							className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+							initial={{ opacity: 0, y: 30 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.4 }}
+						>
+							Tecnológica
+						</motion.h2>
+
+						<motion.p
+							className="text-2xl sm:text-3xl text-gray-300 mb-12 max-w-5xl mx-auto leading-relaxed"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.6 }}
+						>
+							Transforme sua empresa através da{" "}
+							<span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold">
+								tecnologia estratégica
 							</span>
-						</div>
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Planejamento Estratégico
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							R$ 25.000
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Auditoria completa + Planejamento</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Roadmap de 3-5 anos</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Análise de ROI detalhada</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Workshops com stakeholders</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Acompanhamento por 6 meses</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
+						</motion.p>
+
+						{/* CTA Buttons */}
+						<motion.div
+							className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.8 }}
 						>
-							Solicitar Orçamento
-						</a>
-					</div>
-					<div className="bg-brand-green-800 p-8 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Transformação Completa
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							Sob Consulta
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Consultoria completa + Implementação</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Gestão de projeto dedicada</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Capacitação de equipes</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Suporte pós-implementação</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Garantia de resultados</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
-						>
-							Falar com Consultor
-						</a>
+							<motion.button
+								className="px-10 py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg group"
+								whileHover={{ scale: 1.05, y: -3 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+								Agendar Consultoria Gratuita
+								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+							</motion.button>
+							
+							<motion.button
+								className="px-10 py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3 text-lg group"
+								whileHover={{ scale: 1.05, y: -3 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
+								Ver Apresentação
+							</motion.button>
+						</motion.div>
+					</motion.div>
+				</motion.div>
+			</section>
+
+			{/* Services Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Nossos Serviços
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{services.map((service, index) => {
+							const IconComponent = service.icon;
+							return (
+								<motion.div
+									key={index}
+									className="group relative"
+									initial={{ opacity: 0, y: 50 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.8, delay: index * 0.1 }}
+									viewport={{ once: true }}
+									whileHover={{ y: -10, scale: 1.02 }}
+								>
+									<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+										{/* Gradient Overlay */}
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+										
+										{/* Icon */}
+										<motion.div
+											className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${service.color} mb-6`}
+											whileHover={{ 
+												scale: 1.2, 
+												rotate: 360,
+												boxShadow: "0 0 30px rgba(0,0,0,0.3)"
+											}}
+											transition={{ duration: 0.4, ease: "easeOut" }}
+										>
+											<IconComponent className="w-8 h-8 text-white" />
+										</motion.div>
+
+										{/* Content */}
+										<div className="relative z-10">
+											<h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors">
+												{service.title}
+											</h3>
+											
+											<p className="text-gray-300 mb-6 leading-relaxed">
+												{service.description}
+											</p>
+
+											{/* Features */}
+											<ul className="space-y-3">
+												{service.features.map((feature, featureIndex) => (
+													<motion.li
+														key={featureIndex}
+														className="flex items-start gap-3 text-gray-300 text-sm"
+														initial={{ opacity: 0, x: -20 }}
+														whileInView={{ opacity: 1, x: 0 }}
+														transition={{ duration: 0.5, delay: featureIndex * 0.1 }}
+														viewport={{ once: true }}
+													>
+														<CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+														<span>{feature}</span>
+													</motion.li>
+												))}
+											</ul>
+										</div>
+
+										{/* Hover Glow */}
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+									</div>
+								</motion.div>
+							);
+						})}
 					</div>
 				</div>
 			</section>
 
-			{/* CTA */}
-			<section className="text-center bg-brand-green-800 p-12 rounded-lg">
-				<h2 className="text-3xl font-bold mb-6 text-brand-gray-200">
-					Pronto para Transformar sua Empresa?
-				</h2>
-				<p className="text-xl text-brand-gray-300 mb-8 max-w-2xl mx-auto">
-					Agende uma consultoria gratuita e descubra como a tecnologia pode
-					impulsionar o crescimento do seu negócio.
-				</p>
-				<div className="flex flex-col sm:flex-row gap-4 justify-center">
-					<a
-						href="/contact"
-						className="bg-brand-gold-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-400 transition-colors"
+			{/* Results Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
 					>
-						Agendar Consultoria Gratuita
-					</a>
-					<a
-						href="/portfolio"
-						className="border border-brand-gold-500 text-brand-gold-500 px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-500 hover:text-black transition-colors"
+						Resultados Comprovados
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{[
+							{ icon: TrendingUp, label: "Redução de Custos", value: "30%", color: "from-green-500 to-emerald-500" },
+							{ icon: Zap, label: "Aumento de Produtividade", value: "40%", color: "from-yellow-500 to-orange-500" },
+							{ icon: Shield, label: "Melhoria de Segurança", value: "95%", color: "from-red-500 to-pink-500" },
+							{ icon: Rocket, label: "Inovação Tecnológica", value: "200%", color: "from-purple-500 to-indigo-500" }
+						].map((stat, index) => (
+							<motion.div
+								key={stat.label}
+								className="relative group"
+								initial={{ opacity: 0, y: 50 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, delay: index * 0.1 }}
+								viewport={{ once: true }}
+								whileHover={{ y: -10, scale: 1.05 }}
+							>
+								<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 text-center h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+									<div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+									
+									<div className="relative z-10">
+										<motion.div
+											className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${stat.color} mb-6`}
+											animate={{
+												scale: [1, 1.15, 1],
+												opacity: [0.7, 1, 0.7],
+											}}
+											transition={{
+												duration: 2.5,
+												repeat: Infinity,
+												ease: "easeInOut",
+											}}
+										>
+											<stat.icon className="w-8 h-8 text-white" />
+										</motion.div>
+										
+										<motion.div
+											className="text-5xl font-bold text-white mb-3"
+											initial={{ scale: 0 }}
+											whileInView={{ scale: 1 }}
+											transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+											viewport={{ once: true }}
+										>
+											{stat.value}
+										</motion.div>
+										
+										<div className="text-gray-300 font-medium text-lg">
+											{stat.label}
+										</div>
+									</div>
+
+									<div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+								</div>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* CTA Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-4xl mx-auto text-center">
+					<motion.div
+						className="relative rounded-3xl border border-white/10 bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-xl p-12"
+						initial={{ opacity: 0, y: 50 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
 					>
-						Ver Cases de Sucesso
-					</a>
+						<motion.h2
+							className="text-5xl sm:text-6xl font-bold text-white mb-6"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
+							viewport={{ once: true }}
+						>
+							Pronto para Transformar?
+						</motion.h2>
+						
+						<motion.p
+							className="text-2xl text-gray-300 mb-10 max-w-3xl mx-auto"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.4 }}
+							viewport={{ once: true }}
+						>
+							Agende uma consultoria gratuita e descubra como a tecnologia pode impulsionar o crescimento do seu negócio.
+						</motion.p>
+						
+						<motion.div
+							className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.6 }}
+							viewport={{ once: true }}
+						>
+							<motion.button
+								className="px-10 py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg group"
+								whileHover={{ scale: 1.05, y: -3 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+								Agendar Consultoria Gratuita
+								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+							</motion.button>
+							
+							<motion.button
+								className="px-10 py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3 text-lg group"
+								whileHover={{ scale: 1.05, y: -3 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<Users className="w-6 h-6 group-hover:scale-110 transition-transform" />
+								Falar com Especialista
+							</motion.button>
+						</motion.div>
+					</motion.div>
 				</div>
 			</section>
 		</div>
