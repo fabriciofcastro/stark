@@ -350,8 +350,7 @@ export function useChat({
 
       // Atualizar sessão
       await updateSession({ 
-        status: 'escalated',
-        mode: 'human',
+        status: 'escalated' as any,
       });
 
       if (onEscalation) {

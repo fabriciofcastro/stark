@@ -18,7 +18,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { CHAT_COLORS, CHAT_TYPOGRAPHY, CHAT_EFFECTS, CHAT_CONFIG } from './design-system';
+import { CHAT_COLORS, CHAT_TYPOGRAPHY, CHAT_EFFECTS, CHAT_CONFIG, CHAT_SPACING, CHAT_ACCESSIBILITY } from './design-system';
 import { MessageBubble } from './message-bubble';
 import { ChatInput } from './chat-input';
 import { ChatHeader } from './chat-header';
@@ -161,7 +161,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           id: Date.now().toString(),
           sessionId: session?.id || '',
           reason: 'Usuário solicitou falar com especialista',
-          priority: 'normal',
+          priority: 'normal' as any,
           status: 'pending',
           createdAt: new Date().toISOString(),
         });
@@ -194,7 +194,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
   const getWidgetStyles = () => {
     const baseStyles = {
       position: 'fixed' as const,
-      zIndex: CHAT_CONFIG.accessibility.zIndex.chat,
+      zIndex: CHAT_ACCESSIBILITY.zIndex.chat,
       fontFamily: CHAT_TYPOGRAPHY.fontFamily.sans.join(', '),
       fontSize: CHAT_TYPOGRAPHY.fontSize.base,
       lineHeight: CHAT_TYPOGRAPHY.lineHeight.normal,
@@ -239,9 +239,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             "hover:shadow-glow transition-all duration-300",
             "focus:outline-none focus:ring-4 focus:ring-primary-500/50",
             "flex items-center justify-center",
-            finalConfig.position === 'bottom-left' && "left-6 right-auto",
-            finalConfig.position === 'top-right' && "top-6 bottom-auto",
-            finalConfig.position === 'top-left' && "top-6 left-6 right-auto bottom-auto",
+            (finalConfig.position as any) === 'bottom-left' && "left-6 right-auto",
+            (finalConfig.position as any) === 'top-right' && "top-6 bottom-auto",
+            (finalConfig.position as any) === 'top-left' && "top-6 left-6 right-auto bottom-auto",
           )}
           aria-label="Abrir chat"
         >
@@ -285,19 +285,21 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             style={getWidgetStyles()}
           >
             {/* Header */}
-            <ChatHeader
-              session={session}
-              user={session ? users[session.userId] : undefined}
-              onMinimize={minimizeWidget}
-              onClose={closeWidget}
-              onEscalate={() => handleSuggestionClick({ 
-                id: 'escalate', 
-                text: 'Falar com especialista', 
-                action: 'escalate' 
-              })}
-              showAvatar={finalConfig.showAvatar}
-              showStatus={finalConfig.showStatus}
-            />
+            {session && (
+              <ChatHeader
+                session={session}
+                user={users[session.userId]}
+                onMinimize={minimizeWidget}
+                onClose={closeWidget}
+                onEscalate={() => handleSuggestionClick({ 
+                  id: 'escalate', 
+                  text: 'Falar com especialista', 
+                  action: 'escalate' 
+                })}
+                showAvatar={finalConfig.showAvatar}
+                showStatus={finalConfig.showStatus}
+              />
+            )}
 
             {/* Mensagens */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800">
@@ -390,9 +392,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             "fixed bottom-6 right-6 z-50",
             "bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700",
             "p-3 cursor-pointer",
-            finalConfig.position === 'bottom-left' && "left-6 right-auto",
-            finalConfig.position === 'top-right' && "top-6 bottom-auto",
-            finalConfig.position === 'top-left' && "top-6 left-6 right-auto bottom-auto",
+            (finalConfig.position as any) === 'bottom-left' && "left-6 right-auto",
+            (finalConfig.position as any) === 'top-right' && "top-6 bottom-auto",
+            (finalConfig.position as any) === 'top-left' && "top-6 left-6 right-auto bottom-auto",
           )}
           onClick={toggleWidget}
         >

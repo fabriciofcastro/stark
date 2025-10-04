@@ -148,7 +148,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
             )}
           >
             <span>{emoji}</span>
-            <span>{count}</span>
+            <span>{String(count)}</span>
           </button>
         ))}
       </div>

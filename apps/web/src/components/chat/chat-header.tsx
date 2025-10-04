@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CHAT_TYPOGRAPHY, CHAT_COLORS } from './design-system';
-import type { ChatHeaderProps, ChatSession, User } from './types';
+import type { ChatHeaderProps, ChatSession, User as ChatUser } from './types';
 
 /**
  * ChatHeader - Cabeçalho do widget de chat profissional

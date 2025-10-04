@@ -14,9 +14,12 @@ import {
 import { AdvancedSEOProvider } from "@/components/seo/advanced-seo-provider";
 import { generatePerformanceMeta, generateSecurityMeta } from "@/lib/seo-advanced";
 import ModernCookieConsent from "@/components/ui/modern-cookie-consent";
-import { ChatWidget } from "@/components/chat";
+import { ChatProvider } from "@/components/chat";
 import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
+import { AdvancedPerformanceOptimizer } from "@/components/performance/advanced-performance";
+import { FloatingSocialShare, FloatingSocialFollow } from "@/components/social";
+import { StrategicCTA } from "@/components/cta";
 
 export const metadata = {
   title:
@@ -85,34 +88,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Footer />
         <RevealOnScroll />
         <HashRedirector />
-        <ChatWidget
-          config={{
-            theme: 'stark',
-            position: 'bottom-right',
-            size: 'md',
-            autoOpen: false,
-            showAvatar: true,
-            showTyping: true,
-            showStatus: true,
-            enableSounds: true,
-            enableNotifications: true,
-            maxMessages: 50,
-            apiEndpoint: '/api/v1/chat',
-            websocketEndpoint: '/api/v1/chat/ws',
-          }}
-          onSessionStart={(session) => {
-            console.log('Chat session started:', session.id);
-          }}
-          onSessionEnd={(session) => {
-            console.log('Chat session ended:', session.id);
-          }}
-          onEscalation={(ticket) => {
-            console.log('Escalation ticket created:', ticket.id);
-          }}
-        />
+        <ChatProvider />
         <GA4 />
         <ModernCookieConsent />
         <Toaster />
+        <AdvancedPerformanceOptimizer />
+        <FloatingSocialShare />
+        <FloatingSocialFollow />
+        <StrategicCTA variant="floating" />
       </body>
     </html>
   );

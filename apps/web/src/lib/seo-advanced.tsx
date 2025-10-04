@@ -452,3 +452,4 @@ export function generateSitemapData(): Array<{
     priority: page.priority,
   }));
 }
+

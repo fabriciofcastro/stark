@@ -30,6 +30,7 @@ import {
   Atom,
   CircuitBoard
 } from "lucide-react";
+import { SocialFollowButtons } from "@/components/social";
 
 const Footer = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -47,23 +48,26 @@ const Footer = () => {
   const { scrollYProgress } = useScroll();
   const scrollPercentage = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 1]);
 
-  // Neural Network Particles
+  // Neural Network Particles - OTIMIZADO para performance
   useEffect(() => {
+    let animationFrameId: number;
+    let isAnimating = false;
+
     const generateNeuralNetwork = () => {
-      const particles = Array.from({ length: 15 }, (_, i) => ({
+      const particles = Array.from({ length: 12 }, (_, i) => ({ // Reduzido de 15 para 12
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 0.3, // Reduzido de 0.5 para 0.3
+        vy: (Math.random() - 0.5) * 0.3,
         connections: [] as number[]
       }));
 
-      // Create neural connections
+      // Create neural connections - otimizado
       particles.forEach((particle, i) => {
         const connections: number[] = [];
         for (let j = 0; j < particles.length; j++) {
-          if (i !== j && Math.random() > 0.7) {
+          if (i !== j && Math.random() > 0.75) { // Aumentado de 0.7 para 0.75
             connections.push(j);
           }
         }
@@ -73,23 +77,45 @@ const Footer = () => {
       setNeuralParticles(particles);
     };
 
-    generateNeuralNetwork();
-    const interval = setInterval(generateNeuralNetwork, 20000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Animate neural particles
-  useEffect(() => {
     const animateParticles = () => {
+      if (!isAnimating) return;
+      
       setNeuralParticles(prev => prev.map(particle => ({
         ...particle,
         x: (particle.x + particle.vx + 100) % 100,
         y: (particle.y + particle.vy + 100) % 100
       })));
+
+      animationFrameId = requestAnimationFrame(animateParticles);
     };
 
-    const interval = setInterval(animateParticles, 100);
-    return () => clearInterval(interval);
+    // Iniciar animação apenas quando visível
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isAnimating = entry.isIntersecting;
+        if (isAnimating) {
+          animationFrameId = requestAnimationFrame(animateParticles);
+        } else if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    generateNeuralNetwork();
+    const interval = setInterval(generateNeuralNetwork, 30000); // Aumentado de 20s para 30s
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, []);
 
   // Show scroll button at 30% scroll
@@ -443,6 +469,16 @@ const Footer = () => {
                   QUANTUM CONTACT MATRIX
                 </span>
               </h4>
+              
+              {/* Redes Sociais - NOVO */}
+              <motion.div
+                className="mb-12"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
+                <SocialFollowButtons variant="footer" showStats={true} />
+              </motion.div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[

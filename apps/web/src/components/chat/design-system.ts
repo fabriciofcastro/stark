@@ -226,29 +226,6 @@ export const CHAT_BREAKPOINTS = {
   '2xl': '1536px',
 } as const;
 
-// ===== CONFIGURAÇÕES DE ACESSIBILIDADE =====
-export const CHAT_ACCESSIBILITY = {
-  // Contraste mínimo WCAG AA
-  contrast: {
-    normal: 4.5,
-    large: 3,
-  },
-  
-  // Foco visível
-  focus: {
-    ring: '2px solid rgb(212 160 23)',
-    offset: '2px',
-  },
-  
-  // Z-index layers
-  zIndex: {
-    chat: 1000,
-    overlay: 1050,
-    modal: 1100,
-    toast: 1200,
-  },
-} as const;
-
 // ===== TEMAS DE CHAT =====
 export const CHAT_THEMES = {
   light: {
@@ -300,6 +277,29 @@ export const CHAT_CONFIG = {
     messageSlideIn: 'slideInUp 0.3s ease-out',
     typingDots: 'typing 1.4s infinite ease-in-out',
     fadeIn: 'fadeIn 0.2s ease-out',
+  },
+} as const;
+
+// ===== CONFIGURAÇÕES DE ACESSIBILIDADE =====
+export const CHAT_ACCESSIBILITY = {
+  // Contraste mínimo WCAG AA
+  contrast: {
+    normal: 4.5,
+    large: 3,
+  },
+  
+  // Foco visível
+  focus: {
+    ring: '2px solid rgb(212 160 23)',
+    offset: '2px',
+  },
+  
+  // Z-index layers
+  zIndex: {
+    chat: 1000,
+    overlay: 1050,
+    modal: 1100,
+    toast: 1200,
   },
 } as const;
 

@@ -62,6 +62,8 @@ export enum Priority {
   URGENT = 'urgent',
 }
 
+export type PriorityType = 'low' | 'normal' | 'high' | 'urgent';
+
 // ===== INTERFACES DE USUÁRIO =====
 
 export interface User {
@@ -204,9 +206,10 @@ export interface AIResponse {
 export interface Suggestion {
   id: string;
   text: string;
-  action: 'reply' | 'action' | 'link';
+  action: 'reply' | 'action' | 'link' | 'escalate';
   data?: any;
   icon?: string;
+  priority?: number;
 }
 
 export interface BotConfig {
@@ -477,6 +480,8 @@ export interface ChatHeaderProps {
   onMinimize?: () => void;
   onClose?: () => void;
   onEscalate?: () => void;
+  showAvatar?: boolean;
+  showStatus?: boolean;
   className?: string;
 }
 
