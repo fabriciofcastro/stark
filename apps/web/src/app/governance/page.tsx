@@ -474,9 +474,9 @@ export default function GovernancaPage() {
                             <CheckCircle className="w-4 h-4 text-indigo-400 mt-0.5 flex-shrink-0" />
                             <span>{feature}</span>
                           </motion.li>
-                        ))}
-                      </ul>
-                    </div>
+              ))}
+            </ul>
+          </div>
 
                     <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
                   </div>
@@ -613,7 +613,7 @@ export default function GovernancaPage() {
           </div>
         </div>
       </section>
-
+      
       {/* CTA Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">

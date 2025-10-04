@@ -425,18 +425,18 @@ export default function ConsultoriaTecnologica() {
 										{/* Content */}
 										<div className="relative z-10">
 											<h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors">
-												{service.title}
-											</h3>
+										{service.title}
+									</h3>
 											
 											<p className="text-gray-300 mb-6 leading-relaxed">
-												{service.description}
-											</p>
+										{service.description}
+									</p>
 
 											{/* Features */}
-											<ul className="space-y-3">
-												{service.features.map((feature, featureIndex) => (
+							<ul className="space-y-3">
+								{service.features.map((feature, featureIndex) => (
 													<motion.li
-														key={featureIndex}
+										key={featureIndex}
 														className="flex items-start gap-3 text-gray-300 text-sm"
 														initial={{ opacity: 0, x: -20 }}
 														whileInView={{ opacity: 1, x: 0 }}
@@ -444,19 +444,19 @@ export default function ConsultoriaTecnologica() {
 														viewport={{ once: true }}
 													>
 														<CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-														<span>{feature}</span>
+										<span>{feature}</span>
 													</motion.li>
-												))}
-											</ul>
-										</div>
+								))}
+							</ul>
+						</div>
 
 										{/* Hover Glow */}
 										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
-									</div>
+								</div>
 								</motion.div>
 							);
 						})}
-					</div>
+						</div>
 				</div>
 			</section>
 
@@ -520,8 +520,8 @@ export default function ConsultoriaTecnologica() {
 										
 										<div className="text-gray-300 font-medium text-lg">
 											{stat.label}
-										</div>
-									</div>
+							</div>
+						</div>
 
 									<div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
 								</div>
@@ -574,7 +574,7 @@ export default function ConsultoriaTecnologica() {
 								whileTap={{ scale: 0.95 }}
 							>
 								<Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-								Agendar Consultoria Gratuita
+						Agendar Consultoria Gratuita
 								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
 							</motion.button>
 							
