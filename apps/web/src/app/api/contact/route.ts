@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { validateContactForm, sanitizeInput, detectAttackPatterns, checkRateLimit } from '@/lib/validation';
+import { createStandardResponse, validateContactFormResponse } from '@/lib/response-validation';
 
 type ContactPayload = {
   name: string;
@@ -13,14 +15,8 @@ type ContactPayload = {
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 function createErrorResponse(message: string, status = 400) {
-  return NextResponse.json(
-    { 
-      success: false, 
-      error: message,
-      timestamp: new Date().toISOString()
-    }, 
-    { status }
-  );
+  const response = createStandardResponse(false, null, message);
+  return NextResponse.json(response, { status });
 }
 
 // Funções para mascaramento de PII
@@ -186,48 +182,76 @@ async function sendEmailNotification(payload: ContactPayload): Promise<boolean> 
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json() as ContactPayload;
-    const { name, email, phone, service, message, token, company } = body;
-
-    // Validações
-    if (!name || name.trim().length < 3) {
-      return createErrorResponse("Nome deve ter pelo menos 3 caracteres");
+    // Rate limiting por IP
+    const clientIP = request.headers.get('x-forwarded-for') || 
+                    request.headers.get('x-real-ip') || 
+                    'unknown';
+    
+    const rateLimit = checkRateLimit(clientIP, 5, 15 * 60 * 1000); // 5 requests per 15 minutes
+    if (!rateLimit.allowed) {
+      return createErrorResponse(
+        `Muitas tentativas. Tente novamente em ${Math.ceil((rateLimit.resetTime - Date.now()) / 60000)} minutos`, 
+        429
+      );
     }
 
-    if (!email || !emailRegex.test(email)) {
-      return createErrorResponse("Email inválido");
+    const body = await request.json();
+    
+    // Validação rigorosa com Zod
+    const validation = validateContactForm({
+      name: body.name,
+      email: body.email,
+      phone: body.phone,
+      company: body.company,
+      subject: body.service || 'Contato via site',
+      message: body.message,
+      recaptchaToken: body.token,
+      source: 'website',
+      utm_source: body.utm_source,
+      utm_medium: body.utm_medium,
+      utm_campaign: body.utm_campaign
+    });
+
+    if (!validation.success) {
+      return createErrorResponse(
+        `Dados inválidos: ${validation.errors?.map(e => e.message).join(', ')}`,
+        400
+      );
     }
 
-    const phoneDigits = phone?.replace(/\D/g, "") || "";
-    if (phoneDigits.length < 10) {
-      return createErrorResponse("Telefone inválido");
-    }
+    const { data: validatedData } = validation;
 
-    if (!service || service.trim().length < 2) {
-      return createErrorResponse("Serviço deve ser especificado");
-    }
-
-    if (!message || message.trim().length < 20) {
-      return createErrorResponse("Mensagem deve ter pelo menos 20 caracteres");
+    // Detecção de padrões de ataque
+    const attackDetection = detectAttackPatterns(validatedData.message);
+    if (attackDetection.isAttack) {
+      console.warn(`Tentativa de ataque detectada de ${clientIP}:`, {
+        patterns: attackDetection.patterns,
+        riskLevel: attackDetection.riskLevel,
+        message: validatedData.message.substring(0, 100)
+      });
+      
+      if (attackDetection.riskLevel === 'high') {
+        return createErrorResponse("Conteúdo suspeito detectado", 403);
+      }
     }
 
     // Verificação reCAPTCHA
-    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !token) {
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !validatedData.recaptchaToken) {
       return createErrorResponse("Token de verificação obrigatório", 403);
     }
 
-    if (token && !(await verifyRecaptcha(token))) {
+    if (validatedData.recaptchaToken && !(await verifyRecaptcha(validatedData.recaptchaToken))) {
       return createErrorResponse("Verificação de segurança falhou", 403);
     }
 
-    // Processar contato
+    // Processar contato com dados validados
     const contactData: ContactPayload = {
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      company: company?.trim(),
-      phone: phone.trim(),
-      service: service.trim(),
-      message: message.trim(),
+      name: sanitizeInput(validatedData.name),
+      email: validatedData.email,
+      company: validatedData.company ? sanitizeInput(validatedData.company) : undefined,
+      phone: validatedData.phone || '',
+      service: validatedData.subject,
+      message: sanitizeInput(validatedData.message),
     };
 
     // Enviar para múltiplos serviços
@@ -248,15 +272,27 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Contato enviado com sucesso",
-      timestamp: new Date().toISOString(),
-      integrations: {
-        chatwoot: chatwootSuccess,
-        email: emailSuccess,
+    const response = createStandardResponse(
+      true,
+      {
+        integrations: {
+          chatwoot: chatwootSuccess,
+          email: emailSuccess,
+        },
+        service: contactData.service,
       },
-    });
+      undefined,
+      "Contato enviado com sucesso"
+    );
+
+    // Validar resposta antes de enviar
+    const validation = validateContactFormResponse(response);
+    if (!validation.success) {
+      console.error('Resposta de contato inválida:', validation.errors);
+      return createErrorResponse("Erro de validação de resposta", 500);
+    }
+
+    return NextResponse.json(response);
 
   } catch (error) {
     console.error("Contact API error:", error);

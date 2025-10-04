@@ -20,6 +20,7 @@ import { AIResponse, BotConfig } from './interfaces';
 import { AIAssistantService } from './ai-assistant.service';
 import { NotificationService } from './notification.service';
 import { AnalyticsService } from './analytics.service';
+import { ValidationService } from './validation.service';
 
 @Injectable()
 export class ChatService {
@@ -31,6 +32,7 @@ export class ChatService {
     private readonly aiAssistant: AIAssistantService,
     private readonly notificationService: NotificationService,
     private readonly analyticsService: AnalyticsService,
+    private readonly validationService: ValidationService,
   ) {}
 
   // ===== GESTÃO DO USUÁRIO BOT =====
@@ -252,6 +254,21 @@ export class ChatService {
 
   async sendMessage(sendMessageDto: SendMessageDto) {
     try {
+      // Validação rigorosa dos dados de entrada
+      this.validationService.validateInput(sendMessageDto.sessionId, 'Session ID', {
+        required: true,
+        type: 'uuid'
+      });
+
+      this.validationService.validateChatMessage(sendMessageDto.content);
+
+      if (sendMessageDto.metadata) {
+        this.validationService.validateInput(sendMessageDto.metadata, 'Metadata', {
+          type: 'string',
+          maxLength: 1000
+        });
+      }
+
       // Verificar se a sessão existe
       const session = await this.prisma.chatSession.findUnique({
         where: { id: sendMessageDto.sessionId },
@@ -749,19 +766,9 @@ export class ChatService {
 
   async updateSystemConfig(config: Record<string, any>) {
     try {
-      // Validar todas as chaves antes de fazer qualquer alteração
-      const invalidKeys = Object.keys(config).filter(key => !this.validateConfigKey(key));
-      if (invalidKeys.length > 0) {
-        throw new BadRequestException(`Invalid configuration keys: ${invalidKeys.join(', ')}`);
-      }
-
-      // Validar todos os valores
-      const invalidValues = Object.entries(config).filter(([key, value]) => 
-        !this.validateConfigValue(key, value)
-      );
-      if (invalidValues.length > 0) {
-        const invalidEntries = invalidValues.map(([key, value]) => `${key}: ${value}`);
-        throw new BadRequestException(`Invalid configuration values: ${invalidEntries.join(', ')}`);
+      // Validar todas as chaves e valores usando ValidationService
+      for (const [key, value] of Object.entries(config)) {
+        this.validationService.validateSystemConfig(key, value);
       }
 
       const updates = await Promise.all(

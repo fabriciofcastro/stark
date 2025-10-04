@@ -2,24 +2,63 @@
 import "./globals.css";
 import type { Viewport } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/sections/header";
 import { JsonLd, organizationData } from "@/components/seo/structured-data";
-import {
-  RevealOnScroll,
-  HashRedirector,
-  GA4,
-} from "@/components/wrappers";
-import { AdvancedSEOProvider } from "@/components/seo/advanced-seo-provider";
-import { generatePerformanceMeta, generateSecurityMeta } from "@/lib/seo-advanced";
-import ModernCookieConsent from "@/components/ui/modern-cookie-consent";
-import { ChatProvider } from "@/components/chat";
-import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
-import { AdvancedPerformanceOptimizer } from "@/components/performance/advanced-performance";
-import { FloatingSocialShare, FloatingSocialFollow } from "@/components/social";
-import { StrategicCTA } from "@/components/cta";
+
+// Lazy load de componentes não críticos para melhorar FCP e LCP
+const RevealOnScroll = dynamic(() => 
+  import("@/components/wrappers").then(mod => mod.RevealOnScroll), 
+  { ssr: false }
+);
+
+const HashRedirector = dynamic(() => 
+  import("@/components/wrappers").then(mod => mod.HashRedirector), 
+  { ssr: false }
+);
+
+const GA4 = dynamic(() => 
+  import("@/components/wrappers").then(mod => mod.GA4), 
+  { ssr: false }
+);
+
+const ModernCookieConsent = dynamic(() => 
+  import("@/components/ui/modern-cookie-consent"), 
+  { ssr: false }
+);
+
+const ChatProvider = dynamic(() => 
+  import("@/components/chat").then(mod => mod.ChatProvider), 
+  { ssr: false }
+);
+
+const Toaster = dynamic(() => 
+  import("@/components/ui/toast"), 
+  { ssr: false }
+);
+
+const AdvancedPerformanceOptimizer = dynamic(() => 
+  import("@/components/performance/advanced-performance").then(mod => mod.AdvancedPerformanceOptimizer), 
+  { ssr: false }
+);
+
+const FloatingSocialShare = dynamic(() => 
+  import("@/components/social").then(mod => mod.FloatingSocialShare), 
+  { ssr: false }
+);
+
+const FloatingSocialFollow = dynamic(() => 
+  import("@/components/social").then(mod => mod.FloatingSocialFollow), 
+  { ssr: false }
+);
+
+const StrategicCTA = dynamic(() => 
+  import("@/components/cta").then(mod => mod.StrategicCTA), 
+  { ssr: false }
+);
 
 export const metadata = {
   title:
