@@ -306,9 +306,9 @@ const Footer = () => {
                   opacity: activeHover === 'brand' ? 1 : 0.8,
                 }}
               >
-                Pioneering the <span className="text-cyan-400 font-semibold">quantum computing revolution</span>. 
-                We transcend traditional boundaries, creating <span className="text-purple-400 font-semibold">neural networks</span> 
-                that redefine technological possibilities.
+                Pioneirando a <span className="text-cyan-400 font-semibold">revolução da computação quântica</span>. 
+                Transcendemos limites tradicionais, criando <span className="text-purple-400 font-semibold">redes neurais</span> 
+                que redefinem as possibilidades tecnológicas.
               </motion.p>
               
               <motion.div 
@@ -320,7 +320,7 @@ const Footer = () => {
                   <span className="text-gray-400">© 2024 STARK Quantum</span>
                 </div>
                 <div className="w-px h-4 bg-gray-700" />
-                <span className="text-gray-500">All rights reserved</span>
+                <span className="text-gray-500">Todos os direitos reservados</span>
               </motion.div>
             </div>
           </motion.div>
@@ -343,18 +343,18 @@ const Footer = () => {
                   <Layers className="w-4 h-4 text-cyan-400" />
                 </div>
                 <span className="bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-                  Services
+                  Serviços
                 </span>
               </motion.h4>
               
               <nav className="space-y-4">
                 {[
-                  { href: "/suporte-tecnico", label: "Quantum Support", icon: "⚡" },
-                  { href: "/consultoria-tecnologica", label: "Neural Consulting", icon: "🧠" },
-                  { href: "/cloud-vps-linux", label: "Cloud Matrix", icon: "☁️" },
-                  { href: "/governance", label: "AI Governance", icon: "🏛️" },
-                  { href: "/cyberseguranca", label: "Cyber Defense", icon: "🛡️" },
-                  { href: "/create-site", label: "Web Evolution", icon: "🌐" }
+                  { href: "/suporte-tecnico", label: "Suporte Quântico", icon: "⚡" },
+                  { href: "/consultoria-tecnologica", label: "Consultoria Neural", icon: "🧠" },
+                  { href: "/cloud-vps-linux", label: "Matriz Cloud", icon: "☁️" },
+                  { href: "/governance", label: "Governança IA", icon: "🏛️" },
+                  { href: "/cyberseguranca", label: "Defesa Cibernética", icon: "🛡️" },
+                  { href: "/create-site", label: "Evolução Web", icon: "🌐" }
                 ].map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -400,18 +400,18 @@ const Footer = () => {
                   <Globe className="w-4 h-4 text-purple-400" />
                 </div>
                 <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                  Company
+                  Empresa
                 </span>
               </motion.h4>
               
               <nav className="space-y-4">
                 {[
-                  { href: "/sobre", label: "About Us", icon: "🏢" },
-                  { href: "/portfolio", label: "Portfolio", icon: "💼" },
-                  { href: "/cases-de-sucesso", label: "Success Cases", icon: "🏆" },
+                  { href: "/sobre", label: "Sobre Nós", icon: "🏢" },
+                  { href: "/portfolio", label: "Portfólio", icon: "💼" },
+                  { href: "/cases-de-sucesso", label: "Cases de Sucesso", icon: "🏆" },
                   { href: "/faq", label: "FAQ", icon: "❓" },
                   { href: "/blog", label: "Blog", icon: "📝" },
-                  { href: "/contact", label: "Contact", icon: "📞" }
+                  { href: "/contact", label: "Contato", icon: "📞" }
                 ].map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -466,7 +466,7 @@ const Footer = () => {
             <div className="relative p-8">
               <h4 className="text-2xl font-bold text-center text-white mb-12">
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                  QUANTUM CONTACT MATRIX
+                  MATRIZ DE CONTATO QUÂNTICO
                 </span>
               </h4>
               
@@ -484,19 +484,19 @@ const Footer = () => {
                 {[
                   { 
                     icon: MapPin, 
-                    title: "Location", 
+                    title: "Localização", 
                     content: "Av. Paulista, 1000\nItaquaquecetuba - SP",
                     color: "cyan"
                   },
                   { 
                     icon: Mail, 
-                    title: "Email", 
+                    title: "E-mail", 
                     content: "contato@starkgestao.com.br",
                     color: "purple"
                   },
                   { 
                     icon: Phone, 
-                    title: "Phone", 
+                    title: "Telefone", 
                     content: "(11) 99439-6469",
                     color: "emerald"
                   }
@@ -565,8 +565,8 @@ const Footer = () => {
             {/* Legal Links */}
             <div className="flex flex-wrap items-center justify-center gap-4">
               {[
-                { href: "/politica-privacidade", label: "Privacy", icon: Shield, color: "cyan" },
-                { href: "/termos-uso", label: "Terms", icon: FileText, color: "purple" },
+                { href: "/politica-privacidade", label: "Privacidade", icon: Shield, color: "cyan" },
+                { href: "/termos-uso", label: "Termos", icon: FileText, color: "purple" },
                 { href: "/politica-cookies", label: "Cookies", icon: Cookie, color: "emerald" },
                 { href: "/lgpd", label: "LGPD", icon: Scale, color: "orange" }
               ].map((link, index) => (
@@ -609,7 +609,7 @@ const Footer = () => {
               >
                 <Cookie className="w-4 h-4 text-cyan-400" />
                 <span className="text-gray-300 hover:text-white transition-colors font-medium text-sm">
-                  Manage Cookies
+                  Gerenciar Cookies
                 </span>
               </motion.button>
             </div>
@@ -623,12 +623,12 @@ const Footer = () => {
             >
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-pulse" />
-                <span>Quantum Analytics</span>
+                <span>Analytics Quântico</span>
               </div>
               <div className="w-px h-4 bg-gray-700" />
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full animate-pulse" />
-                <span>Neural Networks</span>
+                <span>Redes Neurais</span>
               </div>
             </motion.div>
           </div>
