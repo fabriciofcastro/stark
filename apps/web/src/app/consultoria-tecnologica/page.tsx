@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Consultoria Tecnológica Estratégica | STARK Gestão em Tecnologia",
+	title: "Consultoria Tecnológica Estratégica | STARK Solutions",
 	description:
 		"Consultoria tecnológica estratégica para transformação digital. Análise de processos, otimização de TI, planejamento estratégico e implementação de soluções inovadoras.",
 	keywords:

@@ -4,18 +4,18 @@ import { CriacaoSitesSeo } from "@/components/sections/criacao-sites-seo";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Criação de Sites | STARK Gestão em Tecnologia",
+  title: "Criação de Sites | STARK Solutions",
   description: "Sites rápidos, seguros e prontos para ranquear. Foco em conversão, SEO técnico e performance.",
   keywords: "criação de sites, desenvolvimento web, SEO, performance, conversão, sites responsivos, Core Web Vitals",
   openGraph: {
-    title: "Criação de Sites | STARK Gestão em Tecnologia",
+    title: "Criação de Sites | STARK Solutions",
     description: "Sites rápidos, seguros e prontos para ranquear. Foco em conversão, SEO técnico e performance.",
     type: "website",
     url: `${SITE_URL}/criacao-de-sites`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Criação de Sites | STARK Gestão em Tecnologia",
+    title: "Criação de Sites | STARK Solutions",
     description: "Sites rápidos, seguros e prontos para ranquear. Foco em conversão, SEO técnico e performance.",
   },
   alternates: {

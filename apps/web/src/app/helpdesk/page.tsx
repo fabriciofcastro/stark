@@ -4,18 +4,18 @@ import { HelpdeskSeo } from "@/components/sections/helpdesk-seo";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
-  title: "Help Desk | STARK Gestão em Tecnologia",
+  title: "Help Desk | STARK Solutions",
   description: "Abra um chamado, consulte a base de conhecimento e acesse ferramentas de suporte remoto.",
   keywords: "help desk, suporte, chamados, base de conhecimento, atendimento, ticket",
   openGraph: {
-    title: "Help Desk | STARK Gestão em Tecnologia",
+    title: "Help Desk | STARK Solutions",
     description: "Abra um chamado, consulte a base de conhecimento e acesse ferramentas de suporte remoto.",
     type: "website",
     url: `${SITE_URL}/helpdesk`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Help Desk | STARK Gestão em Tecnologia",
+    title: "Help Desk | STARK Solutions",
     description: "Abra um chamado, consulte a base de conhecimento e acesse ferramentas de suporte remoto.",
   },
   alternates: {

@@ -514,7 +514,7 @@ const ModernHeader = () => {
                           ease: "easeInOut",
                         }}
                       >
-                        GESTÃO EM TECNOLOGIA
+                        SOLUTIONS
                       </motion.p>
                     )}
                   </div>
@@ -966,7 +966,7 @@ const ModernHeader = () => {
                         STARK
                       </h2>
                       <p className="text-xs bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent font-medium">
-                        GESTÃO EM TECNOLOGIA
+                        SOLUTIONS
                       </p>
                     </div>
                   </div>
@@ -1110,7 +1110,7 @@ const ModernHeader = () => {
                       <span className="text-gray-300">(11) 99439-6469</span>
                     </a>
                     <a
-                      href="mailto:contato@fernandohenrique.dev"
+                      href="mailto:contato@starksolutions.com.br"
                       className="flex items-center justify-center space-x-2 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-300"
                     >
                       <Mail className="w-4 h-4 text-cyan-400" />

@@ -2,10 +2,10 @@
 import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://starkgestao.com.br";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://starksolutions.com.br";
 
   return {
-    name: "STARK Gestão em Tecnologia",
+    name: "STARK Solutions",
     short_name: "STARK",
     description: "Empresa especializada em tecnologia da informação com foco em infraestrutura, segurança da informação, suporte e consultoria estratégica.",
     start_url: "/",

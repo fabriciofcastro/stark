@@ -28,7 +28,7 @@ interface SocialShareButtonsProps {
 
 export function SocialShareButtons({
   url = typeof window !== "undefined" ? window.location.href : "",
-  title = "STARK Gestão em Tecnologia",
+  title = "STARK Solutions",
   description = "Empresa especializada em tecnologia da informação com foco em infraestrutura, segurança da informação, suporte e consultoria estratégica.",
   hashtags = ["tecnologia", "suporte", "TI", "consultoria"],
   className = "",

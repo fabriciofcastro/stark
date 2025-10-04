@@ -101,7 +101,7 @@ async function sendEmailNotification(payload: ContactPayload): Promise<boolean> 
     // Implementar integração com serviço de email (SendGrid, Resend, etc.)
     // Por enquanto, apenas log
     console.log("Email notification would be sent:", {
-      to: process.env.NOTIFICATION_EMAIL || "contato@starkgestao.com.br",
+      to: process.env.NOTIFICATION_EMAIL || "contato@starksolutions.com.br",
       subject: `Novo contato via site: ${payload.service}`,
       payload,
     });

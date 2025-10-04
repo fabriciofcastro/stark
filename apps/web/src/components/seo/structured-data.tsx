@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/site";
 const organizationData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "STARK Gestão em Tecnologia",
+  name: "STARK Solutions",
   url: SITE_URL,
   logo: `${SITE_URL}/icon.svg`,
   description:
@@ -23,7 +23,7 @@ const organizationData = {
     "@type": "ContactPoint",
     telephone: "+55-11-99439-6469",
     contactType: "Suporte Técnico",
-    email: "contato@starkgestao.com.br",
+    email: "contato@starksolutions.com.br",
   },
   sameAs: [
     // Add your social media links here if applicable
@@ -57,7 +57,7 @@ const breadcrumbData = (pageTitle: string, pagePath: string) => ({
 const localBusinessData = (city: string) => ({
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "STARK Gestão em Tecnologia",
+  name: "STARK Solutions",
   image: `${SITE_URL}/icon.svg`,
   address: {
     "@type": "PostalAddress",
@@ -93,7 +93,7 @@ const serviceData = (serviceName: string, serviceDescription: string) => ({
   serviceType: serviceName,
   provider: {
     "@type": "Organization",
-    name: "STARK Gestão em Tecnologia",
+    name: "STARK Solutions",
   },
   description: serviceDescription,
   areaServed: {

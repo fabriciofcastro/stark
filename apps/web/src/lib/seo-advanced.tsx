@@ -268,7 +268,7 @@ export function generateStructuredData(config: SEOConfig): string {
         "@type": "ContactPoint",
         telephone: "+55-11-99439-6469",
         contactType: "customer service",
-        email: "contato@starkgestao.com.br",
+        email: "contato@starksolutions.com.br",
         availableLanguage: ["Portuguese"],
       },
       address: {

@@ -31,7 +31,7 @@ export function AdvancedSEOProvider({
     const updatePageTitle = () => {
       const currentTitle = document.title;
       if (!currentTitle.includes("STARK")) {
-        document.title = `${currentTitle} | STARK Gestão em Tecnologia`;
+        document.title = `${currentTitle} | STARK Solutions`;
       }
     };
 
@@ -161,10 +161,10 @@ export function AdvancedSEOProvider({
     const addSocialMetaTags = () => {
       const metaTags = [
         { property: "og:locale", content: "pt_BR" },
-        { property: "og:site_name", content: "STARK Gestão em Tecnologia" },
+        { property: "og:site_name", content: "STARK Solutions" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: "@starktecnologia" },
-        { name: "twitter:creator", content: "@starktecnologia" },
+        { name: "twitter:site", content: "@starksolutions" },
+        { name: "twitter:creator", content: "@starksolutions" },
       ];
 
       metaTags.forEach((tag) => {

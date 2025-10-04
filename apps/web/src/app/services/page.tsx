@@ -6,13 +6,13 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata = {
 	title:
-		"Catálogo de Serviços | STARK Gestão em Tecnologia - Soluções Completas em TI",
+		"Catálogo de Serviços | STARK Solutions - Soluções Tecnológicas Avançadas",
 	description:
 		"Explore nosso catálogo completo de serviços de TI: suporte 24/7, consultoria estratégica, cibersegurança, cloud, governança e desenvolvimento. Encontre a solução ideal para sua empresa.",
 	keywords:
 		"serviços de TI, catálogo de serviços, suporte técnico, consultoria, cibersegurança, cloud, infraestrutura, governança de TI",
 	openGraph: {
-		title: "Catálogo de Serviços | STARK Gestão em Tecnologia",
+		title: "Catálogo de Serviços | STARK Solutions",
 		description:
 			"Explore nosso catálogo completo de serviços de TI com filtros inteligentes para encontrar a solução ideal para sua empresa.",
 		type: "website",
@@ -20,7 +20,7 @@ export const metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Catálogo de Serviços | STARK Gestão em Tecnologia",
+		title: "Catálogo de Serviços | STARK Solutions",
 		description:
 			"Explore nosso catálogo completo de serviços de TI com filtros inteligentes para encontrar a solução ideal para sua empresa.",
 	},

@@ -40,10 +40,10 @@ const seoConfig = {
     category: "Serviços de TI",
   },
   localBusiness: {
-    name: "STARK Gestão em Tecnologia",
+    name: "STARK Solutions",
     address: "Av. Paulista, 1000, Itaquaquecetuba - SP",
     phone: "+55-11-99439-6469",
-    email: "contato@starkgestao.com.br",
+    email: "contato@starksolutions.com.br",
     openingHours: [
       "Segunda-Feira 08:00-18:00",
       "Terça-Feira 08:00-18:00",
@@ -172,8 +172,8 @@ export default function SuporteTecnicoPage() {
                   </div>
                   <div className="flex items-center space-x-3">
                     <span className="text-cyan-400">✉️</span>
-                    <a href="mailto:contato@starkgestao.com.br" className="text-white hover:text-cyan-400 transition-colors">
-                      contato@starkgestao.com.br
+                    <a href="mailto:contato@starksolutions.com.br" className="text-white hover:text-cyan-400 transition-colors">
+                      contato@starksolutions.com.br
                     </a>
                   </div>
                   <div className="flex items-center space-x-3">

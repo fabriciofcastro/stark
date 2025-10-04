@@ -61,10 +61,10 @@ const seoConfig = {
     price: "Sob consulta",
   },
   localBusiness: {
-    name: "STARK Gestão em Tecnologia",
+    name: "STARK Solutions",
     address: "Av. Paulista, 1000, Itaquaquecetuba - SP",
     phone: "+55-11-99439-6469",
-    email: "contato@starkgestao.com.br",
+    email: "contato@starksolutions.com.br",
     openingHours: [
       "Segunda-Feira 00:00-23:59",
       "Terça-Feira 00:00-23:59",
