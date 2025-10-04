@@ -35,10 +35,10 @@ export interface SEOConfig {
   };
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://starkgestao.com.br";
-const SITE_NAME = "STARK Gestão em Tecnologia";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://starksolutions.com.br";
+const SITE_NAME = "STARK Solutions";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
-const TWITTER_HANDLE = "@starktecnologia";
+const TWITTER_HANDLE = "@starksolutions";
 
 // Keywords por categoria de serviço
 export const SERVICE_KEYWORDS = {

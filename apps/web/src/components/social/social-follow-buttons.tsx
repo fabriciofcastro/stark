@@ -34,7 +34,7 @@ export function SocialFollowButtons({
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://facebook.com/starktecnologia",
+      url: "https://facebook.com/starksolutions",
       color: "hover:text-blue-500",
       bgColor: "hover:bg-blue-500/10",
       followers: "2.5K",
@@ -43,7 +43,7 @@ export function SocialFollowButtons({
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://linkedin.com/company/stark-gestao-tecnologia",
+      url: "https://linkedin.com/company/stark-solutions",
       color: "hover:text-blue-600",
       bgColor: "hover:bg-blue-600/10",
       followers: "1.8K",
@@ -52,7 +52,7 @@ export function SocialFollowButtons({
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://instagram.com/starktecnologia",
+      url: "https://instagram.com/starksolutions",
       color: "hover:text-pink-500",
       bgColor: "hover:bg-pink-500/10",
       followers: "1.2K",
@@ -61,7 +61,7 @@ export function SocialFollowButtons({
     {
       name: "Twitter",
       icon: Twitter,
-      url: "https://twitter.com/starktecnologia",
+      url: "https://twitter.com/starksolutions",
       color: "hover:text-sky-400",
       bgColor: "hover:bg-sky-500/10",
       followers: "890",
@@ -70,7 +70,7 @@ export function SocialFollowButtons({
     {
       name: "YouTube",
       icon: Youtube,
-      url: "https://youtube.com/@starktecnologia",
+      url: "https://youtube.com/@starksolutions",
       color: "hover:text-red-500",
       bgColor: "hover:bg-red-500/10",
       followers: "650",
@@ -90,7 +90,7 @@ export function SocialFollowButtons({
     {
       name: "Email",
       icon: Mail,
-      url: "mailto:contato@starkgestao.com.br",
+      url: "mailto:contato@starksolutions.com.br",
       color: "hover:text-yellow-500",
       bgColor: "hover:bg-yellow-500/10",
       label: "E-mail"

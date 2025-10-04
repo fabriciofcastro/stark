@@ -214,11 +214,11 @@ export function StrategicCTA({
                 <p className="text-gray-400 text-sm">
                   Ou envie um e-mail:{" "}
                   <a 
-                    href="mailto:contato@starkgestao.com.br"
+                    href="mailto:contato@starksolutions.com.br"
                     className="text-brand-gold-400 hover:text-brand-gold-300 transition-colors"
                     onClick={() => handleCTAClick("email", "hero_email")}
                   >
-                    contato@starkgestao.com.br
+                    contato@starksolutions.com.br
                   </a>
                 </p>
               </div>

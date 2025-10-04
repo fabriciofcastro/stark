@@ -1,6 +1,10 @@
 export const SITE_URL = (
-	process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+	process.env.NEXT_PUBLIC_SITE_URL || "https://starksolutions.com.br"
 ).replace(/\/$/, "");
+
+export const SITE_NAME = "STARK Solutions";
+export const SITE_DESCRIPTION = "Soluções Tecnológicas Avançadas e Inovadoras";
+export const SITE_TAGLINE = "Innovation • Technology • Solutions";
 
 export const MEETING_URL =
 	process.env.NEXT_PUBLIC_MEETING_URL || "https://cal.com/";

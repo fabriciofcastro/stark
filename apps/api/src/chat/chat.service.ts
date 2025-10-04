@@ -263,7 +263,7 @@ export class ChatService {
       const botMessage = await this.prisma.chatMessage.create({
 			data: {
           sessionId: sendMessageDto.sessionId,
-          senderId: aiResponse.botUserId,
+          senderId: 'bot',
           content: aiResponse.content,
           type: MessageType.TEXT,
           status: MessageStatus.SENT,
@@ -528,7 +528,7 @@ export class ChatService {
   // ===== MÉTODOS PRIVADOS =====
 
   private async sendWelcomeMessage(sessionId: string) {
-    const botConfig = await this.getBotConfig();
+    const botConfig = await this.getBotConfigPublic();
     
     await this.prisma.chatMessage.create({
       data: {
@@ -585,7 +585,7 @@ export class ChatService {
     };
   }
 
-  private async getBotConfig(): Promise<BotConfig> {
+  public async getBotConfigPublic(): Promise<BotConfig> {
     return {
       name: 'STARK Assistant',
       avatar: '/images/bot-avatar.png',
@@ -600,6 +600,12 @@ export class ChatService {
         end: '18:00',
         timezone: 'America/Sao_Paulo',
       },
+      responses: {
+        greeting: ['Olá! Como posso ajudá-lo?', 'Oi! Em que posso ser útil?'],
+        goodbye: ['Até logo!', 'Tenha um ótimo dia!'],
+        service: ['Como posso ajudá-lo?', 'Em que posso ser útil?'],
+        escalation: ['Vou conectá-lo com um especialista', 'Um especialista irá atendê-lo']
+      }
     };
   }
 
@@ -635,9 +641,6 @@ export class ChatService {
     return this.analyticsService.getSessionAnalytics(sessionId);
   }
 
-  async getBotConfig() {
-    return this.aiAssistant.getBotConfig();
-  }
 
   async getSystemConfig() {
     try {

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateAnalyticsDto, DashboardStats, ChatAnalytics } from './interfaces';
+import { DashboardStats, ChatAnalytics } from './interfaces';
+import { CreateAnalyticsDto } from './dto';
 
 @Injectable()
 export class AnalyticsService {
@@ -57,7 +58,11 @@ export class AnalyticsService {
         escalationRate,
         satisfactionScore: satisfactionStats.average,
         botAccuracy,
-        popularIntents,
+        popularIntents: popularIntents.map(intent => ({
+          intent: intent.intent,
+          count: Number(intent.count),
+          percentage: intent.percentage
+        })),
         hourlyStats,
         dailyStats,
       };
@@ -352,15 +357,15 @@ export class AnalyticsService {
       return acc;
     }, {} as Record<string, number>);
 
-    const total = Object.values(intentCounts).reduce((sum, count) => sum + count, 0);
+    const total = Object.values(intentCounts).reduce((sum: number, count: number) => sum + count, 0);
 
     return Object.entries(intentCounts)
       .map(([intent, count]) => ({
         intent,
         count,
-        percentage: total > 0 ? (count / total) * 100 : 0,
+        percentage: (total as number) > 0 ? (count as number / (total as number)) * 100 : 0,
       }))
-      .sort((a, b) => b.count - a.count)
+      .sort((a, b) => Number(b.count) - Number(a.count))
       .slice(0, 10);
   }
 

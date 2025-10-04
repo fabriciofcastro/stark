@@ -186,7 +186,7 @@ export class ChatController {
   @Get('config')
   async getChatConfig() {
     return {
-      botConfig: await this.chatService.getBotConfig(),
+      botConfig: await this.chatService.getBotConfigPublic(),
       systemConfig: await this.chatService.getSystemConfig(),
     };
   }

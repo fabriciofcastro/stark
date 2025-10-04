@@ -295,7 +295,7 @@ const Footer = () => {
                     className="text-cyan-400 font-medium text-sm tracking-wider"
                     animate={{ x: activeHover === 'brand' ? 5 : 0 }}
                   >
-                    QUANTUM TECHNOLOGY
+                    STARK SOLUTIONS
                   </motion.p>
                 </div>
               </div>
@@ -306,9 +306,9 @@ const Footer = () => {
                   opacity: activeHover === 'brand' ? 1 : 0.8,
                 }}
               >
-                Pioneirando a <span className="text-cyan-400 font-semibold">revolução da computação quântica</span>. 
-                Transcendemos limites tradicionais, criando <span className="text-purple-400 font-semibold">redes neurais</span> 
-                que redefinem as possibilidades tecnológicas.
+                Liderando a <span className="text-cyan-400 font-semibold">revolução tecnológica</span>. 
+                Desenvolvemos <span className="text-purple-400 font-semibold">soluções inovadoras</span> 
+                que transformam o futuro das empresas.
               </motion.p>
               
               <motion.div 
@@ -317,7 +317,7 @@ const Footer = () => {
               >
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full animate-pulse" />
-                  <span className="text-gray-400">© 2024 STARK Quantum</span>
+                  <span className="text-gray-400">© 2024 STARK Solutions</span>
                 </div>
                 <div className="w-px h-4 bg-gray-700" />
                 <span className="text-gray-500">Todos os direitos reservados</span>
@@ -491,7 +491,7 @@ const Footer = () => {
                   { 
                     icon: Mail, 
                     title: "E-mail", 
-                    content: "contato@starkgestao.com.br",
+                    content: "contato@starksolutions.com.br",
                     color: "purple"
                   },
                   { 

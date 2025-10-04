@@ -23,15 +23,15 @@ import { StrategicCTA } from "@/components/cta";
 
 export const metadata = {
   title:
-    "STARK Gestão em Tecnologia | Serviços de Informática e Suporte Técnico",
+    "STARK Solutions | Soluções Tecnológicas Avançadas e Inovadoras",
   description:
-    "Empresa especializada em tecnologia da informação com foco em infraestrutura, segurança da informação, suporte e consultoria estratégica em Itaquaquecetuba - SP.",
+    "Empresa especializada em soluções tecnológicas de ponta com foco em inteligência artificial, infraestrutura avançada, segurança cibernética e inovação estratégica em Itaquaquecetuba - SP.",
   keywords:
-    "suporte técnico, serviços de informática, consultoria em tecnologia, soluções em nuvem, recuperação de dados, segurança da informação, LGPD, Itaquaquecetuba, SP",
+    "soluções tecnológicas, inteligência artificial, infraestrutura avançada, segurança cibernética, inovação tecnológica, STARK Solutions, tecnologia de ponta, Itaquaquecetuba, SP",
   openGraph: {
-    title: "STARK Gestão em Tecnologia",
+    title: "STARK Solutions",
     description:
-      "Empresa especializada em tecnologia da informação com foco em infraestrutura, segurança da informação, suporte e consultoria estratégica.",
+      "Empresa especializada em soluções tecnológicas de ponta com foco em inteligência artificial, infraestrutura avançada, segurança cibernética e inovação estratégica.",
     type: "website",
     url: SITE_URL,
   },
