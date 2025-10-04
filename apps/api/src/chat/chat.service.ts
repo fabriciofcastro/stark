@@ -1,10 +1,10 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import {
-  CreateChatSessionDto,
+	CreateChatSessionDto,
   UpdateChatSessionDto,
-  SendMessageDto,
-  EscalateToHumanDto,
+	SendMessageDto,
+	EscalateToHumanDto,
   UpdateEscalationDto,
   CreateUserDto,
   UpdateUserDto,
@@ -142,7 +142,7 @@ export class ChatService {
     try {
       const session = await this.prisma.chatSession.update({
         where: { id: sessionId },
-        data: {
+			data: {
           ...updateSessionDto,
           updatedAt: new Date(),
         },
@@ -180,8 +180,8 @@ export class ChatService {
           orderBy: { createdAt: 'desc' },
         },
         analytics: true,
-      },
-    });
+			},
+		});
 
     if (!session) {
       throw new NotFoundException('Session not found');
@@ -261,7 +261,7 @@ export class ChatService {
 
       // Criar resposta do bot
       const botMessage = await this.prisma.chatMessage.create({
-        data: {
+			data: {
           sessionId: sendMessageDto.sessionId,
           senderId: aiResponse.botUserId,
           content: aiResponse.content,
@@ -297,10 +297,10 @@ export class ChatService {
           messageId: userMessage.id,
           content: sendMessageDto.content,
           aiResponse: !!aiResponse,
-        },
-      });
+			},
+		});
 
-      return {
+		return {
         userMessage,
         botMessage,
         suggestions: aiResponse.suggestions,
@@ -354,9 +354,9 @@ export class ChatService {
         throw new NotFoundException('Session not found');
       }
 
-      // Criar ticket de escalação
-      const ticket = await this.prisma.escalationTicket.create({
-        data: {
+		// Criar ticket de escalação
+		const ticket = await this.prisma.escalationTicket.create({
+			data: {
           sessionId: escalateDto.sessionId,
           reason: escalateDto.reason,
           priority: escalateDto.priority || Priority.NORMAL,
@@ -417,8 +417,8 @@ export class ChatService {
           session: {
             include: { user: true },
           },
-        },
-      });
+			},
+		});
 
       await this.logActivity({
         userId: ticket.session.userId,
@@ -430,7 +430,7 @@ export class ChatService {
         },
       });
 
-      return ticket;
+		return ticket;
     } catch (error) {
       this.logger.error('Error updating escalation:', error);
       throw new NotFoundException('Escalation ticket not found');
@@ -443,7 +443,7 @@ export class ChatService {
     try {
       const analytics = await this.prisma.chatAnalytics.create({
         data: createAnalyticsDto,
-        include: {
+			include: {
           session: {
             include: { user: true },
           },
@@ -574,7 +574,7 @@ export class ChatService {
   }
 
   private getDefaultSessionContext() {
-    return {
+		return {
       pageUrl: '',
       referrer: '',
       userAgent: '',

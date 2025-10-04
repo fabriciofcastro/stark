@@ -1,471 +1,277 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import { generateAdvancedSEO, generateStructuredData, SERVICE_KEYWORDS } from "@/lib/seo-advanced";
+import { AdvancedSEOProvider, SEOBreadcrumb, SEOFAQ } from "@/components/seo/advanced-seo-provider";
+import { ContentOptimization, OptimizedHeading, OptimizedList, OptimizedTable } from "@/components/seo/content-optimization";
 
-export const metadata: Metadata = {
-	title: "Suporte Técnico Empresarial 24/7 | STARK Gestão em Tecnologia",
-	description:
-		"Suporte técnico empresarial especializado 24/7. Manutenção preventiva, correção de falhas, monitoramento proativo e SLA garantido para sua empresa.",
-	keywords:
-		"suporte técnico empresarial, manutenção TI, helpdesk, suporte 24 horas, monitoramento proativo, sla garantido",
-	robots: {
-		index: true,
-		follow: true,
-	},
+const seoConfig = {
+  title: "Suporte Técnico Empresarial - Soluções Corporativas STARK",
+  description: "Suporte técnico empresarial especializado para grandes empresas. Help desk corporativo, manutenção de servidores, gestão de infraestrutura e suporte 24/7 em São Paulo.",
+  keywords: [
+    ...SERVICE_KEYWORDS["suporte-tecnico"],
+    "suporte técnico empresarial",
+    "help desk corporativo",
+    "suporte técnico empresas",
+    "manutenção servidores",
+    "gestão infraestrutura",
+    "suporte 24/7",
+    "suporte técnico corporativo",
+    "assistência técnica empresas",
+    "manutenção preventiva corporativa",
+    "suporte técnico São Paulo empresas",
+    "help desk especializado",
+    "gestão TI empresas",
+    "suporte técnico grande porte",
+  ],
+  canonical: "/suporte-tecnico-empresarial",
+  ogType: "service" as const,
+  breadcrumbs: [
+    { name: "Serviços", url: "/services" },
+    { name: "Suporte Técnico Empresarial", url: "/suporte-tecnico-empresarial" },
+  ],
+  faq: [
+    {
+      question: "Qual a diferença entre suporte técnico comum e empresarial?",
+      answer: "O suporte técnico empresarial é especializado para grandes empresas, oferecendo SLAs específicos, equipe dedicada, monitoramento 24/7 e soluções escaláveis para ambientes corporativos complexos.",
+    },
+    {
+      question: "Vocês oferecem SLA (Service Level Agreement)?",
+      answer: "Sim, oferecemos SLAs personalizados com tempos de resposta garantidos: 1 hora para problemas críticos, 4 horas para problemas de alta prioridade e 8 horas para problemas padrão.",
+    },
+    {
+      question: "Como funciona o suporte 24/7 para empresas?",
+      answer: "Nossa equipe de suporte 24/7 monitora continuamente sua infraestrutura, oferecendo resposta imediata para problemas críticos e manutenção preventiva durante horários de menor movimento.",
+    },
+    {
+      question: "Vocês trabalham com empresas de qual porte?",
+      answer: "Atendemos empresas de todos os portes, desde pequenas empresas até grandes corporações, adaptando nossos serviços e recursos conforme a necessidade e complexidade do ambiente.",
+    },
+    {
+      question: "Que tipos de infraestrutura vocês suportam?",
+      answer: "Suportamos ambientes Windows Server, Linux, virtualização VMware/Hyper-V, cloud computing, redes corporativas, servidores de banco de dados, aplicações críticas e sistemas legados.",
+    },
+    {
+      question: "Como é feito o monitoramento da infraestrutura?",
+      answer: "Utilizamos ferramentas avançadas de monitoramento que verificam continuamente servidores, aplicações, redes e serviços, enviando alertas automáticos e gerando relatórios detalhados de performance.",
+    },
+  ],
+  service: {
+    name: "Suporte Técnico Empresarial",
+    description: "Suporte técnico especializado para empresas com SLAs garantidos, monitoramento 24/7 e equipe dedicada para ambientes corporativos complexos.",
+    category: "Serviços de TI Corporativos",
+    price: "Sob consulta",
+  },
+  localBusiness: {
+    name: "STARK Gestão em Tecnologia",
+    address: "Av. Paulista, 1000, Itaquaquecetuba - SP",
+    phone: "+55-11-99439-6469",
+    email: "contato@starkgestao.com.br",
+    openingHours: [
+      "Segunda-Feira 00:00-23:59",
+      "Terça-Feira 00:00-23:59",
+      "Quarta-Feira 00:00-23:59",
+      "Quinta-Feira 00:00-23:59",
+      "Sexta-Feira 00:00-23:59",
+      "Sábado 00:00-23:59",
+      "Domingo 00:00-23:59",
+    ],
+    serviceArea: [
+      "São Paulo",
+      "Itaquaquecetuba",
+      "Guarulhos",
+      "Suzano",
+      "Mogi das Cruzes",
+      "Arujá",
+      "Santa Isabel",
+      "Ferraz de Vasconcelos",
+      "Região Metropolitana de São Paulo",
+    ],
+  },
 };
 
-export default function SuporteTecnicoEmpresarial() {
-	const services = [
-		{
-			title: "Suporte Preventivo",
-			icon: "🛡️",
-			description:
-				"Manutenção regular para evitar problemas antes que aconteçam",
-			features: [
-				"Monitoramento 24/7 dos sistemas",
-				"Atualizações de segurança automáticas",
-				"Verificação periódica de backups",
-				"Relatórios mensais de performance",
-			],
-		},
-		{
-			title: "Correção de Falhas",
-			icon: "🔧",
-			description: "Resolução rápida de problemas técnicos e emergências",
-			features: [
-				"Tempo de resposta garantido por SLA",
-				"Suporte remoto e presencial",
-				"Equipe especializada disponível 24/7",
-				"Diagnóstico preciso e solução eficiente",
-			],
-		},
-		{
-			title: "Helpdesk Estruturado",
-			icon: "📞",
-			description: "Central de atendimento organizada e eficiente",
-			features: [
-				"Sistema de tickets organizado",
-				"Priorização por criticidade",
-				"Histórico completo de atendimentos",
-				"Comunicação transparente com o cliente",
-			],
-		},
-		{
-			title: "Monitoramento Proativo",
-			icon: "📊",
-			description: "Acompanhamento contínuo da saúde dos sistemas",
-			features: [
-				"Alertas automáticos de problemas",
-				"Dashboards em tempo real",
-				"Análise de tendências",
-				"Prevenção de falhas críticas",
-			],
-		},
-	];
+export const metadata: Metadata = generateAdvancedSEO(seoConfig);
 
-	const slaLevels = [
-		{
-			level: "Crítico",
-			description: "Sistemas que afetam a operação principal",
-			response: "1 hora",
-			color: "border-red-500",
-			textColor: "text-red-400",
-		},
-		{
-			level: "Alta",
-			description: "Problemas que impactam produtividade",
-			response: "4 horas",
-			color: "border-orange-500",
-			textColor: "text-orange-400",
-		},
-		{
-			level: "Média",
-			description: "Questões que afetam funcionalidades específicas",
-			response: "24 horas",
-			color: "border-yellow-500",
-			textColor: "text-yellow-400",
-		},
-		{
-			level: "Baixa",
-			description: "Melhorias e consultas gerais",
-			response: "72 horas",
-			color: "border-green-500",
-			textColor: "text-green-400",
-		},
-	];
+const structuredData = generateStructuredData(seoConfig);
 
-	const benefits = [
-		{
-			title: "Disponibilidade 24/7",
-			description:
-				"Suporte técnico disponível todos os dias, incluindo fins de semana e feriados",
-			icon: "🕐",
-		},
-		{
-			title: "Equipe Especializada",
-			description:
-				"Profissionais certificados com ampla experiência em diferentes tecnologias",
-			icon: "👥",
-		},
-		{
-			title: "SLA Garantido",
-			description:
-				"Tempos de resposta garantidos por contrato com penalidades por descumprimento",
-			icon: "⚡",
-		},
-		{
-			title: "Monitoramento Proativo",
-			description:
-				"Detecção antecipada de problemas antes que afetem sua operação",
-			icon: "📈",
-		},
-		{
-			title: "Relatórios Detalhados",
-			description:
-				"Acompanhamento mensal com métricas de performance e disponibilidade",
-			icon: "📋",
-		},
-		{
-			title: "Escalabilidade",
-			description:
-				"Suporte que cresce junto com sua empresa, adaptando-se às suas necessidades",
-			icon: "📊",
-		},
-	];
+export default function SuporteTecnicoEmpresarialPage() {
+  return (
+    <AdvancedSEOProvider
+      structuredData={structuredData}
+      breadcrumbs={seoConfig.breadcrumbs}
+      faq={seoConfig.faq}
+    >
+      <ContentOptimization targetKeywords={seoConfig.keywords}>
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900">
+          <div className="container mx-auto px-4 py-16">
+            <SEOBreadcrumb items={seoConfig.breadcrumbs} />
+            
+            <header className="text-center mb-16">
+              <OptimizedHeading level={1} className="text-5xl font-bold text-white mb-6">
+                Suporte Técnico <span className="text-cyan-400">Empresarial</span>
+              </OptimizedHeading>
+              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Soluções de suporte técnico especializado para empresas de grande porte. 
+                SLAs garantidos, monitoramento 24/7 e equipe dedicada para ambientes corporativos complexos.
+              </p>
+            </header>
 
-	return (
-		<div className="container mx-auto px-4 py-16">
-			{/* Hero Section */}
-			<section className="text-center mb-16">
-				<h1 className="text-5xl font-bold mb-6 text-brand-gold-500">
-					Suporte Técnico Empresarial
-				</h1>
-				<p className="text-xl text-brand-gray-300 max-w-3xl mx-auto">
-					Suporte técnico especializado 24/7 para garantir a continuidade da sua
-					operação. SLA garantido, monitoramento proativo e equipe altamente
-					qualificada.
-				</p>
-			</section>
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+              <div className="space-y-8">
+                <div className="bg-white/5 rounded-xl p-6">
+                  <OptimizedHeading level={2} className="text-2xl font-bold text-white mb-4">
+                    Nossos Serviços Empresariais
+                  </OptimizedHeading>
+                  <OptimizedList items={[
+                    "Suporte técnico 24/7 com SLA garantido",
+                    "Monitoramento proativo de infraestrutura",
+                    "Help desk corporativo especializado",
+                    "Manutenção preventiva de servidores",
+                    "Gestão de infraestrutura de TI",
+                    "Suporte para ambientes virtualizados",
+                    "Backup e recuperação de desastres",
+                    "Consultoria em segurança da informação",
+                    "Migração e modernização de sistemas",
+                    "Suporte para aplicações críticas",
+                  ]} />
+                </div>
 
-			{/* Services Overview */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Nossos Serviços de Suporte
-				</h2>
-				<div className="grid md:grid-cols-2 gap-8">
-					{services.map((service, index) => (
-						<div key={index} className="bg-brand-green-800 p-8 rounded-lg">
-							<div className="flex items-center gap-4 mb-6">
-								<span className="text-4xl">{service.icon}</span>
-								<div>
-									<h3 className="text-xl font-bold text-brand-gold-400">
-										{service.title}
-									</h3>
-									<p className="text-brand-gray-300 text-sm">
-										{service.description}
-									</p>
-								</div>
-							</div>
-							<ul className="space-y-3">
-								{service.features.map((feature, featureIndex) => (
-									<li
-										key={featureIndex}
-										className="flex items-start gap-2 text-brand-gray-300"
-									>
-										<span className="text-brand-green-500 mt-1">✓</span>
-										<span>{feature}</span>
-									</li>
-								))}
-							</ul>
-						</div>
-					))}
-				</div>
-			</section>
+                <div className="bg-gradient-to-br from-cyan-500/10 to-purple-500/10 rounded-xl p-6 border border-cyan-500/20">
+                  <OptimizedHeading level={2} className="text-2xl font-bold text-white mb-4">
+                    SLAs Garantidos
+                  </OptimizedHeading>
+                  <OptimizedTable
+                    headers={["Prioridade", "Tempo de Resposta", "Tempo de Resolução"]}
+                    rows={[
+                      ["Crítica", "1 hora", "4 horas"],
+                      ["Alta", "4 horas", "8 horas"],
+                      ["Média", "8 horas", "24 horas"],
+                      ["Baixa", "24 horas", "72 horas"],
+                    ]}
+                    caption="Tempos de resposta e resolução garantidos por contrato"
+                  />
+                </div>
+              </div>
 
-			{/* SLA Levels */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Níveis de SLA (Service Level Agreement)
-				</h2>
-				<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{slaLevels.map((sla, index) => (
-						<div
-							key={index}
-							className={`bg-brand-green-800 p-6 rounded-lg border-l-4 ${sla.color}`}
-						>
-							<h3 className={`text-lg font-bold mb-3 ${sla.textColor}`}>
-								{sla.level}
-							</h3>
-							<p className="text-brand-gray-300 text-sm mb-4">
-								{sla.description}
-							</p>
-							<div className="bg-brand-green-700 p-3 rounded-lg text-center">
-								<div className="text-xl font-bold text-brand-gold-500">
-									{sla.response}
-								</div>
-								<div className="text-brand-gray-300 text-xs">
-									Tempo de Resposta
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
+              <div className="space-y-8">
+                <div className="bg-white/5 rounded-xl p-6">
+                  <OptimizedHeading level={2} className="text-2xl font-bold text-white mb-4">
+                    Tecnologias Suportadas
+                  </OptimizedHeading>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <h3 className="font-semibold text-cyan-400 mb-2">Sistemas Operacionais</h3>
+                      <OptimizedList items={[
+                        "Windows Server 2016/2019/2022",
+                        "Linux (Ubuntu, CentOS, RHEL)",
+                        "VMware vSphere",
+                        "Microsoft Hyper-V",
+                      ]} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-cyan-400 mb-2">Aplicações</h3>
+                      <OptimizedList items={[
+                        "Microsoft Exchange",
+                        "SQL Server / MySQL",
+                        "Active Directory",
+                        "SAP / ERP Systems",
+                      ]} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-cyan-400 mb-2">Cloud & Virtualização</h3>
+                      <OptimizedList items={[
+                        "Microsoft Azure",
+                        "Amazon AWS",
+                        "Google Cloud Platform",
+                        "VMware Cloud",
+                      ]} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-cyan-400 mb-2">Segurança</h3>
+                      <OptimizedList items={[
+                        "Firewalls corporativos",
+                        "Antivírus empresarial",
+                        "Backup automatizado",
+                        "Monitoramento de segurança",
+                      ]} />
+                    </div>
+                  </div>
+                </div>
 
-			{/* Benefits */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Por que Escolher Nosso Suporte?
-				</h2>
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{benefits.map((benefit, index) => (
-						<div
-							key={index}
-							className="bg-brand-green-800 p-6 rounded-lg text-center"
-						>
-							<div className="text-4xl mb-4">{benefit.icon}</div>
-							<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-								{benefit.title}
-							</h3>
-							<p className="text-brand-gray-300 text-sm">
-								{benefit.description}
-							</p>
-						</div>
-					))}
-				</div>
-			</section>
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-500/20">
+                  <OptimizedHeading level={2} className="text-2xl font-bold text-white mb-4">
+                    Monitoramento 24/7
+                  </OptimizedHeading>
+                  <OptimizedList items={[
+                    "Monitoramento contínuo de servidores",
+                    "Alertas automáticos por email/SMS",
+                    "Dashboard em tempo real",
+                    "Relatórios de performance mensais",
+                    "Análise proativa de problemas",
+                    "Prevenção de falhas críticas",
+                  ]} />
+                </div>
+              </div>
+            </section>
 
-			{/* Process Flow */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Como Funciona Nosso Processo
-				</h2>
-				<div className="grid md:grid-cols-4 gap-6">
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">📞</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							1. Solicitação
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Você entra em contato através de nossos canais: telefone, email,
-							chat ou sistema de tickets.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">⚡</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							2. Classificação
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Classificamos a prioridade conforme o impacto no seu negócio e
-							acionamos a equipe adequada.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">🔧</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							3. Resolução
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Nossa equipe especializada resolve o problema no tempo garantido
-							pelo SLA.
-						</p>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg text-center">
-						<div className="text-4xl mb-4">📋</div>
-						<h3 className="text-lg font-bold mb-3 text-brand-gold-400">
-							4. Documentação
-						</h3>
-						<p className="text-brand-gray-300 text-sm">
-							Documentamos a solução e incluímos no seu histórico para
-							referência futura.
-						</p>
-					</div>
-				</div>
-			</section>
+            <section className="mb-16">
+              <OptimizedHeading level={2} className="text-3xl font-bold text-white mb-8 text-center">
+                Benefícios do Suporte Empresarial
+              </OptimizedHeading>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-white/5 rounded-xl p-6 text-center">
+                  <div className="text-4xl mb-4">⚡</div>
+                  <h3 className="text-xl font-bold text-white mb-3">Resposta Rápida</h3>
+                  <p className="text-gray-300">
+                    Tempos de resposta garantidos por SLA, com priorização de problemas críticos 
+                    que afetam a operação da empresa.
+                  </p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-6 text-center">
+                  <div className="text-4xl mb-4">🛡️</div>
+                  <h3 className="text-xl font-bold text-white mb-3">Prevenção Proativa</h3>
+                  <p className="text-gray-300">
+                    Monitoramento contínuo e manutenção preventiva para evitar problemas 
+                    antes que afetem a produtividade.
+                  </p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-6 text-center">
+                  <div className="text-4xl mb-4">📊</div>
+                  <h3 className="text-xl font-bold text-white mb-3">Relatórios Detalhados</h3>
+                  <p className="text-gray-300">
+                    Relatórios mensais com métricas de performance, disponibilidade e 
+                    análise de tendências para tomada de decisão.
+                  </p>
+                </div>
+              </div>
+            </section>
 
-			{/* Technologies */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Tecnologias que Suportamos
-				</h2>
-				<div className="grid md:grid-cols-3 gap-8">
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Sistemas Operacionais
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• Windows Server 2016/2019/2022</li>
-							<li>• Linux (Ubuntu, CentOS, Red Hat)</li>
-							<li>• macOS para ambientes mistos</li>
-							<li>• Virtualização (VMware, Hyper-V)</li>
-						</ul>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Aplicações de Negócio
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• Microsoft 365 / Office 365</li>
-							<li>• Google Workspace</li>
-							<li>• ERPs (SAP, Oracle, Totvs)</li>
-							<li>• CRMs (Salesforce, HubSpot)</li>
-						</ul>
-					</div>
-					<div className="bg-brand-green-800 p-6 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Infraestrutura
-						</h3>
-						<ul className="space-y-2 text-brand-gray-300">
-							<li>• Servidores físicos e virtuais</li>
-							<li>• Storage e backup</li>
-							<li>• Redes e segurança</li>
-							<li>• Cloud (AWS, Azure, GCP)</li>
-						</ul>
-					</div>
-				</div>
-			</section>
+            <SEOFAQ faqs={seoConfig.faq} />
 
-			{/* Pricing */}
-			<section className="mb-16">
-				<h2 className="text-3xl font-bold text-center mb-12 text-brand-gray-200">
-					Planos de Suporte
-				</h2>
-				<div className="grid md:grid-cols-3 gap-8">
-					<div className="bg-brand-green-800 p-8 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Básico
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							R$ 2.500/mês
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Suporte 8x5 (seg-sex 8h-18h)</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Até 10 usuários</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>SLA de 24h para problemas médios</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Relatório mensal básico</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
-						>
-							Solicitar Orçamento
-						</a>
-					</div>
-					<div className="bg-brand-green-800 p-8 rounded-lg border-2 border-brand-gold-500 relative">
-						<div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-							<span className="bg-brand-gold-500 text-black px-4 py-1 rounded-full text-sm font-semibold">
-								Mais Popular
-							</span>
-						</div>
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Profissional
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							R$ 5.500/mês
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Suporte 24/7</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Até 50 usuários</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Monitoramento proativo</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>SLA de 4h para problemas altos</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Relatório detalhado mensal</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
-						>
-							Solicitar Orçamento
-						</a>
-					</div>
-					<div className="bg-brand-green-800 p-8 rounded-lg">
-						<h3 className="text-xl font-bold mb-4 text-brand-gold-400">
-							Enterprise
-						</h3>
-						<div className="text-3xl font-bold text-brand-gold-500 mb-6">
-							Sob Consulta
-						</div>
-						<ul className="space-y-3 text-brand-gray-300 mb-8">
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Suporte 24/7 com engenheiro dedicado</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Usuários ilimitados</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>SLA de 1h para problemas críticos</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Consultoria estratégica incluída</span>
-							</li>
-							<li className="flex items-start gap-2">
-								<span className="text-brand-green-500 mt-1">✓</span>
-								<span>Relatório executivo personalizado</span>
-							</li>
-						</ul>
-						<a
-							href="/contact"
-							className="w-full bg-brand-gold-500 text-black py-3 rounded-lg font-semibold text-center block hover:bg-brand-gold-400 transition-colors"
-						>
-							Falar com Consultor
-						</a>
-					</div>
-				</div>
-			</section>
-
-			{/* CTA */}
-			<section className="text-center bg-brand-green-800 p-12 rounded-lg">
-				<h2 className="text-3xl font-bold mb-6 text-brand-gray-200">
-					Pronto para Ter Suporte Técnico de Excelência?
-				</h2>
-				<p className="text-xl text-brand-gray-300 mb-8 max-w-2xl mx-auto">
-					Garanta a continuidade da sua operação com nosso suporte técnico
-					especializado. SLA garantido e equipe disponível 24/7.
-				</p>
-				<div className="flex flex-col sm:flex-row gap-4 justify-center">
-					<a
-						href="/contact"
-						className="bg-brand-gold-500 text-black px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-400 transition-colors"
-					>
-						Solicitar Orçamento
-					</a>
-					<a
-						href="tel:+5511999999999"
-						className="border border-brand-gold-500 text-brand-gold-500 px-8 py-3 rounded-lg font-semibold hover:bg-brand-gold-500 hover:text-black transition-colors"
-					>
-						Ligar Agora
-					</a>
-				</div>
-			</section>
-		</div>
-	);
+            <section className="text-center mt-16">
+              <OptimizedHeading level={2} className="text-3xl font-bold text-white mb-6">
+                Pronto para otimizar seu suporte técnico empresarial?
+              </OptimizedHeading>
+              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+                Entre em contato conosco e descubra como podemos elevar a qualidade do seu 
+                suporte técnico com soluções especializadas para empresas.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="/contact"
+                  className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-cyan-600 hover:to-purple-700 transition-all duration-300"
+                >
+                  Solicitar Proposta
+                </a>
+                <a
+                  href="tel:+5511994396469"
+                  className="border border-cyan-400 text-cyan-400 px-8 py-3 rounded-lg font-semibold hover:bg-cyan-400 hover:text-white transition-all duration-300"
+                >
+                  Ligar Agora
+                </a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </ContentOptimization>
+    </AdvancedSEOProvider>
+  );
 }

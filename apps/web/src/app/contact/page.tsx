@@ -1,12 +1,10 @@
 import { ContactPageSeo } from "@/components/sections/contact-page-seo";
-import { ContactChatwootBridge } from "@/components/sections/contact-chatwoot-bridge";
 import Contact from "@/components/sections/contact";
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 overflow-hidden">
       <ContactPageSeo />
-      <ContactChatwootBridge />
       {/* Hero Section Simples */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">

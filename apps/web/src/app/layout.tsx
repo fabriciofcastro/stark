@@ -9,10 +9,12 @@ import { JsonLd, organizationData } from "@/components/seo/structured-data";
 import {
   RevealOnScroll,
   HashRedirector,
+  GA4,
 } from "@/components/wrappers";
-import { AnalyticsProvider } from "@/lib/analytics-unified";
+import { AdvancedSEOProvider } from "@/components/seo/advanced-seo-provider";
+import { generatePerformanceMeta, generateSecurityMeta } from "@/lib/seo-advanced";
 import ModernCookieConsent from "@/components/ui/modern-cookie-consent";
-// Chat system will be recreated
+import { ChatWidget } from "@/components/chat";
 import Toaster from "@/components/ui/toast";
 import { SITE_URL } from "@/lib/site";
 
@@ -108,7 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             console.log('Escalation ticket created:', ticket.id);
           }}
         />
-        <AnalyticsProvider />
+        <GA4 />
         <ModernCookieConsent />
         <Toaster />
       </body>
