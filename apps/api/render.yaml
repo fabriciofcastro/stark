@@ -1,0 +1,53 @@
+# Render Configuration for STARK Solutions API
+# Configuração para deploy no Render.com
+
+services:
+  - type: web
+    name: stark-solutions-api
+    env: node
+    plan: starter
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start:prod
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CHATWOOT_ACCESS_TOKEN
+        sync: false
+      - key: CHATWOOT_ACCOUNT_ID
+        sync: false
+      - key: CHATWOOT_INBOX_ID
+        sync: false
+      - key: RECAPTCHA_SECRET_KEY
+        sync: false
+      - key: NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+        sync: false
+      - key: NOTIFICATION_EMAIL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: RATE_LIMIT_REQUESTS
+        value: "100"
+      - key: RATE_LIMIT_WINDOW
+        value: "900000"
+      - key: SECURITY_LEVEL
+        value: "high"
+    autoDeploy: true
+    branch: main
+    rootDir: apps/api
