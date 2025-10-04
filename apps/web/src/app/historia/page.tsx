@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -273,14 +274,16 @@ const HistoriaPage = () => {
                 Assistir Vídeo da História
               </motion.button>
               
-              <motion.button
-                className="px-10 py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3 text-lg"
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Users className="w-6 h-6" />
-                Conhecer Nossa Equipe
-              </motion.button>
+              <Link href="/equipe">
+                <motion.button
+                  className="px-10 py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3 text-lg"
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Users className="w-6 h-6" />
+                  Conhecer Nossa Equipe
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

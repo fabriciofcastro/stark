@@ -23,9 +23,55 @@ function createErrorResponse(message: string, status = 400) {
   );
 }
 
+// Funções para mascaramento de PII
+function maskEmail(email: string): string {
+  if (!email || !email.includes('@')) return email;
+  const [local, domain] = email.split('@');
+  const maskedLocal = local.length > 2 
+    ? `${local[0]}${'*'.repeat(local.length - 2)}${local[local.length - 1]}`
+    : local;
+  return `${maskedLocal}@${domain}`;
+}
+
+function maskPhone(phone: string): string {
+  if (!phone) return phone;
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length < 8) return phone;
+  return `${digits.slice(0, 2)}****${digits.slice(-2)}`;
+}
+
+function maskName(name: string): string {
+  if (!name || name.length < 3) return name;
+  const words = name.split(' ');
+  return words.map(word => 
+    word.length > 2 
+      ? `${word[0]}${'*'.repeat(word.length - 2)}${word[word.length - 1]}`
+      : word
+  ).join(' ');
+}
+
+function sanitizeMessage(message: string): string {
+  // Remover possíveis dados sensíveis da mensagem
+  return message
+    .replace(/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/g, '[CPF_MASKED]') // CPF
+    .replace(/\b\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}\b/g, '[CNPJ_MASKED]') // CNPJ
+    .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[EMAIL_MASKED]'); // Email
+}
+
 async function verifyRecaptcha(token: string): Promise<boolean> {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
-  if (!secret) return true; // Skip if no secret configured
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  
+  // Se não há configuração de reCAPTCHA, rejeitar por segurança
+  if (!secret || !siteKey) {
+    console.error("reCAPTCHA not configured - rejecting request for security");
+    return false;
+  }
+
+  if (!token) {
+    console.error("reCAPTCHA token missing");
+    return false;
+  }
 
   try {
     const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
@@ -34,10 +80,21 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
       body: new URLSearchParams({ secret, response: token }),
     });
 
+    if (!response.ok) {
+      console.error("reCAPTCHA API error:", response.status);
+      return false;
+    }
+
     const data = await response.json() as {
       success?: boolean;
       score?: number;
+      'error-codes'?: string[];
     };
+
+    // Log erros específicos do reCAPTCHA
+    if (data['error-codes'] && data['error-codes'].length > 0) {
+      console.error("reCAPTCHA error codes:", data['error-codes']);
+    }
 
     return data.success === true && (data.score ?? 1) >= 0.3;
   } catch (error) {
@@ -67,16 +124,18 @@ async function sendToChatwoot(payload: ContactPayload): Promise<boolean> {
         source_id: "website-contact-form",
         inbox_id: chatwootInboxId,
         contact: {
-          name: payload.name,
-          email: payload.email,
-          phone_number: payload.phone,
+          name: maskName(payload.name),
+          email: maskEmail(payload.email),
+          phone_number: maskPhone(payload.phone),
           custom_attributes: {
             company: payload.company || "",
             service: payload.service,
+            original_email: payload.email, // Manter original para resposta
+            original_phone: payload.phone, // Manter original para resposta
           },
         },
         message: {
-          content: `**Serviço:** ${payload.service}\n\n**Mensagem:**\n${payload.message}`,
+          content: `**Serviço:** ${payload.service}\n\n**Mensagem:**\n${sanitizeMessage(payload.message)}`,
           message_type: "incoming",
         },
       }),
@@ -99,11 +158,23 @@ async function sendEmailNotification(payload: ContactPayload): Promise<boolean> 
 
   try {
     // Implementar integração com serviço de email (SendGrid, Resend, etc.)
-    // Por enquanto, apenas log
+    // Por enquanto, apenas log com dados mascarados
     console.log("Email notification would be sent:", {
       to: process.env.NOTIFICATION_EMAIL || "contato@starksolutions.com.br",
       subject: `Novo contato via site: ${payload.service}`,
-      payload,
+      payload: {
+        name: maskName(payload.name),
+        email: maskEmail(payload.email),
+        phone: maskPhone(payload.phone),
+        service: payload.service,
+        message: sanitizeMessage(payload.message),
+        company: payload.company,
+        // Dados originais para processamento interno (não logar)
+        originalData: {
+          email: payload.email,
+          phone: payload.phone,
+        }
+      },
     });
     
     return true;

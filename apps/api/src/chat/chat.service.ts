@@ -24,6 +24,7 @@ import { AnalyticsService } from './analytics.service';
 @Injectable()
 export class ChatService {
   private readonly logger = new Logger(ChatService.name);
+  private readonly BOT_USER_ID = 'stark-ai-assistant';
 
   constructor(
     private readonly prisma: PrismaService,
@@ -31,6 +32,39 @@ export class ChatService {
     private readonly notificationService: NotificationService,
     private readonly analyticsService: AnalyticsService,
   ) {}
+
+  // ===== GESTÃO DO USUÁRIO BOT =====
+
+  private async ensureBotUser() {
+    try {
+      let botUser = await this.prisma.user.findUnique({
+        where: { id: this.BOT_USER_ID },
+      });
+
+      if (!botUser) {
+        botUser = await this.prisma.user.create({
+          data: {
+            id: this.BOT_USER_ID,
+            name: 'STARK AI Assistant',
+            email: 'ai@starksolutions.com.br',
+            role: 'bot',
+            isOnline: true,
+            metadata: {
+              isSystemBot: true,
+              version: '1.0.0',
+              capabilities: ['chat', 'support', 'consultation'],
+            },
+          },
+        });
+        this.logger.log('Bot user created successfully');
+      }
+
+      return botUser;
+    } catch (error) {
+      this.logger.error('Error ensuring bot user:', error);
+      throw new BadRequestException('Failed to initialize bot user');
+    }
+  }
 
   // ===== GESTÃO DE USUÁRIOS =====
 
@@ -259,11 +293,14 @@ export class ChatService {
         userHistory: await this.getUserMessageHistory(sendMessageDto.sessionId),
       });
 
+      // Garantir que o usuário bot existe
+      await this.ensureBotUser();
+
       // Criar resposta do bot
       const botMessage = await this.prisma.chatMessage.create({
 			data: {
           sessionId: sendMessageDto.sessionId,
-          senderId: 'bot',
+          senderId: this.BOT_USER_ID, // Usar ID seguro do bot
           content: aiResponse.content,
           type: MessageType.TEXT,
           status: MessageStatus.SENT,
@@ -655,22 +692,112 @@ export class ChatService {
     }
   }
 
+  // Whitelist de configurações permitidas
+  private readonly ALLOWED_CONFIG_KEYS = [
+    'bot.name',
+    'bot.welcome_message',
+    'bot.fallback_message',
+    'bot.escalation_threshold',
+    'bot.working_hours.enabled',
+    'bot.working_hours.start',
+    'bot.working_hours.end',
+    'bot.working_hours.timezone',
+    'notification.email_enabled',
+    'notification.slack_enabled',
+    'notification.telegram_enabled',
+    'analytics.retention_days',
+    'analytics.auto_cleanup',
+    'security.rate_limit_enabled',
+    'security.max_requests_per_minute',
+    'ui.theme',
+    'ui.language',
+  ];
+
+  private validateConfigKey(key: string): boolean {
+    return this.ALLOWED_CONFIG_KEYS.includes(key);
+  }
+
+  private validateConfigValue(key: string, value: any): boolean {
+    // Validações específicas por tipo de configuração
+    switch (key) {
+      case 'bot.escalation_threshold':
+        return typeof value === 'number' && value >= 0 && value <= 1;
+      case 'bot.working_hours.start':
+      case 'bot.working_hours.end':
+        return typeof value === 'string' && /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(value);
+      case 'bot.working_hours.timezone':
+        return typeof value === 'string' && /^[A-Za-z_]+\/[A-Za-z_]+$/.test(value);
+      case 'analytics.retention_days':
+        return typeof value === 'number' && value >= 1 && value <= 365;
+      case 'security.max_requests_per_minute':
+        return typeof value === 'number' && value >= 1 && value <= 1000;
+      case 'notification.email_enabled':
+      case 'notification.slack_enabled':
+      case 'notification.telegram_enabled':
+      case 'bot.working_hours.enabled':
+      case 'analytics.auto_cleanup':
+      case 'security.rate_limit_enabled':
+        return typeof value === 'boolean';
+      case 'ui.theme':
+        return ['light', 'dark', 'auto'].includes(value);
+      case 'ui.language':
+        return ['pt-BR', 'en-US', 'es-ES'].includes(value);
+      default:
+        return typeof value === 'string' && value.length <= 1000;
+    }
+  }
+
   async updateSystemConfig(config: Record<string, any>) {
     try {
+      // Validar todas as chaves antes de fazer qualquer alteração
+      const invalidKeys = Object.keys(config).filter(key => !this.validateConfigKey(key));
+      if (invalidKeys.length > 0) {
+        throw new BadRequestException(`Invalid configuration keys: ${invalidKeys.join(', ')}`);
+      }
+
+      // Validar todos os valores
+      const invalidValues = Object.entries(config).filter(([key, value]) => 
+        !this.validateConfigValue(key, value)
+      );
+      if (invalidValues.length > 0) {
+        const invalidEntries = invalidValues.map(([key, value]) => `${key}: ${value}`);
+        throw new BadRequestException(`Invalid configuration values: ${invalidEntries.join(', ')}`);
+      }
+
       const updates = await Promise.all(
         Object.entries(config).map(([key, value]) =>
           this.prisma.systemConfig.upsert({
             where: { key },
-            update: { value, updatedAt: new Date() },
-            create: { key, value, category: 'general' },
+            update: { 
+              value, 
+              updatedAt: new Date(),
+              // Adicionar categoria baseada na chave
+              category: key.startsWith('bot.') ? 'bot' :
+                       key.startsWith('notification.') ? 'notification' :
+                       key.startsWith('analytics.') ? 'analytics' :
+                       key.startsWith('security.') ? 'security' :
+                       key.startsWith('ui.') ? 'ui' : 'general'
+            },
+            create: { 
+              key, 
+              value, 
+              category: key.startsWith('bot.') ? 'bot' :
+                       key.startsWith('notification.') ? 'notification' :
+                       key.startsWith('analytics.') ? 'analytics' :
+                       key.startsWith('security.') ? 'security' :
+                       key.startsWith('ui.') ? 'ui' : 'general'
+            },
           })
         )
       );
 
-      this.logger.log(`Updated ${updates.length} system configurations`);
+      this.logger.log(`Updated ${updates.length} system configurations with validation`);
       return updates;
     } catch (error) {
       this.logger.error('Error updating system config:', error);
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
       throw new BadRequestException('Failed to update system configuration');
     }
   }

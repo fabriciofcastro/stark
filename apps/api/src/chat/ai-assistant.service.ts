@@ -5,7 +5,7 @@ import { MessageType } from './enums';
 @Injectable()
 export class AIAssistantService {
   private readonly logger = new Logger(AIAssistantService.name);
-  private readonly botUserId = 'bot';
+  private readonly botUserId = 'stark-ai-assistant';
 
   // Configuração do bot
   private readonly botConfig: BotConfig = {
