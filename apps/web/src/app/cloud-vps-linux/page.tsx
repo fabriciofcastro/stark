@@ -630,6 +630,440 @@ export default function CloudVpsLinuxPage() {
         </div>
       </section>
 
+      {/* Infrastructure Details Section */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Infraestrutura Detalhada
+          </motion.h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Server Specifications */}
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <motion.div
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    boxShadow: [
+                      "0 0 20px rgba(59, 130, 246, 0.4)",
+                      "0 0 40px rgba(6, 182, 212, 0.7)",
+                      "0 0 20px rgba(59, 130, 246, 0.4)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Server className="w-8 h-8 text-white" />
+                </motion.div>
+                <h3 className="text-3xl font-bold text-white">Especificações dos Servidores</h3>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { spec: "CPU", value: "Intel Xeon E5-2686 v4", cores: "18 cores / 36 threads", clock: "2.3 GHz base" },
+                  { spec: "RAM", value: "DDR4 ECC", capacity: "32GB - 128GB", speed: "2400 MHz" },
+                  { spec: "Storage", value: "NVMe SSD", capacity: "500GB - 4TB", iops: "100K+ IOPS" },
+                  { spec: "Network", value: "10 Gbps", bandwidth: "Unlimited", latency: "<1ms" },
+                  { spec: "Backup", value: "Snapshots diários", retention: "30 dias", restore: "Instantâneo" },
+                  { spec: "Monitoring", value: "24/7 NOC", uptime: "99.9% SLA", response: "<5min" }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.spec}
+                    className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold text-white">{item.spec}</h4>
+                      <span className="text-blue-400 font-bold">{item.value}</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-sm text-gray-300">
+                      <span>{item.cores || item.capacity || item.bandwidth || item.retention || item.uptime || item.speed}</span>
+                      <span>{item.clock || item.iops || item.latency || item.restore || item.response || item.speed}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Deployment Options */}
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <motion.div
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-emerald-500"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    boxShadow: [
+                      "0 0 20px rgba(16, 185, 129, 0.4)",
+                      "0 0 40px rgba(5, 150, 105, 0.7)",
+                      "0 0 20px rgba(16, 185, 129, 0.4)",
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Cloud className="w-8 h-8 text-white" />
+                </motion.div>
+                <h3 className="text-3xl font-bold text-white">Opções de Deploy</h3>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { option: "VPS Dedicado", description: "Recursos exclusivos para máxima performance", price: "A partir de R$ 299/mês", features: ["CPU dedicada", "SSD NVMe", "IP dedicado"] },
+                  { option: "Cloud Instances", description: "Escalabilidade automática conforme demanda", price: "A partir de R$ 199/mês", features: ["Auto-scaling", "Load balancing", "CDN global"] },
+                  { option: "Kubernetes Cluster", description: "Orquestração de containers para microserviços", price: "A partir de R$ 499/mês", features: ["K8s managed", "Helm charts", "Service mesh"] },
+                  { option: "Bare Metal", description: "Servidores físicos para workloads intensivos", price: "A partir de R$ 899/mês", features: ["Hardware dedicado", "Performance máxima", "Customização total"] },
+                  { option: "Hybrid Cloud", description: "Combinação de cloud pública e privada", price: "Sob consulta", features: ["Multi-cloud", "Data sovereignty", "Compliance"] },
+                  { option: "Edge Computing", description: "Processamento próximo aos usuários finais", price: "A partir de R$ 399/mês", features: ["Low latency", "Global distribution", "Real-time processing"] }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.option}
+                    className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold text-white">{item.option}</h4>
+                      <span className="text-green-400 font-bold">{item.price}</span>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-3">{item.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {item.features.map((feature, featureIndex) => (
+                        <span key={feature} className="px-2 py-1 bg-white/10 rounded-full text-xs text-gray-300 border border-white/20">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Advanced Monitoring Section */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Monitoramento Avançado
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Performance Metrics",
+                icon: Activity,
+                metrics: [
+                  { name: "CPU Usage", value: "23%", trend: "stable" },
+                  { name: "Memory", value: "4.2GB/16GB", trend: "optimal" },
+                  { name: "Disk I/O", value: "125 MB/s", trend: "low" },
+                  { name: "Network", value: "45 Mbps", trend: "normal" }
+                ],
+                color: "from-blue-500 to-cyan-500"
+              },
+              {
+                title: "Security Alerts",
+                icon: Shield,
+                metrics: [
+                  { name: "Firewall", value: "Active", trend: "protected" },
+                  { name: "SSL Status", value: "Valid", trend: "secure" },
+                  { name: "Vulnerabilities", value: "0", trend: "clean" },
+                  { name: "Login Attempts", value: "12", trend: "normal" }
+                ],
+                color: "from-red-500 to-orange-500"
+              },
+              {
+                title: "Backup Status",
+                icon: Database,
+                metrics: [
+                  { name: "Last Backup", value: "2h ago", trend: "recent" },
+                  { name: "Backup Size", value: "2.3GB", trend: "normal" },
+                  { name: "Retention", value: "30 days", trend: "configured" },
+                  { name: "Restore Time", value: "<5min", trend: "fast" }
+                ],
+                color: "from-green-500 to-emerald-500"
+              },
+              {
+                title: "Network Health",
+                icon: Network,
+                metrics: [
+                  { name: "Latency", value: "12ms", trend: "excellent" },
+                  { name: "Packet Loss", value: "0%", trend: "perfect" },
+                  { name: "Bandwidth", value: "950 Mbps", trend: "high" },
+                  { name: "Uptime", value: "99.97%", trend: "reliable" }
+                ],
+                color: "from-purple-500 to-pink-500"
+              }
+            ].map((monitor, index) => {
+              const IconComponent = monitor.icon;
+              return (
+                <motion.div
+                  key={monitor.title}
+                  className="group relative"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                >
+                  <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${monitor.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                    
+                    <motion.div
+                      className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${monitor.color} mb-6`}
+                      whileHover={{ 
+                        scale: 1.2, 
+                        rotate: 360,
+                        boxShadow: "0 0 30px rgba(59, 130, 246, 0.3)"
+                      }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    >
+                      <IconComponent className="w-8 h-8 text-white" />
+                    </motion.div>
+
+                    <div className="relative z-10">
+                      <h3 className="text-xl font-bold text-white mb-6 group-hover:text-blue-300 transition-colors">
+                        {monitor.title}
+                      </h3>
+                      
+                      <div className="space-y-3">
+                        {monitor.metrics.map((metric, metricIndex) => (
+                          <motion.div
+                            key={metric.name}
+                            className="flex justify-between items-center"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: metricIndex * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <span className="text-gray-300 text-sm">{metric.name}</span>
+                            <div className="flex items-center gap-2">
+                              <span className="text-white font-semibold text-sm">{metric.value}</span>
+                              <div className={`w-2 h-2 rounded-full ${
+                                metric.trend === 'stable' || metric.trend === 'optimal' || metric.trend === 'low' || metric.trend === 'normal' || metric.trend === 'recent' || metric.trend === 'configured' || metric.trend === 'excellent' || metric.trend === 'perfect' || metric.trend === 'high' || metric.trend === 'reliable' || metric.trend === 'protected' || metric.trend === 'secure' || metric.trend === 'clean' || metric.trend === 'fast'
+                                  ? 'bg-green-400'
+                                  : metric.trend === 'warning'
+                                  ? 'bg-yellow-400'
+                                  : 'bg-red-400'
+                              }`}></div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${monitor.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies Section */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Cases de Sucesso
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                company: "E-commerce Global",
+                industry: "Varejo Online",
+                challenge: "Alta demanda em datas comemorativas",
+                solution: "Auto-scaling com Kubernetes",
+                results: [
+                  "300% aumento em capacidade",
+                  "99.9% uptime durante Black Friday",
+                  "Redução de 60% nos custos operacionais"
+                ],
+                technologies: ["Kubernetes", "Docker", "AWS", "Terraform"],
+                image: "🛒"
+              },
+              {
+                company: "Fintech Startup",
+                industry: "Serviços Financeiros",
+                challenge: "Compliance e segurança rigorosa",
+                solution: "Infraestrutura segura com monitoramento",
+                results: [
+                  "Zero incidentes de segurança",
+                  "Conformidade PCI DSS",
+                  "Deploy 50% mais rápido"
+                ],
+                technologies: ["AWS", "Vault", "Prometheus", "Grafana"],
+                image: "💰"
+              },
+              {
+                company: "SaaS Analytics",
+                industry: "Business Intelligence",
+                challenge: "Processamento de big data em tempo real",
+                solution: "Pipeline de dados otimizado",
+                results: [
+                  "Processamento 10x mais rápido",
+                  "Custos reduzidos em 40%",
+                  "Escalabilidade automática"
+                ],
+                technologies: ["Kafka", "ClickHouse", "Kubernetes", "Redis"],
+                image: "📊"
+              },
+              {
+                company: "Media Streaming",
+                industry: "Entretenimento",
+                challenge: "Distribuição global de conteúdo",
+                solution: "CDN e edge computing",
+                results: [
+                  "Latência reduzida em 80%",
+                  "Cobertura em 50+ países",
+                  "99.99% disponibilidade"
+                ],
+                technologies: ["CloudFlare", "AWS CloudFront", "Lambda", "S3"],
+                image: "🎬"
+              },
+              {
+                company: "Healthcare Platform",
+                industry: "Saúde Digital",
+                challenge: "LGPD e HIPAA compliance",
+                solution: "Infraestrutura compliant e auditável",
+                results: [
+                  "100% compliance LGPD",
+                  "Auditorias aprovadas",
+                  "Backup automático e seguro"
+                ],
+                technologies: ["Azure", "PostgreSQL", "Backup Vault", "Monitor"],
+                image: "🏥"
+              },
+              {
+                company: "IoT Manufacturing",
+                industry: "Indústria 4.0",
+                challenge: "Conectividade de dispositivos IoT",
+                solution: "Edge computing e MQTT broker",
+                results: [
+                  "10.000+ dispositivos conectados",
+                  "Latência <50ms",
+                  "Monitoramento em tempo real"
+                ],
+                technologies: ["MQTT", "InfluxDB", "Grafana", "Edge Nodes"],
+                image: "🏭"
+              }
+            ].map((case_study, index) => (
+              <motion.div
+                key={case_study.company}
+                className="group relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.02 }}
+              >
+                <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="text-4xl">{case_study.image}</div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                          {case_study.company}
+                        </h3>
+                        <p className="text-blue-400 text-sm">{case_study.industry}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Desafio:</h4>
+                      <p className="text-gray-300 text-sm mb-3">{case_study.challenge}</p>
+                      
+                      <h4 className="text-sm font-semibold text-gray-400 mb-2">Solução:</h4>
+                      <p className="text-gray-300 text-sm mb-4">{case_study.solution}</p>
+                    </div>
+
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-gray-400 mb-3">Resultados:</h4>
+                      <ul className="space-y-2">
+                        {case_study.results.map((result, resultIndex) => (
+                          <motion.li
+                            key={result}
+                            className="flex items-start gap-2 text-gray-300 text-sm"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: resultIndex * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <CheckCircle className="w-3 h-3 text-green-400 mt-0.5 flex-shrink-0" />
+                            <span>{result}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-400 mb-3">Tecnologias:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {case_study.technologies.map((tech, techIndex) => (
+                          <motion.span
+                            key={tech}
+                            className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300 border border-white/20"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: techIndex * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            {tech}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
