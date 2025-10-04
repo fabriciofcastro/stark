@@ -29,7 +29,7 @@ import {
   Cloud,
   Palette
 } from "lucide-react";
-import { faker } from "@faker-js/faker";
+// Removido faker para evitar problemas de hidratação
 
 interface TeamMember {
   id: string;
@@ -65,68 +65,113 @@ const Team = () => {
   const { scrollYProgress } = useScroll();
   const scrollPercentage = useTransform(scrollYProgress, [0, 0.3, 1], [0, 1, 1]);
 
-  // Gerar dados da equipe com Faker.js
+  // Dados estáticos da equipe para evitar problemas de hidratação
   useEffect(() => {
-    const departments = [
-      "Desenvolvimento", "Infraestrutura", "Segurança", "DevOps", 
-      "Cloud Computing", "Inteligência Artificial", "UX/UI", "Gestão"
-    ];
-    
-    const skills = [
-      "React", "Node.js", "Python", "Java", "AWS", "Azure", "Docker", 
-      "Kubernetes", "Cybersecurity", "Machine Learning", "Blockchain",
-      "Microservices", "API Development", "Database Design", "System Architecture"
+    const members: TeamMember[] = [
+      {
+        id: "1",
+        name: "Fernando Silva",
+        role: "CEO & Fundador",
+        department: "Gestão",
+        bio: "Visionário da tecnologia com mais de 15 anos de experiência em transformação digital. Liderou mais de 200 projetos de migração para cloud e implementação de soluções de IA.",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        skills: ["Liderança", "Estratégia", "Cloud Computing", "IA", "Blockchain"],
+        experience: 15,
+        location: "São Paulo, SP",
+        email: "fernando@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/fernando-silva-stark",
+        github: "https://github.com/fernando-stark",
+        certifications: ["AWS Certified Solutions Architect", "CISSP", "PMP"],
+        achievements: ["Liderou migração para cloud com 40% de redução de custos", "Implementou sistema de IA que processa 1M+ transações diárias"],
+        quote: "A tecnologia deve servir ao ser humano, não o contrário."
+      },
+      {
+        id: "2",
+        name: "Maria Santos",
+        role: "CTO",
+        department: "Desenvolvimento",
+        bio: "Especialista em arquitetura de sistemas e infraestrutura. Responsável pela arquitetura de mais de 100 sistemas distribuídos em produção.",
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+        skills: ["Microservices", "Kubernetes", "Docker", "API Development", "System Architecture"],
+        experience: 12,
+        location: "São Paulo, SP",
+        email: "maria@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/maria-santos-stark",
+        github: "https://github.com/maria-stark",
+        certifications: ["Kubernetes Certified Administrator", "Microsoft Azure Expert"],
+        achievements: ["Criou arquitetura que melhorou performance em 300%", "Estabeleceu práticas DevOps que reduziram deploys de horas para minutos"],
+        quote: "A simplicidade é a sofisticação suprema."
+      },
+      {
+        id: "3",
+        name: "João Oliveira",
+        role: "Especialista em Segurança",
+        department: "Segurança",
+        bio: "Analista de segurança da informação com foco em compliance e proteção de dados. Especialista em LGPD e frameworks de segurança.",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+        skills: ["Cybersecurity", "LGPD", "Compliance", "Penetration Testing", "Risk Assessment"],
+        experience: 10,
+        location: "São Paulo, SP",
+        email: "joao@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/joao-oliveira-stark",
+        github: "https://github.com/joao-stark",
+        certifications: ["Certified Ethical Hacker", "CompTIA Security+", "CISSP"],
+        achievements: ["Implementou sistema de segurança que reduziu vulnerabilidades em 95%", "Liderou implementação de LGPD em 50+ empresas"],
+        quote: "Segurança não é um produto, é um processo contínuo."
+      },
+      {
+        id: "4",
+        name: "Ana Costa",
+        role: "Especialista em Cloud",
+        department: "Cloud Computing",
+        bio: "Especialista em soluções cloud com foco em AWS e Azure. Responsável pela migração de mais de 500 servidores para cloud.",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+        skills: ["AWS", "Azure", "Cloud Architecture", "DevOps", "Infrastructure as Code"],
+        experience: 8,
+        location: "São Paulo, SP",
+        email: "ana@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/ana-costa-stark",
+        github: "https://github.com/ana-stark",
+        certifications: ["AWS Certified Solutions Architect", "Google Cloud Professional"],
+        achievements: ["Migrou 500+ servidores para cloud com zero downtime", "Reduziu custos de infraestrutura em 60%"],
+        quote: "A melhor infraestrutura é aquela que você nem percebe que existe."
+      },
+      {
+        id: "5",
+        name: "Carlos Lima",
+        role: "Especialista em IA",
+        department: "Inteligência Artificial",
+        bio: "Cientista de dados e especialista em machine learning. Desenvolveu modelos de IA que processam milhões de dados em tempo real.",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+        skills: ["Machine Learning", "Python", "TensorFlow", "Data Science", "Neural Networks"],
+        experience: 9,
+        location: "São Paulo, SP",
+        email: "carlos@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/carlos-lima-stark",
+        github: "https://github.com/carlos-stark",
+        certifications: ["Google Cloud Professional ML Engineer", "AWS Certified Machine Learning"],
+        achievements: ["Desenvolveu modelo de IA com 95% de precisão", "Criou sistema de recomendação que aumentou vendas em 30%"],
+        quote: "Dados são o novo petróleo, mas só têm valor se bem refinados."
+      },
+      {
+        id: "6",
+        name: "Patricia Rocha",
+        role: "Designer UX/UI",
+        department: "UX/UI",
+        bio: "Designer de experiência do usuário com foco em interfaces intuitivas e acessíveis. Especialista em design thinking e prototipagem.",
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+        skills: ["UX Design", "UI Design", "Figma", "Prototyping", "User Research"],
+        experience: 7,
+        location: "São Paulo, SP",
+        email: "patricia@starksolutions.com.br",
+        linkedin: "https://linkedin.com/in/patricia-rocha-stark",
+        github: "https://github.com/patricia-stark",
+        certifications: ["Google UX Design Certificate", "Adobe Certified Expert"],
+        achievements: ["Aumentou conversão de usuários em 45%", "Criou design system usado por 20+ produtos"],
+        quote: "Inovação é a chave para transformar desafios em oportunidades."
+      }
     ];
 
-    const certifications = [
-      "AWS Certified Solutions Architect", "Certified Ethical Hacker",
-      "Microsoft Azure Expert", "Google Cloud Professional", "CISSP",
-      "CompTIA Security+", "Kubernetes Certified Administrator"
-    ];
-
-    const achievements = [
-      "Liderou migração para cloud com 40% de redução de custos",
-      "Implementou sistema de segurança que reduziu vulnerabilidades em 95%",
-      "Desenvolveu aplicação que processa 1M+ transações diárias",
-      "Criou arquitetura que melhorou performance em 300%",
-      "Estabeleceu práticas DevOps que reduziram deploys de horas para minutos"
-    ];
-
-    const quotes = [
-      "A tecnologia deve servir ao ser humano, não o contrário.",
-      "Inovação é a chave para transformar desafios em oportunidades.",
-      "Segurança não é um produto, é um processo contínuo.",
-      "A melhor infraestrutura é aquela que você nem percebe que existe.",
-      "Código limpo é código que funciona e é fácil de manter.",
-      "A simplicidade é a sofisticação suprema.",
-      "Dados são o novo petróleo, mas só têm valor se bem refinados."
-    ];
-
-    const generateTeamMember = (): TeamMember => {
-      const department = faker.helpers.arrayElement(departments);
-      const memberSkills = faker.helpers.arrayElements(skills, { min: 3, max: 8 });
-      
-      return {
-        id: faker.string.uuid(),
-        name: faker.person.fullName(),
-        role: faker.person.jobTitle(),
-        department,
-        bio: faker.lorem.paragraphs(2),
-        avatar: faker.image.avatar(),
-        skills: memberSkills,
-        experience: faker.number.int({ min: 2, max: 15 }),
-        location: `${faker.location.city()}, ${faker.location.state()}`,
-        email: faker.internet.email(),
-        linkedin: `https://linkedin.com/in/${faker.helpers.slugify(faker.person.fullName())}`,
-        github: `https://github.com/${faker.helpers.slugify(faker.person.firstName())}`,
-        certifications: faker.helpers.arrayElements(certifications, { min: 1, max: 4 }),
-        achievements: faker.helpers.arrayElements(achievements, { min: 1, max: 3 }),
-        quote: faker.helpers.arrayElement(quotes)
-      };
-    };
-
-    // Gerar 12 membros da equipe
-    const members = Array.from({ length: 12 }, generateTeamMember);
     setTeamMembers(members);
   }, []);
 
