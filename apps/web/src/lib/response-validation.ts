@@ -13,7 +13,7 @@ export const apiResponseSchema = z.object({
   message: z.string().optional(),
   timestamp: z.string().optional(),
   code: z.string().optional(),
-  details: z.record(z.any()).optional()
+  details: z.record(z.string(), z.any()).optional()
 });
 
 export const chatResponseSchema = z.object({
@@ -28,7 +28,7 @@ export const chatResponseSchema = z.object({
       name: z.string(),
       type: z.enum(['user', 'bot', 'human'])
     }),
-    metadata: z.record(z.any()).optional(),
+    metadata: z.record(z.string(), z.any()).optional(),
     status: z.enum(['sent', 'delivered', 'read', 'failed']).optional()
   }).optional(),
   session: z.object({
@@ -62,7 +62,7 @@ export const userDataResponseSchema = z.object({
     email: z.string().email(),
     role: z.enum(['user', 'admin', 'moderator']),
     permissions: z.array(z.string()).optional(),
-    metadata: z.record(z.any()).optional(),
+    metadata: z.record(z.string(), z.any()).optional(),
     createdAt: z.string(),
     updatedAt: z.string()
   }).optional(),
@@ -77,7 +77,7 @@ export const analyticsResponseSchema = z.object({
     activeSessions: z.number(),
     responseTime: z.number(),
     satisfaction: z.number().optional(),
-    metrics: z.record(z.any()).optional()
+    metrics: z.record(z.string(), z.any()).optional()
   }).optional(),
   error: z.string().optional(),
   timestamp: z.string()
@@ -96,7 +96,7 @@ export function validateApiResponse(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -123,7 +123,7 @@ export function validateChatResponse(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -150,7 +150,7 @@ export function validateContactFormResponse(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -177,7 +177,7 @@ export function validateUserDataResponse(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -204,7 +204,7 @@ export function validateAnalyticsResponse(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code

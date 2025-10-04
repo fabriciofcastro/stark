@@ -127,7 +127,7 @@ export const trackEvent = (
 
     // Vercel Analytics
     if (window.va) {
-      window.va("track", action, { category, label, value });
+      window.va("event", action);
     }
   } catch (error) {
     console.warn("Analytics tracking error:", error);
@@ -185,7 +185,7 @@ export const trackWebVitals = (metric: {
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
-    va?: (...args: any[]) => void;
+    va?: (event: "beforeSend" | "event" | "pageview", properties?: unknown) => void;
     dataLayer?: any[];
   }
 }

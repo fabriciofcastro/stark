@@ -98,7 +98,7 @@ export const chatMessageSchema = z.object({
     page: z.string().max(200).optional(),
     referrer: z.string().max(500).optional(),
     userAgent: z.string().max(500).optional(),
-    ip: z.string().ip().optional()
+    ip: z.string().optional()
   }).optional()
 });
 
@@ -124,7 +124,7 @@ export const userDataSchema = z.object({
     .max(50, 'Muitas permissões')
     .optional(),
   
-  metadata: z.record(z.any())
+  metadata: z.record(z.string(), z.any())
     .optional()
 });
 
@@ -141,7 +141,7 @@ export function validateContactForm(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -168,7 +168,7 @@ export function validateChatMessage(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code
@@ -195,7 +195,7 @@ export function validateUserData(data: unknown) {
       return {
         success: false,
         data: null,
-        errors: error.errors.map(err => ({
+        errors: error.issues.map(err => ({
           field: err.path.join('.'),
           message: err.message,
           code: err.code

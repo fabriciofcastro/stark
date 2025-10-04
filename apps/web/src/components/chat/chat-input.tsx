@@ -199,7 +199,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
       mediaRecorder.onstop = () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        const audioFile = new File([audioBlob], 'audio-message.wav', { type: 'audio/wav' });
+        const audioFile = Object.assign(audioBlob, {
+          name: 'audio-message.wav',
+          lastModified: Date.now()
+        }) as File;
         
         const audioAttachment: Attachment = {
           id: Date.now().toString(),

@@ -23,7 +23,7 @@ const seoConfig = {
     "suporte técnico grande porte",
   ],
   canonical: "/suporte-tecnico-empresarial",
-  ogType: "service" as const,
+  ogType: "website" as const,
   breadcrumbs: [
     { name: "Serviços", url: "/services" },
     { name: "Suporte Técnico Empresarial", url: "/suporte-tecnico-empresarial" },

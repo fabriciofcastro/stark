@@ -2,63 +2,25 @@
 import "./globals.css";
 import type { Viewport } from "next";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/sections/header";
 import { JsonLd, organizationData } from "@/components/seo/structured-data";
 import { SITE_URL } from "@/lib/site";
 
-// Lazy load de componentes não críticos para melhorar FCP e LCP
-const RevealOnScroll = dynamic(() => 
-  import("@/components/wrappers").then(mod => mod.RevealOnScroll), 
-  { ssr: false }
-);
-
-const HashRedirector = dynamic(() => 
-  import("@/components/wrappers").then(mod => mod.HashRedirector), 
-  { ssr: false }
-);
-
-const GA4 = dynamic(() => 
-  import("@/components/wrappers").then(mod => mod.GA4), 
-  { ssr: false }
-);
-
-const ModernCookieConsent = dynamic(() => 
-  import("@/components/ui/modern-cookie-consent"), 
-  { ssr: false }
-);
-
-const ChatProvider = dynamic(() => 
-  import("@/components/chat").then(mod => mod.ChatProvider), 
-  { ssr: false }
-);
-
-const Toaster = dynamic(() => 
-  import("@/components/ui/toast"), 
-  { ssr: false }
-);
-
-const AdvancedPerformanceOptimizer = dynamic(() => 
-  import("@/components/performance/advanced-performance").then(mod => mod.AdvancedPerformanceOptimizer), 
-  { ssr: false }
-);
-
-const FloatingSocialShare = dynamic(() => 
-  import("@/components/social").then(mod => mod.FloatingSocialShare), 
-  { ssr: false }
-);
-
-const FloatingSocialFollow = dynamic(() => 
-  import("@/components/social").then(mod => mod.FloatingSocialFollow), 
-  { ssr: false }
-);
-
-const StrategicCTA = dynamic(() => 
-  import("@/components/cta").then(mod => mod.StrategicCTA), 
-  { ssr: false }
-);
+// Importar componentes cliente que precisam de ssr: false
+import {
+  RevealOnScroll,
+  HashRedirector,
+  GA4,
+  ModernCookieConsent,
+  ChatProvider,
+  Toaster,
+  AdvancedPerformanceOptimizer,
+  FloatingSocialShare,
+  FloatingSocialFollow,
+  StrategicCTA
+} from "@/components/layout/client-components";
 
 export const metadata = {
   title:

@@ -7,7 +7,7 @@ export interface SEOConfig {
   keywords?: string[];
   canonical?: string;
   ogImage?: string;
-  ogType?: "website" | "article" | "product" | "service";
+  ogType?: "website" | "article";
   articleAuthor?: string;
   articlePublishedTime?: string;
   articleModifiedTime?: string;
@@ -289,7 +289,7 @@ export function generateStructuredData(config: SEOConfig): string {
 
   // Adicionar breadcrumbs se existirem
   if (breadcrumbs && breadcrumbs.length > 0) {
-    baseStructuredData.breadcrumb = {
+    (baseStructuredData as any).breadcrumb = {
       "@type": "BreadcrumbList",
       itemListElement: breadcrumbs.map((item, index) => ({
         "@type": "ListItem",
@@ -302,7 +302,7 @@ export function generateStructuredData(config: SEOConfig): string {
 
   // Adicionar FAQ se existir
   if (faq && faq.length > 0) {
-    baseStructuredData.mainEntity = {
+    (baseStructuredData as any).mainEntity = {
       "@type": "FAQPage",
       mainEntity: faq.map((item) => ({
         "@type": "Question",
@@ -317,7 +317,7 @@ export function generateStructuredData(config: SEOConfig): string {
 
   // Adicionar dados de serviço se existir
   if (service) {
-    baseStructuredData.offers = {
+    (baseStructuredData as any).offers = {
       "@type": "Offer",
       name: service.name,
       description: service.description,
@@ -334,7 +334,7 @@ export function generateStructuredData(config: SEOConfig): string {
 
   // Adicionar dados de negócio local se existir
   if (localBusiness) {
-    baseStructuredData.about = {
+    (baseStructuredData as any).about = {
       "@type": "LocalBusiness",
       name: localBusiness.name,
       description: config.description,

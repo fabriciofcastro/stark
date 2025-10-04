@@ -126,12 +126,16 @@ export function PerformanceSEO({ children }: PerformanceSEOProps) {
           
           // Track FID (First Input Delay)
           if (entry.entryType === "first-input") {
-            console.log("FID:", entry.processingStart - entry.startTime);
+            const fidEntry = entry as PerformanceEventTiming;
+            console.log("FID:", fidEntry.processingStart - fidEntry.startTime);
           }
           
           // Track CLS (Cumulative Layout Shift)
-          if (entry.entryType === "layout-shift" && !entry.hadRecentInput) {
-            console.log("CLS:", entry.value);
+          if (entry.entryType === "layout-shift") {
+            const clsEntry = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+            if (!clsEntry.hadRecentInput) {
+              console.log("CLS:", clsEntry.value);
+            }
           }
         }
       });

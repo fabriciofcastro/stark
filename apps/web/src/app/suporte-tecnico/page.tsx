@@ -7,7 +7,7 @@ const seoConfig = {
   description: "Suporte técnico profissional para empresas em São Paulo. Manutenção de computadores, help desk, suporte remoto e assistência técnica especializada. Resposta em até 2 horas.",
   keywords: SERVICE_KEYWORDS["suporte-tecnico"],
   canonical: "/suporte-tecnico",
-  ogType: "service" as const,
+  ogType: "website" as const,
   breadcrumbs: [
     { name: "Serviços", url: "/services" },
     { name: "Suporte Técnico", url: "/suporte-tecnico" },

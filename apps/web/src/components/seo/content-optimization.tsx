@@ -312,7 +312,7 @@ export function useContentAnalysis() {
     wordCount: 0,
     readingTime: 0,
     keywordDensity: {},
-    headings: [],
+    headings: [] as { level: number; text: string }[],
     links: 0,
   });
 

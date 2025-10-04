@@ -164,6 +164,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           priority: 'normal' as any,
           status: 'pending',
           createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
       }
     }

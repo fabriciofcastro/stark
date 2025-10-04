@@ -214,12 +214,16 @@ export async function POST(request: NextRequest) {
 
     if (!validation.success) {
       return createErrorResponse(
-        `Dados inválidos: ${validation.errors?.map(e => e.message).join(', ')}`,
+        `Dados inválidos: ${validation.errors?.map((e: any) => e.message).join(', ')}`,
         400
       );
     }
 
     const { data: validatedData } = validation;
+
+    if (!validatedData) {
+      return createErrorResponse("Erro de validação de dados", 400);
+    }
 
     // Detecção de padrões de ataque
     const attackDetection = detectAttackPatterns(validatedData.message);
@@ -286,9 +290,9 @@ export async function POST(request: NextRequest) {
     );
 
     // Validar resposta antes de enviar
-    const validation = validateContactFormResponse(response);
-    if (!validation.success) {
-      console.error('Resposta de contato inválida:', validation.errors);
+    const responseValidation = validateContactFormResponse(response);
+    if (!responseValidation.success) {
+      console.error('Resposta de contato inválida:', responseValidation.errors);
       return createErrorResponse("Erro de validação de resposta", 500);
     }
 

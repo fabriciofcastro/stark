@@ -1,7 +1,7 @@
 // components/seo/advanced-seo-provider.tsx - Provider SEO Avançado
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { trackPageView } from "@/lib/analytics-unified";
 import { SERVICE_KEYWORDS } from "@/lib/seo-advanced";
@@ -13,7 +13,7 @@ interface AdvancedSEOProviderProps {
   faq?: Array<{ question: string; answer: string }>;
 }
 
-export function AdvancedSEOProvider({
+function AdvancedSEOProviderInner({
   children,
   structuredData,
   breadcrumbs,
@@ -174,7 +174,7 @@ export function AdvancedSEOProvider({
           if (tag.property) {
             meta.setAttribute("property", tag.property);
           } else {
-            meta.setAttribute("name", tag.name);
+            meta.setAttribute("name", tag.name || '');
           }
           meta.setAttribute("content", tag.content);
           document.head.appendChild(meta);
@@ -334,4 +334,13 @@ export function useSEO() {
     getPageSEO,
     currentPath: pathname,
   };
+}
+
+// Wrapper com Suspense para resolver o problema do useSearchParams
+export function AdvancedSEOProvider(props: AdvancedSEOProviderProps) {
+  return (
+    <Suspense fallback={<div>{props.children}</div>}>
+      <AdvancedSEOProviderInner {...props} />
+    </Suspense>
+  );
 }
