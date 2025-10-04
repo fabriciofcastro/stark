@@ -42,7 +42,7 @@ a[href]:active {
    🔗 LINKS DO RODAPÉ E NAVEGAÇÃO
    ======================================== */
 
-/* Links do rodapé com hover effects */
+/* Links do rodapé com hover effects - SEM UNDERLINE */
 footer a,
 .nav-link,
 .menu-link {
@@ -58,24 +58,21 @@ footer a:hover,
   transform: translateY(-1px);
 }
 
-/* Underline animado para links */
+/* UNDERLINE REMOVIDO - Sem efeito de linha crescente */
 footer a::after,
-.nav-link::after,
-.menu-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: linear-gradient(90deg, #60a5fa, #34d399);
-  transition: width 0.3s ease;
+footer a::before,
+footer .group::after,
+footer .group::before {
+  display: none !important;
 }
 
-footer a:hover::after,
-.nav-link:hover::after,
-.menu-link:hover::after {
-  width: 100%;
+/* Garantir que nenhum link do footer tenha underline */
+footer a {
+  text-decoration: none !important;
+}
+
+footer a:hover {
+  text-decoration: none !important;
 }
 
 /* ========================================
