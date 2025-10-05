@@ -166,7 +166,7 @@ importers:
         specifier: ^18.0.0
         version: 18.3.7(@types/react@18.3.25)
       '@vercel/analytics':
-        specifier: ^1.2.0
+        specifier: ^1.5.0
         version: 1.5.0(next@15.5.3)(react@19.2.0)
       '@vercel/speed-insights':
         specifier: ^1.0.0

@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/sections/header";
 import { JsonLd, organizationData } from "@/components/seo/structured-data";
 import { SITE_URL } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 
 // Importar componentes cliente que precisam de ssr: false
 import {
@@ -117,6 +118,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <FloatingSocialShare />
         <FloatingSocialFollow />
         <StrategicCTA variant="floating" />
+        <Analytics />
       </body>
     </html>
   );
