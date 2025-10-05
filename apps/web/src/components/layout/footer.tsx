@@ -47,9 +47,9 @@ const Footer = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [cyberParticles, setCyberParticles] = useState<Array<{
-    id: number;
-    x: number;
-    y: number;
+    id: number; 
+    x: number; 
+    y: number; 
     size: number;
     opacity: number;
     speed: number;
@@ -66,7 +66,7 @@ const Footer = () => {
     const generateCyberParticles = () => {
       const colors = ['#00ffff', '#ff0080', '#00ff00', '#ffff00', '#ff8000', '#8000ff'];
       const types = ['dot', 'line', 'hex'] as const;
-      
+
       const newParticles = Array.from({ length: 30 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
@@ -135,10 +135,10 @@ const Footer = () => {
               opacity: [particle.opacity, particle.opacity * 0.3, particle.opacity],
               rotate: particle.type === 'hex' ? [0, 180, 360] : [0, 0, 0],
             }}
-            transition={{
+                    transition={{
               duration: 6 + particle.speed * 8,
-              repeat: Infinity,
-              ease: "easeInOut",
+                      repeat: Infinity,
+                      ease: "easeInOut",
               delay: particle.id * 0.1,
             }}
           />
@@ -147,13 +147,13 @@ const Footer = () => {
         {/* Cyber Grid */}
         <div className="absolute inset-0 opacity-20">
           <svg className="w-full h-full">
-            <defs>
+          <defs>
               <pattern id="cyberGrid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00ffff" strokeWidth="0.5" opacity="0.3"/>
               </pattern>
-            </defs>
+          </defs>
             <rect width="100%" height="100%" fill="url(#cyberGrid)" />
-          </svg>
+        </svg>
         </div>
 
         {/* Floating Tech Icons */}
@@ -236,11 +236,11 @@ const Footer = () => {
       
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
         {/* Hero Brand Section */}
-        <motion.div
+          <motion.div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
         >
           <div className="relative inline-block">
             {/* Glassmorphism Container */}
@@ -255,9 +255,9 @@ const Footer = () => {
                 transition={{ duration: 0.3 }}
               >
                 <div className="flex items-center justify-center space-x-6">
-                  <motion.div 
+                <motion.div 
                     className="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center shadow-lg"
-                    animate={{ 
+                  animate={{
                       boxShadow: [
                         '0 0 20px rgba(0, 255, 255, 0.5)',
                         '0 0 40px rgba(139, 92, 246, 0.5)',
@@ -282,19 +282,19 @@ const Footer = () => {
                         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                       }}
                       transition={{ duration: 3, repeat: Infinity }}
-                      style={{ backgroundSize: '200% 100%' }}
-                    >
-                      STARK
+                    style={{ backgroundSize: '200% 100%' }}
+                  >
+                    STARK
                     </motion.h2>
-                    <motion.p 
+                  <motion.p 
                       className="text-cyan-400 font-medium text-lg tracking-wider"
                       animate={{ x: [0, 5, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
-                    >
+                  >
                       SOLUTIONS
-                    </motion.p>
-                  </div>
+                  </motion.p>
                 </div>
+              </div>
               </motion.div>
               
               <motion.p 
@@ -325,17 +325,17 @@ const Footer = () => {
                   <span className="text-purple-400 font-medium">IA Ativa</span>
                 </motion.div>
                 <div className="w-px h-4 bg-white/20" />
-                <motion.div 
+              <motion.div 
                   className="flex items-center space-x-2"
                   whileHover={{ scale: 1.1 }}
                 >
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]" />
                   <span className="text-green-400 font-medium">Seguro</span>
                 </motion.div>
-              </div>
+                </div>
             </div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
 
         {/* Main Content Grid - New Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
@@ -353,19 +353,19 @@ const Footer = () => {
               {/* Neon Glow */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400/5 to-purple-500/5 blur-sm" />
               
-              <div className="relative">
-                <motion.h4 
+            <div className="relative">
+              <motion.h4 
                   className="text-xl font-bold text-cyan-400 mb-6 flex items-center space-x-3"
                   animate={{ x: activeSection === 'services' ? 5 : 0 }}
-                >
+              >
                   <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 flex items-center justify-center border border-cyan-400/30">
-                    <Layers className="w-4 h-4 text-cyan-400" />
-                  </div>
+                  <Layers className="w-4 h-4 text-cyan-400" />
+                </div>
                   <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     MATRIZ DE SERVIÇOS
-                  </span>
-                </motion.h4>
-                
+                </span>
+              </motion.h4>
+              
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     { href: "/suporte-tecnico", label: "Suporte", icon: Settings, color: "cyan" },
@@ -375,7 +375,7 @@ const Footer = () => {
                     { href: "/cyberseguranca", label: "Cybersegurança", icon: Lock, color: "red" },
                     { href: "/create-site", label: "Desenvolvimento", icon: Code, color: "pink" }
                   ].map((service, index) => (
-                    <motion.div
+                  <motion.div
                       key={service.href}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -422,10 +422,10 @@ const Footer = () => {
                           <p className="text-white/80 group-hover:text-white transition-colors font-medium text-xs">
                             {service.label}
                           </p>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
                 </div>
               </div>
             </div>
@@ -444,19 +444,19 @@ const Footer = () => {
               {/* Neon Glow */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/5 to-pink-500/5 blur-sm" />
               
-              <div className="relative">
-                <motion.h4 
+            <div className="relative">
+              <motion.h4 
                   className="text-xl font-bold text-purple-400 mb-6 flex items-center space-x-3"
                   animate={{ x: activeSection === 'company' ? 5 : 0 }}
-                >
+              >
                   <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 flex items-center justify-center border border-purple-400/30">
-                    <Globe className="w-4 h-4 text-purple-400" />
-                  </div>
+                  <Globe className="w-4 h-4 text-purple-400" />
+                </div>
                   <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     MATRIZ CORPORATIVA
-                  </span>
-                </motion.h4>
-                
+                </span>
+              </motion.h4>
+              
                 <div className="space-y-2">
                   {[
                     { href: "/sobre", label: "Sobre Nós", icon: Users, color: "purple" },
@@ -466,19 +466,19 @@ const Footer = () => {
                     { href: "/faq", label: "FAQ", icon: Eye, color: "blue" },
                     { href: "/blog", label: "Blog", icon: FileText, color: "pink" },
                     { href: "/contact", label: "Contato", icon: Phone, color: "red" }
-                  ].map((link, index) => (
-                    <motion.div
-                      key={link.href}
+                ].map((link, index) => (
+                  <motion.div
+                    key={link.href}
                       initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
                       whileHover={{ x: 5 }}
-                    >
-                      <Link
-                        href={link.href}
+                  >
+                    <Link
+                      href={link.href}
                         className="group flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-400/30 transition-all duration-300 no-underline"
-                      >
-                        <div className="flex items-center space-x-3">
+                    >
+                      <div className="flex items-center space-x-3">
                           <motion.div 
                             className="w-6 h-6 rounded-lg flex items-center justify-center"
                             style={{
@@ -515,13 +515,13 @@ const Footer = () => {
                             }`} />
                           </motion.div>
                           <span className="text-white/80 group-hover:text-white transition-colors font-medium text-sm">
-                            {link.label}
-                          </span>
-                        </div>
+                          {link.label}
+                        </span>
+                      </div>
                         <ArrowUpRight className="w-3 h-3 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </Link>
-                    </motion.div>
-                  ))}
+                    </Link>
+                  </motion.div>
+                ))}
                 </div>
               </div>
             </div>
@@ -596,14 +596,14 @@ const Footer = () => {
                       />
                       
                       <div className="relative">
-                        <motion.div 
+                      <motion.div 
                           className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-4"
-                          style={{
-                            background: `linear-gradient(135deg, ${
+                        style={{
+                          background: `linear-gradient(135deg, ${
                               contact.color === 'cyan' ? 'rgba(0, 255, 255, 0.1)' :
-                              contact.color === 'purple' ? 'rgba(139, 92, 246, 0.1)' :
+                            contact.color === 'purple' ? 'rgba(139, 92, 246, 0.1)' :
                               'rgba(34, 197, 94, 0.1)'
-                            }, transparent)`,
+                          }, transparent)`,
                             border: `2px solid ${
                               contact.color === 'cyan' ? 'rgba(0, 255, 255, 0.3)' :
                               contact.color === 'purple' ? 'rgba(139, 92, 246, 0.3)' :
@@ -611,34 +611,34 @@ const Footer = () => {
                             }`,
                             boxShadow: `0 0 20px ${
                               contact.color === 'cyan' ? 'rgba(0, 255, 255, 0.2)' :
-                              contact.color === 'purple' ? 'rgba(139, 92, 246, 0.2)' :
+                            contact.color === 'purple' ? 'rgba(139, 92, 246, 0.2)' :
                               'rgba(34, 197, 94, 0.2)'
-                            }`
-                          }}
-                          whileHover={{ 
-                            scale: 1.1, 
-                            rotate: 360,
+                          }`
+                        }}
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 360,
                             boxShadow: `0 0 30px ${
                               contact.color === 'cyan' ? 'rgba(0, 255, 255, 0.4)' :
                               contact.color === 'purple' ? 'rgba(139, 92, 246, 0.4)' :
                               'rgba(34, 197, 94, 0.4)'
                             }`
-                          }}
-                          transition={{ duration: 0.6 }}
-                        >
+                        }}
+                        transition={{ duration: 0.6 }}
+                      >
                           <contact.icon className={`w-6 h-6 ${
-                            contact.color === 'cyan' ? 'text-cyan-400' :
-                            contact.color === 'purple' ? 'text-purple-400' :
+                          contact.color === 'cyan' ? 'text-cyan-400' :
+                          contact.color === 'purple' ? 'text-purple-400' :
                             'text-green-400'
-                          }`} />
-                        </motion.div>
-                        
+                        }`} />
+                      </motion.div>
+                      
                         <h5 className="text-white font-bold text-base mb-3 group-hover:text-cyan-400 transition-colors">
-                          {contact.title}
-                        </h5>
+                        {contact.title}
+                      </h5>
                         <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line group-hover:text-white/90 transition-colors">
-                          {contact.content}
-                        </p>
+                        {contact.content}
+                      </p>
                       </div>
                     </div>
                   </motion.div>
@@ -691,13 +691,13 @@ const Footer = () => {
                     <motion.div
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
-                    >
-                      <link.icon className={`w-4 h-4 ${
-                        link.color === 'cyan' ? 'text-cyan-400' :
-                        link.color === 'purple' ? 'text-purple-400' :
+                  >
+                    <link.icon className={`w-4 h-4 ${
+                      link.color === 'cyan' ? 'text-cyan-400' :
+                      link.color === 'purple' ? 'text-purple-400' :
                         link.color === 'green' ? 'text-green-400' :
                         'text-yellow-400'
-                      }`} />
+                    }`} />
                     </motion.div>
                     <span className="text-white/70 group-hover:text-white transition-colors font-medium text-xs text-center">
                       {link.label}
@@ -706,7 +706,7 @@ const Footer = () => {
                 </motion.div>
               ))}
             </div>
-            
+              
             {/* Bottom Row */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Cookie Management */}
@@ -734,10 +734,10 @@ const Footer = () => {
               </motion.button>
 
               {/* System Status */}
-              <motion.div 
+            <motion.div 
                 className="flex items-center space-x-4 text-xs"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.5 }}
               >
                 <motion.div 
@@ -764,7 +764,7 @@ const Footer = () => {
                   <span className="text-green-400 font-medium">Secure</span>
                 </motion.div>
               </motion.div>
-            </div>
+              </div>
           </div>
         </motion.div>
       </div>

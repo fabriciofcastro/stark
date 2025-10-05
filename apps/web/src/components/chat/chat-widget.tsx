@@ -305,12 +305,12 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-400/20 animate-pulse" />
           
           {/* Ícone principal */}
-          <motion.div
+            <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-          >
+            >
             <MessageCircle className="w-7 h-7 text-white relative z-10" />
-          </motion.div>
+            </motion.div>
           
           {/* Efeito de brilho */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -565,9 +565,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                   <div className="flex-1 relative">
                     <textarea
                       ref={useRef<HTMLTextAreaElement>(null)}
-                      placeholder="Digite sua mensagem..."
-                      disabled={isLoading || !isConnected}
-                      maxLength={finalConfig.maxMessages}
+                placeholder="Digite sua mensagem..."
+                disabled={isLoading || !isConnected}
+                maxLength={finalConfig.maxMessages}
                       className="w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-4 py-3 pr-12 text-white placeholder-white/50 resize-none focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
                       rows={1}
                       style={{ minHeight: '48px', maxHeight: '120px' }}
@@ -611,17 +611,17 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               {/* Status e ações */}
               <div className="flex items-center justify-between mt-3 text-xs">
                 <div className="flex items-center space-x-4">
-                  {/* Status de conexão */}
+              {/* Status de conexão */}
                   <div className="flex items-center space-x-2 text-white/60">
                     <motion.div
                       className={cn(
-                        "w-2 h-2 rounded-full",
-                        isConnected ? "bg-green-500" : "bg-red-500"
+                    "w-2 h-2 rounded-full",
+                    isConnected ? "bg-green-500" : "bg-red-500"
                       )}
                       animate={isConnected ? { scale: [1, 1.2, 1] } : {}}
                       transition={{ duration: 1, repeat: Infinity }}
                     />
-                    <span>{isConnected ? 'Conectado' : 'Desconectado'}</span>
+                  <span>{isConnected ? 'Conectado' : 'Desconectado'}</span>
                   </div>
                   
                   {/* Contador de caracteres */}
@@ -649,18 +649,18 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                   >
                     <Share2 className="w-4 h-4" />
                   </motion.button>
-                  
-                  {error && (
+                
+                {error && (
                     <motion.div
                       initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
                       className="flex items-center space-x-1 text-red-400"
                     >
-                      <AlertCircle className="w-3 h-3" />
-                      <span>{error}</span>
+                    <AlertCircle className="w-3 h-3" />
+                    <span>{error}</span>
                     </motion.div>
                   )}
-                </div>
+                  </div>
               </div>
             </div>
           </motion.div>
