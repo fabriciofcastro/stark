@@ -769,6 +769,138 @@ const Footer = () => {
         </motion.div>
       </div>
 
+      {/* Corporate Information & Credits */}
+      <motion.div
+        className="relative backdrop-blur-xl bg-white/5 border border-slate-400/20 rounded-2xl p-8 shadow-xl mb-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.0 }}
+      >
+        {/* Neon Glow */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-slate-400/5 to-slate-500/5 blur-sm" />
+        
+        <div className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Stark Solutions Corporate Info */}
+            <motion.div
+              className="text-center lg:text-left"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+            >
+              <div className="flex items-center justify-center lg:justify-start space-x-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 flex items-center justify-center border border-cyan-400/30">
+                  <Rocket className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-bold text-cyan-400">
+                  STARK SOLUTIONS
+                </h3>
+              </div>
+              
+              <div className="space-y-3 text-white/80">
+                <p className="text-sm leading-relaxed">
+                  <strong className="text-cyan-400">Empresa:</strong> Stark Solutions Tecnologia<br/>
+                  <strong className="text-cyan-400">CNPJ:</strong> 12.345.678/0001-90<br/>
+                  <strong className="text-cyan-400">Endereço:</strong> Av. Paulista, 1000 - Itaquaquecetuba/SP<br/>
+                  <strong className="text-cyan-400">Telefone:</strong> (11) 99439-6469<br/>
+                  <strong className="text-cyan-400">Email:</strong> contato@starksolutions.com.br
+                </p>
+                
+                <div className="flex items-center justify-center lg:justify-start space-x-4 text-xs">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-green-400">Sistema Online</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Shield className="w-3 h-3 text-cyan-400" />
+                    <span className="text-cyan-400">Seguro & Confiável</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Developer Credits */}
+            <motion.div
+              className="text-center lg:text-right"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              <div className="flex items-center justify-center lg:justify-end space-x-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400/20 to-pink-500/20 flex items-center justify-center border border-purple-400/30">
+                  <Code className="w-5 h-5 text-purple-400" />
+                </div>
+                <h3 className="text-xl font-bold text-purple-400">
+                  DESENVOLVIDO POR
+                </h3>
+              </div>
+              
+              <div className="space-y-3 text-white/80">
+                <div className="flex items-center justify-center lg:justify-end space-x-2 mb-3">
+                  <span className="text-lg font-semibold text-white">Fabrício Castro</span>
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <a
+                      href="https://www.fabriciofcastro.com.br/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 hover:border-purple-400/50 transition-all duration-300 group"
+                    >
+                      <Globe className="w-4 h-4 text-purple-400 group-hover:text-pink-400 transition-colors" />
+                    </a>
+                  </motion.div>
+                </div>
+                
+                <p className="text-sm leading-relaxed">
+                  <strong className="text-purple-400">Desenvolvedor Full Stack</strong><br/>
+                  Especialista em Next.js, React, Node.js e NestJS<br/>
+                  Criação de interfaces modernas e APIs escaláveis<br/>
+                  <a 
+                    href="https://www.fabriciofcastro.com.br/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-pink-400 transition-colors underline decoration-dotted underline-offset-4"
+                  >
+                    fabriciofcastro.com.br
+                  </a>
+                </p>
+                
+                <div className="flex items-center justify-center lg:justify-end space-x-4 text-xs">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                    <span className="text-purple-400">Desenvolvimento Ativo</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Star className="w-3 h-3 text-yellow-400" />
+                    <span className="text-yellow-400">Qualidade Premium</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Divider */}
+          <div className="mt-8 pt-6 border-t border-white/10">
+            <div className="text-center">
+              <p className="text-xs text-white/60">
+                © 2024 Stark Solutions. Todos os direitos reservados. | 
+                Desenvolvido com ❤️ por <a 
+                  href="https://www.fabriciofcastro.com.br/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-purple-400 hover:text-pink-400 transition-colors"
+                >
+                  Fabrício Castro
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Cyberpunk Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
