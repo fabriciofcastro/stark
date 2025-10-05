@@ -132,19 +132,22 @@ export class AIAssistantService {
   private detectIntent(message: string, history: any[]): string {
     const content = message.toLowerCase();
     
-    // Intenções principais
+    // Intenções principais com fluxos inteligentes
     const intents = {
-      greeting: ['olá', 'oi', 'bom dia', 'boa tarde', 'boa noite', 'hello', 'hi'],
-      service_inquiry: ['serviço', 'serviços', 'oferece', 'fazem', 'trabalham'],
-      support: ['suporte', 'problema', 'erro', 'ajuda', 'não funciona', 'quebrou'],
-      consultation: ['consultoria', 'consultar', 'aconselhar', 'recomendar'],
-      security: ['segurança', 'cibersegurança', 'proteção', 'vulnerabilidade'],
-      cloud: ['nuvem', 'cloud', 'aws', 'azure', 'gcp'],
-      lgpd: ['lgpd', 'privacidade', 'dados pessoais', 'conformidade'],
-      pricing: ['preço', 'custo', 'valor', 'quanto custa', 'orçamento'],
-      contact: ['contato', 'telefone', 'email', 'endereço', 'localização'],
-      escalation: ['humano', 'especialista', 'agente', 'pessoa', 'falar com alguém'],
-      goodbye: ['tchau', 'até logo', 'obrigado', 'valeu', 'bye'],
+      greeting: ['olá', 'oi', 'bom dia', 'boa tarde', 'boa noite', 'hello', 'hi', 'e aí', 'eae'],
+      service_inquiry: ['serviço', 'serviços', 'oferece', 'fazem', 'trabalham', 'quero', 'preciso'],
+      support: ['suporte', 'problema', 'erro', 'ajuda', 'não funciona', 'quebrou', 'bug', 'falha'],
+      consultation: ['consultoria', 'consultar', 'aconselhar', 'recomendar', 'estratégia', 'planejamento'],
+      security: ['segurança', 'cibersegurança', 'proteção', 'vulnerabilidade', 'hack', 'ataque'],
+      cloud: ['nuvem', 'cloud', 'aws', 'azure', 'gcp', 'servidor', 'hosting'],
+      lgpd: ['lgpd', 'privacidade', 'dados pessoais', 'conformidade', 'gdpr'],
+      pricing: ['preço', 'custo', 'valor', 'quanto custa', 'orçamento', 'quanto', 'valor'],
+      contact: ['contato', 'telefone', 'email', 'endereço', 'localização', 'onde', 'como falar'],
+      escalation: ['humano', 'especialista', 'agente', 'pessoa', 'falar com alguém', 'atendente'],
+      goodbye: ['tchau', 'até logo', 'obrigado', 'valeu', 'bye', 'até mais', 'falou'],
+      development: ['desenvolvimento', 'app', 'aplicativo', 'site', 'sistema', 'programação', 'código'],
+      maintenance: ['manutenção', 'atualização', 'upgrade', 'melhoria', 'otimização'],
+      training: ['treinamento', 'curso', 'capacitação', 'aprender', 'ensinar'],
     };
 
     // Verificar cada intenção
@@ -203,44 +206,169 @@ export class AIAssistantService {
   private async generateResponse(intent: string, message: string, entities: Record<string, any>): Promise<string> {
     switch (intent) {
       case 'greeting':
-        return this.getRandomResponse(this.botConfig.responses.greeting);
+        return `👋 ${this.getRandomResponse(this.botConfig.responses.greeting)} 
+
+Sou o **STARK AI** e estou aqui para te ajudar com:
+• 🛠️ Suporte Técnico
+• 💡 Consultoria Tecnológica  
+• 🔒 Cibersegurança
+• ☁️ Soluções em Nuvem
+• 📋 Conformidade LGPD
+• 💻 Desenvolvimento de Sistemas
+
+Como posso te auxiliar hoje?`;
       
       case 'service_inquiry':
         if (entities.services && entities.services.length > 0) {
           const service = entities.services[0];
-          return this.knowledgeBase.services[service].response;
+          return `🎯 **${service.toUpperCase()}**
+
+${this.knowledgeBase.services[service].response}
+
+Posso te ajudar com mais detalhes sobre este serviço ou você gostaria de conhecer outros?`;
         }
-        return 'Oferecemos diversos serviços em tecnologia. Posso te ajudar com suporte técnico, consultoria, cibersegurança, soluções em nuvem e conformidade com LGPD. Qual desses te interessa?';
+        return `🚀 **Nossos Serviços**
+
+Oferecemos soluções completas em tecnologia:
+
+🛠️ **Suporte Técnico** - Resolução de problemas e manutenção
+💡 **Consultoria** - Estratégias tecnológicas para sua empresa  
+🔒 **Cibersegurança** - Proteção contra ameaças digitais
+☁️ **Cloud Computing** - AWS, Azure, Google Cloud
+📋 **LGPD** - Conformidade com proteção de dados
+💻 **Desenvolvimento** - Apps, sites e sistemas personalizados
+
+Qual desses serviços te interessa mais?`;
       
       case 'support':
-        return this.knowledgeBase.services['suporte técnico'].response + ' Você pode descrever o problema que está enfrentando?';
+        return `🛠️ **Suporte Técnico STARK**
+
+${this.knowledgeBase.services['suporte técnico'].response}
+
+Para te ajudar melhor, me conte:
+• Qual é o problema específico?
+• Quando começou a acontecer?
+• Já tentou alguma solução?
+
+Ou prefere que eu te conecte com um especialista?`;
       
       case 'consultation':
-        return this.knowledgeBase.services['consultoria'].response + ' Gostaria de agendar uma consultoria gratuita?';
+        return `💡 **Consultoria Tecnológica**
+
+${this.knowledgeBase.services['consultoria'].response}
+
+**O que posso fazer por você:**
+• Análise da infraestrutura atual
+• Planejamento de migração para nuvem
+• Estratégias de segurança
+• Otimização de processos
+
+Gostaria de agendar uma **consultoria gratuita** de 30 minutos?`;
       
       case 'security':
-        return this.knowledgeBase.services['cibersegurança'].response + ' Podemos fazer uma auditoria de segurança da sua empresa.';
+        return `🔒 **Cibersegurança STARK**
+
+${this.knowledgeBase.services['cibersegurança'].response}
+
+**Nossas soluções:**
+• Auditoria de segurança completa
+• Implementação de firewalls e antivírus
+• Treinamento da equipe
+• Monitoramento 24/7
+• Conformidade com LGPD
+
+Sua empresa está protegida contra ameaças digitais?`;
       
       case 'cloud':
-        return this.knowledgeBase.services['cloud'].response + ' Trabalhamos com AWS, Azure e Google Cloud.';
+        return `☁️ **Soluções em Nuvem**
+
+${this.knowledgeBase.services['cloud'].response}
+
+**Trabalhamos com:**
+• AWS (Amazon Web Services)
+• Microsoft Azure  
+• Google Cloud Platform
+• Migração e otimização
+• Backup e disaster recovery
+
+Qual provedor de nuvem você usa atualmente?`;
       
       case 'lgpd':
-        return this.knowledgeBase.services['lgpd'].response + ' Podemos fazer uma análise de conformidade da sua empresa.';
+        return `📋 **Conformidade LGPD**
+
+${this.knowledgeBase.services['lgpd'].response}
+
+**Nossos serviços:**
+• Análise de conformidade
+• Implementação de políticas
+• Treinamento da equipe
+• Auditoria de dados
+• Suporte jurídico
+
+Sua empresa já está em conformidade com a LGPD?`;
+      
+      case 'development':
+        return `💻 **Desenvolvimento de Sistemas**
+
+Desenvolvemos soluções personalizadas para sua empresa:
+
+**O que criamos:**
+• Aplicativos mobile (iOS/Android)
+• Sites e portais corporativos
+• Sistemas de gestão
+• Integrações entre sistemas
+• APIs e microserviços
+
+Qual tipo de sistema você precisa?`;
       
       case 'pricing':
-        return 'Nossos preços variam conforme o serviço e complexidade. Gostaria de receber um orçamento personalizado?';
+        return `💰 **Orçamento Personalizado**
+
+Nossos preços são baseados na complexidade e escopo do projeto.
+
+**Para receber um orçamento preciso, preciso saber:**
+• Qual serviço te interessa?
+• Tamanho da sua empresa?
+• Prazo desejado?
+• Orçamento aproximado?
+
+Posso te enviar um orçamento detalhado por email!`;
       
       case 'contact':
-        return 'Você pode nos contatar através do WhatsApp, email ou telefone. Estamos localizados em Itaquaquecetuba - SP.';
+        return `📞 **Contato STARK**
+
+**Como nos encontrar:**
+• 📱 WhatsApp: (11) 99439-6469
+• 📧 Email: contato@starksolutions.com.br
+• 📍 Endereço: Av. Paulista, 1000 - Itaquaquecetuba/SP
+• ⏰ Horário: Seg-Sex, 9h às 18h
+
+Prefere falar por WhatsApp ou agendar uma reunião?`;
       
       case 'escalation':
-        return this.getRandomResponse(this.botConfig.responses.escalation);
+        return `👨‍💼 **Conectando com Especialista**
+
+${this.getRandomResponse(this.botConfig.responses.escalation)}
+
+Um de nossos especialistas irá te atender em breve. Enquanto isso, posso te ajudar com mais alguma coisa?`;
       
       case 'goodbye':
-        return this.getRandomResponse(this.botConfig.responses.goodbye);
+        return `👋 ${this.getRandomResponse(this.botConfig.responses.goodbye)}
+
+Foi um prazer te ajudar! Se precisar de mais alguma coisa, estarei aqui. 
+
+**Lembre-se:** Você pode me encontrar a qualquer momento! 😊`;
       
       default:
-        return this.botConfig.fallbackMessage;
+        return `🤔 ${this.botConfig.fallbackMessage}
+
+**Tente uma dessas opções:**
+• "Preciso de suporte técnico"
+• "Quero uma consultoria"  
+• "Falar sobre preços"
+• "Como entrar em contato"
+
+Ou escolha uma das opções abaixo! 👇`;
     }
   }
 
@@ -250,35 +378,66 @@ export class AIAssistantService {
     switch (intent) {
       case 'greeting':
         suggestions.push(
-          { id: 'support', text: 'Preciso de suporte técnico', action: 'reply' },
-          { id: 'consultation', text: 'Quero uma consultoria', action: 'reply' },
-          { id: 'services', text: 'Quais serviços vocês oferecem?', action: 'reply' },
-          { id: 'contact', text: 'Como posso entrar em contato?', action: 'reply' }
+          { id: 'support', text: '🛠️ Preciso de suporte técnico', action: 'reply' },
+          { id: 'consultation', text: '💡 Quero uma consultoria', action: 'reply' },
+          { id: 'services', text: '🚀 Quais serviços vocês oferecem?', action: 'reply' },
+          { id: 'pricing', text: '💰 Falar sobre preços', action: 'reply' },
+          { id: 'contact', text: '📞 Como entrar em contato?', action: 'reply' }
         );
         break;
       
       case 'service_inquiry':
         suggestions.push(
-          { id: 'support', text: 'Suporte técnico', action: 'reply' },
-          { id: 'consultation', text: 'Consultoria tecnológica', action: 'reply' },
-          { id: 'security', text: 'Cibersegurança', action: 'reply' },
-          { id: 'cloud', text: 'Soluções em nuvem', action: 'reply' }
+          { id: 'support', text: '🛠️ Suporte técnico', action: 'reply' },
+          { id: 'consultation', text: '💡 Consultoria tecnológica', action: 'reply' },
+          { id: 'security', text: '🔒 Cibersegurança', action: 'reply' },
+          { id: 'cloud', text: '☁️ Soluções em nuvem', action: 'reply' },
+          { id: 'development', text: '💻 Desenvolvimento', action: 'reply' }
         );
         break;
       
       case 'support':
         suggestions.push(
-          { id: 'escalate', text: 'Falar com especialista', action: 'escalate' },
-          { id: 'schedule', text: 'Agendar visita técnica', action: 'action' },
-          { id: 'remote', text: 'Suporte remoto', action: 'reply' }
+          { id: 'escalate', text: '👨‍💼 Falar com especialista', action: 'escalate' },
+          { id: 'schedule', text: '📅 Agendar visita técnica', action: 'action' },
+          { id: 'remote', text: '💻 Suporte remoto', action: 'reply' },
+          { id: 'urgent', text: '🚨 Problema urgente', action: 'escalate' }
+        );
+        break;
+      
+      case 'consultation':
+        suggestions.push(
+          { id: 'schedule', text: '📅 Agendar consultoria gratuita', action: 'action' },
+          { id: 'pricing', text: '💰 Ver preços', action: 'reply' },
+          { id: 'portfolio', text: '📋 Ver portfólio', action: 'link' },
+          { id: 'contact', text: '📞 Falar por telefone', action: 'reply' }
+        );
+        break;
+      
+      case 'pricing':
+        suggestions.push(
+          { id: 'budget', text: '📊 Solicitar orçamento', action: 'action' },
+          { id: 'consultation', text: '💡 Consultoria gratuita', action: 'reply' },
+          { id: 'contact', text: '📞 Falar com vendas', action: 'reply' },
+          { id: 'whatsapp', text: '📱 WhatsApp', action: 'link' }
+        );
+        break;
+      
+      case 'contact':
+        suggestions.push(
+          { id: 'whatsapp', text: '📱 WhatsApp', action: 'link' },
+          { id: 'email', text: '📧 Enviar email', action: 'action' },
+          { id: 'schedule', text: '📅 Agendar reunião', action: 'action' },
+          { id: 'address', text: '📍 Ver endereço', action: 'link' }
         );
         break;
       
       default:
         suggestions.push(
-          { id: 'escalate', text: 'Falar com especialista', action: 'escalate' },
-          { id: 'whatsapp', text: 'WhatsApp', action: 'link' },
-          { id: 'schedule', text: 'Agendar reunião', action: 'action' }
+          { id: 'escalate', text: '👨‍💼 Falar com especialista', action: 'escalate' },
+          { id: 'whatsapp', text: '📱 WhatsApp', action: 'link' },
+          { id: 'schedule', text: '📅 Agendar reunião', action: 'action' },
+          { id: 'services', text: '🚀 Ver serviços', action: 'reply' }
         );
     }
 

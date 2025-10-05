@@ -91,148 +91,93 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
 
   return (
     <div className={cn(
-      "flex items-center justify-between p-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700",
+      "relative z-10 bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-xl border-b border-white/10 p-4",
       className
     )}>
       {/* Informações do usuário/agente */}
-      <div className="flex items-center space-x-3 flex-1 min-w-0">
-        {/* Avatar */}
-        {showAvatar && (
-          <div className="relative flex-shrink-0">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 flex items-center justify-center relative">
-              {user?.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              ) : (
-                <span className="text-white font-medium text-lg">
-                  {user?.name?.charAt(0)?.toUpperCase() || '?'}
-                </span>
-              )}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          {/* Avatar moderno */}
+          {showAvatar && (
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center shadow-lg">
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-12 h-12 rounded-2xl object-cover"
+                  />
+                ) : (
+                  <User className="w-6 h-6 text-white" />
+                )}
+              </div>
               
               {/* Indicador de status */}
               {showStatus && (
-                <div className={cn(
-                  "absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-gray-900",
-                  statusInfo.color === 'text-green-500' ? 'bg-green-500' : 'bg-gray-400'
-                )} />
+                <motion.div
+                  className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-800"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
               )}
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
 
-        {/* Informações de texto */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center space-x-2">
-            <h3 className={cn(
-              "font-semibold text-gray-900 dark:text-gray-100 truncate",
-              CHAT_TYPOGRAPHY.fontSize.lg,
-              CHAT_TYPOGRAPHY.fontWeight.semibold
-            )}>
-              {user?.name || 'STARK Assistant'}
+          {/* Informações de texto */}
+          <div>
+            <h3 className="text-white font-bold text-lg">
+              {user?.name || 'STARK AI'}
             </h3>
-            
-            {/* Indicador de função */}
-            {user?.role === 'agent' && (
-              <Crown className="w-4 h-4 text-yellow-500" />
-            )}
-            
-            {/* Indicador de prioridade */}
-            {priorityInfo && (
-              <div className={cn(
-                "flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium",
-                priorityInfo.color === 'text-orange-500' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300' :
-                priorityInfo.color === 'text-red-500' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
-                'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-              )}>
-                <priorityInfo.icon className="w-3 h-3" />
-                <span>{priorityInfo.text}</span>
-              </div>
-            )}
-          </div>
-          
-          <div className="flex items-center space-x-2 text-sm">
-            <StatusIcon className={cn("w-4 h-4", statusInfo.color)} />
-            <span className={cn("text-gray-600 dark:text-gray-400", statusInfo.color)}>
-              {statusInfo.text}
-            </span>
-            
-            {responseTime && (
-              <>
-                <span className="text-gray-300 dark:text-gray-600">•</span>
-                <span className="text-gray-500 dark:text-gray-500 text-xs">
-                  {responseTime}
-                </span>
-              </>
-            )}
+            <p className="text-cyan-400 text-sm flex items-center">
+              <motion.span
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                {statusInfo.text}
+              </motion.span>
+              <span className="ml-2 text-xs">• Assistente Virtual</span>
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Menu de opções */}
-      <div className="relative flex items-center space-x-2">
-        {/* Botão de menu */}
-        <button
-          onClick={() => setShowMenu(!showMenu)}
-          className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-          aria-label="Menu de opções"
-        >
-          <MoreVertical className="w-5 h-5" />
-        </button>
-
-        {/* Menu dropdown */}
-        {showMenu && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50"
+        {/* Controles modernos */}
+        <div className="flex items-center space-x-2">
+          {onEscalate && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onEscalate}
+              className="p-2 hover:bg-white/10 rounded-xl text-white/60 hover:text-white transition-colors"
+              title="Escalar para especialista"
+            >
+              <Crown className="w-4 h-4" />
+            </motion.button>
+          )}
+          
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={onMinimize}
+            className="p-2 hover:bg-white/10 rounded-xl text-white/60 hover:text-white transition-colors"
+            title="Minimizar"
           >
-            <div className="py-1">
-              <button
-                onClick={() => {
-                  onEscalate?.();
-                  setShowMenu(false);
-                }}
-                className="flex items-center space-x-2 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Falar com especialista</span>
-              </button>
-              
-              <button
-                onClick={() => {
-                  // TODO: Implementar configurações
-                  setShowMenu(false);
-                }}
-                className="flex items-center space-x-2 w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >
-                <Settings className="w-4 h-4" />
-                <span>Configurações</span>
-              </button>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Botão de minimizar */}
-        <button
-          onClick={onMinimize}
-          className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-          aria-label="Minimizar chat"
-        >
-          <Minimize2 className="w-5 h-5" />
-        </button>
-
-        {/* Botão de fechar */}
-        <button
-          onClick={onClose}
-          className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-          aria-label="Fechar chat"
-        >
-          <X className="w-5 h-5" />
-        </button>
+            <Minimize2 className="w-4 h-4" />
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={onClose}
+            className="p-2 hover:bg-red-500/20 rounded-xl text-white/60 hover:text-red-400 transition-colors"
+            title="Fechar"
+          >
+            <X className="w-4 h-4" />
+          </motion.button>
+        </div>
       </div>
     </div>
   );

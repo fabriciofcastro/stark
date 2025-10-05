@@ -287,7 +287,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           whileTap={{ scale: 0.95 }}
           onClick={toggleWidget}
           className={cn(
-            "fixed bottom-6 right-6 z-50",
+            "fixed bottom-6 right-6 z-[100]",
             "w-16 h-16 rounded-2xl",
             "bg-gradient-to-br from-cyan-500 via-purple-600 to-pink-500",
             "backdrop-blur-xl border border-white/20",
@@ -342,7 +342,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className={cn(
-              "fixed bottom-6 right-6 z-50",
+              "fixed bottom-6 right-6 z-[100]",
               "w-96 h-[600px] rounded-3xl",
               "bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95",
               "backdrop-blur-xl border border-white/10",
@@ -674,7 +674,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           className={cn(
-            "fixed bottom-6 right-6 z-50",
+            "fixed bottom-6 right-6 z-[100]",
             "bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700",
             "p-3 cursor-pointer",
             (finalConfig.position as any) === 'bottom-left' && "left-6 right-auto",

@@ -35,24 +35,24 @@ export const TypingIndicator: React.FC<TypingIndicatorProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       className={cn(
-        "flex items-center space-x-2 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg",
+        "flex items-center space-x-3 p-4 bg-gradient-to-r from-slate-800/50 to-slate-700/50 backdrop-blur-xl rounded-2xl border border-white/10",
         className
       )}
     >
-      {/* Dots animados */}
+      {/* Dots animados modernos */}
       <div className="flex space-x-1">
         {[0, 1, 2].map((index) => (
           <motion.div
             key={index}
-            className="w-2 h-2 bg-gray-500 rounded-full"
+            className="w-2 h-2 bg-cyan-400 rounded-full"
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 1, 0.5],
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 1, 0.3],
             }}
             transition={{
-              duration: 1.4,
+              duration: 1.2,
               repeat: Infinity,
-              delay: index * 0.2,
+              delay: index * 0.3,
               ease: "easeInOut",
             }}
           />
@@ -60,7 +60,7 @@ export const TypingIndicator: React.FC<TypingIndicatorProps> = ({
       </div>
 
       {/* Texto */}
-      <span className="text-sm text-gray-600 dark:text-gray-400">
+      <span className="text-sm text-cyan-400 font-medium">
         {getTypingText()}
       </span>
     </motion.div>
