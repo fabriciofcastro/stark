@@ -326,6 +326,8 @@ export function FloatingSocialFollow() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
+              aria-label={`Seguir no ${social.name}`}
+              title={`Seguir no ${social.name}`}
             >
               <social.icon className="w-3 h-3 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
             </motion.a>

@@ -276,7 +276,7 @@ const Footer = () => {
                   </motion.div>
                   
                   <div className="text-left">
-                    <motion.h2 
+                    <motion.h1 
                       className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
                       animate={{
                         backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -285,7 +285,7 @@ const Footer = () => {
                     style={{ backgroundSize: '200% 100%' }}
                   >
                     STARK
-                    </motion.h2>
+                    </motion.h1>
                   <motion.p 
                       className="text-cyan-400 font-medium text-lg tracking-wider"
                       animate={{ x: [0, 5, 0] }}
@@ -354,7 +354,7 @@ const Footer = () => {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400/5 to-purple-500/5 blur-sm" />
               
             <div className="relative">
-              <motion.h4 
+              <motion.h2 
                   className="text-xl font-bold text-cyan-400 mb-6 flex items-center space-x-3"
                   animate={{ x: activeSection === 'services' ? 5 : 0 }}
               >
@@ -364,7 +364,7 @@ const Footer = () => {
                   <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     MATRIZ DE SERVIÇOS
                 </span>
-              </motion.h4>
+              </motion.h2>
               
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -445,7 +445,7 @@ const Footer = () => {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/5 to-pink-500/5 blur-sm" />
               
             <div className="relative">
-              <motion.h4 
+              <motion.h3 
                   className="text-xl font-bold text-purple-400 mb-6 flex items-center space-x-3"
                   animate={{ x: activeSection === 'company' ? 5 : 0 }}
               >
@@ -455,7 +455,7 @@ const Footer = () => {
                   <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     MATRIZ CORPORATIVA
                 </span>
-              </motion.h4>
+              </motion.h3>
               
                 <div className="space-y-2">
                   {[
@@ -540,7 +540,7 @@ const Footer = () => {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/5 via-cyan-500/5 to-blue-500/5 blur-xl" />
             
             <div className="relative text-center">
-              <motion.h4 
+              <motion.h3 
                 className="text-2xl font-bold text-green-400 mb-8 flex items-center justify-center space-x-3"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -552,7 +552,7 @@ const Footer = () => {
                 <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
                   MATRIZ DE CONTATO
                 </span>
-              </motion.h4>
+              </motion.h3>
               
               {/* Contact Info Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -790,6 +790,8 @@ const Footer = () => {
           stiffness: 400,
           damping: 25
         }}
+        aria-label="Voltar ao topo da página"
+        title="Voltar ao topo"
       >
         <div className="relative">
           {/* Cyber Pulse Rings */}
