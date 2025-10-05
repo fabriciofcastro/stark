@@ -1200,34 +1200,34 @@ export default function ConsultoriaTecnologica() {
 						{/* Controles Futuristas */}
 						<motion.button
 							onClick={prevSlide}
-							className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-2xl"
-							whileHover={{ scale: 1.1, x: -5 }}
+							className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-lg"
+							whileHover={{ scale: 1.05, x: -2 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 group-hover:-translate-x-1 transition-transform duration-300" />
+							<ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-0.5 transition-transform duration-300" />
 						</motion.button>
 
 						<motion.button
 							onClick={nextSlide}
-							className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-2xl"
-							whileHover={{ scale: 1.1, x: 5 }}
+							className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-lg"
+							whileHover={{ scale: 1.05, x: 2 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-1 transition-transform duration-300" />
+							<ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-0.5 transition-transform duration-300" />
 						</motion.button>
 
 						{/* Auto-play Toggle Futurista */}
 						<button
 							onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-							className="absolute top-4 right-4 sm:top-8 sm:right-8 z-30 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-xl border border-purple-400/30 rounded-2xl flex items-center justify-center text-purple-400 hover:bg-purple-500/30 hover:border-purple-400/50 transition-all duration-500 shadow-2xl"
+							className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-xl border border-purple-400/30 rounded-lg flex items-center justify-center text-purple-400 hover:bg-purple-500/30 hover:border-purple-400/50 transition-all duration-500 shadow-md"
 						>
-							{isAutoPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />}
+							{isAutoPlaying ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
 						</button>
 
 						{/* Slides Container Futurista */}
 						<div 
 							ref={carouselRef}
-							className="relative h-[600px] sm:h-[700px] lg:h-[800px] xl:h-[900px] overflow-hidden rounded-3xl sm:rounded-4xl border border-white/10 shadow-2xl"
+							className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 shadow-xl"
 						>
 							{caseStudies.map((caseStudy, index) => {
 								const IconComponent = caseStudy.icon;
@@ -1419,17 +1419,17 @@ export default function ConsultoriaTecnologica() {
 										{/* Conteúdo Futurista */}
 										<div className="relative z-10 h-full flex flex-col lg:flex-row">
 											{/* Lado Esquerdo - Informações Principais */}
-											<div className="flex-1 p-8 sm:p-12 lg:p-16 xl:p-20 flex flex-col justify-center">
+											<div className="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
 												<motion.div
-													className="space-y-8 sm:space-y-12"
-													initial={{ opacity: 0, x: -100 }}
-													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -100 }}
-													transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+													className="space-y-4 sm:space-y-6"
+													initial={{ opacity: 0, x: -50 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -50 }}
+													transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
 												>
 													{/* Header Futurista */}
-													<div className="space-y-6">
-														<div className="flex items-center gap-6">
-															<div className={`w-20 h-20 sm:w-24 sm:h-24 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl shadow-2xl ${
+													<div className="space-y-3">
+														<div className="flex items-center gap-4">
+															<div className={`w-12 h-12 sm:w-16 sm:h-16 backdrop-blur-xl rounded-2xl flex items-center justify-center text-2xl sm:text-3xl shadow-lg ${
 																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
 																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
@@ -1439,11 +1439,11 @@ export default function ConsultoriaTecnologica() {
 															}`}>
 																{caseStudy.image}
 															</div>
-															<div className="space-y-2">
-																<h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
+															<div className="space-y-1">
+																<h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight tracking-tight">
 																	{caseStudy.company}
 																</h3>
-																<div className={`inline-block px-4 py-2 backdrop-blur-xl rounded-full ${
+																<div className={`inline-block px-3 py-1 backdrop-blur-xl rounded-full ${
 																	index === 0 ? 'bg-cyan-400/20 border border-cyan-400/30' :
 																	index === 1 ? 'bg-purple-400/20 border border-purple-400/30' :
 																	index === 2 ? 'bg-emerald-400/20 border border-emerald-400/30' :
@@ -1451,7 +1451,7 @@ export default function ConsultoriaTecnologica() {
 																	index === 4 ? 'bg-cyan-400/20 border border-cyan-400/30' :
 																	'bg-yellow-400/20 border border-yellow-400/30'
 																}`}>
-																	<span className={`text-sm font-bold tracking-wider uppercase ${
+																	<span className={`text-xs font-bold tracking-wider uppercase ${
 																		index === 0 ? 'text-cyan-400' :
 																		index === 1 ? 'text-purple-400' :
 																		index === 2 ? 'text-emerald-400' :
@@ -1467,11 +1467,11 @@ export default function ConsultoriaTecnologica() {
 													</div>
 
 													{/* Conteúdo Principal */}
-													<div className="space-y-8">
+													<div className="space-y-4">
 														{/* Desafio */}
-														<div className="space-y-4">
-															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+														<div className="space-y-2">
+															<div className="flex items-center gap-3">
+																<div className={`w-8 h-8 backdrop-blur-xl rounded-xl flex items-center justify-center ${
 																	index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																	index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
 																	index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
@@ -1479,7 +1479,7 @@ export default function ConsultoriaTecnologica() {
 																	index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																	'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
 																}`}>
-																	<IconComponent className={`w-6 h-6 ${
+																	<IconComponent className={`w-4 h-4 ${
 																		index === 0 ? 'text-cyan-400' :
 																		index === 1 ? 'text-purple-400' :
 																		index === 2 ? 'text-emerald-400' :
@@ -1488,19 +1488,19 @@ export default function ConsultoriaTecnologica() {
 																		'text-yellow-400'
 																	}`} />
 																</div>
-																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																<h4 className="text-sm sm:text-base font-bold text-white tracking-wide">
 																	DESAFIO
 																</h4>
 															</div>
-															<p className="text-gray-200 text-lg sm:text-xl leading-relaxed font-light pl-16">
+															<p className="text-gray-200 text-sm sm:text-base leading-relaxed font-light pl-11">
 																{caseStudy.challenge}
 															</p>
 														</div>
 
 														{/* Solução */}
-														<div className="space-y-4">
-															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+														<div className="space-y-2">
+															<div className="flex items-center gap-3">
+																<div className={`w-8 h-8 backdrop-blur-xl rounded-xl flex items-center justify-center ${
 																	index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																	index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
 																	index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
@@ -1508,7 +1508,7 @@ export default function ConsultoriaTecnologica() {
 																	index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																	'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
 																}`}>
-																	<Lightbulb className={`w-6 h-6 ${
+																	<Lightbulb className={`w-4 h-4 ${
 																		index === 0 ? 'text-cyan-400' :
 																		index === 1 ? 'text-purple-400' :
 																		index === 2 ? 'text-emerald-400' :
@@ -1517,11 +1517,11 @@ export default function ConsultoriaTecnologica() {
 																		'text-yellow-400'
 																	}`} />
 																</div>
-																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																<h4 className="text-sm sm:text-base font-bold text-white tracking-wide">
 																	SOLUÇÃO
 																</h4>
 															</div>
-															<p className="text-gray-200 text-lg sm:text-xl leading-relaxed font-light pl-16">
+															<p className="text-gray-200 text-sm sm:text-base leading-relaxed font-light pl-11">
 																{caseStudy.solution}
 															</p>
 														</div>
@@ -1530,17 +1530,17 @@ export default function ConsultoriaTecnologica() {
 											</div>
 
 											{/* Lado Direito - Resultados e Tecnologias Futuristas */}
-											<div className="flex-1 p-8 sm:p-12 lg:p-16 xl:p-20">
+											<div className="flex-1 p-4 sm:p-6 lg:p-8">
 												<motion.div
-													className="h-full flex flex-col justify-center space-y-12 sm:space-y-16"
-													initial={{ opacity: 0, x: 100 }}
-													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 100 }}
-													transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+													className="h-full flex flex-col justify-center space-y-6 sm:space-y-8"
+													initial={{ opacity: 0, x: 50 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 50 }}
+													transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
 												>
 													{/* Resultados Futuristas */}
-													<div className="space-y-8">
-														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+													<div className="space-y-4">
+														<div className="flex items-center gap-3">
+															<div className={`w-8 h-8 backdrop-blur-xl rounded-xl flex items-center justify-center ${
 																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
 																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
@@ -1548,7 +1548,7 @@ export default function ConsultoriaTecnologica() {
 																index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
 															}`}>
-																<TrendingUp className={`w-6 h-6 ${
+																<TrendingUp className={`w-4 h-4 ${
 																	index === 0 ? 'text-cyan-400' :
 																	index === 1 ? 'text-purple-400' :
 																	index === 2 ? 'text-emerald-400' :
@@ -1557,30 +1557,30 @@ export default function ConsultoriaTecnologica() {
 																	'text-yellow-400'
 																}`} />
 															</div>
-															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+															<h4 className="text-sm sm:text-base font-bold text-white tracking-wide">
 																RESULTADOS
 															</h4>
 														</div>
 														
-														<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+														<div className="grid grid-cols-1 gap-2 sm:gap-3">
 															{caseStudy.results.map((result, resultIndex) => (
 																<motion.div
 																	key={result}
-																	className={`group relative p-6 backdrop-blur-xl rounded-2xl transition-all duration-500 hover:shadow-2xl ${
-																		index === 0 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40 hover:shadow-cyan-400/10' :
-																		index === 1 ? 'bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/20 hover:border-purple-400/40 hover:shadow-purple-400/10' :
-																		index === 2 ? 'bg-gradient-to-br from-emerald-400/10 to-emerald-400/5 border border-emerald-400/20 hover:border-emerald-400/40 hover:shadow-emerald-400/10' :
-																		index === 3 ? 'bg-gradient-to-br from-orange-400/10 to-orange-400/5 border border-orange-400/20 hover:border-orange-400/40 hover:shadow-orange-400/10' :
-																		index === 4 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40 hover:shadow-cyan-400/10' :
-																		'bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/20 hover:border-yellow-400/40 hover:shadow-yellow-400/10'
+																	className={`group relative p-3 backdrop-blur-xl rounded-xl transition-all duration-300 hover:shadow-lg ${
+																		index === 0 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40' :
+																		index === 1 ? 'bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/20 hover:border-purple-400/40' :
+																		index === 2 ? 'bg-gradient-to-br from-emerald-400/10 to-emerald-400/5 border border-emerald-400/20 hover:border-emerald-400/40' :
+																		index === 3 ? 'bg-gradient-to-br from-orange-400/10 to-orange-400/5 border border-orange-400/20 hover:border-orange-400/40' :
+																		index === 4 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40' :
+																		'bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/20 hover:border-yellow-400/40'
 																	}`}
-																	initial={{ opacity: 0, y: 30, scale: 0.9 }}
-																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30, scale: isActive ? 1 : 0.9 }}
-																	transition={{ duration: 0.6, delay: 0.7 + resultIndex * 0.1, ease: "easeOut" }}
-																	whileHover={{ y: -5, scale: 1.02 }}
+																	initial={{ opacity: 0, y: 20, scale: 0.95 }}
+																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20, scale: isActive ? 1 : 0.95 }}
+																	transition={{ duration: 0.4, delay: 0.4 + resultIndex * 0.1, ease: "easeOut" }}
+																	whileHover={{ y: -2, scale: 1.01 }}
 																>
-																	<div className="flex items-start gap-4">
-																		<div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 ${
+																	<div className="flex items-start gap-3">
+																		<div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ${
 																			index === 0 ? 'bg-cyan-400/20' :
 																			index === 1 ? 'bg-purple-400/20' :
 																			index === 2 ? 'bg-emerald-400/20' :
@@ -1588,7 +1588,7 @@ export default function ConsultoriaTecnologica() {
 																			index === 4 ? 'bg-cyan-400/20' :
 																			'bg-yellow-400/20'
 																		}`}>
-																			<CheckCircle className={`w-5 h-5 ${
+																			<CheckCircle className={`w-3 h-3 ${
 																				index === 0 ? 'text-cyan-400' :
 																				index === 1 ? 'text-purple-400' :
 																				index === 2 ? 'text-emerald-400' :
@@ -1597,7 +1597,7 @@ export default function ConsultoriaTecnologica() {
 																				'text-yellow-400'
 																			}`} />
 																		</div>
-																		<span className="text-gray-200 text-sm sm:text-base font-medium leading-relaxed group-hover:text-white transition-colors duration-300">
+																		<span className="text-gray-200 text-xs sm:text-sm font-medium leading-relaxed group-hover:text-white transition-colors duration-300">
 																			{result}
 																		</span>
 																	</div>
@@ -1607,9 +1607,9 @@ export default function ConsultoriaTecnologica() {
 													</div>
 
 													{/* Tecnologias Futuristas */}
-													<div className="space-y-6">
-														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+													<div className="space-y-4">
+														<div className="flex items-center gap-3">
+															<div className={`w-8 h-8 backdrop-blur-xl rounded-xl flex items-center justify-center ${
 																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
 																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
@@ -1617,7 +1617,7 @@ export default function ConsultoriaTecnologica() {
 																index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
 																'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
 															}`}>
-																<Code className={`w-6 h-6 ${
+																<Code className={`w-4 h-4 ${
 																	index === 0 ? 'text-cyan-400' :
 																	index === 1 ? 'text-purple-400' :
 																	index === 2 ? 'text-emerald-400' :
@@ -1626,31 +1626,31 @@ export default function ConsultoriaTecnologica() {
 																	'text-yellow-400'
 																}`} />
 															</div>
-															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+															<h4 className="text-sm sm:text-base font-bold text-white tracking-wide">
 																TECNOLOGIAS
 															</h4>
 														</div>
 														
-														<div className="flex flex-wrap gap-3 sm:gap-4">
+														<div className="flex flex-wrap gap-2 sm:gap-3">
 															{caseStudy.technologies.map((tech, techIndex) => (
 																<motion.span
 																	key={tech}
-																	className={`group relative px-4 py-3 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white transition-all duration-500 hover:shadow-lg cursor-pointer ${
-																		index === 0 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50 hover:shadow-cyan-400/20' :
-																		index === 1 ? 'bg-gradient-to-r from-purple-400/20 to-purple-400/10 border border-purple-400/30 hover:border-purple-400/50 hover:shadow-purple-400/20' :
-																		index === 2 ? 'bg-gradient-to-r from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30 hover:border-emerald-400/50 hover:shadow-emerald-400/20' :
-																		index === 3 ? 'bg-gradient-to-r from-orange-400/20 to-orange-400/10 border border-orange-400/30 hover:border-orange-400/50 hover:shadow-orange-400/20' :
-																		index === 4 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50 hover:shadow-cyan-400/20' :
-																		'bg-gradient-to-r from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 hover:border-yellow-400/50 hover:shadow-yellow-400/20'
+																	className={`group relative px-3 py-2 backdrop-blur-xl rounded-xl text-xs sm:text-sm text-white transition-all duration-300 hover:shadow-md cursor-pointer ${
+																		index === 0 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50' :
+																		index === 1 ? 'bg-gradient-to-r from-purple-400/20 to-purple-400/10 border border-purple-400/30 hover:border-purple-400/50' :
+																		index === 2 ? 'bg-gradient-to-r from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30 hover:border-emerald-400/50' :
+																		index === 3 ? 'bg-gradient-to-r from-orange-400/20 to-orange-400/10 border border-orange-400/30 hover:border-orange-400/50' :
+																		index === 4 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50' :
+																		'bg-gradient-to-r from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 hover:border-yellow-400/50'
 																	}`}
-																	initial={{ opacity: 0, scale: 0.8, y: 20 }}
-																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8, y: isActive ? 0 : 20 }}
-																	transition={{ duration: 0.4, delay: 0.9 + techIndex * 0.1, ease: "easeOut" }}
-																	whileHover={{ scale: 1.05, y: -3 }}
-																	whileTap={{ scale: 0.95 }}
+																	initial={{ opacity: 0, scale: 0.9, y: 10 }}
+																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.9, y: isActive ? 0 : 10 }}
+																	transition={{ duration: 0.3, delay: 0.5 + techIndex * 0.05, ease: "easeOut" }}
+																	whileHover={{ scale: 1.02, y: -1 }}
+																	whileTap={{ scale: 0.98 }}
 																>
 																	<span className="font-medium tracking-wide">{tech}</span>
-																	<div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+																	<div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
 																		index === 0 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10' :
 																		index === 1 ? 'bg-gradient-to-r from-purple-400/20 to-purple-400/10' :
 																		index === 2 ? 'bg-gradient-to-r from-emerald-400/20 to-emerald-400/10' :
@@ -1671,24 +1671,24 @@ export default function ConsultoriaTecnologica() {
 						</div>
 
 						{/* Indicadores Futuristas */}
-						<div className="flex justify-center mt-12 sm:mt-16 gap-4 sm:gap-6">
+						<div className="flex justify-center mt-6 sm:mt-8 gap-3 sm:gap-4">
 							{caseStudies.map((_, index) => (
 								<motion.button
 									key={index}
 									onClick={() => goToSlide(index)}
-									className={`group relative w-4 h-4 sm:w-5 sm:h-5 rounded-full transition-all duration-500 ${
+									className={`group relative w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 ${
 										index === currentSlide 
-											? 'bg-gradient-to-r from-cyan-400 to-purple-400 scale-150 shadow-lg shadow-cyan-400/50' 
+											? 'bg-gradient-to-r from-cyan-400 to-purple-400 scale-125 shadow-md shadow-cyan-400/30' 
 											: 'bg-white/20 hover:bg-white/40 border border-white/30'
 									}`}
-									whileHover={{ scale: 1.2 }}
-									whileTap={{ scale: 0.9 }}
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.95 }}
 								>
 									{index === currentSlide && (
 										<motion.div
 											className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"
-											animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-											transition={{ duration: 2, repeat: Infinity }}
+											animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+											transition={{ duration: 1.5, repeat: Infinity }}
 										/>
 									)}
 								</motion.button>
@@ -1696,13 +1696,13 @@ export default function ConsultoriaTecnologica() {
 						</div>
 
 						{/* Contador e Status Futurista */}
-						<div className="text-center mt-6 sm:mt-8 space-y-2">
-							<div className="flex items-center justify-center gap-4">
-								<span className="text-cyan-400 text-sm font-bold tracking-wider uppercase">
+						<div className="text-center mt-4 sm:mt-6 space-y-1">
+							<div className="flex items-center justify-center gap-3">
+								<span className="text-cyan-400 text-xs sm:text-sm font-bold tracking-wider uppercase">
 									{currentSlide + 1} / {caseStudies.length}
 								</span>
-								<div className="w-8 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
-								<span className="text-gray-400 text-sm font-medium">
+								<div className="w-6 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+								<span className="text-gray-400 text-xs sm:text-sm font-medium">
 									{isAutoPlaying ? 'AUTO' : 'MANUAL'}
 								</span>
 							</div>
