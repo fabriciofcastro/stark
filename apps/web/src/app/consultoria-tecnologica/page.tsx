@@ -1240,42 +1240,90 @@ export default function ConsultoriaTecnologica() {
 										gradient: "from-blue-900/90 via-cyan-900/80 to-blue-800/90",
 										particles: "bg-cyan-400",
 										lines: "from-cyan-400/40 to-blue-400/40",
-										accent: "cyan-400"
+										accent: "cyan-400",
+										accentClasses: {
+											bg: "bg-cyan-400",
+											text: "text-cyan-400",
+											border: "border-cyan-400",
+											from: "from-cyan-400",
+											to: "to-cyan-400",
+											shadow: "shadow-cyan-400"
+										}
 									},
 									// Slide 2 - Supermercados (Roxo/Rosa)
 									{
 										gradient: "from-purple-900/90 via-pink-900/80 to-purple-800/90",
 										particles: "bg-purple-400",
 										lines: "from-purple-400/40 to-pink-400/40",
-										accent: "purple-400"
+										accent: "purple-400",
+										accentClasses: {
+											bg: "bg-purple-400",
+											text: "text-purple-400",
+											border: "border-purple-400",
+											from: "from-purple-400",
+											to: "to-purple-400",
+											shadow: "shadow-purple-400"
+										}
 									},
 									// Slide 3 - Banco (Verde/Esmeralda)
 									{
 										gradient: "from-green-900/90 via-emerald-900/80 to-green-800/90",
 										particles: "bg-emerald-400",
 										lines: "from-emerald-400/40 to-green-400/40",
-										accent: "emerald-400"
+										accent: "emerald-400",
+										accentClasses: {
+											bg: "bg-emerald-400",
+											text: "text-emerald-400",
+											border: "border-emerald-400",
+											from: "from-emerald-400",
+											to: "to-emerald-400",
+											shadow: "shadow-emerald-400"
+										}
 									},
 									// Slide 4 - Construtora (Laranja/Vermelho)
 									{
 										gradient: "from-orange-900/90 via-red-900/80 to-orange-800/90",
 										particles: "bg-orange-400",
 										lines: "from-orange-400/40 to-red-400/40",
-										accent: "orange-400"
+										accent: "orange-400",
+										accentClasses: {
+											bg: "bg-orange-400",
+											text: "text-orange-400",
+											border: "border-orange-400",
+											from: "from-orange-400",
+											to: "to-orange-400",
+											shadow: "shadow-orange-400"
+										}
 									},
 									// Slide 5 - Hospital (Cyan/Azul)
 									{
 										gradient: "from-cyan-900/90 via-blue-900/80 to-cyan-800/90",
 										particles: "bg-cyan-400",
 										lines: "from-cyan-400/40 to-blue-400/40",
-										accent: "cyan-400"
+										accent: "cyan-400",
+										accentClasses: {
+											bg: "bg-cyan-400",
+											text: "text-cyan-400",
+											border: "border-cyan-400",
+											from: "from-cyan-400",
+											to: "to-cyan-400",
+											shadow: "shadow-cyan-400"
+										}
 									},
 									// Slide 6 - Combustíveis (Amarelo/Laranja)
 									{
 										gradient: "from-yellow-900/90 via-orange-900/80 to-yellow-800/90",
 										particles: "bg-yellow-400",
 										lines: "from-yellow-400/40 to-orange-400/40",
-										accent: "yellow-400"
+										accent: "yellow-400",
+										accentClasses: {
+											bg: "bg-yellow-400",
+											text: "text-yellow-400",
+											border: "border-yellow-400",
+											from: "from-yellow-400",
+											to: "to-yellow-400",
+											shadow: "shadow-yellow-400"
+										}
 									}
 								];
 								
@@ -1381,15 +1429,15 @@ export default function ConsultoriaTecnologica() {
 													{/* Header Futurista */}
 													<div className="space-y-6">
 														<div className="flex items-center gap-6">
-															<div className={`w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl border border-${bg.accent}/30 shadow-2xl`}>
+															<div className={`w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl border ${bg.accentClasses.border}/30 shadow-2xl`}>
 																{caseStudy.image}
 															</div>
 															<div className="space-y-2">
 																<h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
 																	{caseStudy.company}
 																</h3>
-																<div className={`inline-block px-4 py-2 bg-${bg.accent}/20 backdrop-blur-xl rounded-full border border-${bg.accent}/30`}>
-																	<span className={`text-${bg.accent} text-sm font-bold tracking-wider uppercase`}>
+																<div className={`inline-block px-4 py-2 ${bg.accentClasses.bg}/20 backdrop-blur-xl rounded-full border ${bg.accentClasses.border}/30`}>
+																	<span className={`${bg.accentClasses.text} text-sm font-bold tracking-wider uppercase`}>
 																		{caseStudy.industry}
 																	</span>
 																</div>
@@ -1402,8 +1450,8 @@ export default function ConsultoriaTecnologica() {
 														{/* Desafio */}
 														<div className="space-y-4">
 															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
-																	<IconComponent className={`w-6 h-6 text-${bg.accent}`} />
+																<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
+																	<IconComponent className={`w-6 h-6 ${bg.accentClasses.text}`} />
 																</div>
 																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																	DESAFIO
@@ -1417,8 +1465,8 @@ export default function ConsultoriaTecnologica() {
 														{/* Solução */}
 														<div className="space-y-4">
 															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
-																	<Lightbulb className={`w-6 h-6 text-${bg.accent}`} />
+																<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
+																	<Lightbulb className={`w-6 h-6 ${bg.accentClasses.text}`} />
 																</div>
 																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																	SOLUÇÃO
@@ -1443,8 +1491,8 @@ export default function ConsultoriaTecnologica() {
 													{/* Resultados Futuristas */}
 													<div className="space-y-8">
 														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
-																<TrendingUp className={`w-6 h-6 text-${bg.accent}`} />
+															<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
+																<TrendingUp className={`w-6 h-6 ${bg.accentClasses.text}`} />
 															</div>
 															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																RESULTADOS
@@ -1455,15 +1503,15 @@ export default function ConsultoriaTecnologica() {
 															{caseStudy.results.map((result, resultIndex) => (
 																<motion.div
 																	key={result}
-																	className={`group relative p-6 bg-gradient-to-br from-${bg.accent}/10 to-${bg.accent}/5 backdrop-blur-xl rounded-2xl border border-${bg.accent}/20 hover:border-${bg.accent}/40 transition-all duration-500 hover:shadow-2xl hover:shadow-${bg.accent}/10`}
+																	className={`group relative p-6 bg-gradient-to-br ${bg.accentClasses.from}/10 ${bg.accentClasses.to}/5 backdrop-blur-xl rounded-2xl border ${bg.accentClasses.border}/20 hover:${bg.accentClasses.border}/40 transition-all duration-500 hover:shadow-2xl hover:${bg.accentClasses.shadow}/10`}
 																	initial={{ opacity: 0, y: 30, scale: 0.9 }}
 																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30, scale: isActive ? 1 : 0.9 }}
 																	transition={{ duration: 0.6, delay: 0.7 + resultIndex * 0.1, ease: "easeOut" }}
 																	whileHover={{ y: -5, scale: 1.02 }}
 																>
 																	<div className="flex items-start gap-4">
-																		<div className={`w-8 h-8 bg-${bg.accent}/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1`}>
-																			<CheckCircle className={`w-5 h-5 text-${bg.accent}`} />
+																		<div className={`w-8 h-8 ${bg.accentClasses.bg}/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1`}>
+																			<CheckCircle className={`w-5 h-5 ${bg.accentClasses.text}`} />
 																		</div>
 																		<span className="text-gray-200 text-sm sm:text-base font-medium leading-relaxed group-hover:text-white transition-colors duration-300">
 																			{result}
@@ -1477,8 +1525,8 @@ export default function ConsultoriaTecnologica() {
 													{/* Tecnologias Futuristas */}
 													<div className="space-y-6">
 														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
-																<Code className={`w-6 h-6 text-${bg.accent}`} />
+															<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
+																<Code className={`w-6 h-6 ${bg.accentClasses.text}`} />
 															</div>
 															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																TECNOLOGIAS
@@ -1489,7 +1537,7 @@ export default function ConsultoriaTecnologica() {
 															{caseStudy.technologies.map((tech, techIndex) => (
 																<motion.span
 																	key={tech}
-																	className={`group relative px-4 py-3 bg-gradient-to-r from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white border border-${bg.accent}/30 hover:border-${bg.accent}/50 transition-all duration-500 hover:shadow-lg hover:shadow-${bg.accent}/20 cursor-pointer`}
+																	className={`group relative px-4 py-3 bg-gradient-to-r ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white border ${bg.accentClasses.border}/30 hover:${bg.accentClasses.border}/50 transition-all duration-500 hover:shadow-lg hover:${bg.accentClasses.shadow}/20 cursor-pointer`}
 																	initial={{ opacity: 0, scale: 0.8, y: 20 }}
 																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8, y: isActive ? 0 : 20 }}
 																	transition={{ duration: 0.4, delay: 0.9 + techIndex * 0.1, ease: "easeOut" }}
@@ -1497,7 +1545,7 @@ export default function ConsultoriaTecnologica() {
 																	whileTap={{ scale: 0.95 }}
 																>
 																	<span className="font-medium tracking-wide">{tech}</span>
-																	<div className={`absolute inset-0 bg-gradient-to-r from-${bg.accent}/20 to-${bg.accent}/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+																	<div className={`absolute inset-0 bg-gradient-to-r ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 																</motion.span>
 															))}
 														</div>
