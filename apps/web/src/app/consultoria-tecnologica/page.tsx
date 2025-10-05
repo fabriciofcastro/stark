@@ -440,13 +440,13 @@ export default function ConsultoriaTecnologica() {
 				))}
 			</div>
 
-			{/* Hero Section */}
+			{/* Hero Section - Modernizada */}
 			<section 
 				ref={heroRef}
-				className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+				className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
 			>
 				<motion.div 
-					className="max-w-6xl mx-auto text-center"
+					className="max-w-7xl mx-auto text-center w-full"
 					style={{ y, opacity }}
 				>
 					<motion.div
@@ -454,17 +454,17 @@ export default function ConsultoriaTecnologica() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 					>
-						{/* Animated Logo */}
+						{/* Animated Logo - Responsivo */}
 						<motion.div
-							className="inline-flex items-center justify-center w-32 h-32 mb-8 rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 shadow-2xl"
+							className="inline-flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mb-6 sm:mb-8 rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 shadow-2xl"
 							animate={{
-								x: [0, 10, -10, 0],
-								y: [0, -5, 0],
-								scale: [1, 1.05, 1],
+								x: [0, 8, -8, 0],
+								y: [0, -4, 0],
+								scale: [1, 1.03, 1],
 								boxShadow: [
-									"0 0 30px rgba(6, 182, 212, 0.4)",
-									"0 0 50px rgba(139, 92, 246, 0.7)",
-									"0 0 30px rgba(6, 182, 212, 0.4)",
+									"0 0 20px rgba(6, 182, 212, 0.4)",
+									"0 0 40px rgba(139, 92, 246, 0.7)",
+									"0 0 20px rgba(6, 182, 212, 0.4)",
 								],
 							}}
 							transition={{
@@ -474,11 +474,12 @@ export default function ConsultoriaTecnologica() {
 								boxShadow: { duration: 4, repeat: Infinity, ease: "easeInOut" },
 							}}
 						>
-							<Brain className="w-16 h-16 text-white" />
+							<Brain className="w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-white" />
 						</motion.div>
 
+						{/* Título Principal - Mobile First */}
 						<motion.h1
-							className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent"
+							className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-tight"
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.2 }}
@@ -487,7 +488,7 @@ export default function ConsultoriaTecnologica() {
 						</motion.h1>
 
 						<motion.h2
-							className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent leading-tight"
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.4 }}
@@ -495,8 +496,9 @@ export default function ConsultoriaTecnologica() {
 							Tecnológica
 						</motion.h2>
 
+						{/* Subtítulo - Melhorado para Mobile */}
 						<motion.p
-							className="text-2xl sm:text-3xl text-gray-300 mb-12 max-w-5xl mx-auto leading-relaxed"
+							className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-8 sm:mb-10 lg:mb-12 max-w-4xl mx-auto leading-relaxed px-4"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.6 }}
@@ -507,50 +509,90 @@ export default function ConsultoriaTecnologica() {
 							</span>
 						</motion.p>
 
-						{/* CTA Buttons */}
+						{/* CTA Buttons - Mobile Otimizado */}
 						<motion.div
-							className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+							className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 0.8 }}
 						>
 							<motion.button
-								className="px-10 py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg group"
-								whileHover={{ scale: 1.05, y: -3 }}
-								whileTap={{ scale: 0.95 }}
+								className="w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 text-base sm:text-lg group"
+								whileHover={{ scale: 1.02, y: -2 }}
+								whileTap={{ scale: 0.98 }}
 							>
-								<Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-								Agendar Consultoria Gratuita
-								<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+								<Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
+								<span className="whitespace-nowrap">Agendar Consultoria Gratuita</span>
+								<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
 							</motion.button>
 							
 							<motion.button
-								className="px-10 py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center gap-3 text-lg group"
-								whileHover={{ scale: 1.05, y: -3 }}
-								whileTap={{ scale: 0.95 }}
+								className="w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-4 sm:py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-3 text-base sm:text-lg group"
+								whileHover={{ scale: 1.02, y: -2 }}
+								whileTap={{ scale: 0.98 }}
 							>
-								<Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
-								Ver Apresentação
+								<Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+								<span className="whitespace-nowrap">Ver Apresentação</span>
 							</motion.button>
+						</motion.div>
+
+						{/* Indicadores de Scroll - Mobile */}
+						<motion.div
+							className="mt-12 sm:mt-16 flex flex-col items-center gap-2"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.8, delay: 1.2 }}
+						>
+							<span className="text-gray-400 text-sm">Descubra mais</span>
+							<motion.div
+								className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+								animate={{ y: [0, 8, 0] }}
+								transition={{ duration: 2, repeat: Infinity }}
+							>
+								<motion.div
+									className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+									animate={{ opacity: [1, 0, 1] }}
+									transition={{ duration: 2, repeat: Infinity }}
+								/>
+							</motion.div>
 						</motion.div>
 					</motion.div>
 				</motion.div>
 			</section>
 
-			{/* Services Section */}
-			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+			{/* Services Section - Modernizada */}
+			<section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
 				<div className="max-w-7xl mx-auto">
-					<motion.h2
-						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+					{/* Header Modernizado */}
+					<motion.div
+						className="text-center mb-12 sm:mb-16 lg:mb-20"
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
 					>
+						<motion.h2
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-tight"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: true }}
+					>
 						Nossos Serviços
 					</motion.h2>
+						<motion.p
+							className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.4 }}
+							viewport={{ once: true }}
+						>
+							Soluções tecnológicas personalizadas para impulsionar seu negócio
+						</motion.p>
+					</motion.div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					{/* Grid Responsivo Melhorado */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
 						{services.map((service, index) => {
 							const IconComponent = service.icon;
 							return (
@@ -561,77 +603,115 @@ export default function ConsultoriaTecnologica() {
 									whileInView={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.8, delay: index * 0.1 }}
 									viewport={{ once: true }}
-									whileHover={{ y: -10, scale: 1.02 }}
+									whileHover={{ y: -8, scale: 1.02 }}
 								>
-									<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+									<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10 group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
 										{/* Gradient Overlay */}
 										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 										
-										{/* Icon */}
+										{/* Icon - Responsivo */}
 										<motion.div
-											className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${service.color} mb-6`}
+											className={`inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r ${service.color} mb-4 sm:mb-6 shadow-lg`}
 											whileHover={{ 
-												scale: 1.2, 
+												scale: 1.15, 
 												rotate: 360,
-												boxShadow: "0 0 30px rgba(0,0,0,0.3)"
+												boxShadow: "0 0 25px rgba(0,0,0,0.3)"
 											}}
 											transition={{ duration: 0.4, ease: "easeOut" }}
 										>
-											<IconComponent className="w-8 h-8 text-white" />
+											<IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
 										</motion.div>
 
-										{/* Content */}
+										{/* Content - Mobile Otimizado */}
 										<div className="relative z-10">
-											<h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors">
+											<h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 group-hover:text-cyan-300 transition-colors leading-tight">
 										{service.title}
 									</h3>
 											
-											<p className="text-gray-300 mb-6 leading-relaxed">
+											<p className="text-gray-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
 										{service.description}
 									</p>
 
-											{/* Features */}
-							<ul className="space-y-3">
+											{/* Features - Melhorado para Mobile */}
+											<ul className="space-y-2 sm:space-y-3">
 								{service.features.map((feature, featureIndex) => (
 													<motion.li
 										key={featureIndex}
-														className="flex items-start gap-3 text-gray-300 text-sm"
+														className="flex items-start gap-2 sm:gap-3 text-gray-300 text-xs sm:text-sm"
 														initial={{ opacity: 0, x: -20 }}
 														whileInView={{ opacity: 1, x: 0 }}
 														transition={{ duration: 0.5, delay: featureIndex * 0.1 }}
 														viewport={{ once: true }}
 													>
-														<CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-										<span>{feature}</span>
+														<CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+														<span className="leading-relaxed">{feature}</span>
 													</motion.li>
 								))}
 							</ul>
 						</div>
 
-										{/* Hover Glow */}
-										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+										{/* Hover Glow - Suavizado */}
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} blur-xl opacity-0 group-hover:opacity-15 transition-opacity duration-500`} />
 								</div>
 								</motion.div>
 							);
 						})}
 						</div>
+
+					{/* CTA Section - Adicionado */}
+					<motion.div
+						className="text-center mt-12 sm:mt-16"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.6 }}
+						viewport={{ once: true }}
+					>
+						<motion.button
+							className="px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-base sm:text-lg group mx-auto"
+							whileHover={{ scale: 1.05, y: -2 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
+							Conhecer Todos os Serviços
+							<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+						</motion.button>
+					</motion.div>
 				</div>
 			</section>
 
-			{/* Results Section - Modernized */}
-			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+			{/* Results Section - Modernizada */}
+			<section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
 				<div className="max-w-7xl mx-auto">
-					<motion.h2
-						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+					{/* Header Modernizado */}
+					<motion.div
+						className="text-center mb-12 sm:mb-16 lg:mb-20"
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
 					>
+						<motion.h2
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-tight"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: true }}
+					>
 						Nossa Jornada de Transformação
 					</motion.h2>
+						<motion.p
+							className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.4 }}
+							viewport={{ once: true }}
+						>
+							Resultados comprovados que transformam empresas
+						</motion.p>
+					</motion.div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					{/* Grid Responsivo Melhorado */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
 						{[
 							{ 
 								icon: TrendingUp, 
@@ -1103,44 +1183,44 @@ export default function ConsultoriaTecnologica() {
 
 					{/* Carrossel Container */}
 					<div className="relative">
-						{/* Controles de Navegação */}
+						{/* Controles de Navegação - Mobile Responsivo */}
 						<motion.button
 							onClick={prevSlide}
-							className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
-							whileHover={{ scale: 1.1 }}
+							className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
+							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+							<ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-1 transition-transform" />
 						</motion.button>
 
 						<motion.button
 							onClick={nextSlide}
-							className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
-							whileHover={{ scale: 1.1 }}
+							className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
+							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+							<ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
 						</motion.button>
 
-						{/* Auto-play Toggle */}
+						{/* Auto-play Toggle - Mobile Responsivo */}
 						<button
 							onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-							className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+							className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
 						>
-							{isAutoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+							{isAutoPlaying ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
 						</button>
 
-						{/* Slides Container */}
+						{/* Slides Container - Mobile Responsivo */}
 						<div 
 							ref={carouselRef}
-							className="relative h-[600px] overflow-hidden rounded-3xl"
+							className="relative h-[500px] sm:h-[600px] lg:h-[700px] overflow-hidden rounded-2xl sm:rounded-3xl"
 						>
 							{caseStudies.map((caseStudy, index) => {
 								const IconComponent = caseStudy.icon;
 								const isActive = index === currentSlide;
 								
 								return (
-									<motion.div
+							<motion.div
 										key={caseStudy.company}
 										className={`absolute inset-0 transition-all duration-1000 ${
 											isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
@@ -1153,103 +1233,105 @@ export default function ConsultoriaTecnologica() {
 										}}
 										transition={{ duration: 0.8, ease: "easeInOut" }}
 									>
-										{/* Background do slide */}
-										<div className={`absolute inset-0 bg-gradient-to-br ${caseStudy.gradient} rounded-3xl`}>
-											{/* Padrão decorativo */}
-											<div className="absolute inset-0 opacity-20">
-												<div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
-												<div className="absolute bottom-10 left-10 w-24 h-24 bg-cyan-400/20 rounded-full blur-lg"></div>
-												<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-purple-400/10 rounded-full blur-2xl"></div>
+										{/* Background do slide - Mobile Responsivo */}
+										<div className={`absolute inset-0 bg-gradient-to-br ${caseStudy.gradient} rounded-2xl sm:rounded-3xl`}>
+											{/* Padrão decorativo - Otimizado para Mobile */}
+											<div className="absolute inset-0 opacity-15 sm:opacity-20">
+												<div className="absolute top-4 right-4 sm:top-10 sm:right-10 w-16 h-16 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-xl"></div>
+												<div className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 w-12 h-12 sm:w-24 sm:h-24 bg-cyan-400/20 rounded-full blur-lg"></div>
+												<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-40 sm:h-40 bg-purple-400/10 rounded-full blur-2xl"></div>
 											</div>
 										</div>
 
-										{/* Conteúdo do slide */}
+										{/* Conteúdo do slide - Mobile First */}
 										<div className="relative z-10 h-full flex flex-col lg:flex-row">
-											{/* Lado esquerdo - Informações principais */}
-											<div className="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+											{/* Lado esquerdo - Informações principais - Mobile Otimizado */}
+											<div className="flex-1 p-4 sm:p-6 lg:p-8 xl:p-12 flex flex-col justify-center">
 												<motion.div
-													className="mb-8"
+													className="mb-6 sm:mb-8"
 													initial={{ opacity: 0, x: -50 }}
 													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -50 }}
 													transition={{ duration: 0.6, delay: 0.2 }}
 												>
-													<div className="flex items-center gap-4 mb-6">
-														<div className="w-16 h-16 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center text-3xl">
+													{/* Header do Case - Mobile Responsivo */}
+													<div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+														<div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-xl rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-3xl">
 															{caseStudy.image}
 														</div>
 														<div>
-															<h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+															<h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-1 sm:mb-2 leading-tight">
 																{caseStudy.company}
 															</h3>
-															<p className="text-cyan-300 text-lg">{caseStudy.industry}</p>
+															<p className="text-cyan-300 text-sm sm:text-base lg:text-lg">{caseStudy.industry}</p>
 														</div>
 													</div>
 
-													<div className="space-y-6">
+													{/* Conteúdo - Mobile Otimizado */}
+													<div className="space-y-4 sm:space-y-6">
 														<div>
-															<h4 className="text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
-																<IconComponent className="w-5 h-5 text-cyan-400" />
+															<h4 className="text-base sm:text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
+																<IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
 																Desafio
 															</h4>
-															<p className="text-gray-200 text-lg leading-relaxed">
+															<p className="text-gray-200 text-sm sm:text-base lg:text-lg leading-relaxed">
 																{caseStudy.challenge}
 															</p>
 														</div>
 
 														<div>
-															<h4 className="text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
-																<Lightbulb className="w-5 h-5 text-yellow-400" />
+															<h4 className="text-base sm:text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
+																<Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
 																Solução
 															</h4>
-															<p className="text-gray-200 text-lg leading-relaxed">
+															<p className="text-gray-200 text-sm sm:text-base lg:text-lg leading-relaxed">
 																{caseStudy.solution}
 															</p>
 														</div>
 													</div>
 												</motion.div>
-											</div>
+										</div>
 
-											{/* Lado direito - Resultados e tecnologias */}
-											<div className="flex-1 p-8 lg:p-12">
+											{/* Lado direito - Resultados e tecnologias - Mobile Responsivo */}
+											<div className="flex-1 p-4 sm:p-6 lg:p-8 xl:p-12">
 												<motion.div
 													className="h-full flex flex-col justify-center"
 													initial={{ opacity: 0, x: 50 }}
 													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 50 }}
 													transition={{ duration: 0.6, delay: 0.4 }}
 												>
-													{/* Resultados */}
-													<div className="mb-8">
-														<h4 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-															<TrendingUp className="w-6 h-6 text-green-400" />
+													{/* Resultados - Mobile Otimizado */}
+													<div className="mb-6 sm:mb-8">
+														<h4 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 flex items-center gap-2">
+															<TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
 															Resultados Alcançados
 														</h4>
-														<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+														<div className="grid grid-cols-1 gap-3 sm:gap-4">
 															{caseStudy.results.map((result, resultIndex) => (
 																<motion.div
 																	key={result}
-																	className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20"
+																	className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-white/10 backdrop-blur-xl rounded-lg sm:rounded-xl border border-white/20"
 																	initial={{ opacity: 0, y: 20 }}
 																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
 																	transition={{ duration: 0.4, delay: 0.6 + resultIndex * 0.1 }}
 																>
-																	<CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
-																	<span className="text-gray-200 text-sm font-medium">{result}</span>
+																	<CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mt-0.5 flex-shrink-0" />
+																	<span className="text-gray-200 text-xs sm:text-sm font-medium leading-relaxed">{result}</span>
 																</motion.div>
 															))}
 														</div>
 													</div>
 
-													{/* Tecnologias */}
+													{/* Tecnologias - Mobile Otimizado */}
 													<div>
-														<h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-															<Code className="w-5 h-5 text-purple-400" />
+														<h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
+															<Code className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
 															Tecnologias Utilizadas
 														</h4>
-														<div className="flex flex-wrap gap-3">
+														<div className="flex flex-wrap gap-2 sm:gap-3">
 															{caseStudy.technologies.map((tech, techIndex) => (
 																<motion.span
 																	key={tech}
-																	className="px-4 py-2 bg-white/20 backdrop-blur-xl rounded-full text-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300"
+																	className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-xl rounded-full text-xs sm:text-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300"
 																	initial={{ opacity: 0, scale: 0.8 }}
 																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8 }}
 																	transition={{ duration: 0.3, delay: 0.8 + techIndex * 0.1 }}
@@ -1261,20 +1343,20 @@ export default function ConsultoriaTecnologica() {
 														</div>
 													</div>
 												</motion.div>
-											</div>
-										</div>
-									</motion.div>
+									</div>
+								</div>
+							</motion.div>
 								);
 							})}
 						</div>
 
-						{/* Indicadores de slide */}
-						<div className="flex justify-center mt-8 gap-3">
+						{/* Indicadores de slide - Mobile Responsivo */}
+						<div className="flex justify-center mt-6 sm:mt-8 gap-2 sm:gap-3">
 							{caseStudies.map((_, index) => (
 								<button
 									key={index}
 									onClick={() => goToSlide(index)}
-									className={`w-3 h-3 rounded-full transition-all duration-300 ${
+									className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
 										index === currentSlide 
 											? 'bg-cyan-400 scale-125' 
 											: 'bg-white/30 hover:bg-white/50'
@@ -1283,9 +1365,9 @@ export default function ConsultoriaTecnologica() {
 							))}
 						</div>
 
-						{/* Contador de slides */}
-						<div className="text-center mt-4">
-							<span className="text-gray-400 text-sm">
+						{/* Contador de slides - Mobile Responsivo */}
+						<div className="text-center mt-3 sm:mt-4">
+							<span className="text-gray-400 text-xs sm:text-sm">
 								{currentSlide + 1} de {caseStudies.length}
 							</span>
 						</div>
