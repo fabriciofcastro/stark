@@ -93,7 +93,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <JsonLd data={organizationData} />
       </head>
       <body
-        className="antialiased bg-gradient-to-br from-primary-900/95 via-neutral-950/98 to-accent-900/95 text-white min-h-screen overflow-hidden"
+        className="antialiased bg-gradient-to-br from-primary-900/95 via-neutral-950/98 to-accent-900/95 text-white min-h-screen overflow-x-hidden"
         suppressHydrationWarning={true}
       >
         <Link
