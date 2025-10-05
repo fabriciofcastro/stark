@@ -55,13 +55,20 @@ import {
   Compass,
   MapPin,
   Phone,
-  Mail
+  Mail,
+  ChevronLeft,
+  ChevronDown,
+  Circle,
+  Heart,
+  Truck
 } from "lucide-react";
 
 export default function ConsultoriaTecnologica() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [neuralParticles, setNeuralParticles] = useState<Array<{ 
     id: number; 
     x: number; 
@@ -81,9 +88,134 @@ export default function ConsultoriaTecnologica() {
   }>>([]);
   
   const heroRef = useRef<HTMLElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  // Dados dos cases de consultoria
+  const caseStudies = [
+    {
+      company: "Indústria Farmacêutica",
+      industry: "Saúde & Farmacêutica",
+      challenge: "Digitalização de processos e compliance regulatório",
+      solution: "Implementação de ERP integrado com sistema de qualidade",
+      results: [
+        "Redução de 70% no tempo de aprovação de lotes",
+        "100% compliance com ANVISA",
+        "Economia de R$ 2.5M em multas",
+        "ROI de 340% em 18 meses"
+      ],
+      technologies: ["SAP", "Quality Management", "Regulatory Compliance", "Digital Workflow"],
+      image: "💊",
+      gradient: "from-blue-500/20 to-cyan-500/20",
+      icon: ShieldCheck
+    },
+    {
+      company: "Rede de Supermercados",
+      industry: "Varejo",
+      challenge: "Modernização de sistemas de gestão e estoque",
+      solution: "Migração para cloud e implementação de analytics avançado",
+      results: [
+        "Redução de 45% no desperdício de produtos",
+        "Previsão de demanda 85% mais precisa",
+        "Aumento de 25% nas vendas",
+        "Economia de R$ 8M anuais"
+      ],
+      technologies: ["Cloud Migration", "Predictive Analytics", "Inventory Optimization", "Real-time Dashboard"],
+      image: "🛒",
+      gradient: "from-purple-500/20 to-pink-500/20",
+      icon: BarChart3
+    },
+    {
+      company: "Banco Regional",
+      industry: "Serviços Financeiros",
+      challenge: "Modernização de sistemas legados e open banking",
+      solution: "Arquitetura de microserviços e APIs modernas",
+      results: [
+        "Integração com 15 bancos em 6 meses",
+        "Redução de 60% no tempo de desenvolvimento",
+        "Compliance PIX 100%",
+        "Aumento de 40% em novos clientes"
+      ],
+      technologies: ["Microservices", "API Gateway", "Open Banking", "Cloud Native"],
+      image: "🏦",
+      gradient: "from-green-500/20 to-emerald-500/20",
+      icon: Network
+    },
+    {
+      company: "Construtora",
+      industry: "Construção Civil",
+      challenge: "Gestão de projetos e controle de custos",
+      solution: "Sistema integrado de gestão de obras e BI",
+      results: [
+        "Controle de custos em tempo real",
+        "Redução de 30% em atrasos de obra",
+        "Margem de lucro 20% maior",
+        "Visibilidade completa de 50+ obras"
+      ],
+      technologies: ["Project Management", "Business Intelligence", "Mobile App", "Cost Control"],
+      image: "🏗️",
+      gradient: "from-orange-500/20 to-red-500/20",
+      icon: Building
+    },
+    {
+      company: "Hospital Privado",
+      industry: "Saúde",
+      challenge: "Integração de sistemas e prontuário eletrônico",
+      solution: "Plataforma unificada de saúde digital",
+      results: [
+        "Integração de 12 sistemas diferentes",
+        "Redução de 50% no tempo de consulta",
+        "100% compliance LGPD",
+        "Satisfação do paciente 95%"
+      ],
+      technologies: ["EMR Integration", "Health Analytics", "Patient Portal", "Interoperability"],
+      image: "🏥",
+      gradient: "from-cyan-500/20 to-blue-500/20",
+      icon: Heart
+    },
+    {
+      company: "Distribuidora de Combustíveis",
+      industry: "Energia & Combustíveis",
+      challenge: "Otimização de rotas e gestão de frotas",
+      solution: "Sistema de gestão logística com IA",
+      results: [
+        "Redução de 25% no consumo de combustível",
+        "Otimização de rotas em tempo real",
+        "Redução de 40% em multas de trânsito",
+        "Economia de R$ 3.2M anuais"
+      ],
+      technologies: ["AI/ML", "Route Optimization", "Fleet Management", "Real-time Tracking"],
+      image: "⛽",
+      gradient: "from-yellow-500/20 to-orange-500/20",
+      icon: Truck
+    }
+  ];
+
+  // Auto-play do carrossel
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % caseStudies.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, caseStudies.length]);
+
+  // Funções de navegação
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % caseStudies.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
 
   // Neural Network Particles Animation
   useEffect(() => {
@@ -903,175 +1035,260 @@ export default function ConsultoriaTecnologica() {
 				</div>
 			</section>
 
-			{/* Consulting Case Studies */}
-			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
-				<div className="max-w-7xl mx-auto">
-					<motion.h2
-						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+			{/* Modern Carousel - Cases de Consultoria */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+				{/* Background Animado */}
+				<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+					{/* Partículas flutuantes */}
+					{Array.from({ length: 20 }).map((_, i) => (
+						<motion.div
+							key={i}
+							className="absolute w-2 h-2 bg-cyan-400/30 rounded-full"
+							style={{
+								left: `${Math.random() * 100}%`,
+								top: `${Math.random() * 100}%`,
+							}}
+							animate={{
+								y: [0, -30, 0],
+								opacity: [0.3, 0.8, 0.3],
+								scale: [1, 1.2, 1],
+							}}
+							transition={{
+								duration: 3 + Math.random() * 2,
+								repeat: Infinity,
+								delay: Math.random() * 2,
+							}}
+						/>
+					))}
+					
+					{/* Linhas de energia */}
+					{Array.from({ length: 5 }).map((_, i) => (
+						<motion.div
+							key={i}
+							className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
+							style={{
+								left: `${Math.random() * 100}%`,
+								top: `${Math.random() * 100}%`,
+								width: `${200 + Math.random() * 300}px`,
+								transform: `rotate(${Math.random() * 360}deg)`,
+							}}
+							animate={{
+								opacity: [0, 1, 0],
+								scaleX: [0, 1, 0],
+							}}
+							transition={{
+								duration: 4 + Math.random() * 2,
+								repeat: Infinity,
+								delay: Math.random() * 3,
+							}}
+						/>
+					))}
+				</div>
+
+				<div className="max-w-7xl mx-auto relative z-10">
+					<motion.div
+						className="text-center mb-16"
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
 					>
-						Cases de Consultoria
-					</motion.h2>
+						<h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-cyan-300 to-purple-300 bg-clip-text text-transparent">
+							Cases de Sucesso
+						</h2>
+						<p className="text-xl text-gray-300 max-w-3xl mx-auto">
+							Transformações digitais que geraram resultados excepcionais para nossos clientes
+						</p>
+					</motion.div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{[
-							{
-								company: "Indústria Farmacêutica",
-								industry: "Saúde & Farmacêutica",
-								challenge: "Digitalização de processos e compliance regulatório",
-								solution: "Implementação de ERP integrado com sistema de qualidade",
-								results: [
-									"Redução de 70% no tempo de aprovação de lotes",
-									"100% compliance com ANVISA",
-									"Economia de R$ 2.5M em multas",
-									"ROI de 340% em 18 meses"
-								],
-								technologies: ["SAP", "Quality Management", "Regulatory Compliance", "Digital Workflow"],
-								image: "💊"
-							},
-							{
-								company: "Rede de Supermercados",
-								industry: "Varejo",
-								challenge: "Modernização de sistemas de gestão e estoque",
-								solution: "Migração para cloud e implementação de analytics avançado",
-								results: [
-									"Redução de 45% no desperdício de produtos",
-									"Previsão de demanda 85% mais precisa",
-									"Aumento de 25% nas vendas",
-									"Economia de R$ 8M anuais"
-								],
-								technologies: ["Cloud Migration", "Predictive Analytics", "Inventory Optimization", "Real-time Dashboard"],
-								image: "🛒"
-							},
-							{
-								company: "Banco Regional",
-								industry: "Serviços Financeiros",
-								challenge: "Modernização de sistemas legados e open banking",
-								solution: "Arquitetura de microserviços e APIs modernas",
-								results: [
-									"Integração com 15 bancos em 6 meses",
-									"Redução de 60% no tempo de desenvolvimento",
-									"Compliance PIX 100%",
-									"Aumento de 40% em novos clientes"
-								],
-								technologies: ["Microservices", "API Gateway", "Open Banking", "Cloud Native"],
-								image: "🏦"
-							},
-							{
-								company: "Construtora",
-								industry: "Construção Civil",
-								challenge: "Gestão de projetos e controle de custos",
-								solution: "Sistema integrado de gestão de obras e BI",
-								results: [
-									"Controle de custos em tempo real",
-									"Redução de 30% em atrasos de obra",
-									"Margem de lucro 20% maior",
-									"Visibilidade completa de 50+ obras"
-								],
-								technologies: ["Project Management", "Business Intelligence", "Mobile App", "Cost Control"],
-								image: "🏗️"
-							},
-							{
-								company: "Hospital Privado",
-								industry: "Saúde",
-								challenge: "Integração de sistemas e prontuário eletrônico",
-								solution: "Plataforma unificada de saúde digital",
-								results: [
-									"Integração de 12 sistemas diferentes",
-									"Redução de 50% no tempo de consulta",
-									"100% compliance LGPD",
-									"Satisfação do paciente 95%"
-								],
-								technologies: ["EMR Integration", "Health Analytics", "Patient Portal", "Interoperability"],
-								image: "🏥"
-							},
-							{
-								company: "Distribuidora de Combustíveis",
-								industry: "Energia & Combustíveis",
-								challenge: "Otimização de rotas e gestão de frotas",
-								solution: "Sistema de gestão logística com IA",
-								results: [
-									"Redução de 25% no consumo de combustível",
-									"Otimização de rotas em tempo real",
-									"Redução de 40% em multas de trânsito",
-									"Economia de R$ 3.2M anuais"
-								],
-								technologies: ["AI/ML", "Route Optimization", "Fleet Management", "Real-time Tracking"],
-								image: "⛽"
-							}
-						].map((case_study, index) => (
-							<motion.div
-								key={case_study.company}
-								className="group relative"
-								initial={{ opacity: 0, y: 50 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.8, delay: index * 0.1 }}
-								viewport={{ once: true }}
-								whileHover={{ y: -10, scale: 1.02 }}
-							>
-								<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
-									<div className="relative z-10">
-										<div className="flex items-center gap-4 mb-4">
-											<div className="text-4xl">{case_study.image}</div>
-											<div>
-												<h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-													{case_study.company}
-												</h3>
-												<p className="text-cyan-400 text-sm">{case_study.industry}</p>
+					{/* Carrossel Container */}
+					<div className="relative">
+						{/* Controles de Navegação */}
+						<motion.button
+							onClick={prevSlide}
+							className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+						</motion.button>
+
+						<motion.button
+							onClick={nextSlide}
+							className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.95 }}
+						>
+							<ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+						</motion.button>
+
+						{/* Auto-play Toggle */}
+						<button
+							onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+							className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+						>
+							{isAutoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+						</button>
+
+						{/* Slides Container */}
+						<div 
+							ref={carouselRef}
+							className="relative h-[600px] overflow-hidden rounded-3xl"
+						>
+							{caseStudies.map((caseStudy, index) => {
+								const IconComponent = caseStudy.icon;
+								const isActive = index === currentSlide;
+								
+								return (
+									<motion.div
+										key={caseStudy.company}
+										className={`absolute inset-0 transition-all duration-1000 ${
+											isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+										}`}
+										initial={{ opacity: 0, scale: 0.8, x: 100 }}
+										animate={{ 
+											opacity: isActive ? 1 : 0,
+											scale: isActive ? 1 : 0.8,
+											x: isActive ? 0 : 100
+										}}
+										transition={{ duration: 0.8, ease: "easeInOut" }}
+									>
+										{/* Background do slide */}
+										<div className={`absolute inset-0 bg-gradient-to-br ${caseStudy.gradient} rounded-3xl`}>
+											{/* Padrão decorativo */}
+											<div className="absolute inset-0 opacity-20">
+												<div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+												<div className="absolute bottom-10 left-10 w-24 h-24 bg-cyan-400/20 rounded-full blur-lg"></div>
+												<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-purple-400/10 rounded-full blur-2xl"></div>
 											</div>
 										</div>
-										
-										<div className="mb-6">
-											<h4 className="text-sm font-semibold text-gray-400 mb-2">Desafio:</h4>
-											<p className="text-gray-300 text-sm mb-3">{case_study.challenge}</p>
-											
-											<h4 className="text-sm font-semibold text-gray-400 mb-2">Solução:</h4>
-											<p className="text-gray-300 text-sm mb-4">{case_study.solution}</p>
-										</div>
 
-										<div className="mb-6">
-											<h4 className="text-sm font-semibold text-gray-400 mb-3">Resultados:</h4>
-											<ul className="space-y-2">
-												{case_study.results.map((result, resultIndex) => (
-													<motion.li
-														key={result}
-														className="flex items-start gap-2 text-gray-300 text-sm"
-														initial={{ opacity: 0, x: -20 }}
-														whileInView={{ opacity: 1, x: 0 }}
-														transition={{ duration: 0.5, delay: resultIndex * 0.1 }}
-														viewport={{ once: true }}
-													>
-														<CheckCircle className="w-3 h-3 text-cyan-400 mt-0.5 flex-shrink-0" />
-														<span>{result}</span>
-													</motion.li>
-												))}
-											</ul>
-										</div>
+										{/* Conteúdo do slide */}
+										<div className="relative z-10 h-full flex flex-col lg:flex-row">
+											{/* Lado esquerdo - Informações principais */}
+											<div className="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+												<motion.div
+													className="mb-8"
+													initial={{ opacity: 0, x: -50 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -50 }}
+													transition={{ duration: 0.6, delay: 0.2 }}
+												>
+													<div className="flex items-center gap-4 mb-6">
+														<div className="w-16 h-16 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center text-3xl">
+															{caseStudy.image}
+														</div>
+														<div>
+															<h3 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+																{caseStudy.company}
+															</h3>
+															<p className="text-cyan-300 text-lg">{caseStudy.industry}</p>
+														</div>
+													</div>
 
-										<div>
-											<h4 className="text-sm font-semibold text-gray-400 mb-3">Tecnologias:</h4>
-											<div className="flex flex-wrap gap-2">
-												{case_study.technologies.map((tech, techIndex) => (
-													<motion.span
-														key={tech}
-														className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300 border border-white/20"
-														initial={{ opacity: 0, scale: 0.8 }}
-														whileInView={{ opacity: 1, scale: 1 }}
-														transition={{ duration: 0.3, delay: techIndex * 0.1 }}
-														viewport={{ once: true }}
-													>
-														{tech}
-													</motion.span>
-												))}
+													<div className="space-y-6">
+														<div>
+															<h4 className="text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
+																<IconComponent className="w-5 h-5 text-cyan-400" />
+																Desafio
+															</h4>
+															<p className="text-gray-200 text-lg leading-relaxed">
+																{caseStudy.challenge}
+															</p>
+														</div>
+
+														<div>
+															<h4 className="text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
+																<Lightbulb className="w-5 h-5 text-yellow-400" />
+																Solução
+															</h4>
+															<p className="text-gray-200 text-lg leading-relaxed">
+																{caseStudy.solution}
+															</p>
+														</div>
+													</div>
+												</motion.div>
+											</div>
+
+											{/* Lado direito - Resultados e tecnologias */}
+											<div className="flex-1 p-8 lg:p-12">
+												<motion.div
+													className="h-full flex flex-col justify-center"
+													initial={{ opacity: 0, x: 50 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 50 }}
+													transition={{ duration: 0.6, delay: 0.4 }}
+												>
+													{/* Resultados */}
+													<div className="mb-8">
+														<h4 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+															<TrendingUp className="w-6 h-6 text-green-400" />
+															Resultados Alcançados
+														</h4>
+														<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+															{caseStudy.results.map((result, resultIndex) => (
+																<motion.div
+																	key={result}
+																	className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-xl rounded-xl border border-white/20"
+																	initial={{ opacity: 0, y: 20 }}
+																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
+																	transition={{ duration: 0.4, delay: 0.6 + resultIndex * 0.1 }}
+																>
+																	<CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+																	<span className="text-gray-200 text-sm font-medium">{result}</span>
+																</motion.div>
+															))}
+														</div>
+													</div>
+
+													{/* Tecnologias */}
+													<div>
+														<h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+															<Code className="w-5 h-5 text-purple-400" />
+															Tecnologias Utilizadas
+														</h4>
+														<div className="flex flex-wrap gap-3">
+															{caseStudy.technologies.map((tech, techIndex) => (
+																<motion.span
+																	key={tech}
+																	className="px-4 py-2 bg-white/20 backdrop-blur-xl rounded-full text-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300"
+																	initial={{ opacity: 0, scale: 0.8 }}
+																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8 }}
+																	transition={{ duration: 0.3, delay: 0.8 + techIndex * 0.1 }}
+																	whileHover={{ scale: 1.05, y: -2 }}
+																>
+																	{tech}
+																</motion.span>
+															))}
+														</div>
+													</div>
+												</motion.div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</motion.div>
-						))}
+									</motion.div>
+								);
+							})}
+						</div>
+
+						{/* Indicadores de slide */}
+						<div className="flex justify-center mt-8 gap-3">
+							{caseStudies.map((_, index) => (
+								<button
+									key={index}
+									onClick={() => goToSlide(index)}
+									className={`w-3 h-3 rounded-full transition-all duration-300 ${
+										index === currentSlide 
+											? 'bg-cyan-400 scale-125' 
+											: 'bg-white/30 hover:bg-white/50'
+									}`}
+								/>
+							))}
+						</div>
+
+						{/* Contador de slides */}
+						<div className="text-center mt-4">
+							<span className="text-gray-400 text-sm">
+								{currentSlide + 1} de {caseStudies.length}
+							</span>
+						</div>
 					</div>
 				</div>
 			</section>
