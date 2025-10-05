@@ -36,6 +36,24 @@ export const metadata = {
       "Empresa especializada em soluções tecnológicas de ponta com foco em inteligência artificial, infraestrutura avançada, segurança cibernética e inovação estratégica.",
     type: "website",
     url: SITE_URL,
+    siteName: "STARK Solutions",
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "STARK Solutions - Soluções Tecnológicas Avançadas",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@starksolutions",
+    creator: "@starksolutions",
+    title: "STARK Solutions",
+    description:
+      "Empresa especializada em soluções tecnológicas de ponta com foco em inteligência artificial, infraestrutura avançada, segurança cibernética e inovação estratégica.",
+    images: [`${SITE_URL}/images/og-default.jpg`],
   },
   robots: {
     index: true,
