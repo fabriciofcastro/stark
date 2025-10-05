@@ -11,6 +11,8 @@ export type Slide = {
 	ctaPrimary?: { label: string; onClick: () => void };
 	ctaSecondary?: { label: string; onClick: () => void };
 	videoUrl?: string;
+	impactPhrase?: string;
+	theme?: string;
 };
 
 export default function HeroEmbla({ slides }: { slides: Slide[] }) {

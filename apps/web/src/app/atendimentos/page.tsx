@@ -158,7 +158,7 @@ export default function AtendimentosPage() {
           id: '3',
           protocol: 'STARK-3C4D5E-F6G7H8',
           userId: 'user3',
-          status: 'resolved',
+          status: 'archived',
           mode: 'auto',
           priority: 'normal',
           title: 'Dúvida sobre Preços',
@@ -343,7 +343,7 @@ export default function AtendimentosPage() {
           {[
             { icon: Activity, label: 'Ativos', value: sessions.filter(s => s.status === 'active').length, color: 'from-green-500 to-emerald-600' },
             { icon: AlertCircle, label: 'Escalados', value: sessions.filter(s => s.status === 'escalated').length, color: 'from-orange-500 to-red-600' },
-            { icon: CheckCircle, label: 'Resolvidos', value: sessions.filter(s => s.status === 'resolved').length, color: 'from-blue-500 to-cyan-600' },
+            { icon: CheckCircle, label: 'Arquivados', value: sessions.filter(s => s.status === 'archived').length, color: 'from-blue-500 to-cyan-600' },
             { icon: Users, label: 'Total', value: sessions.length, color: 'from-purple-500 to-pink-600' },
           ].map((stat, index) => (
             <motion.div
