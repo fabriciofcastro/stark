@@ -440,117 +440,161 @@ export default function ConsultoriaTecnologica() {
 				))}
 			</div>
 
-			{/* Hero Section - Modernizada */}
+			{/* Hero Section - Futurista e Minimalista */}
 			<section 
 				ref={heroRef}
-				className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
+				className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32"
 			>
+				{/* Background Futurista */}
+				<div className="absolute inset-0 overflow-hidden">
+					{/* Gradiente Principal */}
+					<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
+					
+					{/* Partículas de Energia */}
+					{Array.from({ length: 50 }).map((_, i) => (
+						<motion.div
+							key={i}
+							className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+							style={{
+								left: `${Math.random() * 100}%`,
+								top: `${Math.random() * 100}%`,
+							}}
+							animate={{
+								opacity: [0, 1, 0],
+								scale: [0, 1, 0],
+								y: [0, -100, 0],
+							}}
+							transition={{
+								duration: 3 + Math.random() * 2,
+								repeat: Infinity,
+								delay: Math.random() * 3,
+							}}
+						/>
+					))}
+					
+					{/* Linhas de Energia */}
+					{Array.from({ length: 8 }).map((_, i) => (
+						<motion.div
+							key={i}
+							className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
+							style={{
+								left: `${Math.random() * 100}%`,
+								top: `${Math.random() * 100}%`,
+								width: `${200 + Math.random() * 400}px`,
+								transform: `rotate(${Math.random() * 360}deg)`,
+							}}
+							animate={{
+								opacity: [0, 1, 0],
+								scaleX: [0, 1, 0],
+							}}
+							transition={{
+								duration: 4 + Math.random() * 2,
+								repeat: Infinity,
+								delay: Math.random() * 4,
+							}}
+						/>
+					))}
+				</div>
+
 				<motion.div 
-					className="max-w-7xl mx-auto text-center w-full"
+					className="relative z-10 max-w-6xl mx-auto text-center w-full"
 					style={{ y, opacity }}
 				>
 					<motion.div
 						initial={{ opacity: 0, y: 50 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8 }}
+						transition={{ duration: 1, ease: "easeOut" }}
 					>
-						{/* Animated Logo - Responsivo */}
+						{/* Logo Futurista */}
 						<motion.div
-							className="inline-flex items-center justify-center w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mb-6 sm:mb-8 rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 shadow-2xl"
+							className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 mb-8 sm:mb-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 shadow-2xl"
 							animate={{
-								x: [0, 8, -8, 0],
-								y: [0, -4, 0],
-								scale: [1, 1.03, 1],
-								boxShadow: [
-									"0 0 20px rgba(6, 182, 212, 0.4)",
-									"0 0 40px rgba(139, 92, 246, 0.7)",
-									"0 0 20px rgba(6, 182, 212, 0.4)",
-								],
+								rotateY: [0, 360],
+								scale: [1, 1.05, 1],
 							}}
 							transition={{
-								x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-								y: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-								scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-								boxShadow: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+								rotateY: { duration: 8, repeat: Infinity, ease: "linear" },
+								scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
 							}}
 						>
-							<Brain className="w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-white" />
+							<Brain className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-cyan-400" />
 						</motion.div>
 
-						{/* Título Principal - Mobile First */}
+						{/* Título Principal - Tipografia Futurista */}
 						<motion.h1
-							className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 lg:mb-8 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-tight"
+							className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-4 sm:mb-6 bg-gradient-to-r from-white via-cyan-300 to-purple-300 bg-clip-text text-transparent leading-none tracking-tight"
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.2 }}
+							transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
 						>
-							Consultoria
+							CONSULTORIA
 						</motion.h1>
 
 						<motion.h2
-							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent leading-tight"
+							className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 sm:mb-12 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-none tracking-tight"
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.4 }}
+							transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
 						>
-							Tecnológica
+							TECNOLÓGICA
 						</motion.h2>
 
-						{/* Subtítulo - Melhorado para Mobile */}
+						{/* Subtítulo Minimalista */}
 						<motion.p
-							className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-8 sm:mb-10 lg:mb-12 max-w-4xl mx-auto leading-relaxed px-4"
+							className="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-12 sm:mb-16 max-w-4xl mx-auto leading-relaxed font-light"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.6 }}
+							transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
 						>
-							Transforme sua empresa através da{" "}
+							Transformação digital através da{" "}
 							<span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold">
-								tecnologia estratégica
+								inteligência tecnológica
 							</span>
 						</motion.p>
 
-						{/* CTA Buttons - Mobile Otimizado */}
+						{/* CTA Buttons - Design Futurista */}
 						<motion.div
-							className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
+							className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.8, delay: 0.8 }}
+							transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
 						>
 							<motion.button
-								className="w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-4 sm:py-5 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 text-base sm:text-lg group"
-								whileHover={{ scale: 1.02, y: -2 }}
-								whileTap={{ scale: 0.98 }}
+								className="group relative px-8 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-bold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 flex items-center gap-4 text-lg sm:text-xl overflow-hidden"
+								whileHover={{ scale: 1.05, y: -2 }}
+								whileTap={{ scale: 0.95 }}
 							>
-								<Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
-								<span className="whitespace-nowrap">Agendar Consultoria Gratuita</span>
-								<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+								<div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+								<Sparkles className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
+								<span>AGENDAR CONSULTORIA</span>
+								<ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
 							</motion.button>
 							
 							<motion.button
-								className="w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-4 sm:py-5 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-3 text-base sm:text-lg group"
-								whileHover={{ scale: 1.02, y: -2 }}
-								whileTap={{ scale: 0.98 }}
+								className="group relative px-8 sm:px-12 py-4 sm:py-6 border-2 border-white/30 text-white font-bold rounded-2xl hover:border-cyan-400/50 hover:bg-cyan-400/10 transition-all duration-500 flex items-center gap-4 text-lg sm:text-xl backdrop-blur-sm"
+								whileHover={{ scale: 1.05, y: -2 }}
+								whileTap={{ scale: 0.95 }}
 							>
-								<Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
-								<span className="whitespace-nowrap">Ver Apresentação</span>
+								<Play className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+								<span>VER APRESENTAÇÃO</span>
 							</motion.button>
 						</motion.div>
 
-						{/* Indicadores de Scroll - Mobile */}
+						{/* Indicador de Scroll Futurista */}
 						<motion.div
-							className="mt-12 sm:mt-16 flex flex-col items-center gap-2"
+							className="mt-16 sm:mt-20 flex flex-col items-center gap-4"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							transition={{ duration: 0.8, delay: 1.2 }}
+							transition={{ duration: 1, delay: 1.2 }}
 						>
-							<span className="text-gray-400 text-sm">Descubra mais</span>
+							<span className="text-gray-400 text-sm font-medium tracking-wider uppercase">SCROLL</span>
 							<motion.div
-								className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+								className="w-8 h-12 border-2 border-cyan-400/50 rounded-full flex justify-center relative"
 								animate={{ y: [0, 8, 0] }}
 								transition={{ duration: 2, repeat: Infinity }}
 							>
 								<motion.div
-									className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+									className="w-1 h-4 bg-cyan-400 rounded-full mt-2"
 									animate={{ opacity: [1, 0, 1] }}
 									transition={{ duration: 2, repeat: Infinity }}
 								/>
@@ -1115,261 +1159,393 @@ export default function ConsultoriaTecnologica() {
 				</div>
 			</section>
 
-			{/* Modern Carousel - Cases de Consultoria */}
-			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-				{/* Background Animado */}
-				<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-					{/* Partículas flutuantes */}
-					{Array.from({ length: 20 }).map((_, i) => (
-						<motion.div
-							key={i}
-							className="absolute w-2 h-2 bg-cyan-400/30 rounded-full"
-							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-							}}
-							animate={{
-								y: [0, -30, 0],
-								opacity: [0.3, 0.8, 0.3],
-								scale: [1, 1.2, 1],
-							}}
-							transition={{
-								duration: 3 + Math.random() * 2,
-								repeat: Infinity,
-								delay: Math.random() * 2,
-							}}
-						/>
-					))}
-					
-					{/* Linhas de energia */}
-					{Array.from({ length: 5 }).map((_, i) => (
-						<motion.div
-							key={i}
-							className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent"
-							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-								width: `${200 + Math.random() * 300}px`,
-								transform: `rotate(${Math.random() * 360}deg)`,
-							}}
-							animate={{
-								opacity: [0, 1, 0],
-								scaleX: [0, 1, 0],
-							}}
-							transition={{
-								duration: 4 + Math.random() * 2,
-								repeat: Infinity,
-								delay: Math.random() * 3,
-							}}
-						/>
-					))}
-				</div>
+			{/* Carrossel Futurista - Cases de Consultoria */}
+			<section className="relative z-10 py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
+				{/* Background Principal */}
+				<div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
 
-				<div className="max-w-7xl mx-auto relative z-10">
+				<div className="max-w-8xl mx-auto relative z-10">
+					{/* Header Futurista */}
 					<motion.div
-						className="text-center mb-16"
-						initial={{ opacity: 0, y: 30 }}
+						className="text-center mb-20 sm:mb-24 lg:mb-32"
+						initial={{ opacity: 0, y: 50 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8 }}
+						transition={{ duration: 1, ease: "easeOut" }}
 						viewport={{ once: true }}
 					>
-						<h2 className="text-5xl sm:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-cyan-300 to-purple-300 bg-clip-text text-transparent">
-							Cases de Sucesso
+						<motion.div
+							className="inline-block mb-6"
+							initial={{ scale: 0 }}
+							whileInView={{ scale: 1 }}
+							transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 200 }}
+							viewport={{ once: true }}
+						>
+							<span className="text-cyan-400 text-sm font-bold tracking-widest uppercase">CASES DE SUCESSO</span>
+						</motion.div>
+						
+						<h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 sm:mb-8 bg-gradient-to-r from-white via-cyan-200 to-purple-200 bg-clip-text text-transparent leading-none tracking-tight">
+							TRANSFORMAÇÕES
 						</h2>
-						<p className="text-xl text-gray-300 max-w-3xl mx-auto">
-							Transformações digitais que geraram resultados excepcionais para nossos clientes
+						
+						<p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
+							Resultados excepcionais através da{" "}
+							<span className="text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text font-semibold">
+								inteligência tecnológica
+							</span>
 						</p>
 					</motion.div>
 
-					{/* Carrossel Container */}
+					{/* Carrossel Container Futurista */}
 					<div className="relative">
-						{/* Controles de Navegação - Mobile Responsivo */}
+						{/* Controles Futuristas */}
 						<motion.button
 							onClick={prevSlide}
-							className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
-							whileHover={{ scale: 1.05 }}
+							className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-2xl"
+							whileHover={{ scale: 1.1, x: -5 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-1 transition-transform" />
+							<ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 group-hover:-translate-x-1 transition-transform duration-300" />
 						</motion.button>
 
 						<motion.button
 							onClick={nextSlide}
-							className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
-							whileHover={{ scale: 1.05 }}
+							className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl flex items-center justify-center text-cyan-400 hover:bg-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 group shadow-2xl"
+							whileHover={{ scale: 1.1, x: 5 }}
 							whileTap={{ scale: 0.95 }}
 						>
-							<ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
+							<ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-1 transition-transform duration-300" />
 						</motion.button>
 
-						{/* Auto-play Toggle - Mobile Responsivo */}
+						{/* Auto-play Toggle Futurista */}
 						<button
 							onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-							className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+							className="absolute top-4 right-4 sm:top-8 sm:right-8 z-30 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-xl border border-purple-400/30 rounded-2xl flex items-center justify-center text-purple-400 hover:bg-purple-500/30 hover:border-purple-400/50 transition-all duration-500 shadow-2xl"
 						>
-							{isAutoPlaying ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
+							{isAutoPlaying ? <Pause className="w-5 h-5 sm:w-6 sm:h-6" /> : <Play className="w-5 h-5 sm:w-6 sm:h-6" />}
 						</button>
 
-						{/* Slides Container - Mobile Responsivo */}
+						{/* Slides Container Futurista */}
 						<div 
 							ref={carouselRef}
-							className="relative h-[500px] sm:h-[600px] lg:h-[700px] overflow-hidden rounded-2xl sm:rounded-3xl"
+							className="relative h-[600px] sm:h-[700px] lg:h-[800px] xl:h-[900px] overflow-hidden rounded-3xl sm:rounded-4xl border border-white/10 shadow-2xl"
 						>
 							{caseStudies.map((caseStudy, index) => {
 								const IconComponent = caseStudy.icon;
 								const isActive = index === currentSlide;
 								
+								// Backgrounds únicos para cada slide
+								const slideBackgrounds = [
+									// Slide 1 - Farmacêutica (Azul/Cyan)
+									{
+										gradient: "from-blue-900/90 via-cyan-900/80 to-blue-800/90",
+										particles: "bg-cyan-400",
+										lines: "from-cyan-400/40 to-blue-400/40",
+										accent: "cyan-400"
+									},
+									// Slide 2 - Supermercados (Roxo/Rosa)
+									{
+										gradient: "from-purple-900/90 via-pink-900/80 to-purple-800/90",
+										particles: "bg-purple-400",
+										lines: "from-purple-400/40 to-pink-400/40",
+										accent: "purple-400"
+									},
+									// Slide 3 - Banco (Verde/Esmeralda)
+									{
+										gradient: "from-green-900/90 via-emerald-900/80 to-green-800/90",
+										particles: "bg-emerald-400",
+										lines: "from-emerald-400/40 to-green-400/40",
+										accent: "emerald-400"
+									},
+									// Slide 4 - Construtora (Laranja/Vermelho)
+									{
+										gradient: "from-orange-900/90 via-red-900/80 to-orange-800/90",
+										particles: "bg-orange-400",
+										lines: "from-orange-400/40 to-red-400/40",
+										accent: "orange-400"
+									},
+									// Slide 5 - Hospital (Cyan/Azul)
+									{
+										gradient: "from-cyan-900/90 via-blue-900/80 to-cyan-800/90",
+										particles: "bg-cyan-400",
+										lines: "from-cyan-400/40 to-blue-400/40",
+										accent: "cyan-400"
+									},
+									// Slide 6 - Combustíveis (Amarelo/Laranja)
+									{
+										gradient: "from-yellow-900/90 via-orange-900/80 to-yellow-800/90",
+										particles: "bg-yellow-400",
+										lines: "from-yellow-400/40 to-orange-400/40",
+										accent: "yellow-400"
+									}
+								];
+								
+								const bg = slideBackgrounds[index] || slideBackgrounds[0];
+								
 								return (
-							<motion.div
+									<motion.div
 										key={caseStudy.company}
 										className={`absolute inset-0 transition-all duration-1000 ${
 											isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
 										}`}
-										initial={{ opacity: 0, scale: 0.8, x: 100 }}
+										initial={{ opacity: 0, scale: 0.9, y: 50 }}
 										animate={{ 
 											opacity: isActive ? 1 : 0,
-											scale: isActive ? 1 : 0.8,
-											x: isActive ? 0 : 100
+											scale: isActive ? 1 : 0.9,
+											y: isActive ? 0 : 50
 										}}
-										transition={{ duration: 0.8, ease: "easeInOut" }}
+										transition={{ duration: 1, ease: "easeInOut" }}
 									>
-										{/* Background do slide - Mobile Responsivo */}
-										<div className={`absolute inset-0 bg-gradient-to-br ${caseStudy.gradient} rounded-2xl sm:rounded-3xl`}>
-											{/* Padrão decorativo - Otimizado para Mobile */}
-											<div className="absolute inset-0 opacity-15 sm:opacity-20">
-												<div className="absolute top-4 right-4 sm:top-10 sm:right-10 w-16 h-16 sm:w-32 sm:h-32 bg-white/10 rounded-full blur-xl"></div>
-												<div className="absolute bottom-4 left-4 sm:bottom-10 sm:left-10 w-12 h-12 sm:w-24 sm:h-24 bg-cyan-400/20 rounded-full blur-lg"></div>
-												<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-40 sm:h-40 bg-purple-400/10 rounded-full blur-2xl"></div>
+										{/* Background Futurista Único */}
+										<div className={`absolute inset-0 bg-gradient-to-br ${bg.gradient} backdrop-blur-sm`}>
+											{/* Partículas Animadas Únicas */}
+											{Array.from({ length: 30 }).map((_, i) => (
+												<motion.div
+													key={i}
+													className={`absolute w-1 h-1 ${bg.particles} rounded-full`}
+													style={{
+														left: `${Math.random() * 100}%`,
+														top: `${Math.random() * 100}%`,
+													}}
+													animate={{
+														opacity: [0, 1, 0],
+														scale: [0, 1, 0],
+														y: [0, -200, 0],
+														x: [0, Math.random() * 100 - 50, 0],
+													}}
+													transition={{
+														duration: 4 + Math.random() * 3,
+														repeat: Infinity,
+														delay: Math.random() * 4,
+													}}
+												/>
+											))}
+											
+											{/* Linhas de Energia Únicas */}
+											{Array.from({ length: 12 }).map((_, i) => (
+												<motion.div
+													key={i}
+													className={`absolute h-px bg-gradient-to-r from-transparent via-${bg.accent}/30 to-transparent`}
+													style={{
+														left: `${Math.random() * 100}%`,
+														top: `${Math.random() * 100}%`,
+														width: `${300 + Math.random() * 500}px`,
+														transform: `rotate(${Math.random() * 360}deg)`,
+													}}
+													animate={{
+														opacity: [0, 1, 0],
+														scaleX: [0, 1, 0],
+													}}
+													transition={{
+														duration: 5 + Math.random() * 3,
+														repeat: Infinity,
+														delay: Math.random() * 5,
+													}}
+												/>
+											))}
+											
+											{/* Padrões Geométricos */}
+											<div className="absolute inset-0 opacity-10">
+												{Array.from({ length: 8 }).map((_, i) => (
+													<motion.div
+														key={i}
+														className={`absolute w-32 h-32 border border-${bg.accent}/20 rounded-full`}
+														style={{
+															left: `${Math.random() * 100}%`,
+															top: `${Math.random() * 100}%`,
+														}}
+														animate={{
+															scale: [1, 1.5, 1],
+															opacity: [0.1, 0.3, 0.1],
+															rotate: [0, 360],
+														}}
+														transition={{
+															duration: 8 + Math.random() * 4,
+															repeat: Infinity,
+															delay: Math.random() * 6,
+														}}
+													/>
+												))}
 											</div>
 										</div>
 
-										{/* Conteúdo do slide - Mobile First */}
+										{/* Conteúdo Futurista */}
 										<div className="relative z-10 h-full flex flex-col lg:flex-row">
-											{/* Lado esquerdo - Informações principais - Mobile Otimizado */}
-											<div className="flex-1 p-4 sm:p-6 lg:p-8 xl:p-12 flex flex-col justify-center">
+											{/* Lado Esquerdo - Informações Principais */}
+											<div className="flex-1 p-8 sm:p-12 lg:p-16 xl:p-20 flex flex-col justify-center">
 												<motion.div
-													className="mb-6 sm:mb-8"
-													initial={{ opacity: 0, x: -50 }}
-													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -50 }}
-													transition={{ duration: 0.6, delay: 0.2 }}
+													className="space-y-8 sm:space-y-12"
+													initial={{ opacity: 0, x: -100 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -100 }}
+													transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
 												>
-													{/* Header do Case - Mobile Responsivo */}
-													<div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-														<div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 backdrop-blur-xl rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-3xl">
-															{caseStudy.image}
-														</div>
-														<div>
-															<h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-1 sm:mb-2 leading-tight">
-																{caseStudy.company}
-															</h3>
-															<p className="text-cyan-300 text-sm sm:text-base lg:text-lg">{caseStudy.industry}</p>
+													{/* Header Futurista */}
+													<div className="space-y-6">
+														<div className="flex items-center gap-6">
+															<div className={`w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl border border-${bg.accent}/30 shadow-2xl`}>
+																{caseStudy.image}
+															</div>
+															<div className="space-y-2">
+																<h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
+																	{caseStudy.company}
+																</h3>
+																<div className={`inline-block px-4 py-2 bg-${bg.accent}/20 backdrop-blur-xl rounded-full border border-${bg.accent}/30`}>
+																	<span className={`text-${bg.accent} text-sm font-bold tracking-wider uppercase`}>
+																		{caseStudy.industry}
+																	</span>
+																</div>
+															</div>
 														</div>
 													</div>
 
-													{/* Conteúdo - Mobile Otimizado */}
-													<div className="space-y-4 sm:space-y-6">
-														<div>
-															<h4 className="text-base sm:text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
-																<IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
-																Desafio
-															</h4>
-															<p className="text-gray-200 text-sm sm:text-base lg:text-lg leading-relaxed">
+													{/* Conteúdo Principal */}
+													<div className="space-y-8">
+														{/* Desafio */}
+														<div className="space-y-4">
+															<div className="flex items-center gap-4">
+																<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
+																	<IconComponent className={`w-6 h-6 text-${bg.accent}`} />
+																</div>
+																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																	DESAFIO
+																</h4>
+															</div>
+															<p className="text-gray-200 text-lg sm:text-xl leading-relaxed font-light pl-16">
 																{caseStudy.challenge}
 															</p>
 														</div>
 
-														<div>
-															<h4 className="text-base sm:text-lg font-semibold text-gray-300 mb-2 flex items-center gap-2">
-																<Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
-																Solução
-															</h4>
-															<p className="text-gray-200 text-sm sm:text-base lg:text-lg leading-relaxed">
+														{/* Solução */}
+														<div className="space-y-4">
+															<div className="flex items-center gap-4">
+																<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
+																	<Lightbulb className={`w-6 h-6 text-${bg.accent}`} />
+																</div>
+																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																	SOLUÇÃO
+																</h4>
+															</div>
+															<p className="text-gray-200 text-lg sm:text-xl leading-relaxed font-light pl-16">
 																{caseStudy.solution}
 															</p>
 														</div>
 													</div>
 												</motion.div>
-										</div>
+											</div>
 
-											{/* Lado direito - Resultados e tecnologias - Mobile Responsivo */}
-											<div className="flex-1 p-4 sm:p-6 lg:p-8 xl:p-12">
+											{/* Lado Direito - Resultados e Tecnologias Futuristas */}
+											<div className="flex-1 p-8 sm:p-12 lg:p-16 xl:p-20">
 												<motion.div
-													className="h-full flex flex-col justify-center"
-													initial={{ opacity: 0, x: 50 }}
-													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 50 }}
-													transition={{ duration: 0.6, delay: 0.4 }}
+													className="h-full flex flex-col justify-center space-y-12 sm:space-y-16"
+													initial={{ opacity: 0, x: 100 }}
+													animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : 100 }}
+													transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
 												>
-													{/* Resultados - Mobile Otimizado */}
-													<div className="mb-6 sm:mb-8">
-														<h4 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 flex items-center gap-2">
-															<TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
-															Resultados Alcançados
-														</h4>
-														<div className="grid grid-cols-1 gap-3 sm:gap-4">
+													{/* Resultados Futuristas */}
+													<div className="space-y-8">
+														<div className="flex items-center gap-4">
+															<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
+																<TrendingUp className={`w-6 h-6 text-${bg.accent}`} />
+															</div>
+															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																RESULTADOS
+															</h4>
+														</div>
+														
+														<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 															{caseStudy.results.map((result, resultIndex) => (
 																<motion.div
 																	key={result}
-																	className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-white/10 backdrop-blur-xl rounded-lg sm:rounded-xl border border-white/20"
-																	initial={{ opacity: 0, y: 20 }}
-																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
-																	transition={{ duration: 0.4, delay: 0.6 + resultIndex * 0.1 }}
+																	className={`group relative p-6 bg-gradient-to-br from-${bg.accent}/10 to-${bg.accent}/5 backdrop-blur-xl rounded-2xl border border-${bg.accent}/20 hover:border-${bg.accent}/40 transition-all duration-500 hover:shadow-2xl hover:shadow-${bg.accent}/10`}
+																	initial={{ opacity: 0, y: 30, scale: 0.9 }}
+																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30, scale: isActive ? 1 : 0.9 }}
+																	transition={{ duration: 0.6, delay: 0.7 + resultIndex * 0.1, ease: "easeOut" }}
+																	whileHover={{ y: -5, scale: 1.02 }}
 																>
-																	<CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mt-0.5 flex-shrink-0" />
-																	<span className="text-gray-200 text-xs sm:text-sm font-medium leading-relaxed">{result}</span>
+																	<div className="flex items-start gap-4">
+																		<div className={`w-8 h-8 bg-${bg.accent}/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1`}>
+																			<CheckCircle className={`w-5 h-5 text-${bg.accent}`} />
+																		</div>
+																		<span className="text-gray-200 text-sm sm:text-base font-medium leading-relaxed group-hover:text-white transition-colors duration-300">
+																			{result}
+																		</span>
+																	</div>
 																</motion.div>
 															))}
 														</div>
 													</div>
 
-													{/* Tecnologias - Mobile Otimizado */}
-													<div>
-														<h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2">
-															<Code className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
-															Tecnologias Utilizadas
-														</h4>
-														<div className="flex flex-wrap gap-2 sm:gap-3">
+													{/* Tecnologias Futuristas */}
+													<div className="space-y-6">
+														<div className="flex items-center gap-4">
+															<div className={`w-12 h-12 bg-gradient-to-br from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-${bg.accent}/30`}>
+																<Code className={`w-6 h-6 text-${bg.accent}`} />
+															</div>
+															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
+																TECNOLOGIAS
+															</h4>
+														</div>
+														
+														<div className="flex flex-wrap gap-3 sm:gap-4">
 															{caseStudy.technologies.map((tech, techIndex) => (
 																<motion.span
 																	key={tech}
-																	className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-xl rounded-full text-xs sm:text-sm text-white border border-white/30 hover:bg-white/30 transition-all duration-300"
-																	initial={{ opacity: 0, scale: 0.8 }}
-																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8 }}
-																	transition={{ duration: 0.3, delay: 0.8 + techIndex * 0.1 }}
-																	whileHover={{ scale: 1.05, y: -2 }}
+																	className={`group relative px-4 py-3 bg-gradient-to-r from-${bg.accent}/20 to-${bg.accent}/10 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white border border-${bg.accent}/30 hover:border-${bg.accent}/50 transition-all duration-500 hover:shadow-lg hover:shadow-${bg.accent}/20 cursor-pointer`}
+																	initial={{ opacity: 0, scale: 0.8, y: 20 }}
+																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8, y: isActive ? 0 : 20 }}
+																	transition={{ duration: 0.4, delay: 0.9 + techIndex * 0.1, ease: "easeOut" }}
+																	whileHover={{ scale: 1.05, y: -3 }}
+																	whileTap={{ scale: 0.95 }}
 																>
-																	{tech}
+																	<span className="font-medium tracking-wide">{tech}</span>
+																	<div className={`absolute inset-0 bg-gradient-to-r from-${bg.accent}/20 to-${bg.accent}/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 																</motion.span>
 															))}
 														</div>
 													</div>
 												</motion.div>
-									</div>
+											</div>
 								</div>
 							</motion.div>
 								);
 							})}
 						</div>
 
-						{/* Indicadores de slide - Mobile Responsivo */}
-						<div className="flex justify-center mt-6 sm:mt-8 gap-2 sm:gap-3">
+						{/* Indicadores Futuristas */}
+						<div className="flex justify-center mt-12 sm:mt-16 gap-4 sm:gap-6">
 							{caseStudies.map((_, index) => (
-								<button
+								<motion.button
 									key={index}
 									onClick={() => goToSlide(index)}
-									className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+									className={`group relative w-4 h-4 sm:w-5 sm:h-5 rounded-full transition-all duration-500 ${
 										index === currentSlide 
-											? 'bg-cyan-400 scale-125' 
-											: 'bg-white/30 hover:bg-white/50'
+											? 'bg-gradient-to-r from-cyan-400 to-purple-400 scale-150 shadow-lg shadow-cyan-400/50' 
+											: 'bg-white/20 hover:bg-white/40 border border-white/30'
 									}`}
-								/>
+									whileHover={{ scale: 1.2 }}
+									whileTap={{ scale: 0.9 }}
+								>
+									{index === currentSlide && (
+										<motion.div
+											className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"
+											animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+											transition={{ duration: 2, repeat: Infinity }}
+										/>
+									)}
+								</motion.button>
 							))}
 						</div>
 
-						{/* Contador de slides - Mobile Responsivo */}
-						<div className="text-center mt-3 sm:mt-4">
-							<span className="text-gray-400 text-xs sm:text-sm">
-								{currentSlide + 1} de {caseStudies.length}
-							</span>
+						{/* Contador e Status Futurista */}
+						<div className="text-center mt-6 sm:mt-8 space-y-2">
+							<div className="flex items-center justify-center gap-4">
+								<span className="text-cyan-400 text-sm font-bold tracking-wider uppercase">
+									{currentSlide + 1} / {caseStudies.length}
+								</span>
+								<div className="w-8 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+								<span className="text-gray-400 text-sm font-medium">
+									{isAutoPlaying ? 'AUTO' : 'MANUAL'}
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
