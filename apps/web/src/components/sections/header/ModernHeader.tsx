@@ -455,20 +455,6 @@ const ModernHeader = () => {
                         isScrolled ? "w-8 h-8" : "w-10 h-10 lg:w-12 lg:h-12"
                       }`}
                     >
-                      {/* Holographic Scan Effect */}
-                      {/* Holographic Scan Effect - Atrás do logo */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl overflow-hidden"
-                        initial={{ x: "-100%" }}
-                        animate={{ x: "100%" }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatDelay: 3,
-                          ease: "easeInOut",
-                        }}
-                        style={{ zIndex: 1 }}
-                      />
 
                       {/* Logo - Sempre na frente */}
                       <div className="relative" style={{ zIndex: 10 }}>

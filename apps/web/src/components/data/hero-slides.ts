@@ -13,6 +13,8 @@ export const heroSlides: Slide[] = [
 			label: "Consultar Governança",
 			onClick: () => logEvent("cta", "governanca_click", "hero_governanca"),
 		},
+		impactPhrase: "Onde a excelência tecnológica encontra a disciplina operacional",
+		theme: "governance"
 	},
 	{
 		// Criação de Sites
@@ -28,6 +30,8 @@ export const heroSlides: Slide[] = [
 			label: "Planejar Projeto",
 			onClick: () => logEvent("cta", "orcamento_click", "hero_sites"),
 		},
+		impactPhrase: "Transformamos ideias em experiências digitais extraordinárias",
+		theme: "development"
 	},
 	{
 		// Suporte / Help Desk
@@ -43,6 +47,8 @@ export const heroSlides: Slide[] = [
 			label: "WhatsApp",
 			onClick: () => logEvent("cta", "whatsapp_click", "hero_suporte"),
 		},
+		impactPhrase: "Sua operação nunca para, nossa dedicação também não",
+		theme: "support"
 	},
 	{
 		// Segurança / Cibersegurança
@@ -54,6 +60,8 @@ export const heroSlides: Slide[] = [
 			label: "Falar com especialista",
 			onClick: () => logEvent("cta", "especialista_click", "hero_security"),
 		},
+		impactPhrase: "Proteção inteligente para um mundo digital complexo",
+		theme: "security"
 	},
 	{
 		// Engajamento Digital
@@ -66,5 +74,7 @@ export const heroSlides: Slide[] = [
 			label: "Analisar Site",
 			onClick: () => logEvent("cta", "engajamento_click", "hero_engajamento"),
 		},
+		impactPhrase: "Conectamos pessoas e tecnologia para resultados excepcionais",
+		theme: "engagement"
 	},
 ];

@@ -11,6 +11,8 @@ export type Slide = {
   ctaPrimary?: { label: string; onClick: () => void };
   ctaSecondary?: { label: string; onClick: () => void };
   videoUrl?: string;
+  impactPhrase?: string;
+  theme?: string;
 };
 
 export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
@@ -26,59 +28,57 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
   const lastRef = useRef<number>(0);
   const elapsedRef = useRef<number>(0);
 
-  // Cores temáticas únicas para cada slide com imagens de background
-  const getSlideTheme = (index: number) => {
-    const themes = [
-      {
-        primary: "from-blue-600 to-cyan-500",
-        secondary: "from-blue-400 to-cyan-300",
-        accent: "from-blue-500 to-teal-400",
+  // Temas futuristas com backgrounds animados temáticos
+  const getSlideTheme = (slide: Slide, index: number) => {
+    const themes = {
+      governance: {
+        primary: "from-slate-900 via-blue-900 to-slate-800",
+        secondary: "from-blue-500 to-cyan-400",
+        accent: "from-blue-400 to-cyan-300",
         particles: "blue-400",
         position: "left",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDc0RjY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMENDQzQ7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBCNkY2O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
+        backgroundPattern: "governance",
+        glowColor: "blue-500"
       },
-      {
-        primary: "from-purple-600 to-indigo-500",
-        secondary: "from-purple-400 to-indigo-300",
-        accent: "from-purple-500 to-blue-400",
+      development: {
+        primary: "from-purple-900 via-indigo-900 to-purple-800",
+        secondary: "from-purple-500 to-pink-400",
+        accent: "from-purple-400 to-pink-300",
         particles: "purple-400",
         position: "center",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5MzM0RkY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0RjQ2RTE7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNzg1NkY3O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
+        backgroundPattern: "development",
+        glowColor: "purple-500"
       },
-      {
-        primary: "from-emerald-600 to-teal-500",
-        secondary: "from-emerald-400 to-teal-300",
-        accent: "from-emerald-500 to-cyan-400",
+      support: {
+        primary: "from-emerald-900 via-teal-900 to-emerald-800",
+        secondary: "from-emerald-500 to-cyan-400",
+        accent: "from-emerald-400 to-cyan-300",
         particles: "emerald-400",
         position: "right",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwNUQ0OEQ7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNERyOEI7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMkRENDE4O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
+        backgroundPattern: "support",
+        glowColor: "emerald-500"
       },
-      {
-        primary: "from-red-600 to-pink-500",
-        secondary: "from-red-400 to-pink-300",
-        accent: "from-red-500 to-rose-400",
+      security: {
+        primary: "from-red-900 via-rose-900 to-red-800",
+        secondary: "from-red-500 to-pink-400",
+        accent: "from-red-400 to-pink-300",
         particles: "red-400",
         position: "center",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNEOEMxQzY7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjEwN0E7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkM4NThEO3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
+        backgroundPattern: "security",
+        glowColor: "red-500"
       },
-      {
-        primary: "from-orange-600 to-amber-500",
-        secondary: "from-orange-400 to-amber-300",
-        accent: "from-orange-500 to-yellow-400",
+      engagement: {
+        primary: "from-orange-900 via-amber-900 to-orange-800",
+        secondary: "from-orange-500 to-yellow-400",
+        accent: "from-orange-400 to-yellow-300",
         particles: "orange-400",
         position: "left",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjQ5MDA7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRjEwN0E7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkM4NzAwO3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
-      },
-      {
-        primary: "from-slate-600 to-gray-500",
-        secondary: "from-slate-400 to-gray-300",
-        accent: "from-slate-500 to-zinc-400",
-        particles: "slate-400",
-        position: "center",
-        backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0NzU1Njk7c3RvcC1vcGFjaXR5OjAuMSIgLz4KPHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2QjcyODA7c3RvcC1vcGFjaXR5OjAuMiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOTQ5NEE5O3N0b3Atb3BhY2l0eTowLjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K')",
-      },
-    ];
-    return themes[index % themes.length];
+        backgroundPattern: "engagement",
+        glowColor: "orange-500"
+      }
+    };
+    
+    return themes[slide.theme as keyof typeof themes] || themes.governance;
   };
 
   const scrollPrev = useCallback(() => embla?.scrollPrev(), [embla]);
@@ -146,18 +146,288 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
     };
   }, [embla, userPaused]);
 
-  // Renderizar partículas animadas para cada slide
+  // Renderizar backgrounds animados temáticos
+  const renderThematicBackground = (theme: any, pattern: string) => {
+    if (typeof window === 'undefined') return null;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) return null;
+    
+    // Otimização: reduzir elementos em telas menores
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const elementCount = isMobile ? 3 : 6;
+
+    const patterns = {
+      governance: () => (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Circuitos e estruturas organizacionais */}
+          {[...Array(elementCount)].map((_, i) => (
+            <motion.div
+              key={`circuit-${i}`}
+              className="absolute border border-blue-400/40"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 200 + 100}px`,
+                height: `${Math.random() * 100 + 50}px`,
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ 
+                opacity: [0, 0.5, 0],
+                scale: [0, 1, 0],
+                rotate: [0, 90, 180]
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          {/* Pontos de conexão */}
+          {[...Array(isMobile ? 8 : 15)].map((_, i) => (
+            <motion.div
+              key={`node-${i}`}
+              className="absolute w-2 h-2 bg-blue-400/60 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      ),
+      development: () => (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Código e elementos de desenvolvimento */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={`code-block-${i}`}
+              className="absolute bg-purple-500/20 rounded-lg"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 150 + 80}px`,
+                height: `${Math.random() * 80 + 40}px`,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ 
+                opacity: [0, 0.8, 0],
+                y: [20, 0, -20]
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          {/* Linhas de código */}
+          {[...Array(isMobile ? 6 : 12)].map((_, i) => (
+            <motion.div
+              key={`code-line-${i}`}
+              className="absolute h-0.5 bg-purple-400/50"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 200 + 100}px`,
+              }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: [0, 1, 0] }}
+              transition={{
+                duration: 2 + Math.random() * 1,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      ),
+      support: () => (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Elementos de suporte e conectividade */}
+          {[...Array(isMobile ? 5 : 10)].map((_, i) => (
+            <motion.div
+              key={`support-ring-${i}`}
+              className="absolute border-2 border-emerald-400/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 100 + 50}px`,
+                height: `${Math.random() * 100 + 50}px`,
+              }}
+              animate={{
+                scale: [0, 1.2, 0],
+                opacity: [0, 0.8, 0],
+                rotate: [0, 360]
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          {/* Pontos de conexão de suporte */}
+          {[...Array(isMobile ? 4 : 8)].map((_, i) => (
+            <motion.div
+              key={`support-dot-${i}`}
+              className="absolute w-3 h-3 bg-emerald-400/70 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2 + Math.random() * 1,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      ),
+      security: () => (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Elementos de segurança e proteção */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={`shield-${i}`}
+              className="absolute border-2 border-red-400/50"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 80 + 40}px`,
+                height: `${Math.random() * 100 + 60}px`,
+                clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
+              }}
+              animate={{
+                scale: [0, 1, 0],
+                opacity: [0, 0.5, 0],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          {/* Linhas de proteção */}
+          {[...Array(isMobile ? 5 : 10)].map((_, i) => (
+            <motion.div
+              key={`security-line-${i}`}
+              className="absolute h-px bg-red-400/60"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 150 + 80}px`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+              }}
+              animate={{
+                scaleX: [0, 1, 0],
+                opacity: [0, 0.8, 0],
+              }}
+              transition={{
+                duration: 2 + Math.random() * 1,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      ),
+      engagement: () => (
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Elementos de engajamento e interação */}
+          {[...Array(isMobile ? 4 : 8)].map((_, i) => (
+            <motion.div
+              key={`engagement-circle-${i}`}
+              className="absolute border border-orange-400/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 120 + 60}px`,
+                height: `${Math.random() * 120 + 60}px`,
+              }}
+              animate={{
+                scale: [0, 1.5, 0],
+                opacity: [0, 0.5, 0],
+                rotate: [0, 180, 360]
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          {/* Partículas de engajamento */}
+          {[...Array(isMobile ? 10 : 20)].map((_, i) => (
+            <motion.div
+              key={`engagement-particle-${i}`}
+              className="absolute w-1 h-1 bg-orange-400/80 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                x: [0, Math.random() * 100 - 50, 0],
+                y: [0, Math.random() * 100 - 50, 0],
+                scale: [0, 1, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+      )
+    };
+
+    return patterns[pattern as keyof typeof patterns]?.() || null;
+  };
+
+  // Renderizar partículas animadas minimalistas
   const renderParticles = (theme: any, index: number) => {
     if (typeof window === 'undefined') return null;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) return null; // Não renderizar partículas se o usuário preferir reduzir animações
+    if (media.matches) return null;
+    
+    // Otimização: reduzir partículas em telas menores
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const particleCount = isMobile ? 4 : 8;
     
     return (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(particleCount)].map((_, i) => (
           <motion.div
             key={`particle-${index}-${i}`}
-            className={`absolute w-1 h-1 bg-${theme.particles}/30 rounded-full`}
+            className={`absolute w-0.5 h-0.5 bg-${theme.particles}/40 rounded-full`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -169,15 +439,15 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
               opacity: 0,
             }}
             animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
+              x: [0, Math.random() * 60 - 30, 0],
+              y: [0, Math.random() * 60 - 30, 0],
               scale: [0, 1, 0],
-              opacity: [0, 0.8, 0],
+              opacity: [0, 0.6, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
               ease: "easeInOut",
             }}
           />
@@ -192,9 +462,13 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (media.matches) return null; // Não renderizar linhas de energia se o usuário preferir reduzir animações
     
+    // Otimização: reduzir linhas em telas menores
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const lineCount = isMobile ? 3 : 5;
+    
     return (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(lineCount)].map((_, i) => (
           <motion.div
             key={`line-${index}-${i}`}
             className={`absolute h-px bg-gradient-to-r from-transparent via-${theme.particles}/40 to-transparent`}
@@ -226,16 +500,10 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
     );
   };
 
-  // Obter posicionamento do conteúdo melhorado
+  // Obter posicionamento do conteúdo responsivo - todos alinhados à esquerda
   const getContentPosition = (position: string) => {
-    switch (position) {
-      case "left":
-        return "justify-start items-center text-left pl-6 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24";
-      case "right":
-        return "justify-end items-center text-right pr-6 sm:pr-12 md:pr-16 lg:pr-20 xl:pr-24";
-      default:
-        return "justify-center items-center text-center px-6 sm:px-12 md:px-16 lg:px-20";
-    }
+    // Forçar todos os textos à esquerda para melhor legibilidade
+    return "justify-start items-center text-left pl-4 xs:pl-6 sm:pl-12 md:pl-16 lg:pl-20 xl:pl-24 2xl:pl-32";
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -248,7 +516,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
 
   return (
     <section 
-      className="relative w-full h-[calc(100vh-120px)] overflow-hidden"
+      className="relative w-full h-[calc(100vh-80px)] sm:h-[calc(100vh-100px)] md:h-[calc(100vh-120px)] min-h-[400px] sm:min-h-[500px] md:min-h-[600px] max-h-[600px] sm:max-h-[700px] md:max-h-[800px] overflow-hidden"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       aria-label="Carrossel principal de destaques"
@@ -265,7 +533,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
       >
         <div className="flex touch-pan-y -ml-px w-full h-full">
           {slides.map((slide, idx) => {
-            const theme = getSlideTheme(idx);
+            const theme = getSlideTheme(slide, idx);
             return (
               <div
                 key={`${slide.title}-${idx}`}
@@ -274,24 +542,24 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                 aria-selected={idx === selectedIndex}
                 aria-label={`Slide ${idx + 1} de ${total}: ${slide.title}`}
               >
-                {/* Background com gradiente e imagem */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${theme.primary}`}
-                  style={{ backgroundImage: theme.backgroundImage }}
-                />
+                {/* Background principal com gradiente futurista */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${theme.primary}`} />
 
-                {/* Partículas animadas */}
+                {/* Background temático animado */}
+                {renderThematicBackground(theme, theme.backgroundPattern)}
+
+                {/* Partículas minimalistas */}
                 {renderParticles(theme, idx)}
 
                 {/* Linhas de energia */}
                 {renderEnergyLines(theme, idx)}
 
-                {/* Overlay com gradiente */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                {/* Overlay com gradiente sutil */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
 
-                {/* Conteúdo principal com melhor espaçamento e alinhamento */}
+                {/* Conteúdo principal responsivo */}
                 <div
-                  className={`absolute inset-0 flex ${getContentPosition(theme.position)} p-4 sm:p-6 md:p-8 lg:p-10 pb-24`}
+                  className={`absolute inset-0 flex ${getContentPosition(theme.position)} p-3 xs:p-4 sm:p-6 md:p-8 lg:p-10 pb-16 xs:pb-20 sm:pb-24`}
                 >
                   <motion.div
                     className="max-w-5xl w-full"
@@ -299,67 +567,94 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
-                    {/* Linha de destaque */}
+                    {/* Linha de destaque minimalista */}
                     <motion.div
-                      className={`h-1 w-24 mb-6 sm:mb-8 bg-gradient-to-r ${theme.accent} rounded-full`}
+                      className={`h-0.5 w-16 mb-4 sm:mb-6 bg-gradient-to-r ${theme.accent} rounded-full`}
                       initial={{ width: 0 }}
-                      animate={{ width: 96 }}
-                      transition={{ duration: 1, delay: 0.5 }}
+                      animate={{ width: 64 }}
+                      transition={{ duration: 1, delay: 0.3 }}
                     />
 
-                    {/* Título principal */}
+                    {/* Frase de impacto responsiva */}
+                    {slide.impactPhrase && (
+                      <motion.p
+                        className="text-xs xs:text-sm sm:text-base md:text-lg text-white/90 mb-3 sm:mb-4 font-medium tracking-wide max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl"
+                        style={{
+                          textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                          color: 'rgba(255,255,255,0.9)',
+                        }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                      >
+                        {slide.impactPhrase}
+                      </motion.p>
+                    )}
+
+                    {/* Título principal com tipografia responsiva */}
                     <motion.h1
-                      className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight text-white"
+                      className="mb-4 sm:mb-6 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-tight leading-tight text-white"
                       style={{
-                        textShadow:
-                          "0 4px 20px rgba(0,0,0,0.8), 0 0 4px rgba(0,0,0,0.9)",
+                        textShadow: `2px 2px 4px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.6)`,
+                        color: '#ffffff',
+                        fontWeight: '700',
+                        letterSpacing: '-0.02em',
                       }}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.3 }}
+                      transition={{ duration: 0.8, delay: 0.4 }}
                     >
                       {slide.title}
                     </motion.h1>
 
-                    {/* Subtítulo com melhor espaçamento para leitura */}
+                    {/* Subtítulo responsivo com melhor legibilidade */}
                     <motion.p
-                      className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed"
+                      className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white mb-6 sm:mb-8 leading-relaxed font-medium max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl"
+                      style={{
+                        textShadow: '1px 1px 3px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.7)',
+                        color: '#ffffff',
+                        fontWeight: '500',
+                      }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8, delay: 0.5 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
                     >
                       {slide.subtitle}
                     </motion.p>
 
-                    {/* CTAs */}
+                    {/* CTAs responsivos */}
                     {(slide.ctaPrimary || slide.ctaSecondary) && (
                       <motion.div
-                        className="flex flex-col sm:flex-row gap-4"
+                        className="flex flex-col sm:flex-row gap-3 w-auto"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.7 }}
+                        transition={{ duration: 0.8, delay: 0.8 }}
                       >
                         {slide.ctaPrimary && (
                           <motion.button
                             onClick={slide.ctaPrimary.onClick}
-                            className={`px-8 py-4 bg-gradient-to-r ${theme.secondary} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.95 }}
+                            className={`group relative px-4 py-2 bg-gradient-to-r ${theme.secondary} text-white font-light rounded-lg border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden text-sm w-auto shadow-lg hover:shadow-xl hover:shadow-${theme.glowColor}/20`}
+                            whileHover={{ y: -2, scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             aria-label={`${slide.ctaPrimary.label} - ${slide.title}`}
                           >
-                            {slide.ctaPrimary.label}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <span className="relative z-10 tracking-wide group-hover:drop-shadow-lg transition-all duration-300">{slide.ctaPrimary.label}</span>
                           </motion.button>
                         )}
 
                         {slide.ctaSecondary && (
                           <motion.button
                             onClick={slide.ctaSecondary.onClick}
-                            className="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.95 }}
+                            className="group relative px-4 py-2 border border-white/30 text-white font-light rounded-lg hover:border-white/60 hover:bg-white/5 transition-all duration-500 overflow-hidden text-sm w-auto shadow-md hover:shadow-lg hover:shadow-white/10"
+                            whileHover={{ y: -2, scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             aria-label={`${slide.ctaSecondary.label} - ${slide.title}`}
                           >
-                            {slide.ctaSecondary.label}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <span className="relative z-10 tracking-wide group-hover:drop-shadow-md transition-all duration-300">{slide.ctaSecondary.label}</span>
                           </motion.button>
                         )}
                       </motion.div>
@@ -372,15 +667,15 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
         </div>
       </div>
 
-      {/* Controles de navegação revolucionários */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-xl rounded-2xl px-6 py-4 border border-white/20 shadow-2xl">
-          {/* Botão Anterior */}
+      {/* Controles de navegação responsivos */}
+      <div className="absolute bottom-4 xs:bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+        <div className="flex items-center space-x-4 xs:space-x-6 sm:space-x-8 bg-black/30 backdrop-blur-2xl rounded-2xl px-4 xs:px-6 sm:px-8 py-2 xs:py-3 border border-white/10 shadow-2xl">
+          {/* Botão Anterior minimalista */}
           <motion.button
             onClick={scrollPrev}
-            className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
-            whileHover={{ scale: 1.1, rotate: -5 }}
-            whileTap={{ scale: 0.9 }}
+            className="group relative p-1.5 xs:p-2 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden rounded-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="Slide anterior"
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -389,8 +684,9 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
               }
             }}
           >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             <svg
-              className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors"
+              className="w-4 h-4 xs:w-5 xs:h-5 text-white/80 group-hover:text-white transition-colors relative z-10"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -399,68 +695,34 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={1.5}
                 d="M15 19l-7-7 7-7"
               />
             </svg>
           </motion.button>
 
-          {/* Indicadores de posição */}
-          <div className="flex items-center space-x-4">
-            <span className="text-white text-sm font-medium min-w-[60px] text-center">
-              {selectedIndex + 1} / {total}
+          {/* Indicadores responsivos */}
+          <div className="flex items-center space-x-3 xs:space-x-4 sm:space-x-6">
+            <span className="text-white/60 text-xs font-light tracking-wider min-w-[30px] xs:min-w-[40px] text-center">
+              {String(selectedIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
 
-            {/* Barra de progresso circular */}
-            <div className="relative w-10 h-10">
-              <svg className="w-10 h-10 transform -rotate-90" viewBox="0 0 44 44">
-                <circle
-                  cx="22"
-                  cy="22"
-                  r="18"
-                  stroke="rgba(255,255,255,0.2)"
-                  strokeWidth="3"
-                  fill="none"
-                />
-                <motion.circle
-                  cx="22"
-                  cy="22"
-                  r="18"
-                  stroke="url(#gradient)"
-                  strokeWidth="3"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeDasharray={`${2 * Math.PI * 18}`}
-                  strokeDashoffset={`${2 * Math.PI * 18 * (1 - (selectedIndex + 1) / total)}`}
-                  transition={{ duration: 0.5 }}
-                />
-                <defs>
-                  <linearGradient
-                    id="gradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="0%"
-                  >
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#06b6d4" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">
-                  {Math.round(((selectedIndex + 1) / total) * 100)}%
-                </span>
-              </div>
+            {/* Indicador de progresso linear responsivo */}
+            <div className="relative w-12 xs:w-16 sm:w-20 h-0.5 bg-white/10 overflow-hidden">
+              <motion.div
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/60 to-white/40"
+                style={{ width: `${((selectedIndex + 1) / total) * 100}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
             </div>
           </div>
 
-          {/* Botão Próximo */}
+          {/* Botão Próximo minimalista */}
           <motion.button
             onClick={scrollNext}
-            className="p-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 group"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
+            className="group relative p-1.5 xs:p-2 border border-white/20 hover:border-white/40 transition-all duration-500 overflow-hidden rounded-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="Próximo slide"
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -469,8 +731,9 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
               }
             }}
           >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             <svg
-              className="w-6 h-6 text-white group-hover:text-cyan-300 transition-colors"
+              className="w-4 h-4 xs:w-5 xs:h-5 text-white/80 group-hover:text-white transition-colors relative z-10"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -479,7 +742,7 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={1.5}
                 d="M9 5l7 7-7 7"
               />
             </svg>
@@ -488,12 +751,12 @@ export default function RevolutionaryCarousel({ slides }: { slides: Slide[] }) {
       </div>
 
 
-      {/* Indicador de progresso linear no topo */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-black/20 z-30" aria-hidden="true">
+      {/* Indicador de progresso minimalista no topo */}
+      <div className="absolute top-0 left-0 w-full h-0.5 bg-white/5 z-30" aria-hidden="true">
         <motion.div
-          className="h-full bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500"
+          className="h-full bg-gradient-to-r from-white/40 to-white/20"
           style={{ width: `${((selectedIndex + 1) / total) * 100}%` }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         />
       </div>
     </section>

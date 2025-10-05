@@ -147,11 +147,11 @@ export function SocialFollowButtons({
       <div className={`space-y-6 ${className}`}>
         {/* Redes Sociais */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-brand-gold-400 flex items-center gap-2">
-            <Users className="w-5 h-5" />
+          <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-brand-gold-400 flex items-center gap-2">
+            <Users className="w-4 h-4 sm:w-5 sm:h-5" />
             Siga-nos
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
             {socialLinks.map((social, index) => (
               <motion.a
                 key={social.name}
@@ -159,23 +159,23 @@ export function SocialFollowButtons({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => handleSocialClick(social, "social")}
-                className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-300 ${social.bgColor} ${social.color} border border-white/10 hover:border-white/20 group`}
+                className={`flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl transition-all duration-300 ${social.bgColor} ${social.color} border border-white/10 hover:border-white/20 group`}
                 whileHover={{ scale: 1.02, x: 5 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <social.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <social.icon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                 <div className="flex-1">
-                  <div className="text-sm font-medium">{social.name}</div>
+                  <div className="text-xs sm:text-sm font-medium">{social.name}</div>
                   {showStats && (
                     <div className="text-xs opacity-70">
                       {social.followers} seguidores
                     </div>
                   )}
                 </div>
-                <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
               </motion.a>
             ))}
           </div>
@@ -183,11 +183,11 @@ export function SocialFollowButtons({
 
         {/* Contato */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-brand-gold-400 flex items-center gap-2">
-            <Heart className="w-5 h-5" />
+          <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-brand-gold-400 flex items-center gap-2">
+            <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
             Entre em Contato
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
             {contactLinks.map((contact, index) => (
               <motion.a
                 key={contact.name}
@@ -195,19 +195,19 @@ export function SocialFollowButtons({
                 target={contact.name === "Email" || contact.name === "Telefone" ? "_self" : "_blank"}
                 rel="noopener noreferrer"
                 onClick={() => handleSocialClick(contact, "contact")}
-                className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-300 ${contact.bgColor} ${contact.color} border border-white/10 hover:border-white/20 group`}
+                className={`flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl transition-all duration-300 ${contact.bgColor} ${contact.color} border border-white/10 hover:border-white/20 group`}
                 whileHover={{ scale: 1.02, x: 5 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: (index + socialLinks.length) * 0.1 }}
               >
-                <contact.icon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <contact.icon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
                 <div className="flex-1">
-                  <div className="text-sm font-medium">{contact.label}</div>
+                  <div className="text-xs sm:text-sm font-medium">{contact.label}</div>
                   <div className="text-xs opacity-70">{contact.name}</div>
                 </div>
-                <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
               </motion.a>
             ))}
           </div>
@@ -220,11 +220,11 @@ export function SocialFollowButtons({
     <div className={`space-y-6 ${className}`}>
       {/* Redes Sociais */}
       <div>
-        <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
-          <Users className="w-6 h-6 text-brand-gold-400" />
+        <h3 className="text-lg sm:text-xl font-bold mb-4 text-white flex items-center gap-2">
+          <Users className="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold-400" />
           Siga-nos nas Redes Sociais
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
           {socialLinks.map((social, index) => (
             <motion.a
               key={social.name}
@@ -232,22 +232,22 @@ export function SocialFollowButtons({
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleSocialClick(social, "social")}
-              className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${social.bgColor} ${social.color} border border-white/10 hover:border-white/20 group cursor-pointer`}
+              className={`flex items-center gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 ${social.bgColor} ${social.color} border border-white/10 hover:border-white/20 group cursor-pointer`}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <div className="p-3 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors">
-                <social.icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
+              <div className="p-2 sm:p-3 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors">
+                <social.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
               </div>
               <div className="flex-1">
-                <div className="font-semibold">{social.name}</div>
+                <div className="font-semibold text-sm sm:text-base">{social.name}</div>
                 {showStats && (
-                  <div className="text-sm opacity-70 flex items-center gap-2">
+                  <div className="text-xs sm:text-sm opacity-70 flex flex-col xs:flex-row xs:items-center gap-1 xs:gap-2">
                     <span>{social.followers} seguidores</span>
-                    <span className="text-brand-gold-400">•</span>
+                    <span className="text-brand-gold-400 hidden xs:inline">•</span>
                     <span className="flex items-center gap-1">
                       <Star className="w-3 h-3" />
                       {social.engagement}
@@ -255,7 +255,7 @@ export function SocialFollowButtons({
                   </div>
                 )}
               </div>
-              <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
             </motion.a>
           ))}
         </div>
@@ -263,11 +263,11 @@ export function SocialFollowButtons({
 
       {/* Contato Rápido */}
       <div>
-        <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
-          <Heart className="w-6 h-6 text-brand-gold-400" />
+        <h3 className="text-lg sm:text-xl font-bold mb-4 text-white flex items-center gap-2">
+          <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-brand-gold-400" />
           Entre em Contato
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {contactLinks.map((contact, index) => (
             <motion.a
               key={contact.name}
@@ -275,21 +275,21 @@ export function SocialFollowButtons({
               target={contact.name === "Email" || contact.name === "Telefone" ? "_self" : "_blank"}
               rel="noopener noreferrer"
               onClick={() => handleSocialClick(contact, "contact")}
-              className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${contact.bgColor} ${contact.color} border border-white/10 hover:border-white/20 group cursor-pointer`}
+              className={`flex items-center gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 ${contact.bgColor} ${contact.color} border border-white/10 hover:border-white/20 group cursor-pointer`}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: (index + socialLinks.length) * 0.1 }}
             >
-              <div className="p-3 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors">
-                <contact.icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
+              <div className="p-2 sm:p-3 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors">
+                <contact.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
               </div>
               <div className="flex-1">
-                <div className="font-semibold">{contact.label}</div>
-                <div className="text-sm opacity-70">{contact.name}</div>
+                <div className="font-semibold text-sm sm:text-base">{contact.label}</div>
+                <div className="text-xs sm:text-sm opacity-70">{contact.name}</div>
               </div>
-              <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
             </motion.a>
           ))}
         </div>
@@ -304,10 +304,10 @@ export function FloatingSocialFollow() {
     <motion.div
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
-      className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40"
+      className="fixed right-2 sm:right-4 md:right-6 top-1/2 transform -translate-y-1/2 z-40"
     >
-      <div className="bg-neutral-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl">
-        <h4 className="text-sm font-semibold mb-3 text-brand-gold-400">Siga-nos</h4>
+      <div className="bg-neutral-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-3 sm:p-4 shadow-2xl">
+        <h4 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-brand-gold-400">Siga-nos</h4>
         <div className="flex flex-col gap-2">
           {[
             { name: "Facebook", icon: Facebook, url: "https://facebook.com/starktecnologia", color: "hover:text-blue-500" },
@@ -320,14 +320,14 @@ export function FloatingSocialFollow() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`p-2 rounded-lg transition-all duration-300 ${social.color} hover:bg-white/10 border border-white/10 hover:border-white/20 group`}
+              className={`p-1.5 sm:p-2 rounded-lg transition-all duration-300 ${social.color} hover:bg-white/10 border border-white/10 hover:border-white/20 group`}
               whileHover={{ scale: 1.1, x: -5 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <social.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <social.icon className="w-3 h-3 sm:w-4 sm:h-4 group-hover:scale-110 transition-transform" />
             </motion.a>
           ))}
         </div>

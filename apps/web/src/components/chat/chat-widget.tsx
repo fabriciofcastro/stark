@@ -16,6 +16,17 @@ import {
   AlertCircle,
   CheckCircle2,
   Loader2,
+  Sparkles,
+  Zap,
+  Brain,
+  Shield,
+  FileText,
+  Hash,
+  Star,
+  ArrowUpRight,
+  Copy,
+  Download,
+  Share2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CHAT_COLORS, CHAT_TYPOGRAPHY, CHAT_EFFECTS, CHAT_CONFIG, CHAT_SPACING, CHAT_ACCESSIBILITY } from './design-system';
@@ -57,6 +68,16 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
   const [isMinimized, setIsMinimized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [protocol, setProtocol] = useState<string | null>(null);
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    size: number;
+    opacity: number;
+    duration: number;
+    delay: number;
+  }>>([]);
   
   // Configuração final mesclada com defaults
   const finalConfig = {
@@ -77,6 +98,38 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
     websocketEndpoint: '/api/v1/chat/ws',
     ...config,
   };
+
+  // Gerar partículas animadas para o background
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 4 + 1,
+        opacity: Math.random() * 0.5 + 0.1,
+        duration: Math.random() * 10 + 5,
+        delay: Math.random() * 5,
+      }));
+      setParticles(newParticles);
+    };
+
+    generateParticles();
+  }, []);
+
+  // Gerar protocolo único para o atendimento
+  const generateProtocol = useCallback(() => {
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substr(2, 5);
+    return `STARK-${timestamp}-${random}`.toUpperCase();
+  }, []);
+
+  // Inicializar protocolo quando abrir o chat
+  useEffect(() => {
+    if (isOpen && !protocol) {
+      setProtocol(generateProtocol());
+    }
+  }, [isOpen, protocol, generateProtocol]);
 
   // Hook personalizado para gerenciar o chat
   const {
@@ -226,38 +279,48 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
   if (!isOpen && !isMinimized) {
     return (
       <>
-        {/* Botão flutuante */}
+        {/* Botão flutuante moderno */}
         <motion.button
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          whileHover={{ scale: 1.1 }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           onClick={toggleWidget}
           className={cn(
             "fixed bottom-6 right-6 z-50",
-            "bg-gradient-to-r from-primary-600 to-primary-700",
-            "text-white rounded-full p-4 shadow-2xl",
-            "hover:shadow-glow transition-all duration-300",
-            "focus:outline-none focus:ring-4 focus:ring-primary-500/50",
+            "w-16 h-16 rounded-2xl",
+            "bg-gradient-to-br from-cyan-500 via-purple-600 to-pink-500",
+            "backdrop-blur-xl border border-white/20",
+            "shadow-2xl hover:shadow-cyan-500/25",
+            "transition-all duration-300",
             "flex items-center justify-center",
+            "group relative overflow-hidden",
             (finalConfig.position as any) === 'bottom-left' && "left-6 right-auto",
             (finalConfig.position as any) === 'top-right' && "top-6 bottom-auto",
             (finalConfig.position as any) === 'top-left' && "top-6 left-6 right-auto bottom-auto",
           )}
-          aria-label="Abrir chat"
+          aria-label="Abrir chat de suporte"
         >
-          <MessageCircle className="w-6 h-6" />
+          {/* Background animado */}
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-400/20 animate-pulse" />
           
-          {/* Indicador de notificação */}
-          {session && messages.length > 0 && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold"
-            >
-              {messages.length}
-            </motion.div>
-          )}
+          {/* Ícone principal */}
+          <motion.div
+            animate={{ rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <MessageCircle className="w-7 h-7 text-white relative z-10" />
+          </motion.div>
+          
+          {/* Efeito de brilho */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          {/* Indicador de status */}
+          <motion.div
+            className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
         </motion.button>
 
         {/* Áudio para notificações */}
@@ -279,36 +342,181 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className={cn(
-              "bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700",
-              "flex flex-col overflow-hidden",
+              "fixed bottom-6 right-6 z-50",
+              "w-96 h-[600px] rounded-3xl",
+              "bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95",
+              "backdrop-blur-xl border border-white/10",
+              "shadow-2xl overflow-hidden",
+              "flex flex-col",
               className
             )}
-            style={getWidgetStyles()}
           >
-            {/* Header */}
-            {session && (
-              <ChatHeader
-                session={session}
-                user={users[session.userId]}
-                onMinimize={minimizeWidget}
-                onClose={closeWidget}
-                onEscalate={() => handleSuggestionClick({ 
-                  id: 'escalate', 
-                  text: 'Falar com especialista', 
-                  action: 'escalate' 
-                })}
-                showAvatar={finalConfig.showAvatar}
-                showStatus={finalConfig.showStatus}
+            {/* Background animado com partículas */}
+            <div className="absolute inset-0 overflow-hidden">
+              {particles.map((particle) => (
+                <motion.div
+                  key={particle.id}
+                  className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+                  style={{
+                    left: `${particle.x}%`,
+                    top: `${particle.y}%`,
+                    width: `${particle.size}px`,
+                    height: `${particle.size}px`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    opacity: [particle.opacity, 0, particle.opacity],
+                    scale: [1, 1.5, 1],
+                  }}
+                  transition={{
+                    duration: particle.duration,
+                    delay: particle.delay,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+              
+              {/* Gradiente animado */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10"
+                animate={{
+                  background: [
+                    "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)",
+                    "linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%)",
+                    "linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(139, 92, 246, 0.1) 100%)",
+                  ],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
-            )}
+            </div>
+            {/* Header moderno com STARK AI */}
+            <div className="relative z-10 bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-xl border-b border-white/10 p-4">
+              <div className="flex items-center justify-between">
+                {/* Avatar e info do robô */}
+                <div className="flex items-center space-x-3">
+                  <motion.div
+                    className="relative"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {/* Avatar do STARK AI */}
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center shadow-lg">
+                      <Brain className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    {/* Indicador de status */}
+                    <motion.div
+                      className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-800"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  </motion.div>
+                  
+                  <div>
+                    <h3 className="text-white font-bold text-lg">STARK AI</h3>
+                    <p className="text-cyan-400 text-sm flex items-center">
+                      <motion.span
+                        animate={{ opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        Online
+                      </motion.span>
+                      <span className="ml-2 text-xs">• Assistente Virtual</span>
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Protocolo do atendimento */}
+                {protocol && (
+                  <div className="flex items-center space-x-2 text-xs text-white/60">
+                    <Hash className="w-3 h-3" />
+                    <span className="font-mono">{protocol}</span>
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => navigator.clipboard.writeText(protocol)}
+                      className="p-1 hover:bg-white/10 rounded"
+                    >
+                      <Copy className="w-3 h-3" />
+                    </motion.button>
+                  </div>
+                )}
+                
+                {/* Controles */}
+                <div className="flex items-center space-x-2">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={minimizeWidget}
+                    className="p-2 hover:bg-white/10 rounded-xl text-white/60 hover:text-white transition-colors"
+                  >
+                    <Minimize2 className="w-4 h-4" />
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={closeWidget}
+                    className="p-2 hover:bg-red-500/20 rounded-xl text-white/60 hover:text-red-400 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </motion.button>
+                </div>
+              </div>
+            </div>
 
-            {/* Mensagens */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-800">
+            {/* Área de mensagens moderna */}
+            <div className="relative z-10 flex-1 overflow-y-auto p-6 space-y-4">
               {messages.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center text-gray-500 dark:text-gray-400">
-                  <Bot className="w-12 h-12 mb-4 text-primary-500" />
-                  <p className="text-lg font-medium mb-2">Olá! Como posso ajudar?</p>
-                  <p className="text-sm">Estou aqui para responder suas dúvidas sobre nossos serviços.</p>
+                <div className="flex flex-col items-center justify-center h-full text-center">
+                  {/* Mensagem de boas-vindas animada */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20 max-w-sm"
+                  >
+                    <motion.div
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center"
+                    >
+                      <Sparkles className="w-8 h-8 text-white" />
+                    </motion.div>
+                    
+                    <h3 className="text-white font-bold text-xl mb-3">Olá! 👋</h3>
+                    <p className="text-white/80 text-sm mb-4">
+                      Sou o <span className="text-cyan-400 font-semibold">STARK AI</span>, seu assistente virtual.
+                    </p>
+                    <p className="text-white/60 text-xs mb-6">
+                      Como posso ajudá-lo hoje?
+                    </p>
+                    
+                    {/* Botões de ação rápida */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { icon: Shield, text: "Suporte", color: "from-blue-500 to-cyan-500" },
+                        { icon: Zap, text: "Consultoria", color: "from-purple-500 to-pink-500" },
+                        { icon: FileText, text: "Orçamento", color: "from-green-500 to-emerald-500" },
+                        { icon: Phone, text: "Contato", color: "from-orange-500 to-red-500" },
+                      ].map((action, index) => (
+                        <motion.button
+                          key={action.text}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handleSendMessage(`Quero ${action.text.toLowerCase()}`)}
+                          className={`p-3 rounded-xl bg-gradient-to-r ${action.color} text-white text-xs font-medium hover:shadow-lg transition-all duration-300`}
+                        >
+                          <action.icon className="w-4 h-4 mx-auto mb-1" />
+                          {action.text}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </motion.div>
                 </div>
               ) : (
                 <>
@@ -348,35 +556,111 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               )}
             </div>
 
-            {/* Input */}
-            <div className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-              <ChatInput
-                onSend={handleSendMessage}
-                onTyping={(isTyping) => {
-                  // TODO: Implementar indicador de digitação
-                }}
-                placeholder="Digite sua mensagem..."
-                disabled={isLoading || !isConnected}
-                maxLength={finalConfig.maxMessages}
-                showAttachments={true}
-              />
+            {/* Input moderno */}
+            <div className="relative z-10 bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-xl border-t border-white/10 p-4">
+              {/* Input principal */}
+              <div className="relative">
+                <div className="flex items-end space-x-3">
+                  {/* Campo de texto */}
+                  <div className="flex-1 relative">
+                    <textarea
+                      ref={useRef<HTMLTextAreaElement>(null)}
+                      placeholder="Digite sua mensagem..."
+                      disabled={isLoading || !isConnected}
+                      maxLength={finalConfig.maxMessages}
+                      className="w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-4 py-3 pr-12 text-white placeholder-white/50 resize-none focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
+                      rows={1}
+                      style={{ minHeight: '48px', maxHeight: '120px' }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          const value = e.currentTarget.value.trim();
+                          if (value) {
+                            handleSendMessage(value);
+                            e.currentTarget.value = '';
+                          }
+                        }
+                      }}
+                    />
+                    
+                    {/* Botão de envio */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+                        const value = textarea?.value.trim();
+                        if (value) {
+                          handleSendMessage(value);
+                          textarea.value = '';
+                        }
+                      }}
+                      disabled={isLoading || !isConnected}
+                      className="absolute right-3 bottom-3 w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-xl flex items-center justify-center text-white disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-all duration-300"
+                    >
+                      {isLoading ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Send className="w-4 h-4" />
+                      )}
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
               
-              {/* Status de conexão */}
-              <div className="flex items-center justify-between px-4 py-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800">
-                <div className="flex items-center space-x-2">
-                  <div className={cn(
-                    "w-2 h-2 rounded-full",
-                    isConnected ? "bg-green-500" : "bg-red-500"
-                  )} />
-                  <span>{isConnected ? 'Conectado' : 'Desconectado'}</span>
+              {/* Status e ações */}
+              <div className="flex items-center justify-between mt-3 text-xs">
+                <div className="flex items-center space-x-4">
+                  {/* Status de conexão */}
+                  <div className="flex items-center space-x-2 text-white/60">
+                    <motion.div
+                      className={cn(
+                        "w-2 h-2 rounded-full",
+                        isConnected ? "bg-green-500" : "bg-red-500"
+                      )}
+                      animate={isConnected ? { scale: [1, 1.2, 1] } : {}}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    />
+                    <span>{isConnected ? 'Conectado' : 'Desconectado'}</span>
+                  </div>
+                  
+                  {/* Contador de caracteres */}
+                  <span className="text-white/40">
+                    {messages.length}/{finalConfig.maxMessages}
+                  </span>
                 </div>
                 
-                {error && (
-                  <div className="flex items-center space-x-1 text-red-500">
-                    <AlertCircle className="w-3 h-3" />
-                    <span>{error}</span>
-                  </div>
-                )}
+                {/* Ações rápidas */}
+                <div className="flex items-center space-x-2">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-2 hover:bg-white/10 rounded-xl text-white/60 hover:text-white transition-colors"
+                    title="Anexar arquivo"
+                  >
+                    <FileText className="w-4 h-4" />
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-2 hover:bg-white/10 rounded-xl text-white/60 hover:text-white transition-colors"
+                    title="Compartilhar conversa"
+                  >
+                    <Share2 className="w-4 h-4" />
+                  </motion.button>
+                  
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="flex items-center space-x-1 text-red-400"
+                    >
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{error}</span>
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>

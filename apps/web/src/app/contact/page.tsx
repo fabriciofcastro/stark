@@ -7,6 +7,17 @@ import { useEffect, useState } from "react";
 
 export default function ContactPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+    animateX: number[];
+    animateY: number[];
+    duration: number;
+    delay: number;
+  }>>([]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -15,6 +26,26 @@ export default function ContactPage() {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Gerar partículas com valores fixos para evitar hidratação
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        width: Math.random() * 6 + 2,
+        height: Math.random() * 6 + 2,
+        animateX: [0, Math.random() * 200 - 100, 0],
+        animateY: [0, Math.random() * 200 - 100, 0],
+        duration: 15 + Math.random() * 10,
+        delay: Math.random() * 5,
+      }));
+      setParticles(newParticles);
+    };
+
+    generateParticles();
   }, []);
 
   return (
@@ -83,27 +114,27 @@ export default function ContactPage() {
         />
 
         {/* Partículas flutuantes dinâmicas */}
-        {Array.from({ length: 20 }).map((_, i) => (
+        {particles.map((particle) => (
           <motion.div
-            key={`particle-${i}`}
+            key={`particle-${particle.id}`}
             className="absolute bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-full blur-sm"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 6 + 2}px`,
-              height: `${Math.random() * 6 + 2}px`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              width: `${particle.width}px`,
+              height: `${particle.height}px`,
             }}
             animate={{
-              x: [0, Math.random() * 200 - 100, 0],
-              y: [0, Math.random() * 200 - 100, 0],
+              x: particle.animateX,
+              y: particle.animateY,
               opacity: [0.2, 0.8, 0.2],
               scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: 15 + Math.random() * 10,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 5,
+              delay: particle.delay,
             }}
           />
         ))}

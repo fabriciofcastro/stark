@@ -141,9 +141,13 @@ export class ChatService {
 
   async createSession(createSessionDto: CreateChatSessionDto) {
     try {
+      // Gerar protocolo único para o atendimento
+      const protocol = this.generateProtocol();
+      
       const session = await this.prisma.chatSession.create({
         data: {
           ...createSessionDto,
+          protocol,
           status: SessionStatus.ACTIVE,
           context: createSessionDto.context || this.getDefaultSessionContext(),
           tags: createSessionDto.tags || [],
@@ -218,6 +222,31 @@ export class ChatService {
         analytics: true,
 			},
 		});
+
+    if (!session) {
+      throw new NotFoundException('Session not found');
+    }
+
+    return session;
+  }
+
+  async getSessionByProtocol(protocol: string) {
+    const session = await this.prisma.chatSession.findUnique({
+      where: { protocol },
+      include: {
+        user: true,
+        messages: {
+          orderBy: { createdAt: 'asc' },
+          include: {
+            sender: true,
+          },
+        },
+        escalationTickets: {
+          orderBy: { createdAt: 'desc' },
+        },
+        analytics: true,
+      },
+    });
 
     if (!session) {
       throw new NotFoundException('Session not found');
@@ -580,6 +609,12 @@ export class ChatService {
   }
 
   // ===== MÉTODOS PRIVADOS =====
+
+  private generateProtocol(): string {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substr(2, 6).toUpperCase();
+    return `STARK-${timestamp}-${random}`;
+  }
 
   private async sendWelcomeMessage(sessionId: string) {
     const botConfig = await this.getBotConfigPublic();

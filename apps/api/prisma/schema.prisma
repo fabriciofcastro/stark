@@ -37,6 +37,7 @@ model User {
 model ChatSession {
   id            String   @id @default(cuid())
   userId        String
+  protocol      String   @unique @default(cuid()) // Protocolo único do atendimento
   status        String   @default("active") // active, inactive, archived, escalated
   mode          String   @default("auto") // auto, human, hybrid
   priority      String   @default("normal") // low, normal, high, urgent

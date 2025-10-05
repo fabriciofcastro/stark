@@ -71,6 +71,11 @@ export class ChatController {
     return this.chatService.getSession(sessionId);
   }
 
+  @Get('sessions/protocol/:protocol')
+  async getSessionByProtocol(@Param('protocol') protocol: string) {
+    return this.chatService.getSessionByProtocol(protocol);
+  }
+
   @Get('sessions')
   async getActiveSessions(@Query('userId') userId?: string) {
     return this.chatService.getActiveSessions(userId);

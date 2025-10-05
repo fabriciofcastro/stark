@@ -9,12 +9,12 @@ export class AIAssistantService {
 
   // Configuração do bot
   private readonly botConfig: BotConfig = {
-    name: 'STARK Assistant',
+    name: 'STARK AI',
     avatar: '/images/bot-avatar.png',
-    personality: 'profissional e prestativo',
-    capabilities: ['suporte técnico', 'consultoria', 'vendas'],
-    welcomeMessage: 'Olá! Sou o assistente virtual da STARK. Como posso te ajudar hoje?',
-    fallbackMessage: 'Desculpe, não entendi sua pergunta. Poderia reformular?',
+    personality: 'profissional, prestativo e inteligente',
+    capabilities: ['suporte técnico', 'consultoria', 'vendas', 'desenvolvimento', 'cybersegurança'],
+    welcomeMessage: 'Olá! 👋 Sou o STARK AI, seu assistente virtual inteligente. Como posso ajudá-lo hoje?',
+    fallbackMessage: 'Desculpe, não entendi sua pergunta. Poderia reformular ou escolher uma das opções abaixo?',
     escalationThreshold: 0.7,
     workingHours: {
       enabled: true,
