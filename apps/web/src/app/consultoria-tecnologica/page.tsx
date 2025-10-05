@@ -1429,15 +1429,36 @@ export default function ConsultoriaTecnologica() {
 													{/* Header Futurista */}
 													<div className="space-y-6">
 														<div className="flex items-center gap-6">
-															<div className={`w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl border ${bg.accentClasses.border}/30 shadow-2xl`}>
+															<div className={`w-20 h-20 sm:w-24 sm:h-24 backdrop-blur-xl rounded-3xl flex items-center justify-center text-4xl sm:text-5xl shadow-2xl ${
+																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
+																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
+																index === 3 ? 'bg-gradient-to-br from-orange-400/20 to-orange-400/10 border border-orange-400/30' :
+																index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
+															}`}>
 																{caseStudy.image}
 															</div>
 															<div className="space-y-2">
 																<h3 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
 																	{caseStudy.company}
 																</h3>
-																<div className={`inline-block px-4 py-2 ${bg.accentClasses.bg}/20 backdrop-blur-xl rounded-full border ${bg.accentClasses.border}/30`}>
-																	<span className={`${bg.accentClasses.text} text-sm font-bold tracking-wider uppercase`}>
+																<div className={`inline-block px-4 py-2 backdrop-blur-xl rounded-full ${
+																	index === 0 ? 'bg-cyan-400/20 border border-cyan-400/30' :
+																	index === 1 ? 'bg-purple-400/20 border border-purple-400/30' :
+																	index === 2 ? 'bg-emerald-400/20 border border-emerald-400/30' :
+																	index === 3 ? 'bg-orange-400/20 border border-orange-400/30' :
+																	index === 4 ? 'bg-cyan-400/20 border border-cyan-400/30' :
+																	'bg-yellow-400/20 border border-yellow-400/30'
+																}`}>
+																	<span className={`text-sm font-bold tracking-wider uppercase ${
+																		index === 0 ? 'text-cyan-400' :
+																		index === 1 ? 'text-purple-400' :
+																		index === 2 ? 'text-emerald-400' :
+																		index === 3 ? 'text-orange-400' :
+																		index === 4 ? 'text-cyan-400' :
+																		'text-yellow-400'
+																	}`}>
 																		{caseStudy.industry}
 																	</span>
 																</div>
@@ -1450,8 +1471,22 @@ export default function ConsultoriaTecnologica() {
 														{/* Desafio */}
 														<div className="space-y-4">
 															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
-																	<IconComponent className={`w-6 h-6 ${bg.accentClasses.text}`} />
+																<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+																	index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																	index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
+																	index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
+																	index === 3 ? 'bg-gradient-to-br from-orange-400/20 to-orange-400/10 border border-orange-400/30' :
+																	index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																	'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
+																}`}>
+																	<IconComponent className={`w-6 h-6 ${
+																		index === 0 ? 'text-cyan-400' :
+																		index === 1 ? 'text-purple-400' :
+																		index === 2 ? 'text-emerald-400' :
+																		index === 3 ? 'text-orange-400' :
+																		index === 4 ? 'text-cyan-400' :
+																		'text-yellow-400'
+																	}`} />
 																</div>
 																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																	DESAFIO
@@ -1465,8 +1500,22 @@ export default function ConsultoriaTecnologica() {
 														{/* Solução */}
 														<div className="space-y-4">
 															<div className="flex items-center gap-4">
-																<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
-																	<Lightbulb className={`w-6 h-6 ${bg.accentClasses.text}`} />
+																<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+																	index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																	index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
+																	index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
+																	index === 3 ? 'bg-gradient-to-br from-orange-400/20 to-orange-400/10 border border-orange-400/30' :
+																	index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																	'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
+																}`}>
+																	<Lightbulb className={`w-6 h-6 ${
+																		index === 0 ? 'text-cyan-400' :
+																		index === 1 ? 'text-purple-400' :
+																		index === 2 ? 'text-emerald-400' :
+																		index === 3 ? 'text-orange-400' :
+																		index === 4 ? 'text-cyan-400' :
+																		'text-yellow-400'
+																	}`} />
 																</div>
 																<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																	SOLUÇÃO
@@ -1491,8 +1540,22 @@ export default function ConsultoriaTecnologica() {
 													{/* Resultados Futuristas */}
 													<div className="space-y-8">
 														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
-																<TrendingUp className={`w-6 h-6 ${bg.accentClasses.text}`} />
+															<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
+																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
+																index === 3 ? 'bg-gradient-to-br from-orange-400/20 to-orange-400/10 border border-orange-400/30' :
+																index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
+															}`}>
+																<TrendingUp className={`w-6 h-6 ${
+																	index === 0 ? 'text-cyan-400' :
+																	index === 1 ? 'text-purple-400' :
+																	index === 2 ? 'text-emerald-400' :
+																	index === 3 ? 'text-orange-400' :
+																	index === 4 ? 'text-cyan-400' :
+																	'text-yellow-400'
+																}`} />
 															</div>
 															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																RESULTADOS
@@ -1503,15 +1566,36 @@ export default function ConsultoriaTecnologica() {
 															{caseStudy.results.map((result, resultIndex) => (
 																<motion.div
 																	key={result}
-																	className={`group relative p-6 bg-gradient-to-br ${bg.accentClasses.from}/10 ${bg.accentClasses.to}/5 backdrop-blur-xl rounded-2xl border ${bg.accentClasses.border}/20 hover:${bg.accentClasses.border}/40 transition-all duration-500 hover:shadow-2xl hover:${bg.accentClasses.shadow}/10`}
+																	className={`group relative p-6 backdrop-blur-xl rounded-2xl transition-all duration-500 hover:shadow-2xl ${
+																		index === 0 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40 hover:shadow-cyan-400/10' :
+																		index === 1 ? 'bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/20 hover:border-purple-400/40 hover:shadow-purple-400/10' :
+																		index === 2 ? 'bg-gradient-to-br from-emerald-400/10 to-emerald-400/5 border border-emerald-400/20 hover:border-emerald-400/40 hover:shadow-emerald-400/10' :
+																		index === 3 ? 'bg-gradient-to-br from-orange-400/10 to-orange-400/5 border border-orange-400/20 hover:border-orange-400/40 hover:shadow-orange-400/10' :
+																		index === 4 ? 'bg-gradient-to-br from-cyan-400/10 to-cyan-400/5 border border-cyan-400/20 hover:border-cyan-400/40 hover:shadow-cyan-400/10' :
+																		'bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/20 hover:border-yellow-400/40 hover:shadow-yellow-400/10'
+																	}`}
 																	initial={{ opacity: 0, y: 30, scale: 0.9 }}
 																	animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30, scale: isActive ? 1 : 0.9 }}
 																	transition={{ duration: 0.6, delay: 0.7 + resultIndex * 0.1, ease: "easeOut" }}
 																	whileHover={{ y: -5, scale: 1.02 }}
 																>
 																	<div className="flex items-start gap-4">
-																		<div className={`w-8 h-8 ${bg.accentClasses.bg}/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1`}>
-																			<CheckCircle className={`w-5 h-5 ${bg.accentClasses.text}`} />
+																		<div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 mt-1 ${
+																			index === 0 ? 'bg-cyan-400/20' :
+																			index === 1 ? 'bg-purple-400/20' :
+																			index === 2 ? 'bg-emerald-400/20' :
+																			index === 3 ? 'bg-orange-400/20' :
+																			index === 4 ? 'bg-cyan-400/20' :
+																			'bg-yellow-400/20'
+																		}`}>
+																			<CheckCircle className={`w-5 h-5 ${
+																				index === 0 ? 'text-cyan-400' :
+																				index === 1 ? 'text-purple-400' :
+																				index === 2 ? 'text-emerald-400' :
+																				index === 3 ? 'text-orange-400' :
+																				index === 4 ? 'text-cyan-400' :
+																				'text-yellow-400'
+																			}`} />
 																		</div>
 																		<span className="text-gray-200 text-sm sm:text-base font-medium leading-relaxed group-hover:text-white transition-colors duration-300">
 																			{result}
@@ -1525,8 +1609,22 @@ export default function ConsultoriaTecnologica() {
 													{/* Tecnologias Futuristas */}
 													<div className="space-y-6">
 														<div className="flex items-center gap-4">
-															<div className={`w-12 h-12 bg-gradient-to-br ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border ${bg.accentClasses.border}/30`}>
-																<Code className={`w-6 h-6 ${bg.accentClasses.text}`} />
+															<div className={`w-12 h-12 backdrop-blur-xl rounded-2xl flex items-center justify-center ${
+																index === 0 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																index === 1 ? 'bg-gradient-to-br from-purple-400/20 to-purple-400/10 border border-purple-400/30' :
+																index === 2 ? 'bg-gradient-to-br from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30' :
+																index === 3 ? 'bg-gradient-to-br from-orange-400/20 to-orange-400/10 border border-orange-400/30' :
+																index === 4 ? 'bg-gradient-to-br from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30' :
+																'bg-gradient-to-br from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30'
+															}`}>
+																<Code className={`w-6 h-6 ${
+																	index === 0 ? 'text-cyan-400' :
+																	index === 1 ? 'text-purple-400' :
+																	index === 2 ? 'text-emerald-400' :
+																	index === 3 ? 'text-orange-400' :
+																	index === 4 ? 'text-cyan-400' :
+																	'text-yellow-400'
+																}`} />
 															</div>
 															<h4 className="text-xl sm:text-2xl font-bold text-white tracking-wide">
 																TECNOLOGIAS
@@ -1537,7 +1635,14 @@ export default function ConsultoriaTecnologica() {
 															{caseStudy.technologies.map((tech, techIndex) => (
 																<motion.span
 																	key={tech}
-																	className={`group relative px-4 py-3 bg-gradient-to-r ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white border ${bg.accentClasses.border}/30 hover:${bg.accentClasses.border}/50 transition-all duration-500 hover:shadow-lg hover:${bg.accentClasses.shadow}/20 cursor-pointer`}
+																	className={`group relative px-4 py-3 backdrop-blur-xl rounded-2xl text-sm sm:text-base text-white transition-all duration-500 hover:shadow-lg cursor-pointer ${
+																		index === 0 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50 hover:shadow-cyan-400/20' :
+																		index === 1 ? 'bg-gradient-to-r from-purple-400/20 to-purple-400/10 border border-purple-400/30 hover:border-purple-400/50 hover:shadow-purple-400/20' :
+																		index === 2 ? 'bg-gradient-to-r from-emerald-400/20 to-emerald-400/10 border border-emerald-400/30 hover:border-emerald-400/50 hover:shadow-emerald-400/20' :
+																		index === 3 ? 'bg-gradient-to-r from-orange-400/20 to-orange-400/10 border border-orange-400/30 hover:border-orange-400/50 hover:shadow-orange-400/20' :
+																		index === 4 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10 border border-cyan-400/30 hover:border-cyan-400/50 hover:shadow-cyan-400/20' :
+																		'bg-gradient-to-r from-yellow-400/20 to-yellow-400/10 border border-yellow-400/30 hover:border-yellow-400/50 hover:shadow-yellow-400/20'
+																	}`}
 																	initial={{ opacity: 0, scale: 0.8, y: 20 }}
 																	animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 0.8, y: isActive ? 0 : 20 }}
 																	transition={{ duration: 0.4, delay: 0.9 + techIndex * 0.1, ease: "easeOut" }}
@@ -1545,7 +1650,14 @@ export default function ConsultoriaTecnologica() {
 																	whileTap={{ scale: 0.95 }}
 																>
 																	<span className="font-medium tracking-wide">{tech}</span>
-																	<div className={`absolute inset-0 bg-gradient-to-r ${bg.accentClasses.from}/20 ${bg.accentClasses.to}/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+																	<div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+																		index === 0 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10' :
+																		index === 1 ? 'bg-gradient-to-r from-purple-400/20 to-purple-400/10' :
+																		index === 2 ? 'bg-gradient-to-r from-emerald-400/20 to-emerald-400/10' :
+																		index === 3 ? 'bg-gradient-to-r from-orange-400/20 to-orange-400/10' :
+																		index === 4 ? 'bg-gradient-to-r from-cyan-400/20 to-cyan-400/10' :
+																		'bg-gradient-to-r from-yellow-400/20 to-yellow-400/10'
+																	}`} />
 																</motion.span>
 															))}
 														</div>
