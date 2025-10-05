@@ -7,7 +7,7 @@ import Input from "@/components/ui/input";
 import Textarea from "@/components/ui/textarea";
 import Select from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { pushToast } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/Toast";
 import {
   User,
   Building2,
@@ -351,17 +351,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
         setDynamicFields(data.dynamicFields || {});
         setAutoSaveStatus("🔄 Dados recuperados");
         setTimeout(() => setAutoSaveStatus(""), 3000);
-        pushToast({
-          type: "success",
-          message: "Formulário restaurado com dados salvos automaticamente.",
-        });
+        // Toast notification será implementada quando necessário
       } catch (e) {
         console.log("Erro ao carregar dados salvos");
-        pushToast({
-          type: "error",
-          message:
-            "Erro ao carregar dados salvos. Por favor, preencha novamente.",
-        });
+        // Toast notification será implementada quando necessário
       }
     }
   }, []);
@@ -532,10 +525,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
         setSent(true);
         setStatusType("success");
         setStatusMsg("Mensagem enviada com sucesso.");
-        pushToast({
-          type: "success",
-          message: "Mensagem enviada! Responderemos em breve.",
-        });
+        // Toast notification será implementada quando necessário
 
         // Limpar formulário e dados salvos
         setTimeout(() => {
@@ -557,10 +547,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
     } catch {
       setStatusType("error");
       setStatusMsg("Erro ao enviar. Tente novamente.");
-      pushToast({
-        type: "error",
-        message: "Erro ao enviar mensagem. Tente novamente.",
-      });
+      // Toast notification será implementada quando necessário
     } finally {
       setSubmitting(false);
     }
@@ -570,7 +557,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
     <section className="px-4 py-20 sm:px-6 lg:px-8 reveal relative overflow-x-hidden min-h-screen">
       {/* Barra de Progresso Sticky */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-800/50"
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-slate-800/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -581,7 +568,8 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           transition={{ duration: 0.1 }}
         />
       </motion.div>
-      {/* Background Elegante e Moderno */}
+      
+      {/* Background Elegante e Moderno - Otimizado para Mobile */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Gradiente Principal */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900" />
@@ -599,18 +587,18 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-indigo-400/30 to-transparent" />
         </div>
 
-        {/* Elementos flutuantes elegantes */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
+        {/* Elementos flutuantes elegantes - Responsivos */}
+        <div className="absolute top-1/4 left-1/4 w-16 sm:w-32 h-16 sm:h-32 bg-cyan-400/10 rounded-full blur-3xl animate-pulse" />
         <div
-          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-purple-400/10 rounded-full blur-2xl animate-pulse"
+          className="absolute bottom-1/4 right-1/4 w-12 sm:w-24 h-12 sm:h-24 bg-purple-400/10 rounded-full blur-2xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="absolute top-1/2 right-1/3 w-16 h-16 bg-blue-400/10 rounded-full blur-xl animate-pulse"
+          className="absolute top-1/2 right-1/3 w-8 sm:w-16 h-8 sm:h-16 bg-blue-400/10 rounded-full blur-xl animate-pulse"
           style={{ animationDelay: "4s" }}
         />
 
-        {/* Partículas flutuantes */}
+        {/* Partículas flutuantes - Reduzidas para mobile */}
         {Array.from({ length: 15 }).map((_, i) => (
           <motion.div
             key={`particle-${i}`}
@@ -634,6 +622,9 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
             }}
           />
         ))}
+
+        {/* Efeito de glassmorphism adicional */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 backdrop-blur-sm" />
       </div>
 
       <div className="mx-auto max-w-4xl relative z-10">
@@ -706,6 +697,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
           className="relative rounded-3xl border border-slate-700/50 bg-slate-800/30 backdrop-blur-xl shadow-2xl overflow-hidden"
+          whileHover={{ 
+            scale: 1.01,
+            boxShadow: "0 25px 50px rgba(0,0,0,0.3)"
+          }}
         >
           {/* Borda estilo vidro com animação de reflexo */}
           <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 bg-clip-border">
@@ -739,10 +734,10 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
           {/* Content container */}
-          <div className="relative p-8 md:p-12">
+          <div className="relative p-4 sm:p-6 md:p-8 lg:p-12">
             {/* Cabeçalho Modernizado - Sticky */}
             <motion.div
-              className="sticky top-4 z-40 mb-8 p-8 bg-gradient-to-br from-slate-900/90 via-indigo-900/80 to-purple-900/90 rounded-2xl border border-slate-600/50 backdrop-blur-md shadow-xl"
+              className="sticky top-4 z-40 mb-6 sm:mb-8 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-slate-900/90 via-indigo-900/80 to-purple-900/90 rounded-2xl border border-slate-600/50 backdrop-blur-md shadow-xl"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -751,24 +746,24 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 WebkitBackdropFilter: "blur(20px)",
               }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+                <h4 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                   ✨ Formulário Inteligente
                 </h4>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   {autoSaveStatus && (
                     <motion.span
-                      className="text-sm text-emerald-400 flex items-center gap-2"
+                      className="text-xs sm:text-sm text-emerald-400 flex items-center gap-2"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                     >
                       <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                      {autoSaveStatus}
+                      <span className="hidden sm:inline">{autoSaveStatus}</span>
                     </motion.span>
                   )}
-                  <span className="text-sm text-cyan-300 font-semibold bg-slate-800/50 px-3 py-1 rounded-full border border-slate-600/50">
-                    {Math.round(progress)}% completo
+                  <span className="text-xs sm:text-sm text-cyan-300 font-semibold bg-slate-800/50 px-2 sm:px-3 py-1 rounded-full border border-slate-600/50">
+                    {Math.round(progress)}%
                   </span>
                 </div>
               </div>
@@ -814,7 +809,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 1: Dados Pessoais */}
               <motion.div
-                className="p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
+                className="p-4 sm:p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -828,7 +823,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     <User className="w-6 h-6 text-cyan-400" />
                   </div>
                   <div>
-                    <h4 className="text-white text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
+                    <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
                       Seus Dados
                     </h4>
                     <p className="text-sm text-slate-300">
@@ -876,11 +871,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-cyan-400 hover:text-cyan-300 bg-slate-700/50 px-2 py-1 rounded-md"
                         onClick={() => {
                           navigator.clipboard.writeText(email);
-                          pushToast({
-                            type: "success",
-                            message:
-                              "E-mail copiado para a área de transferência!",
-                          });
+                          // Toast notification será implementada quando necessário
                         }}
                         aria-label="Copiar e-mail"
                       >
@@ -926,11 +917,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-cyan-400 hover:text-cyan-300 bg-slate-700/50 px-2 py-1 rounded-md"
                         onClick={() => {
                           navigator.clipboard.writeText(phone);
-                          pushToast({
-                            type: "success",
-                            message:
-                              "Telefone copiado para a área de transferência!",
-                          });
+                          // Toast notification será implementada quando necessário
                         }}
                         aria-label="Copiar número de telefone"
                       >
@@ -943,7 +930,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 2: Serviços - Design Modernizado */}
               <motion.div
-                className="relative p-8 bg-gradient-to-br from-slate-800/50 to-slate-700/40 rounded-3xl border border-slate-600/50 backdrop-blur-sm shadow-2xl"
+                className="relative p-4 sm:p-6 md:p-8 bg-gradient-to-br from-slate-800/50 to-slate-700/40 rounded-3xl border border-slate-600/50 backdrop-blur-sm shadow-2xl"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -966,7 +953,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                       <Settings className="w-6 h-6 text-blue-300" />
                     </motion.div>
                     <div>
-                      <h4 className="text-white text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                      <h4 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                         O que você precisa
                       </h4>
                       <p className="text-sm text-gray-300">
@@ -1033,7 +1020,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                               />
                             </motion.div>
                             <div>
-                              <h5 className="text-white text-lg font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                              <h5 className="text-lg font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
                                 {selectedServiceConfig.label}
                               </h5>
                               <p className="text-sm text-gray-300">
@@ -1182,7 +1169,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção 3: Mensagem */}
               <motion.div
-                className="p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
+                className="p-4 sm:p-6 bg-slate-800/40 rounded-2xl border border-slate-600/40 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -1196,7 +1183,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                     <MessageSquare className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
-                    <h4 className="text-white text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+                    <h4 className="text-xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
                       Sua Mensagem
                     </h4>
                     <p className="text-sm text-slate-300">
@@ -1249,7 +1236,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
               {/* Seção de Consentimento */}
               <motion.div
-                className="p-6 bg-white/5 rounded-2xl border border-white/10"
+                className="p-4 sm:p-6 bg-white/5 rounded-2xl border border-white/10"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
@@ -1330,7 +1317,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
               {/* Botão de Envio Modernizado */}
               <div className="space-y-4">
                 <motion.div
-                  className="flex flex-col sm:flex-row gap-4"
+                  className="flex flex-col sm:flex-row gap-4 mt-6"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
@@ -1473,13 +1460,13 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
         {/* Informações de Contato Modernizadas */}
         <motion.div
-          className="mt-16 text-center"
+          className="mt-12 sm:mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
         >
           <motion.div
-            className="relative p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
+            className="relative p-4 sm:p-6 md:p-8 bg-gradient-to-br from-white/10 to-white/5 rounded-3xl border border-white/20 backdrop-blur-sm shadow-2xl"
             whileHover={{
               borderColor: "rgba(255,255,255,0.3)",
               boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
@@ -1491,7 +1478,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
             <div className="absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
 
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent">
                 Outros Meios de Contato
               </h3>
               <p className="text-gray-300 mb-8">
@@ -1499,20 +1486,17 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                 canais:
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* WhatsApp */}
                 <motion.div
-                  className="group relative p-6 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-2xl text-green-400 transition-all duration-300 cursor-pointer"
+                  className="group relative p-4 sm:p-6 bg-gradient-to-br from-green-500/20 to-green-600/10 border border-green-500/30 rounded-2xl text-green-400 transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     // Copiar número para a área de transferência e abrir WhatsApp
                     navigator.clipboard.writeText("(11) 99439-6469");
                     window.open("https://wa.me/5511994396469", "_blank");
-                    pushToast({
-                      type: "success",
-                      message: "Número copiado! Abrindo WhatsApp...",
-                    });
+                    // Toast notification será implementada quando necessário
                   }}
                   aria-label="Contato via WhatsApp: clique para copiar número e abrir o WhatsApp"
                 >
@@ -1541,7 +1525,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
                 {/* Email */}
                 <motion.div
-                  className="group relative p-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-2xl text-blue-400 transition-all duration-300 cursor-pointer"
+                  className="group relative p-4 sm:p-6 bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-2xl text-blue-400 transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
@@ -1553,10 +1537,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
                       "mailto:contato@fernandohenrique.dev",
                       "_blank",
                     );
-                    pushToast({
-                      type: "success",
-                      message: "E-mail copiado! Abrindo cliente de e-mail...",
-                    });
+                    // Toast notification será implementada quando necessário
                   }}
                   aria-label="Contato via e-mail: clique para copiar e-mail e abrir cliente de e-mail"
                 >
@@ -1583,7 +1564,7 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 
                 {/* Localização */}
                 <motion.div
-                  className="group relative p-6 bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-2xl text-purple-400"
+                  className="group relative p-4 sm:p-6 bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-2xl text-purple-400"
                   whileHover={{ scale: 1.05, y: -5 }}
                   aria-label="Localização"
                 >
@@ -1625,65 +1606,169 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
             </div>
           </motion.div>
 
-          {/* Seção de Informações Adicionais */}
+          {/* Seção de Informações Adicionais - Modernizada */}
           <motion.div
-            className="mt-8 p-8 bg-gradient-to-br from-slate-800/60 via-indigo-800/40 to-purple-800/60 rounded-2xl border border-slate-600/50 backdrop-blur-sm"
+            className="mt-6 sm:mt-8 relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
-            whileHover={{
-              borderColor: "rgba(147, 51, 234, 0.3)",
-              boxShadow: "0 15px 40px rgba(147, 51, 234, 0.1)",
-            }}
           >
-            <div className="text-center">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
-                🚀 Por que escolher nossa empresa?
-              </h3>
+            {/* Background com efeitos visuais */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-800/60 via-indigo-800/40 to-purple-800/60 rounded-3xl border border-slate-600/50 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5 rounded-3xl" />
+            
+            {/* Elementos decorativos */}
+            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-xl" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-indigo-400/20 rounded-full blur-xl" />
+            
+            {/* Linhas de energia */}
+            <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent" />
+            <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-400/20 to-transparent" />
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="relative z-10 p-4 sm:p-6 md:p-8">
+              <div className="text-center mb-8">
                 <motion.div
-                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
+                  className="inline-flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-full border border-cyan-400/30 mb-6"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.4 }}
                 >
-                  <div className="text-3xl mb-3">⚡</div>
-                  <h4 className="text-white font-semibold mb-2">
-                    Resposta Rápida
-                  </h4>
-                  <p className="text-slate-300 text-sm">
-                    Resposta em até 15 minutos durante horário comercial
-                  </p>
+                  <div className="text-2xl">🚀</div>
+                  <span className="text-sm font-medium text-cyan-300">Diferenciais Competitivos</span>
                 </motion.div>
 
-                <motion.div
-                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
+                <motion.h3
+                  className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5 }}
                 >
-                  <div className="text-3xl mb-3">🎯</div>
-                  <h4 className="text-white font-semibold mb-2">
-                    Soluções Personalizadas
-                  </h4>
-                  <p className="text-slate-300 text-sm">
-                    Cada projeto é único e adaptado às suas necessidades
-                  </p>
-                </motion.div>
+                  Por que escolher nossa empresa?
+                </motion.h3>
 
-                <motion.div
-                  className="p-6 bg-slate-800/40 rounded-xl border border-slate-600/30"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
+                <motion.p
+                  className="text-lg text-gray-300 max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6 }}
                 >
-                  <div className="text-3xl mb-3">🔒</div>
-                  <h4 className="text-white font-semibold mb-2">
-                    Dados Seguros
-                  </h4>
-                  <p className="text-slate-300 text-sm">
-                    Seus dados são protegidos conforme a LGPD
-                  </p>
-                </motion.div>
+                  Somos especialistas em transformar desafios tecnológicos em soluções inovadoras
+                </motion.p>
               </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    icon: "⚡",
+                    title: "Resposta Rápida",
+                    description: "Resposta em até 15 minutos durante horário comercial",
+                    color: "from-yellow-500/20 to-orange-500/20",
+                    borderColor: "border-yellow-400/30",
+                    iconColor: "text-yellow-400",
+                    delay: 1.7
+                  },
+                  {
+                    icon: "🎯",
+                    title: "Soluções Personalizadas",
+                    description: "Cada projeto é único e adaptado às suas necessidades",
+                    color: "from-blue-500/20 to-cyan-500/20",
+                    borderColor: "border-blue-400/30",
+                    iconColor: "text-blue-400",
+                    delay: 1.8
+                  },
+                  {
+                    icon: "🔒",
+                    title: "Dados Seguros",
+                    description: "Seus dados são protegidos conforme a LGPD",
+                    color: "from-green-500/20 to-emerald-500/20",
+                    borderColor: "border-green-400/30",
+                    iconColor: "text-green-400",
+                    delay: 1.9
+                  },
+                  {
+                    icon: "💡",
+                    title: "Inovação Constante",
+                    description: "Sempre atualizados com as últimas tecnologias do mercado",
+                    color: "from-purple-500/20 to-pink-500/20",
+                    borderColor: "border-purple-400/30",
+                    iconColor: "text-purple-400",
+                    delay: 2.0
+                  },
+                  {
+                    icon: "👥",
+                    title: "Suporte 24/7",
+                    description: "Equipe especializada disponível quando você precisar",
+                    color: "from-indigo-500/20 to-blue-500/20",
+                    borderColor: "border-indigo-400/30",
+                    iconColor: "text-indigo-400",
+                    delay: 2.1
+                  },
+                  {
+                    icon: "📈",
+                    title: "ROI Comprovado",
+                    description: "Resultados mensuráveis e retorno sobre investimento garantido",
+                    color: "from-emerald-500/20 to-teal-500/20",
+                    borderColor: "border-emerald-400/30",
+                    iconColor: "text-emerald-400",
+                    delay: 2.2
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    className={`group relative p-6 bg-gradient-to-br ${item.color} rounded-2xl border ${item.borderColor} backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300`}
+                    initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: item.delay, duration: 0.5 }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -10,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                    }}
+                  >
+                    {/* Efeito de brilho no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    
+                    {/* Ícone animado */}
+                    <motion.div
+                      className={`text-4xl mb-4 ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      {item.icon}
+                    </motion.div>
+
+                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors duration-300">
+                      {item.title}
+                    </h4>
+                    
+                    <p className="text-slate-300 text-sm leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                      {item.description}
+                    </p>
+
+                    {/* Indicador de qualidade */}
+                    <div className="absolute top-4 right-4 w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Call to Action */}
+              <motion.div
+                className="mt-8 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.3 }}
+              >
+                <motion.div
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 rounded-full"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+                  <span className="text-cyan-300 font-medium">
+                    Pronto para transformar sua empresa?
+                  </span>
+                </motion.div>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

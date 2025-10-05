@@ -342,186 +342,392 @@ const About = () => {
 					</div>
 				</div>
 
-				{/* Nossa História */}
+				{/* Nossa História - Modernized */}
 						<div>
-            <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold text-white mb-3">
+            <div className="text-center mb-12">
+              <motion.h3 
+                className="text-4xl md:text-5xl font-bold text-white mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
                 Nossa Jornada de{" "}
-                <span className="text-secondary-400">Transformação</span>
-							</h3>
-              <p className="text-neutral-400 max-w-3xl mx-auto">
+                <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Transformação
+                </span>
+							</motion.h3>
+              <motion.p 
+                className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 Uma trajetória construída com excelência, inovação e resultados
-                comprovados
-              </p>
+                comprovados que transformam o futuro digital
+              </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-							<div className="space-y-4 text-neutral-300">
-                  <div className="bg-gradient-to-r from-primary-500/10 to-accent-500/10 border border-primary-500/20 rounded-lg p-4">
-                    <h4 className="text-xl font-bold text-white mb-2 flex items-center">
-                      <span className="w-2 h-2 bg-primary-500 rounded-full mr-3"></span>
-                      Nossa Origem
-                    </h4>
-                    <p className="leading-relaxed">
-                      Fundada em 2011, a STARK nasceu da visão de democratizar o
-                      acesso à tecnologia de ponta. Iniciamos nossa jornada com
-                      o propósito de transformar ideias em realidade digital,
-                      oferecendo soluções que impulsionam o crescimento de
-                      empresas de todos os portes.
-                    </p>
-                  </div>
+							<div className="space-y-6 text-gray-300">
+                  <motion.div 
+                    className="relative bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-2xl p-8 backdrop-blur-sm group hover:border-cyan-400/50 transition-all duration-500"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                  >
+                    {/* Animated Background */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10">
+                      <h4 className="text-2xl font-bold text-white mb-4 flex items-center group-hover:text-cyan-300 transition-colors duration-300">
+                        <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mr-4 group-hover:scale-125 transition-transform duration-300"></div>
+                        Nossa Origem
+                      </h4>
+                      <p className="leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                        Fundada em 2011, a STARK nasceu da visão de democratizar o
+                        acesso à tecnologia de ponta. Iniciamos nossa jornada com
+                        o propósito de transformar ideias em realidade digital,
+                        oferecendo soluções que impulsionam o crescimento de
+                        empresas de todos os portes.
+                      </p>
+                    </div>
+                  </motion.div>
 
-                  <div className="bg-gradient-to-r from-accent-500/10 to-secondary-500/10 border border-accent-500/20 rounded-lg p-4">
-                    <h4 className="text-xl font-bold text-white mb-2 flex items-center">
-                      <span className="w-2 h-2 bg-accent-500 rounded-full mr-3"></span>
-                      Nosso Crescimento
-                    </h4>
-                    <p className="leading-relaxed">
-                      Ao longo de 13+ anos, construímos uma reputação sólida
-                      baseada em resultados mensuráveis. Já atendemos mais de
-                      500 empresas, desde startups inovadoras até grandes
-                      corporações, sempre com foco em parcerias duradouras e
-                      transformação digital efetiva.
-                    </p>
-                  </div>
+                  <motion.div 
+                    className="relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-2xl p-8 backdrop-blur-sm group hover:border-purple-400/50 transition-all duration-500"
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                  >
+                    {/* Animated Background */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10">
+                      <h4 className="text-2xl font-bold text-white mb-4 flex items-center group-hover:text-purple-300 transition-colors duration-300">
+                        <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mr-4 group-hover:scale-125 transition-transform duration-300"></div>
+                        Nosso Crescimento
+                      </h4>
+                      <p className="leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                        Ao longo de 13+ anos, construímos uma reputação sólida
+                        baseada em resultados mensuráveis. Já atendemos mais de
+                        500 empresas, desde startups inovadoras até grandes
+                        corporações, sempre com foco em parcerias duradouras e
+                        transformação digital efetiva.
+                      </p>
+                    </div>
+                  </motion.div>
 
-                  <div className="flex flex-wrap gap-3 mt-4">
-                    <div className="flex items-center space-x-2 bg-neutral-800/30 px-3 py-1.5 rounded-lg">
-                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                      <span className="text-sm font-medium text-white">
+                  <motion.div 
+                    className="flex flex-wrap gap-4 mt-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                  >
+                    <motion.div 
+                      className="flex items-center space-x-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 px-4 py-3 rounded-xl backdrop-blur-sm group hover:border-cyan-400/50 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors duration-300">
                         13+ Anos de Experiência
                       </span>
-                    </div>
-                    <div className="flex items-center space-x-2 bg-neutral-800/30 px-3 py-1.5 rounded-lg">
-                      <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
-										<span className="text-sm font-medium text-white">
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center space-x-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 px-4 py-3 rounded-xl backdrop-blur-sm group hover:border-purple-400/50 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors duration-300">
                         500+ Empresas Atendidas
-										</span>
-									</div>
-                    <div className="flex items-center space-x-2 bg-neutral-800/30 px-3 py-1.5 rounded-lg">
-                      <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
-										<span className="text-sm font-medium text-white">
+                      </span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center space-x-3 bg-gradient-to-r from-emerald-500/20 to-green-500/20 border border-emerald-400/30 px-4 py-3 rounded-xl backdrop-blur-sm group hover:border-emerald-400/50 transition-all duration-300"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      <div className="w-3 h-3 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors duration-300">
                         99.99% Uptime
-										</span>
-									</div>
-								</div>
+                      </span>
+                    </motion.div>
+                  </motion.div>
 							</div>
 						</div>
 
-              <div className="space-y-4">
-                <div className="bg-gradient-to-br from-primary-800/30 to-accent-800/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                  <div className="flex items-center mb-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center mr-3">
-                      <span className="text-white font-bold">M</span>
+              <div className="space-y-6">
+                <motion.div 
+                  className="relative bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-2xl p-8 backdrop-blur-sm group hover:border-cyan-400/50 transition-all duration-500"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                >
+                  {/* Animated Background */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-6">
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300"
+                        whileHover={{ rotate: 5 }}
+                      >
+                        <span className="text-white font-bold text-xl">M</span>
+                      </motion.div>
+                      <h4 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300">
+                        Nossa Missão
+                      </h4>
                     </div>
-                    <h4 className="text-xl font-bold text-white">
-									Nossa Missão
-								</h4>
+                    <p className="text-gray-300 leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                      Democratizar o acesso à tecnologia de ponta, oferecendo
+                      soluções inovadoras que impulsionam o crescimento e a
+                      transformação digital das empresas, garantindo segurança,
+                      eficiência e resultados mensuráveis.
+                    </p>
                   </div>
-                  <p className="text-neutral-300 leading-relaxed">
-									Democratizar o acesso à tecnologia de ponta, oferecendo
-									soluções inovadoras que impulsionam o crescimento e a
-                    transformação digital das empresas, garantindo segurança,
-                    eficiência e resultados mensuráveis.
-                  </p>
+                </motion.div>
+
+                <motion.div 
+                  className="relative bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/30 rounded-2xl p-8 backdrop-blur-sm group hover:border-purple-400/50 transition-all duration-500"
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                >
+                  {/* Animated Background */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center mb-6">
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300"
+                        whileHover={{ rotate: 5 }}
+                      >
+                        <span className="text-white font-bold text-xl">V</span>
+                      </motion.div>
+                      <h4 className="text-2xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
+                        Nossa Visão
+                      </h4>
+                    </div>
+                    <p className="text-gray-300 leading-relaxed text-base group-hover:text-white transition-colors duration-300">
+                      Ser a referência em tecnologia e inovação no Brasil,
+                      reconhecida pela excelência técnica, pela transformação
+                      digital efetiva e pelo impacto positivo no crescimento dos
+                      nossos parceiros.
+                    </p>
+                  </div>
+                </motion.div>
+					</div>
+				</div>
+
+				{/* Call to Action - Modernized */}
+            <motion.div 
+              className="text-center mt-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative overflow-hidden">
+                {/* Advanced Background Effects */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/10 to-pink-500/5 rounded-3xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-3xl"></div>
+                
+                {/* Animated Grid Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+                    backgroundSize: '20px 20px'
+                  }}></div>
                 </div>
 
-                <div className="bg-gradient-to-br from-accent-800/30 to-secondary-800/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                  <div className="flex items-center mb-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-secondary-500 rounded-lg flex items-center justify-center mr-3">
-                      <span className="text-white font-bold">V</span>
-                    </div>
-                    <h4 className="text-xl font-bold text-white">
-									Nossa Visão
-								</h4>
-                  </div>
-                  <p className="text-neutral-300 leading-relaxed">
-                    Ser a referência em tecnologia e inovação no Brasil,
-                    reconhecida pela excelência técnica, pela transformação
-                    digital efetiva e pelo impacto positivo no crescimento dos
-                    nossos parceiros.
-                  </p>
-						</div>
-					</div>
-				</div>
+                {/* Floating Elements */}
+                <div className="absolute top-4 left-8 w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+                <div className="absolute top-12 right-12 w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
+                <div className="absolute bottom-8 left-16 w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce"></div>
+                <div className="absolute bottom-16 right-8 w-1 h-1 bg-emerald-400 rounded-full animate-ping delay-1000"></div>
 
-				{/* Call to Action */}
-            <div className="text-center mt-12">
-              <div className="bg-gradient-to-br from-primary-900/40 via-neutral-900/30 to-accent-900/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6 relative overflow-hidden">
-                {/* Background Effects */}
-                <div className="absolute top-0 left-1/4 w-32 h-32 bg-secondary-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-accent-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-
-                <div className="relative z-10">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Pronto para{" "}
-                    <span className="text-secondary-400">Transformar</span> Seu
-                    Negócio?
-						</h3>
-                  <p className="text-neutral-300 mb-6 max-w-3xl mx-auto text-base leading-relaxed">
-                    Junte-se a mais de 500 empresas que já confiam na STARK para
-                    sua transformação digital. Descubra como podemos ajudar sua
-                    empresa a alcançar novos patamares de eficiência, segurança
-                    e crescimento.
-                  </p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6 max-w-4xl mx-auto">
-                    <div className="bg-neutral-800/30 border border-white/10 rounded-lg p-3">
-                      <div className="text-xl mb-1">🚀</div>
-                      <div className="text-sm font-semibold text-white">
-                        Implementação Rápida
-                      </div>
-                      <div className="text-xs text-neutral-400">
-                        Resultados em 30 dias
+                {/* Main Content */}
+                <div className="relative z-10 bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12">
+                  
+                  {/* Header */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30">
+                      <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-lg">⚡</span>
                       </div>
                     </div>
-                    <div className="bg-neutral-800/30 border border-white/10 rounded-lg p-3">
-                      <div className="text-xl mb-1">🛡️</div>
-                      <div className="text-sm font-semibold text-white">
-                        Segurança Total
-                      </div>
-                      <div className="text-xs text-neutral-400">
-                        Conformidade garantida
-                      </div>
-                    </div>
-                    <div className="bg-neutral-800/30 border border-white/10 rounded-lg p-3">
-                      <div className="text-xl mb-1">📈</div>
-                      <div className="text-sm font-semibold text-white">
-                        ROI Comprovado
-                      </div>
-                      <div className="text-xs text-neutral-400">
-                        Resultados mensuráveis
-                      </div>
-                    </div>
-                  </div>
+                    
+                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                      Pronto para{" "}
+                      <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
+                        Transformar
+                      </span>{" "}
+                      Seu Negócio?
+                    </h3>
+                    
+                    <p className="text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                      Junte-se a mais de <span className="text-cyan-400 font-semibold">500+ empresas</span> que já confiam na STARK para sua transformação digital. 
+                      Descubra como podemos ajudar sua empresa a alcançar novos patamares de{" "}
+                      <span className="text-purple-400 font-semibold">eficiência</span>,{" "}
+                      <span className="text-pink-400 font-semibold">segurança</span> e{" "}
+                      <span className="text-emerald-400 font-semibold">crescimento</span>.
+                    </p>
+                  </motion.div>
 
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
-							<a
-								href="/contact"
-                      className="inline-flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white font-semibold rounded-xl hover:from-secondary-600 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-secondary-500/25"
-							>
-                      <span className="mr-2">💬</span>
-                      Fale Conosco Agora
-							</a>
-							<a
-								href="/services"
-                      className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-primary-500 text-primary-400 font-semibold rounded-xl hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-105"
+                  {/* Features Grid */}
+                  <motion.div 
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-5xl mx-auto"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    {[
+                      {
+                        icon: "🚀",
+                        title: "Implementação Rápida",
+                        subtitle: "Resultados em 30 dias",
+                        description: "Metodologia ágil comprovada",
+                        gradient: "from-cyan-500/20 to-blue-500/20",
+                        border: "border-cyan-400/30",
+                        iconBg: "from-cyan-400 to-blue-500"
+                      },
+                      {
+                        icon: "🛡️",
+                        title: "Segurança Total",
+                        subtitle: "Conformidade garantida",
+                        description: "LGPD e ISO 27001",
+                        gradient: "from-purple-500/20 to-pink-500/20",
+                        border: "border-purple-400/30",
+                        iconBg: "from-purple-400 to-pink-500"
+                      },
+                      {
+                        icon: "📈",
+                        title: "ROI Comprovado",
+                        subtitle: "Resultados mensuráveis",
+                        description: "ROI médio de 300%",
+                        gradient: "from-emerald-500/20 to-teal-500/20",
+                        border: "border-emerald-400/30",
+                        iconBg: "from-emerald-400 to-teal-500"
+                      }
+                    ].map((feature, index) => (
+                      <motion.div
+                        key={index}
+                        className={`relative group bg-gradient-to-br ${feature.gradient} backdrop-blur-sm border ${feature.border} rounded-2xl p-6 hover:scale-105 transition-all duration-300`}
+                        whileHover={{ y: -5 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        <div className="relative z-10">
+                          <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${feature.iconBg} mb-4`}>
+                            <span className="text-2xl">{feature.icon}</span>
+                          </div>
+                          
+                          <h4 className="text-lg font-bold text-white mb-2">
+                            {feature.title}
+                          </h4>
+                          
+                          <p className="text-sm font-semibold text-cyan-300 mb-1">
+                            {feature.subtitle}
+                          </p>
+                          
+                          <p className="text-xs text-gray-400">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+
+                  {/* CTA Buttons */}
+                  <motion.div 
+                    className="flex flex-col sm:flex-row gap-4 justify-center"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <motion.a
+                      href="/contact"
+                      className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold rounded-2xl hover:from-cyan-600 hover:to-purple-700 transition-all duration-300 shadow-2xl hover:shadow-cyan-500/25"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <span className="mr-2">🔧</span>
-                      Ver Nossos Serviços
-                    </a>
-                    <a
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                      <div className="relative z-10 flex items-center gap-3">
+                        <span className="text-xl">💬</span>
+                        <span>Fale Conosco Agora</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </div>
+                    </motion.a>
+                    
+                    <motion.a
+                      href="/services"
+                      className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-cyan-400/50 text-cyan-300 font-bold rounded-2xl hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 backdrop-blur-sm"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl">🔧</span>
+                        <span>Ver Nossos Serviços</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </div>
+                    </motion.a>
+                    
+                    <motion.a
                       href="/cases-de-sucesso"
-                      className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-accent-500 text-accent-400 font-semibold rounded-xl hover:bg-accent-500 hover:text-white transition-all duration-300 hover:scale-105"
+                      className="group relative inline-flex items-center justify-center px-8 py-4 border-2 border-purple-400/50 text-purple-300 font-bold rounded-2xl hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 backdrop-blur-sm"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <span className="mr-2">📊</span>
-                      Ver Cases de Sucesso
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl">📊</span>
+                        <span>Ver Cases de Sucesso</span>
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </div>
+                    </motion.a>
+                  </motion.div>
+
+                  {/* Trust Indicators */}
+                  <motion.div 
+                    className="mt-8 pt-6 border-t border-white/10"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span>500+ Empresas Atendidas</span>
+                      </div>
+                      <div className="w-px h-4 bg-gray-600"></div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                        <span>99.9% Uptime</span>
+                      </div>
+                      <div className="w-px h-4 bg-gray-600"></div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                        <span>24/7 Suporte</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

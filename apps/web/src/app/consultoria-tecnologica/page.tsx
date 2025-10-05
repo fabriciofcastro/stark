@@ -29,7 +29,33 @@ import {
   Play,
   Pause,
   Volume2,
-  VolumeX
+  VolumeX,
+  Search,
+  Settings,
+  Server,
+  FileText,
+  BookOpen,
+  Briefcase,
+  PieChart,
+  Layers,
+  GitBranch,
+  Workflow,
+  Monitor,
+  Smartphone,
+  Headphones,
+  MessageSquare,
+  Calendar,
+  DollarSign,
+  Building,
+  UserCheck,
+  GraduationCap,
+  ShieldCheck,
+  Globe2,
+  Wrench,
+  Compass,
+  MapPin,
+  Phone,
+  Mail
 } from "lucide-react";
 
 export default function ConsultoriaTecnologica() {
@@ -460,7 +486,7 @@ export default function ConsultoriaTecnologica() {
 				</div>
 			</section>
 
-			{/* Results Section */}
+			{/* Results Section - Modernized */}
 			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
 				<div className="max-w-7xl mx-auto">
 					<motion.h2
@@ -470,15 +496,51 @@ export default function ConsultoriaTecnologica() {
 						transition={{ duration: 0.8 }}
 						viewport={{ once: true }}
 					>
-						Resultados Comprovados
+						Nossa Jornada de Transformação
 					</motion.h2>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 						{[
-							{ icon: TrendingUp, label: "Redução de Custos", value: "30%", color: "from-green-500 to-emerald-500" },
-							{ icon: Zap, label: "Aumento de Produtividade", value: "40%", color: "from-yellow-500 to-orange-500" },
-							{ icon: Shield, label: "Melhoria de Segurança", value: "95%", color: "from-red-500 to-pink-500" },
-							{ icon: Rocket, label: "Inovação Tecnológica", value: "200%", color: "from-purple-500 to-indigo-500" }
+							{ 
+								icon: TrendingUp, 
+								label: "Redução de Custos", 
+								value: "30%", 
+								description: "Economia comprovada em operações",
+								gradient: "from-emerald-500/20 to-green-500/20",
+								border: "border-emerald-500/30",
+								iconBg: "from-emerald-500 to-green-500",
+								textAccent: "text-emerald-400"
+							},
+							{ 
+								icon: Zap, 
+								label: "Aumento de Produtividade", 
+								value: "40%", 
+								description: "Eficiência operacional otimizada",
+								gradient: "from-amber-500/20 to-orange-500/20",
+								border: "border-amber-500/30",
+								iconBg: "from-amber-500 to-orange-500",
+								textAccent: "text-amber-400"
+							},
+							{ 
+								icon: Shield, 
+								label: "Melhoria de Segurança", 
+								value: "95%", 
+								description: "Proteção cibernética robusta",
+								gradient: "from-rose-500/20 to-pink-500/20",
+								border: "border-rose-500/30",
+								iconBg: "from-rose-500 to-pink-500",
+								textAccent: "text-rose-400"
+							},
+							{ 
+								icon: Rocket, 
+								label: "Inovação Tecnológica", 
+								value: "200%", 
+								description: "Crescimento em capacidades digitais",
+								gradient: "from-violet-500/20 to-purple-500/20",
+								border: "border-violet-500/30",
+								iconBg: "from-violet-500 to-purple-500",
+								textAccent: "text-violet-400"
+							}
 						].map((stat, index) => (
 							<motion.div
 								key={stat.label}
@@ -487,46 +549,1426 @@ export default function ConsultoriaTecnologica() {
 								whileInView={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.8, delay: index * 0.1 }}
 								viewport={{ once: true }}
-								whileHover={{ y: -10, scale: 1.05 }}
+								whileHover={{ y: -12, scale: 1.02 }}
 							>
-								<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 text-center h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
-									<div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+								{/* Modern Card Design */}
+								<div className={`relative rounded-3xl border ${stat.border} bg-gradient-to-br ${stat.gradient} backdrop-blur-xl p-8 text-center h-full transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-cyan-500/10`}>
+									{/* Subtle Background Pattern */}
+									<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+									
+									{/* Animated Border Glow */}
+									<div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${stat.iconBg} opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-sm`} />
 									
 									<div className="relative z-10">
+										{/* Modern Icon Container */}
 										<motion.div
-											className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${stat.color} mb-6`}
+											className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${stat.iconBg} mb-6 shadow-lg group-hover:shadow-xl transition-all duration-500`}
 											animate={{
-												scale: [1, 1.15, 1],
-												opacity: [0.7, 1, 0.7],
+												scale: [1, 1.05, 1],
+												rotate: [0, 2, 0],
 											}}
 											transition={{
-												duration: 2.5,
+												duration: 3,
 												repeat: Infinity,
 												ease: "easeInOut",
 											}}
+											whileHover={{ 
+												scale: 1.15, 
+												rotate: 5,
+												boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+											}}
 										>
-											<stat.icon className="w-8 h-8 text-white" />
+											<stat.icon className="w-10 h-10 text-white" />
 										</motion.div>
 										
+										{/* Value with Modern Typography */}
 										<motion.div
-											className="text-5xl font-bold text-white mb-3"
-											initial={{ scale: 0 }}
-											whileInView={{ scale: 1 }}
-											transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+											className={`text-6xl font-black ${stat.textAccent} mb-3 tracking-tight`}
+											initial={{ scale: 0, rotate: -10 }}
+											whileInView={{ scale: 1, rotate: 0 }}
+											transition={{ 
+												duration: 0.8, 
+												delay: index * 0.1 + 0.3,
+												type: "spring",
+												stiffness: 200
+											}}
 											viewport={{ once: true }}
 										>
 											{stat.value}
 										</motion.div>
 										
-										<div className="text-gray-300 font-medium text-lg">
+										{/* Label with Enhanced Styling */}
+										<div className="text-white font-bold text-xl mb-2 group-hover:text-cyan-300 transition-colors duration-500">
 											{stat.label}
-							</div>
-						</div>
+										</div>
+										
+										{/* Description */}
+										<div className="text-gray-300 text-sm leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity duration-500">
+											{stat.description}
+										</div>
+									</div>
 
-									<div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${stat.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+									{/* Hover Glow Effect */}
+									<div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${stat.iconBg} blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700`} />
 								</div>
 							</motion.div>
 						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Consulting Methodology */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Metodologia de Consultoria
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{[
+							{
+								phase: "Análise & Diagnóstico",
+								icon: Search,
+								description: "Avaliação completa da infraestrutura atual",
+								activities: [
+									"Auditoria de sistemas existentes",
+									"Análise de processos de negócio",
+									"Identificação de gargalos",
+									"Assessment de maturidade tecnológica"
+								],
+								duration: "2-3 semanas",
+								color: "from-blue-500 to-cyan-500"
+							},
+							{
+								phase: "Planejamento Estratégico",
+								icon: Target,
+								description: "Definição de roadmap e estratégia digital",
+								activities: [
+									"Definição de objetivos estratégicos",
+									"Roadmap de implementação",
+									"Análise de viabilidade técnica",
+									"Planejamento de recursos"
+								],
+								duration: "1-2 semanas",
+								color: "from-purple-500 to-pink-500"
+							},
+							{
+								phase: "Implementação",
+								icon: Settings,
+								description: "Execução do plano com acompanhamento",
+								activities: [
+									"Implementação de soluções",
+									"Migração de sistemas",
+									"Treinamento de equipes",
+									"Testes e validações"
+								],
+								duration: "4-12 semanas",
+								color: "from-green-500 to-emerald-500"
+							},
+							{
+								phase: "Otimização & Suporte",
+								icon: TrendingUp,
+								description: "Melhoria contínua e suporte especializado",
+								activities: [
+									"Monitoramento de performance",
+									"Otimização contínua",
+									"Suporte técnico especializado",
+									"Relatórios de evolução"
+								],
+								duration: "Ongoing",
+								color: "from-orange-500 to-red-500"
+							}
+						].map((phase, index) => {
+							const IconComponent = phase.icon;
+							return (
+								<motion.div
+									key={phase.phase}
+									className="group relative"
+									initial={{ opacity: 0, y: 50 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.8, delay: index * 0.1 }}
+									viewport={{ once: true }}
+									whileHover={{ y: -10, scale: 1.02 }}
+								>
+									<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${phase.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+										
+										<motion.div
+											className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${phase.color} mb-6`}
+											whileHover={{ 
+												scale: 1.2, 
+												rotate: 360,
+												boxShadow: "0 0 30px rgba(6, 182, 212, 0.3)"
+											}}
+											transition={{ duration: 0.4, ease: "easeOut" }}
+										>
+											<IconComponent className="w-8 h-8 text-white" />
+										</motion.div>
+
+										<div className="relative z-10">
+											<div className="flex justify-between items-start mb-4">
+												<h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+													{phase.phase}
+												</h3>
+												<span className="text-cyan-400 font-bold text-sm bg-cyan-500/20 px-2 py-1 rounded-full">
+													{phase.duration}
+												</span>
+											</div>
+											
+											<p className="text-gray-300 mb-6 leading-relaxed">
+												{phase.description}
+											</p>
+
+											<div className="space-y-3">
+												<h4 className="text-sm font-semibold text-gray-400">Atividades:</h4>
+												<ul className="space-y-2">
+													{phase.activities.map((activity, activityIndex) => (
+														<motion.li
+															key={activity}
+															className="flex items-start gap-2 text-gray-300 text-sm"
+															initial={{ opacity: 0, x: -20 }}
+															whileInView={{ opacity: 1, x: 0 }}
+															transition={{ duration: 0.5, delay: activityIndex * 0.1 }}
+															viewport={{ once: true }}
+														>
+															<CheckCircle className="w-3 h-3 text-cyan-400 mt-0.5 flex-shrink-0" />
+															<span>{activity}</span>
+														</motion.li>
+													))}
+												</ul>
+											</div>
+										</div>
+
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${phase.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+									</div>
+								</motion.div>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+
+			{/* Technology Expertise */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Expertise Tecnológica
+					</motion.h2>
+
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						{/* Enterprise Solutions */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: -50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="flex items-center gap-4 mb-8">
+								<motion.div
+									className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500"
+									animate={{
+										scale: [1, 1.1, 1],
+										boxShadow: [
+											"0 0 20px rgba(6, 182, 212, 0.4)",
+											"0 0 40px rgba(147, 51, 234, 0.7)",
+											"0 0 20px rgba(6, 182, 212, 0.4)",
+										],
+									}}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "easeInOut",
+									}}
+								>
+									<Server className="w-8 h-8 text-white" />
+								</motion.div>
+								<h3 className="text-3xl font-bold text-white">Soluções Enterprise</h3>
+							</div>
+
+							<div className="space-y-4">
+								{[
+									{ solution: "ERP & CRM", technologies: ["SAP", "Oracle", "Salesforce", "Microsoft Dynamics"], expertise: "95%" },
+									{ solution: "Cloud Migration", technologies: ["AWS", "Azure", "Google Cloud", "Hybrid Cloud"], expertise: "98%" },
+									{ solution: "Data Analytics", technologies: ["Power BI", "Tableau", "Qlik", "Apache Spark"], expertise: "92%" },
+									{ solution: "DevOps & CI/CD", technologies: ["Jenkins", "GitLab", "Docker", "Kubernetes"], expertise: "96%" },
+									{ solution: "Microservices", technologies: ["Spring Boot", "Node.js", "API Gateway", "Service Mesh"], expertise: "94%" },
+									{ solution: "Security & Compliance", technologies: ["ISO 27001", "LGPD", "PCI DSS", "Zero Trust"], expertise: "97%" }
+								].map((item, index) => (
+									<motion.div
+										key={item.solution}
+										className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: index * 0.1 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex justify-between items-start mb-2">
+											<h4 className="font-semibold text-white">{item.solution}</h4>
+											<span className="text-cyan-400 font-bold">{item.expertise}</span>
+										</div>
+										<p className="text-gray-300 text-sm mb-3">{item.technologies.join(", ")}</p>
+										<div className="w-full bg-gray-700 rounded-full h-2">
+											<motion.div
+												className="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full"
+												initial={{ width: 0 }}
+												whileInView={{ width: item.expertise }}
+												transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
+												viewport={{ once: true }}
+											/>
+										</div>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+
+						{/* Digital Transformation */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: 50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="flex items-center gap-4 mb-8">
+								<motion.div
+									className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+									animate={{
+										scale: [1, 1.1, 1],
+										boxShadow: [
+											"0 0 20px rgba(147, 51, 234, 0.4)",
+											"0 0 40px rgba(236, 72, 153, 0.7)",
+											"0 0 20px rgba(147, 51, 234, 0.4)",
+										],
+									}}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "easeInOut",
+									}}
+								>
+									<Sparkles className="w-8 h-8 text-white" />
+								</motion.div>
+								<h3 className="text-3xl font-bold text-white">Transformação Digital</h3>
+							</div>
+
+							<div className="space-y-4">
+								{[
+									{ solution: "Inteligência Artificial", technologies: ["Machine Learning", "NLP", "Computer Vision", "RPA"], expertise: "89%" },
+									{ solution: "IoT & Edge Computing", technologies: ["Sensors", "Edge Analytics", "MQTT", "Time Series DB"], expertise: "87%" },
+									{ solution: "Blockchain", technologies: ["Smart Contracts", "DeFi", "NFTs", "Web3"], expertise: "85%" },
+									{ solution: "Mobile First", technologies: ["React Native", "Flutter", "Progressive Web Apps", "Cross-platform"], expertise: "96%" },
+									{ solution: "API Economy", technologies: ["RESTful APIs", "GraphQL", "API Gateway", "Rate Limiting"], expertise: "98%" },
+									{ solution: "Low-Code/No-Code", technologies: ["OutSystems", "Mendix", "Power Platform", "Bubble"], expertise: "91%" }
+								].map((item, index) => (
+									<motion.div
+										key={item.solution}
+										className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: index * 0.1 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex justify-between items-start mb-2">
+											<h4 className="font-semibold text-white">{item.solution}</h4>
+											<span className="text-purple-400 font-bold">{item.expertise}</span>
+										</div>
+										<p className="text-gray-300 text-sm mb-3">{item.technologies.join(", ")}</p>
+										<div className="w-full bg-gray-700 rounded-full h-2">
+											<motion.div
+												className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
+												initial={{ width: 0 }}
+												whileInView={{ width: item.expertise }}
+												transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
+												viewport={{ once: true }}
+											/>
+										</div>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* Consulting Case Studies */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Cases de Consultoria
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{[
+							{
+								company: "Indústria Farmacêutica",
+								industry: "Saúde & Farmacêutica",
+								challenge: "Digitalização de processos e compliance regulatório",
+								solution: "Implementação de ERP integrado com sistema de qualidade",
+								results: [
+									"Redução de 70% no tempo de aprovação de lotes",
+									"100% compliance com ANVISA",
+									"Economia de R$ 2.5M em multas",
+									"ROI de 340% em 18 meses"
+								],
+								technologies: ["SAP", "Quality Management", "Regulatory Compliance", "Digital Workflow"],
+								image: "💊"
+							},
+							{
+								company: "Rede de Supermercados",
+								industry: "Varejo",
+								challenge: "Modernização de sistemas de gestão e estoque",
+								solution: "Migração para cloud e implementação de analytics avançado",
+								results: [
+									"Redução de 45% no desperdício de produtos",
+									"Previsão de demanda 85% mais precisa",
+									"Aumento de 25% nas vendas",
+									"Economia de R$ 8M anuais"
+								],
+								technologies: ["Cloud Migration", "Predictive Analytics", "Inventory Optimization", "Real-time Dashboard"],
+								image: "🛒"
+							},
+							{
+								company: "Banco Regional",
+								industry: "Serviços Financeiros",
+								challenge: "Modernização de sistemas legados e open banking",
+								solution: "Arquitetura de microserviços e APIs modernas",
+								results: [
+									"Integração com 15 bancos em 6 meses",
+									"Redução de 60% no tempo de desenvolvimento",
+									"Compliance PIX 100%",
+									"Aumento de 40% em novos clientes"
+								],
+								technologies: ["Microservices", "API Gateway", "Open Banking", "Cloud Native"],
+								image: "🏦"
+							},
+							{
+								company: "Construtora",
+								industry: "Construção Civil",
+								challenge: "Gestão de projetos e controle de custos",
+								solution: "Sistema integrado de gestão de obras e BI",
+								results: [
+									"Controle de custos em tempo real",
+									"Redução de 30% em atrasos de obra",
+									"Margem de lucro 20% maior",
+									"Visibilidade completa de 50+ obras"
+								],
+								technologies: ["Project Management", "Business Intelligence", "Mobile App", "Cost Control"],
+								image: "🏗️"
+							},
+							{
+								company: "Hospital Privado",
+								industry: "Saúde",
+								challenge: "Integração de sistemas e prontuário eletrônico",
+								solution: "Plataforma unificada de saúde digital",
+								results: [
+									"Integração de 12 sistemas diferentes",
+									"Redução de 50% no tempo de consulta",
+									"100% compliance LGPD",
+									"Satisfação do paciente 95%"
+								],
+								technologies: ["EMR Integration", "Health Analytics", "Patient Portal", "Interoperability"],
+								image: "🏥"
+							},
+							{
+								company: "Distribuidora de Combustíveis",
+								industry: "Energia & Combustíveis",
+								challenge: "Otimização de rotas e gestão de frotas",
+								solution: "Sistema de gestão logística com IA",
+								results: [
+									"Redução de 25% no consumo de combustível",
+									"Otimização de rotas em tempo real",
+									"Redução de 40% em multas de trânsito",
+									"Economia de R$ 3.2M anuais"
+								],
+								technologies: ["AI/ML", "Route Optimization", "Fleet Management", "Real-time Tracking"],
+								image: "⛽"
+							}
+						].map((case_study, index) => (
+							<motion.div
+								key={case_study.company}
+								className="group relative"
+								initial={{ opacity: 0, y: 50 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.8, delay: index * 0.1 }}
+								viewport={{ once: true }}
+								whileHover={{ y: -10, scale: 1.02 }}
+							>
+								<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+									<div className="relative z-10">
+										<div className="flex items-center gap-4 mb-4">
+											<div className="text-4xl">{case_study.image}</div>
+											<div>
+												<h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+													{case_study.company}
+												</h3>
+												<p className="text-cyan-400 text-sm">{case_study.industry}</p>
+											</div>
+										</div>
+										
+										<div className="mb-6">
+											<h4 className="text-sm font-semibold text-gray-400 mb-2">Desafio:</h4>
+											<p className="text-gray-300 text-sm mb-3">{case_study.challenge}</p>
+											
+											<h4 className="text-sm font-semibold text-gray-400 mb-2">Solução:</h4>
+											<p className="text-gray-300 text-sm mb-4">{case_study.solution}</p>
+										</div>
+
+										<div className="mb-6">
+											<h4 className="text-sm font-semibold text-gray-400 mb-3">Resultados:</h4>
+											<ul className="space-y-2">
+												{case_study.results.map((result, resultIndex) => (
+													<motion.li
+														key={result}
+														className="flex items-start gap-2 text-gray-300 text-sm"
+														initial={{ opacity: 0, x: -20 }}
+														whileInView={{ opacity: 1, x: 0 }}
+														transition={{ duration: 0.5, delay: resultIndex * 0.1 }}
+														viewport={{ once: true }}
+													>
+														<CheckCircle className="w-3 h-3 text-cyan-400 mt-0.5 flex-shrink-0" />
+														<span>{result}</span>
+													</motion.li>
+												))}
+											</ul>
+										</div>
+
+										<div>
+											<h4 className="text-sm font-semibold text-gray-400 mb-3">Tecnologias:</h4>
+											<div className="flex flex-wrap gap-2">
+												{case_study.technologies.map((tech, techIndex) => (
+													<motion.span
+														key={tech}
+														className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300 border border-white/20"
+														initial={{ opacity: 0, scale: 0.8 }}
+														whileInView={{ opacity: 1, scale: 1 }}
+														transition={{ duration: 0.3, delay: techIndex * 0.1 }}
+														viewport={{ once: true }}
+													>
+														{tech}
+													</motion.span>
+												))}
+											</div>
+										</div>
+									</div>
+								</div>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Consulting Framework Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Framework de Consultoria
+					</motion.h2>
+
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						{/* Methodology Cards */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: -50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							{[
+								{
+									framework: "COBIT 2019",
+									description: "Governança e gestão de TI empresarial",
+									applications: ["Auditoria de TI", "Gestão de Riscos", "Compliance", "Métricas de Performance"],
+									icon: Shield,
+									color: "from-blue-500 to-cyan-500"
+								},
+								{
+									framework: "ITIL 4",
+									description: "Gestão de serviços de TI",
+									applications: ["Service Desk", "Change Management", "Incident Management", "Service Level Management"],
+									icon: Settings,
+									color: "from-green-500 to-emerald-500"
+								},
+								{
+									framework: "TOGAF",
+									description: "Arquitetura empresarial",
+									applications: ["Enterprise Architecture", "Digital Transformation", "Technology Planning", "Solution Design"],
+									icon: Building,
+									color: "from-purple-500 to-pink-500"
+								},
+								{
+									framework: "Agile/Scrum",
+									description: "Metodologias ágeis de desenvolvimento",
+									applications: ["Sprint Planning", "Daily Standups", "Retrospectives", "Continuous Improvement"],
+									icon: GitBranch,
+									color: "from-orange-500 to-red-500"
+								}
+							].map((methodology, index) => {
+								const IconComponent = methodology.icon;
+								return (
+									<motion.div
+										key={methodology.framework}
+										className="group relative"
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: index * 0.1 }}
+										viewport={{ once: true }}
+										whileHover={{ y: -5, scale: 1.02 }}
+									>
+										<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+											<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${methodology.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+											
+											<div className="relative z-10">
+												<div className="flex items-center gap-4 mb-4">
+													<motion.div
+														className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${methodology.color}`}
+														whileHover={{ scale: 1.1, rotate: 5 }}
+														transition={{ duration: 0.3 }}
+													>
+														<IconComponent className="w-6 h-6 text-white" />
+													</motion.div>
+													<div>
+														<h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
+															{methodology.framework}
+														</h3>
+														<p className="text-gray-300 text-sm">{methodology.description}</p>
+													</div>
+												</div>
+												
+												<div className="space-y-2">
+													<h4 className="text-sm font-semibold text-gray-400">Aplicações:</h4>
+													<div className="flex flex-wrap gap-2">
+														{methodology.applications.map((app, appIndex) => (
+															<motion.span
+																key={app}
+																className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300 border border-white/20"
+																initial={{ opacity: 0, scale: 0.8 }}
+																whileInView={{ opacity: 1, scale: 1 }}
+																transition={{ duration: 0.3, delay: appIndex * 0.1 }}
+																viewport={{ once: true }}
+															>
+																{app}
+															</motion.span>
+														))}
+													</div>
+												</div>
+											</div>
+
+											<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${methodology.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+										</div>
+									</motion.div>
+								);
+							})}
+						</motion.div>
+
+						{/* Process Visualization */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: 50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+								<h3 className="text-2xl font-bold text-white mb-8 text-center">Processo de Consultoria</h3>
+								
+								<div className="space-y-6">
+									{[
+										{ step: "1", title: "Descoberta", description: "Análise profunda do ambiente atual", icon: Search, color: "from-blue-500 to-cyan-500" },
+										{ step: "2", title: "Diagnóstico", description: "Identificação de oportunidades e riscos", icon: Target, color: "from-purple-500 to-pink-500" },
+										{ step: "3", title: "Estratégia", description: "Definição de roadmap e prioridades", icon: Compass, color: "from-green-500 to-emerald-500" },
+										{ step: "4", title: "Execução", description: "Implementação com acompanhamento", icon: Rocket, color: "from-orange-500 to-red-500" },
+										{ step: "5", title: "Otimização", description: "Melhoria contínua e resultados", icon: TrendingUp, color: "from-indigo-500 to-purple-500" }
+									].map((process, index) => {
+										const IconComponent = process.icon;
+										return (
+											<motion.div
+												key={process.step}
+												className="flex items-center gap-4"
+												initial={{ opacity: 0, x: 20 }}
+												whileInView={{ opacity: 1, x: 0 }}
+												transition={{ duration: 0.5, delay: index * 0.1 }}
+												viewport={{ once: true }}
+											>
+												<motion.div
+													className={`flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${process.color} text-white font-bold text-lg`}
+													whileHover={{ scale: 1.1, rotate: 5 }}
+													transition={{ duration: 0.3 }}
+												>
+													<IconComponent className="w-6 h-6" />
+												</motion.div>
+												
+												<div className="flex-1">
+													<h4 className="text-lg font-semibold text-white">{process.title}</h4>
+													<p className="text-gray-300 text-sm">{process.description}</p>
+												</div>
+												
+												{index < 4 && (
+													<motion.div
+														className="hidden lg:block w-8 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
+														initial={{ scaleX: 0 }}
+														whileInView={{ scaleX: 1 }}
+														transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+														viewport={{ once: true }}
+													/>
+												)}
+											</motion.div>
+										);
+									})}
+								</div>
+							</div>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* Specialization Areas Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Parceiros em Transformação Digital
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{[
+							{
+								area: "Transformação Digital",
+								description: "Modernização completa de processos e tecnologias",
+								services: [
+									"Digitalização de processos",
+									"Automação inteligente (RPA)",
+									"Migração para cloud",
+									"Implementação de IA/ML",
+									"Estratégia de dados"
+								],
+								icon: Sparkles,
+								gradient: "from-cyan-500/20 to-blue-500/20",
+								border: "border-cyan-500/30",
+								iconBg: "from-cyan-500 to-blue-500",
+								textAccent: "text-cyan-400",
+								projects: "150+"
+							},
+							{
+								area: "Arquitetura de Software",
+								description: "Design e implementação de arquiteturas escaláveis",
+								services: [
+									"Microserviços",
+									"API Gateway",
+									"Event-driven architecture",
+									"Cloud-native solutions",
+									"Performance optimization"
+								],
+								icon: Layers,
+								gradient: "from-purple-500/20 to-pink-500/20",
+								border: "border-purple-500/30",
+								iconBg: "from-purple-500 to-pink-500",
+								textAccent: "text-purple-400",
+								projects: "120+"
+							},
+							{
+												area: "Governança de Dados",
+												description: "Estruturação e gestão de dados corporativos",
+												services: [
+													"Data governance",
+													"Data quality",
+													"Privacy compliance (LGPD)",
+													"Business intelligence",
+													"Data analytics"
+												],
+												icon: Database,
+												gradient: "from-emerald-500/20 to-green-500/20",
+												border: "border-emerald-500/30",
+												iconBg: "from-emerald-500 to-green-500",
+												textAccent: "text-emerald-400",
+												projects: "80+"
+											},
+							{
+												area: "Segurança Cibernética",
+												description: "Proteção e compliance em segurança digital",
+												services: [
+													"Security assessment",
+													"Compliance (ISO 27001)",
+													"Zero trust architecture",
+													"Incident response",
+													"Security training"
+												],
+												icon: ShieldCheck,
+												gradient: "from-rose-500/20 to-red-500/20",
+												border: "border-rose-500/30",
+												iconBg: "from-rose-500 to-red-500",
+												textAccent: "text-rose-400",
+												projects: "90+"
+											},
+							{
+												area: "DevOps & SRE",
+												description: "Automação e confiabilidade de sistemas",
+												services: [
+													"CI/CD pipelines",
+													"Infrastructure as Code",
+													"Monitoring & alerting",
+													"Site reliability engineering",
+													"Performance tuning"
+												],
+												icon: Workflow,
+												gradient: "from-indigo-500/20 to-purple-500/20",
+												border: "border-indigo-500/30",
+												iconBg: "from-indigo-500 to-purple-500",
+												textAccent: "text-indigo-400",
+												projects: "110+"
+											},
+							{
+												area: "Estratégia de TI",
+												description: "Planejamento estratégico e roadmap tecnológico",
+												services: [
+													"IT strategy",
+													"Technology roadmap",
+													"Vendor management",
+													"Cost optimization",
+													"Digital transformation planning"
+												],
+												icon: Compass,
+												gradient: "from-amber-500/20 to-orange-500/20",
+												border: "border-amber-500/30",
+												iconBg: "from-amber-500 to-orange-500",
+												textAccent: "text-amber-400",
+												projects: "70+"
+											}
+						].map((specialization, index) => {
+							const IconComponent = specialization.icon;
+							return (
+								<motion.div
+									key={specialization.area}
+									className="group relative"
+									initial={{ opacity: 0, y: 50 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.8, delay: index * 0.1 }}
+									viewport={{ once: true }}
+									whileHover={{ y: -12, scale: 1.02 }}
+								>
+									{/* Modern Card Design */}
+									<div className={`relative rounded-3xl border ${specialization.border} bg-gradient-to-br ${specialization.gradient} backdrop-blur-xl p-8 h-full transition-all duration-700 group-hover:shadow-2xl group-hover:shadow-cyan-500/10`}>
+										{/* Subtle Background Pattern */}
+										<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+										
+										{/* Animated Border Glow */}
+										<div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${specialization.iconBg} opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-sm`} />
+										
+										<div className="relative z-10">
+											{/* Header with Icon and Projects Count */}
+											<div className="flex items-center justify-between mb-6">
+												<motion.div
+													className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br ${specialization.iconBg} shadow-lg group-hover:shadow-xl transition-all duration-500`}
+													animate={{
+														scale: [1, 1.05, 1],
+														rotate: [0, 2, 0],
+													}}
+													transition={{
+														duration: 3,
+														repeat: Infinity,
+														ease: "easeInOut",
+													}}
+													whileHover={{ 
+														scale: 1.15, 
+														rotate: 5,
+														boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+													}}
+												>
+													<IconComponent className="w-10 h-10 text-white" />
+												</motion.div>
+												<div className="text-right">
+													<div className={`${specialization.textAccent} font-black text-2xl`}>{specialization.projects}</div>
+													<div className="text-gray-400 text-sm">Projetos</div>
+												</div>
+											</div>
+
+											{/* Title */}
+											<h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-500">
+												{specialization.area}
+											</h3>
+											
+											{/* Description */}
+											<p className="text-gray-300 mb-6 leading-relaxed text-base">
+												{specialization.description}
+											</p>
+
+											{/* Services List */}
+											<div className="space-y-4">
+												<h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Serviços Especializados:</h4>
+												<ul className="space-y-3">
+													{specialization.services.map((service, serviceIndex) => (
+														<motion.li
+															key={service}
+															className="flex items-start gap-3 text-gray-300 text-sm group/item"
+															initial={{ opacity: 0, x: -20 }}
+															whileInView={{ opacity: 1, x: 0 }}
+															transition={{ duration: 0.5, delay: serviceIndex * 0.1 }}
+															viewport={{ once: true }}
+														>
+															<div className={`w-2 h-2 rounded-full bg-gradient-to-r ${specialization.iconBg} mt-2 flex-shrink-0 group-hover/item:scale-125 transition-transform duration-300`} />
+															<span className="group-hover/item:text-white transition-colors duration-300">{service}</span>
+														</motion.li>
+													))}
+												</ul>
+											</div>
+										</div>
+
+										{/* Hover Glow Effect */}
+										<div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${specialization.iconBg} blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700`} />
+									</div>
+								</motion.div>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+
+			{/* Consulting Tools & Technologies Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Ferramentas e Tecnologias
+					</motion.h2>
+
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						{/* Assessment Tools */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: -50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="flex items-center gap-4 mb-8">
+								<motion.div
+									className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
+									animate={{
+										scale: [1, 1.1, 1],
+										boxShadow: [
+											"0 0 20px rgba(6, 182, 212, 0.4)",
+											"0 0 40px rgba(59, 130, 246, 0.7)",
+											"0 0 20px rgba(6, 182, 212, 0.4)",
+										],
+									}}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "easeInOut",
+									}}
+								>
+									<BarChart3 className="w-8 h-8 text-white" />
+								</motion.div>
+								<h3 className="text-3xl font-bold text-white">Ferramentas de Assessment</h3>
+							</div>
+
+							<div className="space-y-4">
+								{[
+									{ tool: "IT Health Check", purpose: "Avaliação completa da infraestrutura", features: ["Security audit", "Performance analysis", "Compliance check", "Cost optimization"] },
+									{ tool: "Digital Maturity Assessment", purpose: "Análise de maturidade digital", features: ["Process evaluation", "Technology gap analysis", "Capability assessment", "Roadmap definition"] },
+									{ tool: "Architecture Review", purpose: "Revisão de arquitetura existente", features: ["System mapping", "Dependency analysis", "Scalability assessment", "Modernization planning"] },
+									{ tool: "Security Assessment", purpose: "Avaliação de segurança cibernética", features: ["Vulnerability scanning", "Penetration testing", "Compliance audit", "Risk analysis"] }
+								].map((tool, index) => (
+									<motion.div
+										key={tool.tool}
+										className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: index * 0.1 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex justify-between items-start mb-3">
+											<h4 className="font-semibold text-white text-lg">{tool.tool}</h4>
+											<span className="text-cyan-400 font-bold text-sm bg-cyan-500/20 px-2 py-1 rounded-full">
+												Assessment
+											</span>
+										</div>
+										<p className="text-gray-300 text-sm mb-4">{tool.purpose}</p>
+										<div className="grid grid-cols-2 gap-2">
+											{tool.features.map((feature, featureIndex) => (
+												<motion.span
+													key={feature}
+													className="px-2 py-1 bg-white/10 rounded text-xs text-gray-300 border border-white/20"
+													initial={{ opacity: 0, scale: 0.8 }}
+													whileInView={{ opacity: 1, scale: 1 }}
+													transition={{ duration: 0.3, delay: featureIndex * 0.1 }}
+													viewport={{ once: true }}
+												>
+													{feature}
+												</motion.span>
+											))}
+										</div>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+
+						{/* Implementation Technologies */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: 50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="flex items-center gap-4 mb-8">
+								<motion.div
+									className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+									animate={{
+										scale: [1, 1.1, 1],
+										boxShadow: [
+											"0 0 20px rgba(147, 51, 234, 0.4)",
+											"0 0 40px rgba(236, 72, 153, 0.7)",
+											"0 0 20px rgba(147, 51, 234, 0.4)",
+										],
+									}}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "easeInOut",
+									}}
+								>
+									<Wrench className="w-8 h-8 text-white" />
+								</motion.div>
+								<h3 className="text-3xl font-bold text-white">Tecnologias de Implementação</h3>
+							</div>
+
+							<div className="space-y-4">
+								{[
+									{ category: "Cloud Platforms", technologies: ["AWS", "Azure", "Google Cloud", "Hybrid Cloud"], expertise: "95%" },
+									{ category: "DevOps & CI/CD", technologies: ["Docker", "Kubernetes", "Jenkins", "GitLab"], expertise: "92%" },
+									{ category: "Monitoring & Analytics", technologies: ["Prometheus", "Grafana", "ELK Stack", "DataDog"], expertise: "88%" },
+									{ category: "Security Tools", technologies: ["Nessus", "Burp Suite", "Splunk", "Qualys"], expertise: "90%" },
+									{ category: "Data & BI", technologies: ["Tableau", "Power BI", "Apache Spark", "Kafka"], expertise: "85%" },
+									{ category: "Automation", technologies: ["Ansible", "Terraform", "Puppet", "Chef"], expertise: "87%" }
+								].map((category, index) => (
+									<motion.div
+										key={category.category}
+										className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm"
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ duration: 0.5, delay: index * 0.1 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex justify-between items-start mb-3">
+											<h4 className="font-semibold text-white">{category.category}</h4>
+											<span className="text-purple-400 font-bold">{category.expertise}</span>
+										</div>
+										<p className="text-gray-300 text-sm mb-3">{category.technologies.join(", ")}</p>
+										<div className="w-full bg-gray-700 rounded-full h-2">
+											<motion.div
+												className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full"
+												initial={{ width: 0 }}
+												whileInView={{ width: category.expertise }}
+												transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
+												viewport={{ once: true }}
+											/>
+										</div>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* Certifications & Credentials Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Certificações e Credenciais
+					</motion.h2>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{[
+							{
+								certification: "AWS Certified Solutions Architect",
+								issuer: "Amazon Web Services",
+								validity: "2024-2027",
+								icon: Cloud,
+								color: "from-orange-500 to-red-500",
+								description: "Arquitetura de soluções em nuvem"
+							},
+							{
+								certification: "Microsoft Azure Expert",
+								issuer: "Microsoft",
+								validity: "2024-2026",
+								icon: Server,
+								color: "from-blue-500 to-cyan-500",
+								description: "Especialista em soluções Azure"
+							},
+							{
+								certification: "ITIL 4 Foundation",
+								issuer: "AXELOS",
+								validity: "Permanente",
+								icon: Settings,
+								color: "from-green-500 to-emerald-500",
+								description: "Gestão de serviços de TI"
+							},
+							{
+								certification: "CISSP",
+								issuer: "ISC²",
+								validity: "2024-2027",
+								icon: Shield,
+								color: "from-red-500 to-pink-500",
+								description: "Segurança da informação"
+							},
+							{
+								certification: "PMP",
+								issuer: "PMI",
+								validity: "2024-2027",
+								icon: Briefcase,
+								color: "from-purple-500 to-indigo-500",
+								description: "Gerenciamento de projetos"
+							},
+							{
+								certification: "TOGAF 9 Certified",
+								issuer: "The Open Group",
+								validity: "Permanente",
+								icon: Building,
+								color: "from-yellow-500 to-orange-500",
+								description: "Arquitetura empresarial"
+							},
+							{
+								certification: "Google Cloud Professional",
+								issuer: "Google Cloud",
+								validity: "2024-2026",
+								icon: Globe2,
+								color: "from-cyan-500 to-blue-500",
+								description: "Soluções Google Cloud"
+							},
+							{
+								certification: "COBIT 2019 Foundation",
+								issuer: "ISACA",
+								validity: "Permanente",
+								icon: ShieldCheck,
+								color: "from-indigo-500 to-purple-500",
+								description: "Governança de TI"
+							}
+						].map((cert, index) => {
+							const IconComponent = cert.icon;
+							return (
+								<motion.div
+									key={cert.certification}
+									className="group relative"
+									initial={{ opacity: 0, y: 50 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.8, delay: index * 0.1 }}
+									viewport={{ once: true }}
+									whileHover={{ y: -10, scale: 1.05 }}
+								>
+									<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 h-full transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/10">
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${cert.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+										
+										<div className="relative z-10 text-center">
+											<motion.div
+												className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${cert.color} mb-4 mx-auto`}
+												whileHover={{ 
+													scale: 1.2, 
+													rotate: 360,
+													boxShadow: "0 0 30px rgba(0,0,0,0.3)"
+												}}
+												transition={{ duration: 0.4, ease: "easeOut" }}
+											>
+												<IconComponent className="w-8 h-8 text-white" />
+											</motion.div>
+
+											<h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+												{cert.certification}
+											</h3>
+											
+											<p className="text-cyan-400 text-sm font-medium mb-2">{cert.issuer}</p>
+											<p className="text-gray-300 text-xs mb-3">{cert.description}</p>
+											
+											<div className="flex justify-center">
+												<span className="text-green-400 font-bold text-xs bg-green-500/20 px-2 py-1 rounded-full border border-green-500/30">
+													{cert.validity}
+												</span>
+											</div>
+										</div>
+
+										<div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${cert.color} blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+									</div>
+								</motion.div>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+
+			{/* Detailed Engagement Process Section */}
+			<section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto">
+					<motion.h2
+						className="text-5xl sm:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						Processo de Engajamento
+					</motion.h2>
+
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						{/* Engagement Timeline */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: -50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+								<h3 className="text-2xl font-bold text-white mb-8 text-center">Timeline de Engajamento</h3>
+								
+								<div className="space-y-8">
+									{[
+										{ 
+											phase: "Consultoria Inicial", 
+											duration: "1-2 semanas",
+											deliverables: ["Discovery call", "Proposta técnica", "Cronograma detalhado"],
+											icon: MessageSquare,
+											color: "from-blue-500 to-cyan-500"
+										},
+										{ 
+											phase: "Assessment & Análise", 
+											duration: "2-4 semanas",
+											deliverables: ["Relatório de assessment", "Gap analysis", "Recomendações"],
+											icon: FileText,
+											color: "from-purple-500 to-pink-500"
+										},
+										{ 
+											phase: "Planejamento Estratégico", 
+											duration: "1-2 semanas",
+											deliverables: ["Roadmap tecnológico", "Business case", "ROI projection"],
+											icon: Target,
+											color: "from-green-500 to-emerald-500"
+										},
+										{ 
+											phase: "Implementação", 
+											duration: "4-16 semanas",
+											deliverables: ["Soluções implementadas", "Documentação", "Treinamento"],
+											icon: Rocket,
+											color: "from-orange-500 to-red-500"
+										},
+										{ 
+											phase: "Suporte & Otimização", 
+											duration: "Ongoing",
+											deliverables: ["Monitoramento", "Otimizações", "Relatórios mensais"],
+											icon: TrendingUp,
+											color: "from-indigo-500 to-purple-500"
+										}
+									].map((phase, index) => {
+										const IconComponent = phase.icon;
+										return (
+											<motion.div
+												key={phase.phase}
+												className="flex items-start gap-4"
+												initial={{ opacity: 0, y: 20 }}
+												whileInView={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.5, delay: index * 0.1 }}
+												viewport={{ once: true }}
+											>
+												<motion.div
+													className={`flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${phase.color} flex-shrink-0`}
+													whileHover={{ scale: 1.1, rotate: 5 }}
+													transition={{ duration: 0.3 }}
+												>
+													<IconComponent className="w-6 h-6 text-white" />
+												</motion.div>
+												
+												<div className="flex-1">
+													<div className="flex justify-between items-start mb-2">
+														<h4 className="text-lg font-semibold text-white">{phase.phase}</h4>
+														<span className="text-cyan-400 font-bold text-sm bg-cyan-500/20 px-2 py-1 rounded-full">
+															{phase.duration}
+														</span>
+													</div>
+													<div className="space-y-1">
+														{phase.deliverables.map((deliverable, deliverableIndex) => (
+															<motion.div
+																key={deliverable}
+																className="flex items-center gap-2 text-gray-300 text-sm"
+																initial={{ opacity: 0, x: -20 }}
+																whileInView={{ opacity: 1, x: 0 }}
+																transition={{ duration: 0.3, delay: deliverableIndex * 0.1 }}
+																viewport={{ once: true }}
+															>
+																<CheckCircle className="w-3 h-3 text-cyan-400 flex-shrink-0" />
+																<span>{deliverable}</span>
+															</motion.div>
+														))}
+													</div>
+												</div>
+											</motion.div>
+										);
+									})}
+								</div>
+							</div>
+						</motion.div>
+
+						{/* Investment & ROI */}
+						<motion.div
+							className="space-y-6"
+							initial={{ opacity: 0, x: 50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+								<h3 className="text-2xl font-bold text-white mb-8 text-center">Investimento e ROI</h3>
+								
+								<div className="space-y-6">
+									{[
+										{ metric: "ROI Médio", value: "340%", description: "Retorno em 18 meses", icon: DollarSign, color: "from-green-500 to-emerald-500" },
+										{ metric: "Redução de Custos", value: "35%", description: "Economia anual média", icon: TrendingUp, color: "from-blue-500 to-cyan-500" },
+										{ metric: "Aumento de Produtividade", value: "45%", description: "Melhoria em eficiência", icon: Zap, color: "from-purple-500 to-pink-500" },
+										{ metric: "Tempo de Payback", value: "8 meses", description: "Recuperação do investimento", icon: Clock, color: "from-orange-500 to-red-500" }
+									].map((metric, index) => {
+										const IconComponent = metric.icon;
+										return (
+											<motion.div
+												key={metric.metric}
+												className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+												initial={{ opacity: 0, y: 20 }}
+												whileInView={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.5, delay: index * 0.1 }}
+												viewport={{ once: true }}
+											>
+												<motion.div
+													className={`flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r ${metric.color}`}
+													whileHover={{ scale: 1.1, rotate: 5 }}
+													transition={{ duration: 0.3 }}
+												>
+													<IconComponent className="w-6 h-6 text-white" />
+												</motion.div>
+												
+												<div className="flex-1">
+													<div className="flex justify-between items-start">
+														<h4 className="font-semibold text-white">{metric.metric}</h4>
+														<span className="text-cyan-400 font-bold text-lg">{metric.value}</span>
+													</div>
+													<p className="text-gray-300 text-sm">{metric.description}</p>
+												</div>
+											</motion.div>
+										);
+									})}
+								</div>
+							</div>
+
+							{/* Contact Information */}
+							<div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8">
+								<h3 className="text-2xl font-bold text-white mb-6 text-center">Entre em Contato</h3>
+								
+								<div className="space-y-4">
+									<motion.div
+										className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+										initial={{ opacity: 0, x: 20 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										transition={{ duration: 0.5 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500">
+											<Phone className="w-6 h-6 text-white" />
+										</div>
+										<div>
+											<h4 className="font-semibold text-white">Telefone</h4>
+											<p className="text-gray-300 text-sm">+55 11 99439-6469</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+										initial={{ opacity: 0, x: 20 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										transition={{ duration: 0.5, delay: 0.1 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
+											<Mail className="w-6 h-6 text-white" />
+										</div>
+										<div>
+											<h4 className="font-semibold text-white">Email</h4>
+											<p className="text-gray-300 text-sm">contato@starksolutions.com.br</p>
+										</div>
+									</motion.div>
+
+									<motion.div
+										className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+										initial={{ opacity: 0, x: 20 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										transition={{ duration: 0.5, delay: 0.2 }}
+										viewport={{ once: true }}
+									>
+										<div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500">
+											<MapPin className="w-6 h-6 text-white" />
+										</div>
+										<div>
+											<h4 className="font-semibold text-white">Localização</h4>
+											<p className="text-gray-300 text-sm">São Paulo, SP - Brasil</p>
+										</div>
+									</motion.div>
+								</div>
+
+								<motion.div
+									className="mt-6 text-center"
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.5, delay: 0.3 }}
+									viewport={{ once: true }}
+								>
+									<motion.button
+										className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg group mx-auto"
+										whileHover={{ scale: 1.05, y: -3 }}
+										whileTap={{ scale: 0.95 }}
+									>
+										<Calendar className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+										Agendar Consultoria Gratuita
+										<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+									</motion.button>
+								</motion.div>
+							</div>
+						</motion.div>
 					</div>
 				</div>
 			</section>

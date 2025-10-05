@@ -212,50 +212,42 @@ export async function POST(request: NextRequest) {
       utm_campaign: body.utm_campaign
     });
 
-    if (!validation.success) {
+    if (!validation.isValid) {
       return createErrorResponse(
-        `Dados inválidos: ${validation.errors?.map((e: any) => e.message).join(', ')}`,
+        `Dados inválidos: ${Object.values(validation.errors).join(', ')}`,
         400
       );
     }
 
-    const { data: validatedData } = validation;
-
-    if (!validatedData) {
-      return createErrorResponse("Erro de validação de dados", 400);
-    }
+    // Dados validados com sucesso
 
     // Detecção de padrões de ataque
-    const attackDetection = detectAttackPatterns(validatedData.message);
-    if (attackDetection.isAttack) {
+    const isAttack = detectAttackPatterns(body.message);
+    if (isAttack) {
       console.warn(`Tentativa de ataque detectada de ${clientIP}:`, {
-        patterns: attackDetection.patterns,
-        riskLevel: attackDetection.riskLevel,
-        message: validatedData.message.substring(0, 100)
+        message: body.message.substring(0, 100)
       });
       
-      if (attackDetection.riskLevel === 'high') {
-        return createErrorResponse("Conteúdo suspeito detectado", 403);
-      }
+      return createErrorResponse("Conteúdo suspeito detectado", 403);
     }
 
     // Verificação reCAPTCHA
-    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !validatedData.recaptchaToken) {
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !body.recaptchaToken) {
       return createErrorResponse("Token de verificação obrigatório", 403);
     }
 
-    if (validatedData.recaptchaToken && !(await verifyRecaptcha(validatedData.recaptchaToken))) {
+    if (body.recaptchaToken && !(await verifyRecaptcha(body.recaptchaToken))) {
       return createErrorResponse("Verificação de segurança falhou", 403);
     }
 
     // Processar contato com dados validados
     const contactData: ContactPayload = {
-      name: sanitizeInput(validatedData.name),
-      email: validatedData.email,
-      company: validatedData.company ? sanitizeInput(validatedData.company) : undefined,
-      phone: validatedData.phone || '',
-      service: validatedData.subject,
-      message: sanitizeInput(validatedData.message),
+      name: sanitizeInput(body.name),
+      email: body.email,
+      company: body.company ? sanitizeInput(body.company) : undefined,
+      phone: body.phone || '',
+      service: body.subject,
+      message: sanitizeInput(body.message),
     };
 
     // Enviar para múltiplos serviços

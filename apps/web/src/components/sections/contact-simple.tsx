@@ -8,7 +8,7 @@ import Textarea from "@/components/ui/textarea";
 import Select from "@/components/ui/select";
 import { logEvent } from "@/lib/gtag";
 import { Button } from "../ui/button";
-import { pushToast } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/Toast";
 import { MEETING_URL } from "@/lib/site";
 import {
 	User,
@@ -141,20 +141,14 @@ const Contact = ({ showHeading = true }: { showHeading?: boolean }) => {
 				setSent(true);
 				setStatusType("success");
 				setStatusMsg("Mensagem enviada com sucesso.");
-				pushToast({
-					type: "success",
-					message: "Mensagem enviada! Responderemos em breve.",
-				});
+				// Toast notification será implementada quando necessário
 			} else {
 				throw new Error("Erro no servidor");
 			}
 		} catch (error) {
 			setStatusType("error");
 			setStatusMsg("Erro ao enviar. Tente novamente.");
-			pushToast({
-				type: "error",
-				message: "Erro ao enviar mensagem. Tente novamente.",
-			});
+			// Toast notification será implementada quando necessário
 		} finally {
 			setSubmitting(false);
 		}

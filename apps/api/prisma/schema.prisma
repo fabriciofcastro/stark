@@ -171,6 +171,81 @@ model ContactForm {
   @@map("contact_forms")
 }
 
+// ===== CANDIDATOS E VAGAS =====
+model Candidate {
+  id                    String   @id @default(cuid())
+  name                  String
+  email                 String   @unique
+  phone                 String?
+  linkedin              String?
+  experience            String?
+  skills                String[] // Array de habilidades
+  preferredDepartments  String[] // Array de departamentos de interesse
+  resumeUrl             String?  // URL do currículo
+  coverLetter           String?  // Carta de apresentação
+  status                String   @default("active") // active, hired, rejected, withdrawn
+  source                String   @default("website") // website, linkedin, referral, etc
+  metadata              Json?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  // Relacionamentos
+  applications JobApplication[]
+
+  @@map("candidates")
+}
+
+model JobPosition {
+  id            String   @id @default(cuid())
+  title         String
+  department    String
+  location      String
+  type          String   // CLT, PJ, Estágio
+  salary        String?
+  experience    String?
+  description   String
+  requirements  String[] // Array de requisitos
+  benefits      String[] // Array de benefícios
+  skills        String[] // Array de habilidades necessárias
+  isRemote      Boolean  @default(false)
+  isUrgent      Boolean  @default(false)
+  isActive      Boolean  @default(true)
+  postedDate    DateTime @default(now())
+  closedDate    DateTime?
+  metadata      Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relacionamentos
+  applications JobApplication[]
+
+  @@map("job_positions")
+}
+
+model JobApplication {
+  id              String   @id @default(cuid())
+  candidateId     String
+  jobPositionId   String
+  status          String   @default("pending") // pending, reviewing, interviewed, hired, rejected
+  coverLetter     String?
+  resumeUrl       String?
+  notes           String?
+  appliedAt       DateTime @default(now())
+  reviewedAt      DateTime?
+  interviewedAt   DateTime?
+  decidedAt       DateTime?
+  metadata        Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relacionamentos
+  candidate    Candidate    @relation(fields: [candidateId], references: [id])
+  jobPosition  JobPosition  @relation(fields: [jobPositionId], references: [id])
+
+  @@unique([candidateId, jobPositionId])
+  @@map("job_applications")
+}
+
 // ===== LOGS DE ATIVIDADE =====
 model ActivityLog {
   id        String   @id @default(cuid())

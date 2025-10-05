@@ -79,7 +79,7 @@ const Select = forwardRef<HTMLSelectElement, AccessibleSelectProps>(
           </select>
           <label
             htmlFor={selectId}
-            className="pointer-events-none absolute left-3 -top-2 bg-[hsl(var(--brand-green-800))] px-1 text-xs text-gray-200"
+            className="pointer-events-none absolute left-3 -top-3 text-xs text-brand-gold-400 px-2 py-1 bg-slate-800/90 backdrop-blur-sm transition-all duration-300 ease-in-out"
           >
             {label} {required && <span className="text-red-400">*</span>}
           </label>

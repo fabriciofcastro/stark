@@ -139,9 +139,9 @@ const Footer = () => {
       className="relative overflow-hidden"
       style={{
         background: `
-          radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
-          radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
-          linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)
+          radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.98) 100%)
         `
       }}
     >
@@ -408,6 +408,7 @@ const Footer = () => {
               <nav className="space-y-4">
                 {[
                   { href: "/sobre", label: "Sobre Nós", icon: "🏢" },
+                  { href: "/trabalhe-conosco", label: "Trabalhe Conosco", icon: "👥" },
                   { href: "/portfolio", label: "Portfólio", icon: "💼" },
                   { href: "/cases-de-sucesso", label: "Cases de Sucesso", icon: "🏆" },
                   { href: "/faq", label: "FAQ", icon: "❓" },

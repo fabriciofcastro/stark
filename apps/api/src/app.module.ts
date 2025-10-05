@@ -4,6 +4,7 @@ import { ThrottlerModule } from "@nestjs/throttler";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ChatModule } from "./chat/chat.module";
+import { CandidatesModule } from "./candidates/candidates.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecurityMiddleware } from "./middleware/security.middleware";
 import { SecurityMonitorService } from "./security/security-monitor.service";
@@ -18,7 +19,8 @@ import { SecurityMonitorService } from "./security/security-monitor.service";
 			ttl: 60, // 1 minuto
 			limit: 100, // 100 requests por minuto
 		}),
-		ChatModule, 
+		ChatModule,
+		CandidatesModule,
 		PrismaModule
 	],
 	controllers: [AppController],

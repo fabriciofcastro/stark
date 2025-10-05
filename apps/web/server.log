@@ -1,0 +1,121 @@
+
+> web@0.1.0 dev /home/fabricio/projects/fernando/apps/web
+> next dev
+
+ ⚠ The config property `experimental.turbo` is deprecated. Move this setting to `config.turbopack` or run `npx @next/codemod@latest next-experimental-turbo-to-turbopack .`
+   ▲ Next.js 15.5.3
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.15.3:3000
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 1992ms
+ ○ Compiling /vagas ...
+ ✓ Compiled /vagas in 12.9s (1518 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 5.4s (1519 modules)
+ GET /vagas 404 in 19414ms
+ ✓ Compiled in 1331ms (1519 modules)
+ ⨯ ./src/components/sections/vagas-simple.tsx
+Error:   [31mx[0m Expected ',', got ';'
+     ,-[[36;1;4m/home/fabricio/projects/fernando/apps/web/src/components/sections/vagas-simple.tsx[0m:224:1]
+ [2m221[0m |       </div>
+ [2m222[0m |     </section>
+ [2m223[0m |   );
+ [2m224[0m | };
+     : [35;1m ^[0m
+ [2m225[0m | 
+ [2m226[0m | export default VagasSimple;
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/sections/vagas-simple.tsx
+./src/app/vagas/page.tsx
+ ✓ Compiled in 1137ms (1519 modules)
+ GET /vagas 200 in 727ms
+ ○ Compiling /equipe ...
+ ✓ Compiled /equipe in 2.2s (1524 modules)
+ GET /equipe 200 in 2903ms
+ ✓ Compiled in 910ms (1538 modules)
+ ✓ Compiled in 1993ms (1537 modules)
+ ✓ Compiled in 1228ms (666 modules)
+ ✓ Compiled in 867ms (666 modules)
+ ✓ Compiled in 790ms (666 modules)
+ ✓ Compiled in 843ms (666 modules)
+ ✓ Compiled in 500ms (666 modules)
+ ✓ Compiled in 635ms (666 modules)
+ ✓ Compiled in 466ms (666 modules)
+ ✓ Compiled in 696ms (666 modules)
+ ✓ Compiled in 569ms (666 modules)
+ ✓ Compiled in 1607ms (666 modules)
+ ✓ Compiled in 645ms (666 modules)
+ ✓ Compiled in 433ms (666 modules)
+ ✓ Compiled in 893ms (666 modules)
+ ✓ Compiled in 1015ms (666 modules)
+ ✓ Compiled in 484ms (666 modules)
+ ✓ Compiled in 446ms (666 modules)
+ ✓ Compiled in 797ms (666 modules)
+ ○ Compiling /trabalhe-conosco ...
+ ✓ Compiled /trabalhe-conosco in 1991ms (1521 modules)
+ GET /trabalhe-conosco 200 in 3230ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1202ms (1578 modules)
+ GET / 200 in 3060ms
+ ✓ Compiled /vagas in 431ms (906 modules)
+ GET /vagas 200 in 1108ms
+ ○ Compiling /icon.svg ...
+ ✓ Compiled /icon.svg in 706ms (923 modules)
+ GET /icon.svg 200 in 1503ms
+ ✓ Compiled in 2.1s (1617 modules)
+ ✓ Compiled in 1810ms (694 modules)
+ ✓ Compiled in 3s (694 modules)
+ ✓ Compiled in 1178ms (694 modules)
+ ✓ Compiled in 684ms (694 modules)
+ ✓ Compiled in 1742ms (694 modules)
+ ✓ Compiled in 1020ms (694 modules)
+ ✓ Compiled in 687ms (694 modules)
+ ✓ Compiled in 637ms (694 modules)
+ ✓ Compiled in 1036ms (694 modules)
+ ✓ Compiled in 1280ms (694 modules)
+ ✓ Compiled in 737ms (694 modules)
+ ✓ Compiled in 764ms (694 modules)
+ ✓ Compiled in 683ms (694 modules)
+ ✓ Compiled in 832ms (694 modules)
+ ✓ Compiled in 617ms (694 modules)
+ ✓ Compiled in 1079ms (694 modules)
+ ○ Compiling /cadastro-candidato ...
+ ✓ Compiled /cadastro-candidato in 2.7s (1550 modules)
+ GET /cadastro-candidato 200 in 4041ms
+ ✓ Compiled in 5.4s (1564 modules)
+ ✓ Compiled in 2.3s (1564 modules)
+ ✓ Compiled in 1899ms (699 modules)
+ ✓ Compiled in 1345ms (699 modules)
+ ✓ Compiled in 1031ms (699 modules)
+ ✓ Compiled in 611ms (699 modules)
+ ✓ Compiled in 809ms (699 modules)
+ ✓ Compiled in 718ms (699 modules)
+ ✓ Compiled in 1321ms (699 modules)
+ ✓ Compiled in 936ms (699 modules)
+ ✓ Compiled in 773ms (699 modules)
+ ✓ Compiled in 733ms (699 modules)
+ ✓ Compiled in 605ms (699 modules)
+ ✓ Compiled in 700ms (699 modules)
+ ✓ Compiled in 1065ms (699 modules)
+ ✓ Compiled in 1855ms (699 modules)
+ ✓ Compiled in 1315ms (699 modules)
+ ✓ Compiled in 2.4s (699 modules)
+ ✓ Compiled in 2.3s (699 modules)
+ ✓ Compiled in 1453ms (699 modules)
+ ✓ Compiled in 1130ms (699 modules)
+ ✓ Compiled in 2.5s (699 modules)
+ ✓ Compiled in 1314ms (699 modules)
+ ✓ Compiled in 1707ms (699 modules)
+ ✓ Compiled in 2.1s (699 modules)
+ ✓ Compiled in 1292ms (699 modules)
+ ✓ Compiled in 736ms (699 modules)
+ ○ Compiling / ...
+[?25h

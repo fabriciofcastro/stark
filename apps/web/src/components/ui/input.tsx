@@ -65,7 +65,7 @@ const Input = forwardRef<HTMLInputElement, AccessibleInputProps>(
           />
           <label
             htmlFor={inputId}
-            className="pointer-events-none absolute left-3 top-2 text-sm text-gray-200 transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs peer-focus:text-gold peer-focus:px-1 peer-focus:bg-[hsl(var(--brand-green-800))] peer-[:not(:placeholder-shown)]:-top-2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:px-1 peer-[:not(:placeholder-shown)]:bg-[hsl(var(--brand-green-800))]"
+            className="pointer-events-none absolute left-3 top-2 text-sm text-gray-200 transition-all duration-300 ease-in-out peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-3 peer-focus:text-xs peer-focus:text-brand-gold-400 peer-focus:px-2 peer-focus:py-1 peer-focus:bg-slate-800/90 peer-focus:backdrop-blur-sm peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:px-2 peer-[:not(:placeholder-shown)]:py-1 peer-[:not(:placeholder-shown)]:bg-slate-800/90 peer-[:not(:placeholder-shown)]:backdrop-blur-sm"
           >
             {label} {required && <span className="text-red-400">*</span>}
           </label>

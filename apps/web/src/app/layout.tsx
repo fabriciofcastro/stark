@@ -21,6 +21,7 @@ import {
   FloatingSocialFollow,
   StrategicCTA
 } from "@/components/layout/client-components";
+import { ToastProvider } from "@/components/ui/Toast";
 
 export const metadata = {
   title:
@@ -82,17 +83,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Pular para o conteúdo
         </Link>
-        <Header />
-        <main id="content" tabIndex={-1}>
-          {children}
-        </main>
-        <Footer />
+        <ToastProvider>
+          <Header />
+          <main id="content" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </ToastProvider>
         <RevealOnScroll />
         <HashRedirector />
         <ChatProvider />
         <GA4 />
         <ModernCookieConsent />
-        <Toaster />
         <AdvancedPerformanceOptimizer />
         <FloatingSocialShare />
         <FloatingSocialFollow />

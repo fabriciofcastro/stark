@@ -34,7 +34,7 @@ export const ChatProvider = dynamic(() =>
 );
 
 export const Toaster = dynamic(() => 
-  import("@/components/ui/toast"), 
+  import("@/components/ui/Toast").then(mod => ({ default: mod.ToastProvider })), 
   { ssr: false }
 );
 
