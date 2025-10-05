@@ -19,8 +19,7 @@ import {
   Toaster,
   AdvancedPerformanceOptimizer,
   FloatingSocialShare,
-  FloatingSocialFollow,
-  StrategicCTA
+  FloatingSocialFollow
 } from "@/components/layout/client-components";
 import { ToastProvider } from "@/components/ui/Toast";
 
@@ -117,7 +116,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AdvancedPerformanceOptimizer />
         <FloatingSocialShare />
         <FloatingSocialFollow />
-        <StrategicCTA variant="floating" />
         <Analytics />
       </body>
     </html>
