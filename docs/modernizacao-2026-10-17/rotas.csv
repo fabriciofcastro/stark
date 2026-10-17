@@ -1,0 +1,35 @@
+path,tipo,arquivo,client_component,metadata_local,status_runtime,acao
+/.well-known/security.txt,endpoint,apps/web/src/app/.well-known/security.txt/route.ts,não,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/api/contact,endpoint,apps/web/src/app/api/contact/route.ts,não,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/api/health,endpoint,apps/web/src/app/api/health/route.ts,não,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/atendimentos,page,apps/web/src/app/atendimentos/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/auth/google/callback,page,apps/web/src/app/auth/google/callback/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/blog/[slug],page,apps/web/src/app/blog/[slug]/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/blog,page,apps/web/src/app/blog/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/cadastro-candidato,page,apps/web/src/app/cadastro-candidato/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/cases-de-sucesso,page,apps/web/src/app/cases-de-sucesso/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/cloud-vps-linux,page,apps/web/src/app/cloud-vps-linux/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/consultoria-tecnologica,page,apps/web/src/app/consultoria-tecnologica/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/contact,page,apps/web/src/app/contact/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/create-site,page,apps/web/src/app/create-site/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/cyberseguranca,page,apps/web/src/app/cyberseguranca/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/equipe,page,apps/web/src/app/equipe/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/faq,page,apps/web/src/app/faq/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/governance,page,apps/web/src/app/governance/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/helpdesk,page,apps/web/src/app/helpdesk/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/historia,page,apps/web/src/app/historia/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/lgpd,page,apps/web/src/app/lgpd/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/,page,apps/web/src/app/page.tsx,não,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/politica-cookies,page,apps/web/src/app/politica-cookies/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/politica-privacidade,page,apps/web/src/app/politica-privacidade/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/portfolio,page,apps/web/src/app/portfolio/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/services,page,apps/web/src/app/services/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/sobre,page,apps/web/src/app/sobre/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/suporte-tecnico-empresarial,page,apps/web/src/app/suporte-tecnico-empresarial/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/suporte-tecnico/[cidade],page,apps/web/src/app/suporte-tecnico/[cidade]/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/suporte-tecnico,page,apps/web/src/app/suporte-tecnico/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/termos-uso,page,apps/web/src/app/termos-uso/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/test-chat,page,apps/web/src/app/test-chat/page.tsx,sim,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/test-page,page,apps/web/src/app/test-page/page.tsx,não,não; conferir layout,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/trabalhe-conosco,page,apps/web/src/app/trabalhe-conosco/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome
+/vagas,page,apps/web/src/app/vagas/page.tsx,não,sim,NOT_RUN,inventariar e validar conforme 05; não inferir indexação pelo nome

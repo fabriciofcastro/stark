@@ -1,0 +1,74 @@
+
+> web@0.1.0 build <workspace>/stark/apps/web
+> next build
+
+ ⚠ The config property `experimental.turbo` is deprecated. Move this setting to `config.turbopack` or run `npx @next/codemod@latest next-experimental-turbo-to-turbopack .`
+   ▲ Next.js 15.5.3
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+Browserslist: browsers data (caniuse-lite) is 13 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled successfully in 21.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/39) ...
+   Generating static pages (9/39) 
+   Generating static pages (19/39) 
+   Generating static pages (29/39) 
+ ✓ Generating static pages (39/39)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                Size  First Load JS
+┌ ○ /                                   19.1 kB         320 kB
+├ ○ /_not-found                           121 B         301 kB
+├ ƒ /.well-known/security.txt             121 B         301 kB
+├ ƒ /api/contact                          121 B         301 kB
+├ ƒ /api/health                           121 B         301 kB
+├ ○ /atendimentos                       3.66 kB         305 kB
+├ ○ /auth/google/callback               1.36 kB         302 kB
+├ ○ /blog                                 782 B         302 kB
+├ ƒ /blog/[slug]                          654 B         302 kB
+├ ○ /cadastro-candidato                 8.96 kB         310 kB
+├ ○ /cases-de-sucesso                     121 B         301 kB
+├ ○ /cloud-vps-linux                    6.74 kB         308 kB
+├ ○ /consultoria-tecnologica            14.2 kB         315 kB
+├ ○ /contact                            13.1 kB         314 kB
+├ ○ /create-site                        7.46 kB         309 kB
+├ ○ /cyberseguranca                     7.32 kB         308 kB
+├ ○ /equipe                             5.27 kB         306 kB
+├ ○ /faq                                  121 B         301 kB
+├ ○ /governance                         7.58 kB         309 kB
+├ ○ /helpdesk                           1.23 kB         302 kB
+├ ○ /historia                            5.1 kB         306 kB
+├ ○ /icon.svg                               0 B            0 B
+├ ○ /lgpd                               3.55 kB         305 kB
+├ ○ /manifest.webmanifest                 121 B         301 kB
+├ ○ /politica-cookies                   4.15 kB         305 kB
+├ ○ /politica-privacidade               3.62 kB         305 kB
+├ ○ /portfolio                            121 B         301 kB
+├ ○ /robots.txt                           121 B         301 kB
+├ ○ /services                            3.4 kB         304 kB
+├ ○ /sitemap.xml                          121 B         301 kB
+├ ○ /sobre                              4.56 kB         306 kB
+├ ○ /suporte-tecnico                    6.95 kB         308 kB
+├ ○ /suporte-tecnico-empresarial        2.74 kB         304 kB
+├ ƒ /suporte-tecnico/[cidade]             904 B         302 kB
+├ ○ /termos-uso                          4.2 kB         305 kB
+├ ○ /test-chat                            616 B         302 kB
+├ ○ /test-page                            121 B         301 kB
+├ ○ /trabalhe-conosco                   3.88 kB         305 kB
+└ ○ /vagas                              4.92 kB         306 kB
++ First Load JS shared by all            301 kB
+  ├ chunks/common-f567ec79461677d1.js   87.3 kB
+  └ chunks/vendors-8ea28163736fb8c9.js   212 kB
+  └ other shared chunks (total)         2.06 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
