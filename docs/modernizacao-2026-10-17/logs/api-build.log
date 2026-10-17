@@ -1,0 +1,590 @@
+
+> api@0.0.1 build <workspace>/stark/apps/api
+> nest build
+
+src/app.module.ts:19:4 - error TS2353: Object literal may only specify known properties, and 'ttl' does not exist in type 'ThrottlerModuleOptions'.
+
+19    ttl: 60, // 1 minuto
+      ~~~
+src/candidates/candidates.service.ts:13:51 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+13       const existingCandidate = await this.prisma.candidate.findUnique({
+                                                     ~~~~~~~~~
+src/candidates/candidates.service.ts:21:43 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+21       const candidate = await this.prisma.candidate.create({
+                                             ~~~~~~~~~
+src/candidates/candidates.service.ts:39:41 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+39     const candidate = await this.prisma.candidate.findUnique({
+                                           ~~~~~~~~~
+src/candidates/candidates.service.ts:58:41 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+58     const candidate = await this.prisma.candidate.update({
+                                           ~~~~~~~~~
+src/candidates/candidates.service.ts:68:41 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+68     const candidate = await this.prisma.candidate.findUnique({
+                                           ~~~~~~~~~
+src/candidates/candidates.service.ts:77:43 - error TS2339: Property 'jobPosition' does not exist on type 'PrismaService'.
+
+77     const jobPosition = await this.prisma.jobPosition.findUnique({
+                                             ~~~~~~~~~~~
+src/candidates/candidates.service.ts:86:51 - error TS2339: Property 'jobApplication' does not exist on type 'PrismaService'.
+
+86     const existingApplication = await this.prisma.jobApplication.findUnique({
+                                                     ~~~~~~~~~~~~~~
+src/candidates/candidates.service.ts:100:43 - error TS2339: Property 'jobApplication' does not exist on type 'PrismaService'.
+
+100     const application = await this.prisma.jobApplication.create({
+                                              ~~~~~~~~~~~~~~
+src/candidates/candidates.service.ts:117:41 - error TS2339: Property 'candidate' does not exist on type 'PrismaService'.
+
+117     const candidate = await this.prisma.candidate.findUnique({
+                                            ~~~~~~~~~
+src/candidates/candidates.service.ts:139:24 - error TS2339: Property 'jobPosition' does not exist on type 'PrismaService'.
+
+139     return this.prisma.jobPosition.findMany({
+                           ~~~~~~~~~~~
+src/candidates/candidates.service.ts:146:43 - error TS2339: Property 'jobPosition' does not exist on type 'PrismaService'.
+
+146     const jobPosition = await this.prisma.jobPosition.findUnique({
+                                              ~~~~~~~~~~~
+src/chat/analytics.service.ts:14:43 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+14       const analytics = await this.prisma.chatAnalytics.create({
+                                             ~~~~~~~~~~~~~
+src/chat/analytics.service.ts:77:43 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+77       const analytics = await this.prisma.chatAnalytics.findUnique({
+                                             ~~~~~~~~~~~~~
+src/chat/analytics.service.ts:90:43 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+90       const analytics = await this.prisma.chatAnalytics.upsert({
+                                             ~~~~~~~~~~~~~
+src/chat/analytics.service.ts:147:50 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+147       const satisfactionData = await this.prisma.chatAnalytics.findMany({
+                                                     ~~~~~~~~~~~~~
+src/chat/analytics.service.ts:178:40 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+178       const agents = await this.prisma.user.findMany({
+                                           ~~~~
+src/chat/analytics.service.ts:232:24 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+232     return this.prisma.chatSession.count();
+                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:236:24 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+236     return this.prisma.chatSession.count({
+                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:242:24 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+242     return this.prisma.chatMessage.count();
+                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:246:24 - error TS2339: Property 'escalationTicket' does not exist on type 'PrismaService'.
+
+246     return this.prisma.escalationTicket.count();
+                           ~~~~~~~~~~~~~~~~
+src/chat/analytics.service.ts:250:45 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+250     const responseTimes = await this.prisma.chatMessage.findMany({
+                                                ~~~~~~~~~~~
+src/chat/analytics.service.ts:273:37 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+273     const stats = await this.prisma.chatAnalytics.aggregate({
+                                        ~~~~~~~~~~~~~
+src/chat/analytics.service.ts:294:42 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+294     const hourlyData = await this.prisma.chatSession.groupBy({
+                                             ~~~~~~~~~~~
+src/chat/analytics.service.ts:313:41 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+313     const dailyData = await this.prisma.chatSession.findMany({
+                                            ~~~~~~~~~~~
+src/chat/analytics.service.ts:340:39 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+340     const intents = await this.prisma.chatMessage.findMany({
+                                          ~~~~~~~~~~~
+src/chat/analytics.service.ts:373:40 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+373     const messages = await this.prisma.chatMessage.findMany({
+                                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:396:24 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+396     return this.prisma.chatSession.findMany({
+                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:407:24 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+407     return this.prisma.chatMessage.findMany({
+                           ~~~~~~~~~~~
+src/chat/analytics.service.ts:418:24 - error TS2339: Property 'escalationTicket' does not exist on type 'PrismaService'.
+
+418     return this.prisma.escalationTicket.findMany({
+                           ~~~~~~~~~~~~~~~~
+src/chat/analytics.service.ts:429:40 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+429     const messages = await this.prisma.chatMessage.findMany({
+                                           ~~~~~~~~~~~
+src/chat/chat.service.ts:42:39 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+42       let botUser = await this.prisma.user.findUnique({
+                                         ~~~~
+src/chat/chat.service.ts:47:37 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+47         botUser = await this.prisma.user.create({
+                                       ~~~~
+src/chat/chat.service.ts:75:38 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+75       const user = await this.prisma.user.create({
+                                        ~~~~
+src/chat/chat.service.ts:98:38 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+98       const user = await this.prisma.user.update({
+                                        ~~~~
+src/chat/chat.service.ts:117:36 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+117     const user = await this.prisma.user.findUnique({
+                                       ~~~~
+src/chat/chat.service.ts:147:41 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+147       const session = await this.prisma.chatSession.create({
+                                            ~~~~~~~~~~~
+src/chat/chat.service.ts:183:41 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+183       const session = await this.prisma.chatSession.update({
+                                            ~~~~~~~~~~~
+src/chat/chat.service.ts:209:39 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+209     const session = await this.prisma.chatSession.findUnique({
+                                          ~~~~~~~~~~~
+src/chat/chat.service.ts:234:39 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+234     const session = await this.prisma.chatSession.findUnique({
+                                          ~~~~~~~~~~~
+src/chat/chat.service.ts:264:24 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+264     return this.prisma.chatSession.findMany({
+                           ~~~~~~~~~~~
+src/chat/chat.service.ts:302:41 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+302       const session = await this.prisma.chatSession.findUnique({
+                                            ~~~~~~~~~~~
+src/chat/chat.service.ts:312:45 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+312       const userMessage = await this.prisma.chatMessage.create({
+                                                ~~~~~~~~~~~
+src/chat/chat.service.ts:329:25 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+329       await this.prisma.chatSession.update({
+                            ~~~~~~~~~~~
+src/chat/chat.service.ts:346:44 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+346       const botMessage = await this.prisma.chatMessage.create({
+                                               ~~~~~~~~~~~
+src/chat/chat.service.ts:402:19 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+402       this.prisma.chatMessage.findMany({
+                      ~~~~~~~~~~~
+src/chat/chat.service.ts:411:19 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+411       this.prisma.chatMessage.count({
+                      ~~~~~~~~~~~
+src/chat/chat.service.ts:431:41 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+431       const session = await this.prisma.chatSession.findUnique({
+                                            ~~~~~~~~~~~
+src/chat/chat.service.ts:441:36 - error TS2339: Property 'escalationTicket' does not exist on type 'PrismaService'.
+
+441   const ticket = await this.prisma.escalationTicket.create({
+                                       ~~~~~~~~~~~~~~~~
+src/chat/chat.service.ts:452:25 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+452       await this.prisma.chatSession.update({
+                            ~~~~~~~~~~~
+src/chat/chat.service.ts:466:25 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+466       await this.prisma.chatMessage.create({
+                            ~~~~~~~~~~~
+src/chat/chat.service.ts:496:40 - error TS2339: Property 'escalationTicket' does not exist on type 'PrismaService'.
+
+496       const ticket = await this.prisma.escalationTicket.update({
+                                           ~~~~~~~~~~~~~~~~
+src/chat/chat.service.ts:527:43 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+527       const analytics = await this.prisma.chatAnalytics.create({
+                                              ~~~~~~~~~~~~~
+src/chat/chat.service.ts:551:19 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+551       this.prisma.chatSession.count(),
+                      ~~~~~~~~~~~
+src/chat/chat.service.ts:552:19 - error TS2339: Property 'chatSession' does not exist on type 'PrismaService'.
+
+552       this.prisma.chatSession.count({
+                      ~~~~~~~~~~~
+src/chat/chat.service.ts:555:19 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+555       this.prisma.chatMessage.count(),
+                      ~~~~~~~~~~~
+src/chat/chat.service.ts:556:19 - error TS2339: Property 'escalationTicket' does not exist on type 'PrismaService'.
+
+556       this.prisma.escalationTicket.count(),
+                      ~~~~~~~~~~~~~~~~
+src/chat/chat.service.ts:557:19 - error TS2339: Property 'chatAnalytics' does not exist on type 'PrismaService'.
+
+557       this.prisma.chatAnalytics.aggregate({
+                      ~~~~~~~~~~~~~
+src/chat/chat.service.ts:575:45 - error TS2339: Property 'contactForm' does not exist on type 'PrismaService'.
+
+575       const contactForm = await this.prisma.contactForm.create({
+                                                ~~~~~~~~~~~
+src/chat/chat.service.ts:599:45 - error TS2339: Property 'contactForm' does not exist on type 'PrismaService'.
+
+599       const contactForm = await this.prisma.contactForm.update({
+                                                ~~~~~~~~~~~
+src/chat/chat.service.ts:622:23 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+622     await this.prisma.chatMessage.create({
+                          ~~~~~~~~~~~
+src/chat/chat.service.ts:638:40 - error TS2339: Property 'chatMessage' does not exist on type 'PrismaService'.
+
+638     const messages = await this.prisma.chatMessage.findMany({
+                                           ~~~~~~~~~~~
+src/chat/chat.service.ts:703:25 - error TS2339: Property 'activityLog' does not exist on type 'PrismaService'.
+
+703       await this.prisma.activityLog.create({
+                            ~~~~~~~~~~~
+src/chat/chat.service.ts:736:41 - error TS2339: Property 'systemConfig' does not exist on type 'PrismaService'.
+
+736       const configs = await this.prisma.systemConfig.findMany();
+                                            ~~~~~~~~~~~~
+src/chat/chat.service.ts:811:23 - error TS2339: Property 'systemConfig' does not exist on type 'PrismaService'.
+
+811           this.prisma.systemConfig.upsert({
+                          ~~~~~~~~~~~~
+src/chat/notification.service.ts:14:46 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+14       const notification = await this.prisma.notification.create({
+                                                ~~~~~~~~~~~~
+src/chat/notification.service.ts:39:40 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+39       const agents = await this.prisma.user.findMany({
+                                          ~~~~
+src/chat/notification.service.ts:76:40 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+76       const admins = await this.prisma.user.findMany({
+                                          ~~~~
+src/chat/notification.service.ts:113:38 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+113       const user = await this.prisma.user.findUnique({
+                                         ~~~~
+src/chat/notification.service.ts:145:39 - error TS2339: Property 'user' does not exist on type 'PrismaService'.
+
+145       const users = await this.prisma.user.findMany({
+                                          ~~~~
+src/chat/notification.service.ts:180:47 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+180       const notifications = await this.prisma.notification.findMany({
+                                                  ~~~~~~~~~~~~
+src/chat/notification.service.ts:195:46 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+195       const notification = await this.prisma.notification.updateMany({
+                                                 ~~~~~~~~~~~~
+src/chat/notification.service.ts:214:40 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+214       const result = await this.prisma.notification.updateMany({
+                                           ~~~~~~~~~~~~
+src/chat/notification.service.ts:235:40 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+235       const result = await this.prisma.notification.deleteMany({
+                                           ~~~~~~~~~~~~
+src/chat/notification.service.ts:285:21 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+285         this.prisma.notification.count({
+                        ~~~~~~~~~~~~
+src/chat/notification.service.ts:288:21 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+288         this.prisma.notification.count({
+                        ~~~~~~~~~~~~
+src/chat/notification.service.ts:291:21 - error TS2339: Property 'notification' does not exist on type 'PrismaService'.
+
+291         this.prisma.notification.groupBy({
+                        ~~~~~~~~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:6:24 - error TS2307: Cannot find module '../../../shared/domain/entity.base' or its corresponding type declarations.
+
+6 import { Entity } from '../../../shared/domain/entity.base';
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:47:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+47     return this.props.id;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:51:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+51     return this.props.userId;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:55:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+55     return this.props.status;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:59:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+59     return this.props.priority;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:63:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+63     return this.props.context;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:67:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+67     return this.props.metadata;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:71:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+71     return this.props.createdAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:75:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+75     return this.props.updatedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:79:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+79     return this.props.closedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:83:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+83     return this.props.escalatedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:87:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+87     return this.props.assignedAgentId;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:92:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+92     if (this.props.status === SessionStatus.ACTIVE) {
+                ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:93:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+93       this.props.status = SessionStatus.PAUSED;
+              ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:94:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+94       this.props.updatedAt = new Date();
+              ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:99:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+99     if (this.props.status === SessionStatus.PAUSED) {
+                ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:100:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+100       this.props.status = SessionStatus.ACTIVE;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:101:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+101       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:106:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+106     if (this.props.status !== SessionStatus.CLOSED) {
+                 ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:107:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+107       this.props.status = SessionStatus.CLOSED;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:108:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+108       this.props.closedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:109:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+109       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:114:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+114     if (this.props.status === SessionStatus.ACTIVE || this.props.status === SessionStatus.PAUSED) {
+                 ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:114:60 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+114     if (this.props.status === SessionStatus.ACTIVE || this.props.status === SessionStatus.PAUSED) {
+                                                               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:115:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+115       this.props.status = SessionStatus.ESCALATED;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:116:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+116       this.props.assignedAgentId = agentId;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:117:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+117       this.props.escalatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:118:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+118       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:123:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+123     this.props.context = context;
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:124:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+124     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:128:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+128     this.props.metadata = { ...this.props.metadata, ...metadata };
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:128:37 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+128     this.props.metadata = { ...this.props.metadata, ...metadata };
+                                        ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:129:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+129     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:133:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+133     this.props.priority = priority;
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:134:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+134     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:139:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+139     return this.props.status === SessionStatus.ACTIVE;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:143:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+143     return this.props.status === SessionStatus.ESCALATED;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:147:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+147     return this.props.status === SessionStatus.CLOSED;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:151:26 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+151     const endTime = this.props.closedAt || new Date();
+                             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:152:37 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+152     return endTime.getTime() - this.props.createdAt.getTime();
+                                        ~~~~~
+src/domains/chat/domain/services/chat-session.service.ts:16:45 - error TS1272: A type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.
+
+16     private readonly chatSessionRepository: ChatSessionRepository,
+                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:8:10
+    8 import { ChatSessionRepository } from '../repositories/chat-session.repository.interface';
+               ~~~~~~~~~~~~~~~~~~~~~
+    'ChatSessionRepository' was imported here.
+src/domains/chat/domain/services/chat-session.service.ts:117:7 - error TS2552: Cannot find name 'ChatSessionId'. Did you mean 'sessionId'?
+
+117       ChatSessionId.create(sessionId)
+          ~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:112:5
+    112     sessionId: string,
+            ~~~~~~~~~~~~~~~~~
+    'sessionId' is declared here.
+src/domains/chat/domain/services/chat-session.service.ts:147:7 - error TS2552: Cannot find name 'ChatSessionId'. Did you mean 'sessionId'?
+
+147       ChatSessionId.create(sessionId)
+          ~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:145:22
+    145   async closeSession(sessionId: string, reason?: string): Promise<void> {
+                             ~~~~~~~~~~~~~~~~~
+    'sessionId' is declared here.
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:6:29 - error TS2307: Cannot find module '../../../shared/domain/value-object.base' or its corresponding type declarations.
+
+6 import { ValueObject } from '../../../shared/domain/value-object.base';
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:33:17 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+33     return this.value === other.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:33:33 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+33     return this.value === other.value;
+                                   ~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:37:17 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+37     return this.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:6:29 - error TS2307: Cannot find module '../../../shared/domain/value-object.base' or its corresponding type declarations.
+
+6 import { ValueObject } from '../../../shared/domain/value-object.base';
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:32:17 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+32     return this.value === other.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:32:33 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+32     return this.value === other.value;
+                                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:36:17 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+36     return this.value;
+                   ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:7:31 - error TS2307: Cannot find module '../../../prisma/prisma.service' or its corresponding type declarations.
+
+7 import { PrismaService } from '../../../prisma/prisma.service';
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:22:24 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+22         id: session.id.value,
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:23:32 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+23         userId: session.userId.value,
+                                  ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:39:23 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+39       where: { id: id.value },
+                         ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:51:31 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+51       where: { userId: userId.value },
+                                 ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:70:24 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+70         userId: userId.value,
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:97:31 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+97       where: { id: session.id.value },
+                                 ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:113:23 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+113       where: { id: id.value },
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:119:31 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+119       where: { userId: userId.value },
+                                  ~~~~~
+src/prisma/prisma.service.ts:2:10 - error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+
+2 import { PrismaClient } from "@prisma/client";
+           ~~~~~~~~~~~~
+src/prisma/prisma.service.ts:7:14 - error TS2339: Property '$connect' does not exist on type 'PrismaService'.
+
+7   await this.$connect();
+               ~~~~~~~~
+src/security/security-monitor.service.ts:184:8 - error TS2349: This expression is not callable.
+  Type 'Number' has no call signatures.
+
+184       .entries()
+           ~~~~~~~
+src/seed/seed.ts:1:10 - error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+
+1 import { PrismaClient } from '@prisma/client';
+           ~~~~~~~~~~~~
+
+Found 141 error(s).
+
+<workspace>/stark/apps/api:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  api@0.0.1 build: `nest build`
+Exit status 1

@@ -1,0 +1,374 @@
+
+> api@0.0.1 build <workspace>/stark/apps/api
+> nest build
+
+src/app.module.ts:19:4 - error TS2353: Object literal may only specify known properties, and 'ttl' does not exist in type 'ThrottlerModuleOptions'.
+
+19    ttl: 60, // 1 minuto
+      ~~~
+src/chat/analytics.service.ts:15:9 - error TS2322: Type 'CreateAnalyticsDto' is not assignable to type '(Without<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput> & ChatAnalyticsUncheckedCreateInput) | (Without<...> & ChatAnalyticsCreateInput)'.
+  Type 'CreateAnalyticsDto' is not assignable to type 'Without<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput> & ChatAnalyticsUncheckedCreateInput'.
+    Type 'CreateAnalyticsDto' is not assignable to type 'ChatAnalyticsUncheckedCreateInput'.
+      Property 'sentiment' is optional in type 'CreateAnalyticsDto' but required in type 'ChatAnalyticsUncheckedCreateInput'.
+
+15         data: createAnalyticsDto,
+           ~~~~
+
+  ../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/index.d.ts:7095:5
+    7095     data: XOR<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput>
+             ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: ChatAnalyticsSelect<DefaultArgs> | null | undefined; include?: ChatAnalyticsInclude<DefaultArgs> | null | undefined; data: (Without<...> & ChatAnalyticsUncheckedCreateInput) | (Without<...> & ChatAnalyticsCreateInput); }'
+src/chat/analytics.service.ts:81:7 - error TS2322: Type '{ sessionId: string; duration: number; messageCount: number; userSatisfaction: number | null; escalationCount: number; resolutionTime: number | null; botAccuracy: number | null; popularTopics: string[]; sentiment: JsonValue; id: string; createdAt: Date; } | null' is not assignable to type 'ChatAnalytics | null'.
+  Property 'performance' is missing in type '{ sessionId: string; duration: number; messageCount: number; userSatisfaction: number | null; escalationCount: number; resolutionTime: number | null; botAccuracy: number | null; popularTopics: string[]; sentiment: JsonValue; id: string; createdAt: Date; }' but required in type 'ChatAnalytics'.
+
+81       return analytics;
+         ~~~~~~
+
+  src/chat/interfaces.ts:97:3
+    97   performance: {
+         ~~~~~~~~~~~
+    'performance' is declared here.
+src/chat/analytics.service.ts:167:61 - error TS2345: Argument of type '{ userSatisfaction: number | null; createdAt: Date; }[]' is not assignable to parameter of type '{ userSatisfaction: number; createdAt: Date; }[]'.
+  Type '{ userSatisfaction: number | null; createdAt: Date; }' is not assignable to type '{ userSatisfaction: number; createdAt: Date; }'.
+    Types of property 'userSatisfaction' are incompatible.
+      Type 'number | null' is not assignable to type 'number'.
+        Type 'null' is not assignable to type 'number'.
+
+167       const groupedData = this.groupSatisfactionByTimeframe(satisfactionData, timeframe);
+                                                                ~~~~~~~~~~~~~~~~
+src/chat/analytics.service.ts:209:44 - error TS18047: 'session.analytics' is possibly 'null'.
+
+209           .reduce((sum, session) => sum + (session.analytics.userSatisfaction || 0), 0);
+                                               ~~~~~~~~~~~~~~~~~
+src/chat/analytics.service.ts:254:11 - error TS2322: Type 'null' is not assignable to type 'InputJsonValue | FieldRef<"ChatMessage", "Json"> | JsonNullValueFilter | undefined'.
+
+254           not: null,
+              ~~~
+src/chat/analytics.service.ts:265:48 - error TS2339: Property 'processingTime' does not exist on type 'string | number | boolean | JsonObject | JsonArray'.
+  Property 'processingTime' does not exist on type 'string'.
+
+265       const processingTime = message.metadata?.processingTime;
+                                                   ~~~~~~~~~~~~~~
+src/chat/analytics.service.ts:344:11 - error TS2322: Type 'null' is not assignable to type 'InputJsonValue | FieldRef<"ChatMessage", "Json"> | JsonNullValueFilter | undefined'.
+
+344           not: null,
+              ~~~
+src/chat/analytics.service.ts:353:40 - error TS2339: Property 'intent' does not exist on type 'string | number | boolean | JsonObject | JsonArray'.
+  Property 'intent' does not exist on type 'string'.
+
+353       const intent = message.metadata?.intent;
+                                           ~~~~~~
+src/chat/analytics.service.ts:377:11 - error TS2322: Type 'null' is not assignable to type 'InputJsonValue | FieldRef<"ChatMessage", "Json"> | JsonNullValueFilter | undefined'.
+
+377           not: null,
+              ~~~
+src/chat/analytics.service.ts:388:44 - error TS2339: Property 'confidence' does not exist on type 'string | number | boolean | JsonObject | JsonArray'.
+  Property 'confidence' does not exist on type 'string'.
+
+388       const confidence = message.metadata?.confidence;
+                                               ~~~~~~~~~~
+src/chat/analytics.service.ts:437:11 - error TS2322: Type 'null' is not assignable to type 'InputJsonValue | FieldRef<"ChatMessage", "Json"> | JsonNullValueFilter | undefined'.
+
+437           not: null,
+              ~~~
+src/chat/analytics.service.ts:446:41 - error TS2339: Property 'processingTime' does not exist on type 'string | number | boolean | JsonObject | JsonArray'.
+  Property 'processingTime' does not exist on type 'string'.
+
+446       .map(message => message.metadata?.processingTime)
+                                            ~~~~~~~~~~~~~~
+src/chat/chat.service.ts:353:11 - error TS2322: Type '{ intent: string; confidence: number; entities: Record<string, any>; suggestions: Suggestion[]; aiGenerated: true; }' is not assignable to type 'NullableJsonNullValueInput | InputJsonValue | undefined'.
+  Types of property 'suggestions' are incompatible.
+    Type 'Suggestion[]' is not assignable to type 'InputJsonValue | null | undefined'.
+      Type 'Suggestion[]' is not assignable to type 'InputJsonObject'.
+        Index signature for type 'string' is missing in type 'Suggestion[]'.
+
+353           metadata: {
+              ~~~~~~~~
+
+  ../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/index.d.ts:15918:5
+    15918     metadata?: NullableJsonNullValueInput | InputJsonValue
+              ~~~~~~~~
+    The expected type comes from property 'metadata' which is declared here on type '(Without<ChatMessageCreateInput, ChatMessageUncheckedCreateInput> & ChatMessageUncheckedCreateInput) | (Without<...> & ChatMessageCreateInput)'
+src/chat/chat.service.ts:528:9 - error TS2322: Type 'CreateAnalyticsDto' is not assignable to type '(Without<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput> & ChatAnalyticsUncheckedCreateInput) | (Without<...> & ChatAnalyticsCreateInput)'.
+  Type 'CreateAnalyticsDto' is not assignable to type 'Without<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput> & ChatAnalyticsUncheckedCreateInput'.
+    Type 'CreateAnalyticsDto' is not assignable to type 'ChatAnalyticsUncheckedCreateInput'.
+      Property 'sentiment' is optional in type 'CreateAnalyticsDto' but required in type 'ChatAnalyticsUncheckedCreateInput'.
+
+528         data: createAnalyticsDto,
+            ~~~~
+
+  ../../node_modules/.pnpm/@prisma+client@5.22.0_prisma@5.22.0/node_modules/.prisma/client/index.d.ts:7095:5
+    7095     data: XOR<ChatAnalyticsCreateInput, ChatAnalyticsUncheckedCreateInput>
+             ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: ChatAnalyticsSelect<DefaultArgs> | null | undefined; include?: ChatAnalyticsInclude<DefaultArgs> | null | undefined; data: (Without<...> & ChatAnalyticsUncheckedCreateInput) | (Without<...> & ChatAnalyticsCreateInput); }'
+src/chat/notification.service.ts:118:31 - error TS2339: Property 'notifications' does not exist on type 'string | number | boolean | JsonObject | JsonArray'.
+  Property 'notifications' does not exist on type 'string'.
+
+118       if (!user?.preferences?.notifications) {
+                                  ~~~~~~~~~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:6:24 - error TS2307: Cannot find module '../../../shared/domain/entity.base' or its corresponding type declarations.
+
+6 import { Entity } from '../../../shared/domain/entity.base';
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:47:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+47     return this.props.id;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:51:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+51     return this.props.userId;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:55:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+55     return this.props.status;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:59:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+59     return this.props.priority;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:63:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+63     return this.props.context;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:67:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+67     return this.props.metadata;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:71:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+71     return this.props.createdAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:75:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+75     return this.props.updatedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:79:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+79     return this.props.closedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:83:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+83     return this.props.escalatedAt;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:87:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+87     return this.props.assignedAgentId;
+                   ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:92:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+92     if (this.props.status === SessionStatus.ACTIVE) {
+                ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:93:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+93       this.props.status = SessionStatus.PAUSED;
+              ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:94:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+94       this.props.updatedAt = new Date();
+              ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:99:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+99     if (this.props.status === SessionStatus.PAUSED) {
+                ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:100:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+100       this.props.status = SessionStatus.ACTIVE;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:101:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+101       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:106:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+106     if (this.props.status !== SessionStatus.CLOSED) {
+                 ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:107:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+107       this.props.status = SessionStatus.CLOSED;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:108:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+108       this.props.closedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:109:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+109       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:114:14 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+114     if (this.props.status === SessionStatus.ACTIVE || this.props.status === SessionStatus.PAUSED) {
+                 ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:114:60 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+114     if (this.props.status === SessionStatus.ACTIVE || this.props.status === SessionStatus.PAUSED) {
+                                                               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:115:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+115       this.props.status = SessionStatus.ESCALATED;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:116:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+116       this.props.assignedAgentId = agentId;
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:117:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+117       this.props.escalatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:118:12 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+118       this.props.updatedAt = new Date();
+               ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:123:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+123     this.props.context = context;
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:124:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+124     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:128:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+128     this.props.metadata = { ...this.props.metadata, ...metadata };
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:128:37 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+128     this.props.metadata = { ...this.props.metadata, ...metadata };
+                                        ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:129:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+129     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:133:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+133     this.props.priority = priority;
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:134:10 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+134     this.props.updatedAt = new Date();
+             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:139:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+139     return this.props.status === SessionStatus.ACTIVE;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:143:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+143     return this.props.status === SessionStatus.ESCALATED;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:147:17 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+147     return this.props.status === SessionStatus.CLOSED;
+                    ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:151:26 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+151     const endTime = this.props.closedAt || new Date();
+                             ~~~~~
+src/domains/chat/domain/entities/chat-session.entity.ts:152:37 - error TS2339: Property 'props' does not exist on type 'ChatSession'.
+
+152     return endTime.getTime() - this.props.createdAt.getTime();
+                                        ~~~~~
+src/domains/chat/domain/services/chat-session.service.ts:16:45 - error TS1272: A type referenced in a decorated signature must be imported with 'import type' or a namespace import when 'isolatedModules' and 'emitDecoratorMetadata' are enabled.
+
+16     private readonly chatSessionRepository: ChatSessionRepository,
+                                               ~~~~~~~~~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:8:10
+    8 import { ChatSessionRepository } from '../repositories/chat-session.repository.interface';
+               ~~~~~~~~~~~~~~~~~~~~~
+    'ChatSessionRepository' was imported here.
+src/domains/chat/domain/services/chat-session.service.ts:117:7 - error TS2552: Cannot find name 'ChatSessionId'. Did you mean 'sessionId'?
+
+117       ChatSessionId.create(sessionId)
+          ~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:112:5
+    112     sessionId: string,
+            ~~~~~~~~~~~~~~~~~
+    'sessionId' is declared here.
+src/domains/chat/domain/services/chat-session.service.ts:147:7 - error TS2552: Cannot find name 'ChatSessionId'. Did you mean 'sessionId'?
+
+147       ChatSessionId.create(sessionId)
+          ~~~~~~~~~~~~~
+
+  src/domains/chat/domain/services/chat-session.service.ts:145:22
+    145   async closeSession(sessionId: string, reason?: string): Promise<void> {
+                             ~~~~~~~~~~~~~~~~~
+    'sessionId' is declared here.
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:6:29 - error TS2307: Cannot find module '../../../shared/domain/value-object.base' or its corresponding type declarations.
+
+6 import { ValueObject } from '../../../shared/domain/value-object.base';
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:33:17 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+33     return this.value === other.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:33:33 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+33     return this.value === other.value;
+                                   ~~~~~
+src/domains/chat/domain/value-objects/chat-session-id.vo.ts:37:17 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+37     return this.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:6:29 - error TS2307: Cannot find module '../../../shared/domain/value-object.base' or its corresponding type declarations.
+
+6 import { ValueObject } from '../../../shared/domain/value-object.base';
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:32:17 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+32     return this.value === other.value;
+                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:32:33 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+32     return this.value === other.value;
+                                   ~~~~~
+src/domains/chat/domain/value-objects/user-id.vo.ts:36:17 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+36     return this.value;
+                   ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:7:31 - error TS2307: Cannot find module '../../../prisma/prisma.service' or its corresponding type declarations.
+
+7 import { PrismaService } from '../../../prisma/prisma.service';
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:22:24 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+22         id: session.id.value,
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:23:32 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+23         userId: session.userId.value,
+                                  ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:39:23 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+39       where: { id: id.value },
+                         ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:51:31 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+51       where: { userId: userId.value },
+                                 ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:70:24 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+70         userId: userId.value,
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:97:31 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+97       where: { id: session.id.value },
+                                 ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:113:23 - error TS2339: Property 'value' does not exist on type 'ChatSessionId'.
+
+113       where: { id: id.value },
+                          ~~~~~
+src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts:119:31 - error TS2339: Property 'value' does not exist on type 'UserId'.
+
+119       where: { userId: userId.value },
+                                  ~~~~~
+src/security/security-monitor.service.ts:184:8 - error TS2349: This expression is not callable.
+  Type 'Number' has no call signatures.
+
+184       .entries()
+           ~~~~~~~
+
+Found 77 error(s).
+
+<workspace>/stark/apps/api:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  api@0.0.1 build: `nest build`
+Exit status 1
