@@ -1,0 +1,1241 @@
+{
+  "repository": "fabriciofcastro/stark",
+  "branch": "Main",
+  "sha": "af72b33935d2e8ab3ac17c9f0866b4cca035d575",
+  "date": "2026-10-17",
+  "tracked_count": 308,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 1587
+    },
+    {
+      "path": ".turbo/cookies/1.cookie",
+      "bytes": 0
+    },
+    {
+      "path": ".turbo/daemon/9d97f5dba363a74c-turbo.log.2025-10-04",
+      "bytes": 94628650
+    },
+    {
+      "path": ".turbo/daemon/9d97f5dba363a74c-turbo.log.2025-10-05",
+      "bytes": 49208003
+    },
+    {
+      "path": "ANALISE_FRONTEND.md",
+      "bytes": 13946
+    },
+    {
+      "path": "ANALISE_FRONTEND_COMPLETA.md",
+      "bytes": 16671
+    },
+    {
+      "path": "BRAND.md",
+      "bytes": 567
+    },
+    {
+      "path": "CATALOGO_REFINAMENTOS_COMPLETO.md",
+      "bytes": 6421
+    },
+    {
+      "path": "Conformidade_de_segurança.md",
+      "bytes": 12318
+    },
+    {
+      "path": "DEPLOY_VERCEL.md",
+      "bytes": 4094
+    },
+    {
+      "path": "DEPLOY_VERCEL_GUIDE.md",
+      "bytes": 6386
+    },
+    {
+      "path": "ESTRATEGIA_MODERNIZACAO_COMPLETA.md",
+      "bytes": 12426
+    },
+    {
+      "path": "GUIA_IMPLEMENTACAO_RAPIDA.md",
+      "bytes": 8440
+    },
+    {
+      "path": "GUIDE_DESIGN_MINIMALISTA.md",
+      "bytes": 6423
+    },
+    {
+      "path": "OTIMIZACOES_IMPLEMENTADAS.md",
+      "bytes": 5456
+    },
+    {
+      "path": "PLANO_IMPLEMENTACAO_FASE_1.md",
+      "bytes": 5661
+    },
+    {
+      "path": "QWEN.md",
+      "bytes": 1753
+    },
+    {
+      "path": "README.md",
+      "bytes": 6039
+    },
+    {
+      "path": "RENDER_DEPLOY_GUIDE.md",
+      "bytes": 5342
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 805
+    },
+    {
+      "path": "SEO_ADVANCED_GUIDE.md",
+      "bytes": 6917
+    },
+    {
+      "path": "SISTEMA_CHAT_PROFISSIONAL.md",
+      "bytes": 13444
+    },
+    {
+      "path": "SISTEMA_DESIGN_COMPLETO_2024.md",
+      "bytes": 24647
+    },
+    {
+      "path": "SUMMARY_IMPROVEMENTS.md",
+      "bytes": 3632
+    },
+    {
+      "path": "apps/api/.prettierrc",
+      "bytes": 51
+    },
+    {
+      "path": "apps/api/.turbo/turbo-build.log",
+      "bytes": 75
+    },
+    {
+      "path": "apps/api/Dockerfile",
+      "bytes": 1567
+    },
+    {
+      "path": "apps/api/README.md",
+      "bytes": 5036
+    },
+    {
+      "path": "apps/api/env.example",
+      "bytes": 1377
+    },
+    {
+      "path": "apps/api/eslint.config.mjs",
+      "bytes": 836
+    },
+    {
+      "path": "apps/api/nest-cli.json",
+      "bytes": 171
+    },
+    {
+      "path": "apps/api/package.json",
+      "bytes": 2226
+    },
+    {
+      "path": "apps/api/pnpm-lock.yaml",
+      "bytes": 199072
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "bytes": 7790
+    },
+    {
+      "path": "apps/api/render.yaml",
+      "bytes": 1280
+    },
+    {
+      "path": "apps/api/scripts/build.sh",
+      "bytes": 1586
+    },
+    {
+      "path": "apps/api/src/app.controller.spec.ts",
+      "bytes": 617
+    },
+    {
+      "path": "apps/api/src/app.controller.ts",
+      "bytes": 274
+    },
+    {
+      "path": "apps/api/src/app.module.ts",
+      "bytes": 1093
+    },
+    {
+      "path": "apps/api/src/app.service.ts",
+      "bytes": 142
+    },
+    {
+      "path": "apps/api/src/candidates/candidates.controller.ts",
+      "bytes": 1600
+    },
+    {
+      "path": "apps/api/src/candidates/candidates.module.ts",
+      "bytes": 398
+    },
+    {
+      "path": "apps/api/src/candidates/candidates.service.ts",
+      "bytes": 4086
+    },
+    {
+      "path": "apps/api/src/candidates/dto/apply-job.dto.ts",
+      "bytes": 282
+    },
+    {
+      "path": "apps/api/src/candidates/dto/create-candidate.dto.ts",
+      "bytes": 703
+    },
+    {
+      "path": "apps/api/src/chat/ai-assistant.service.ts",
+      "bytes": 18921
+    },
+    {
+      "path": "apps/api/src/chat/analytics.service.ts",
+      "bytes": 12927
+    },
+    {
+      "path": "apps/api/src/chat/chat.controller.ts",
+      "bytes": 5349
+    },
+    {
+      "path": "apps/api/src/chat/chat.module.ts",
+      "bytes": 767
+    },
+    {
+      "path": "apps/api/src/chat/chat.service.ts",
+      "bytes": 24274
+    },
+    {
+      "path": "apps/api/src/chat/dto/index.ts",
+      "bytes": 4981
+    },
+    {
+      "path": "apps/api/src/chat/enums.ts",
+      "bytes": 1160
+    },
+    {
+      "path": "apps/api/src/chat/interfaces.ts",
+      "bytes": 3970
+    },
+    {
+      "path": "apps/api/src/chat/notification.service.ts",
+      "bytes": 8659
+    },
+    {
+      "path": "apps/api/src/chat/validation.service.ts",
+      "bytes": 10904
+    },
+    {
+      "path": "apps/api/src/config/security.config.ts",
+      "bytes": 4210
+    },
+    {
+      "path": "apps/api/src/domains/chat/application/use-cases/create-chat-session.use-case.ts",
+      "bytes": 1724
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/entities/chat-session.entity.ts",
+      "bytes": 3826
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/enums/priority.enum.ts",
+      "bytes": 784
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/enums/session-status.enum.ts",
+      "bytes": 713
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/repositories/chat-session.repository.interface.ts",
+      "bytes": 1262
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/services/chat-session.service.ts",
+      "bytes": 5929
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/value-objects/chat-session-id.vo.ts",
+      "bytes": 1021
+    },
+    {
+      "path": "apps/api/src/domains/chat/domain/value-objects/user-id.vo.ts",
+      "bytes": 967
+    },
+    {
+      "path": "apps/api/src/domains/chat/infrastructure/repositories/prisma-chat-session.repository.ts",
+      "bytes": 5072
+    },
+    {
+      "path": "apps/api/src/main.ts",
+      "bytes": 228
+    },
+    {
+      "path": "apps/api/src/middleware/security.middleware.ts",
+      "bytes": 4681
+    },
+    {
+      "path": "apps/api/src/prisma/prisma.module.ts",
+      "bytes": 190
+    },
+    {
+      "path": "apps/api/src/prisma/prisma.service.ts",
+      "bytes": 249
+    },
+    {
+      "path": "apps/api/src/security/security-monitor.service.ts",
+      "bytes": 8930
+    },
+    {
+      "path": "apps/api/src/seed/job-positions.ts",
+      "bytes": 6562
+    },
+    {
+      "path": "apps/api/src/seed/seed.ts",
+      "bytes": 1949
+    },
+    {
+      "path": "apps/api/src/shared/domain/entity.base.ts",
+      "bytes": 458
+    },
+    {
+      "path": "apps/api/src/shared/domain/value-object.base.ts",
+      "bytes": 628
+    },
+    {
+      "path": "apps/api/test/app.e2e-spec.ts",
+      "bytes": 674
+    },
+    {
+      "path": "apps/api/test/jest-e2e.json",
+      "bytes": 183
+    },
+    {
+      "path": "apps/api/tsconfig.build.json",
+      "bytes": 97
+    },
+    {
+      "path": "apps/api/tsconfig.json",
+      "bytes": 677
+    },
+    {
+      "path": "apps/web/.turbo/turbo-build.log",
+      "bytes": 3099
+    },
+    {
+      "path": "apps/web/env.example",
+      "bytes": 2554
+    },
+    {
+      "path": "apps/web/managed_context/metadata.json",
+      "bytes": 34
+    },
+    {
+      "path": "apps/web/next-env.d.ts",
+      "bytes": 262
+    },
+    {
+      "path": "apps/web/next.config.js",
+      "bytes": 3120
+    },
+    {
+      "path": "apps/web/package.json",
+      "bytes": 993
+    },
+    {
+      "path": "apps/web/postcss.config.js",
+      "bytes": 92
+    },
+    {
+      "path": "apps/web/prisma.schema",
+      "bytes": 387
+    },
+    {
+      "path": "apps/web/server.log",
+      "bytes": 4261
+    },
+    {
+      "path": "apps/web/src/app/.well-known/security.txt/route.ts",
+      "bytes": 460
+    },
+    {
+      "path": "apps/web/src/app/api/contact/route.ts",
+      "bytes": 9811
+    },
+    {
+      "path": "apps/web/src/app/api/health/route.ts",
+      "bytes": 4517
+    },
+    {
+      "path": "apps/web/src/app/atendimentos/page.tsx",
+      "bytes": 20283
+    },
+    {
+      "path": "apps/web/src/app/auth/google/callback/page.tsx",
+      "bytes": 5041
+    },
+    {
+      "path": "apps/web/src/app/blog/[slug]/page.tsx",
+      "bytes": 1130
+    },
+    {
+      "path": "apps/web/src/app/blog/page.tsx",
+      "bytes": 1479
+    },
+    {
+      "path": "apps/web/src/app/cadastro-candidato/page.tsx",
+      "bytes": 690
+    },
+    {
+      "path": "apps/web/src/app/cases-de-sucesso/page.tsx",
+      "bytes": 14653
+    },
+    {
+      "path": "apps/web/src/app/cloud-vps-linux/layout.tsx",
+      "bytes": 1140
+    },
+    {
+      "path": "apps/web/src/app/cloud-vps-linux/page.tsx",
+      "bytes": 48280
+    },
+    {
+      "path": "apps/web/src/app/consultoria-tecnologica/layout.tsx",
+      "bytes": 680
+    },
+    {
+      "path": "apps/web/src/app/consultoria-tecnologica/page.tsx",
+      "bytes": 108537
+    },
+    {
+      "path": "apps/web/src/app/contact/page.tsx",
+      "bytes": 17710
+    },
+    {
+      "path": "apps/web/src/app/create-site/layout.tsx",
+      "bytes": 1062
+    },
+    {
+      "path": "apps/web/src/app/create-site/page.tsx",
+      "bytes": 58956
+    },
+    {
+      "path": "apps/web/src/app/cyberseguranca/layout.tsx",
+      "bytes": 1144
+    },
+    {
+      "path": "apps/web/src/app/cyberseguranca/page.tsx",
+      "bytes": 54390
+    },
+    {
+      "path": "apps/web/src/app/equipe/page.tsx",
+      "bytes": 809
+    },
+    {
+      "path": "apps/web/src/app/error.tsx",
+      "bytes": 2174
+    },
+    {
+      "path": "apps/web/src/app/faq/page.tsx",
+      "bytes": 14370
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "bytes": 2090
+    },
+    {
+      "path": "apps/web/src/app/governance/layout.tsx",
+      "bytes": 1135
+    },
+    {
+      "path": "apps/web/src/app/governance/page.tsx",
+      "bytes": 72322
+    },
+    {
+      "path": "apps/web/src/app/helpdesk/page.tsx",
+      "bytes": 4749
+    },
+    {
+      "path": "apps/web/src/app/historia/page.tsx",
+      "bytes": 33854
+    },
+    {
+      "path": "apps/web/src/app/icon.svg",
+      "bytes": 486
+    },
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "bytes": 4012
+    },
+    {
+      "path": "apps/web/src/app/lgpd/page.tsx",
+      "bytes": 21251
+    },
+    {
+      "path": "apps/web/src/app/manifest.ts",
+      "bytes": 2172
+    },
+    {
+      "path": "apps/web/src/app/not-found.tsx",
+      "bytes": 608
+    },
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "bytes": 1474
+    },
+    {
+      "path": "apps/web/src/app/politica-cookies/page.tsx",
+      "bytes": 23601
+    },
+    {
+      "path": "apps/web/src/app/politica-privacidade/page.tsx",
+      "bytes": 15080
+    },
+    {
+      "path": "apps/web/src/app/portfolio/page.tsx",
+      "bytes": 17750
+    },
+    {
+      "path": "apps/web/src/app/robots.ts",
+      "bytes": 881
+    },
+    {
+      "path": "apps/web/src/app/services/page.tsx",
+      "bytes": 1598
+    },
+    {
+      "path": "apps/web/src/app/sitemap.ts",
+      "bytes": 436
+    },
+    {
+      "path": "apps/web/src/app/sobre/page.tsx",
+      "bytes": 28845
+    },
+    {
+      "path": "apps/web/src/app/suporte-tecnico-empresarial/page.tsx",
+      "bytes": 13157
+    },
+    {
+      "path": "apps/web/src/app/suporte-tecnico/[cidade]/page.tsx",
+      "bytes": 2257
+    },
+    {
+      "path": "apps/web/src/app/suporte-tecnico/layout.tsx",
+      "bytes": 2996
+    },
+    {
+      "path": "apps/web/src/app/suporte-tecnico/page.tsx",
+      "bytes": 50923
+    },
+    {
+      "path": "apps/web/src/app/termos-uso/page.tsx",
+      "bytes": 20622
+    },
+    {
+      "path": "apps/web/src/app/test-chat/page.tsx",
+      "bytes": 1188
+    },
+    {
+      "path": "apps/web/src/app/test-page/page.tsx",
+      "bytes": 220
+    },
+    {
+      "path": "apps/web/src/app/trabalhe-conosco/page.tsx",
+      "bytes": 988
+    },
+    {
+      "path": "apps/web/src/app/vagas/page.tsx",
+      "bytes": 792
+    },
+    {
+      "path": "apps/web/src/components/analytics.tsx",
+      "bytes": 600
+    },
+    {
+      "path": "apps/web/src/components/auth/GoogleLogin.tsx",
+      "bytes": 5279
+    },
+    {
+      "path": "apps/web/src/components/chat/chat-header.tsx",
+      "bytes": 5926
+    },
+    {
+      "path": "apps/web/src/components/chat/chat-input.tsx",
+      "bytes": 16044
+    },
+    {
+      "path": "apps/web/src/components/chat/chat-provider.tsx",
+      "bytes": 1312
+    },
+    {
+      "path": "apps/web/src/components/chat/chat-widget.tsx",
+      "bytes": 27262
+    },
+    {
+      "path": "apps/web/src/components/chat/design-system.ts",
+      "bytes": 6924
+    },
+    {
+      "path": "apps/web/src/components/chat/hooks/use-chat.ts",
+      "bytes": 11318
+    },
+    {
+      "path": "apps/web/src/components/chat/index.ts",
+      "bytes": 493
+    },
+    {
+      "path": "apps/web/src/components/chat/message-bubble.tsx",
+      "bytes": 10796
+    },
+    {
+      "path": "apps/web/src/components/chat/suggestions-bar.tsx",
+      "bytes": 1676
+    },
+    {
+      "path": "apps/web/src/components/chat/types.ts",
+      "bytes": 10577
+    },
+    {
+      "path": "apps/web/src/components/chat/typing-indicator.tsx",
+      "bytes": 1750
+    },
+    {
+      "path": "apps/web/src/components/cta/index.ts",
+      "bytes": 63
+    },
+    {
+      "path": "apps/web/src/components/cta/strategic-cta.tsx",
+      "bytes": 15830
+    },
+    {
+      "path": "apps/web/src/components/data/hero-slides.ts",
+      "bytes": 3214
+    },
+    {
+      "path": "apps/web/src/components/examples/page-with-chat-example.tsx",
+      "bytes": 7405
+    },
+    {
+      "path": "apps/web/src/components/examples/themed-page-example.tsx",
+      "bytes": 9807
+    },
+    {
+      "path": "apps/web/src/components/global/index.ts",
+      "bytes": 66
+    },
+    {
+      "path": "apps/web/src/components/layout/client-components.tsx",
+      "bytes": 1593
+    },
+    {
+      "path": "apps/web/src/components/layout/footer.tsx",
+      "bytes": 44515
+    },
+    {
+      "path": "apps/web/src/components/layout/hero.tsx",
+      "bytes": 5751
+    },
+    {
+      "path": "apps/web/src/components/performance/advanced-performance.tsx",
+      "bytes": 11315
+    },
+    {
+      "path": "apps/web/src/components/performance/performance-monitor.tsx",
+      "bytes": 272
+    },
+    {
+      "path": "apps/web/src/components/sections/about.tsx",
+      "bytes": 35299
+    },
+    {
+      "path": "apps/web/src/components/sections/ai-solutions.tsx",
+      "bytes": 604
+    },
+    {
+      "path": "apps/web/src/components/sections/cadastro-candidato-page-seo.tsx",
+      "bytes": 1892
+    },
+    {
+      "path": "apps/web/src/components/sections/cadastro-candidato.tsx",
+      "bytes": 51654
+    },
+    {
+      "path": "apps/web/src/components/sections/case-studies.tsx",
+      "bytes": 14584
+    },
+    {
+      "path": "apps/web/src/components/sections/cloud-vps-cta.tsx",
+      "bytes": 764
+    },
+    {
+      "path": "apps/web/src/components/sections/cloud-vps-seo.tsx",
+      "bytes": 513
+    },
+    {
+      "path": "apps/web/src/components/sections/contact-page-client.tsx",
+      "bytes": 918
+    },
+    {
+      "path": "apps/web/src/components/sections/contact-page-seo.tsx",
+      "bytes": 432
+    },
+    {
+      "path": "apps/web/src/components/sections/contact-seo.tsx",
+      "bytes": 501
+    },
+    {
+      "path": "apps/web/src/components/sections/contact-simple.tsx",
+      "bytes": 21232
+    },
+    {
+      "path": "apps/web/src/components/sections/contact.tsx",
+      "bytes": 80575
+    },
+    {
+      "path": "apps/web/src/components/sections/criacao-sites-cta.tsx",
+      "bytes": 788
+    },
+    {
+      "path": "apps/web/src/components/sections/criacao-sites-seo.tsx",
+      "bytes": 496
+    },
+    {
+      "path": "apps/web/src/components/sections/cyberseguranca-cta.tsx",
+      "bytes": 589
+    },
+    {
+      "path": "apps/web/src/components/sections/cyberseguranca-seo.tsx",
+      "bytes": 522
+    },
+    {
+      "path": "apps/web/src/components/sections/data-governance.tsx",
+      "bytes": 15962
+    },
+    {
+      "path": "apps/web/src/components/sections/governanca-seo.tsx",
+      "bytes": 518
+    },
+    {
+      "path": "apps/web/src/components/sections/governance.tsx",
+      "bytes": 590
+    },
+    {
+      "path": "apps/web/src/components/sections/header.tsx",
+      "bytes": 174
+    },
+    {
+      "path": "apps/web/src/components/sections/header/Brand.tsx",
+      "bytes": 1194
+    },
+    {
+      "path": "apps/web/src/components/sections/header/DesktopNav.tsx",
+      "bytes": 3491
+    },
+    {
+      "path": "apps/web/src/components/sections/header/MobileMenu.tsx",
+      "bytes": 5204
+    },
+    {
+      "path": "apps/web/src/components/sections/header/MobileMenu.tsx.bak",
+      "bytes": 2795
+    },
+    {
+      "path": "apps/web/src/components/sections/header/MobileMenu.tsx.bak2",
+      "bytes": 2804
+    },
+    {
+      "path": "apps/web/src/components/sections/header/MobileToggle.tsx",
+      "bytes": 1386
+    },
+    {
+      "path": "apps/web/src/components/sections/header/ModernHeader.tsx",
+      "bytes": 48211
+    },
+    {
+      "path": "apps/web/src/components/sections/header/ServicesDropdown.tsx",
+      "bytes": 13702
+    },
+    {
+      "path": "apps/web/src/components/sections/header/index.ts",
+      "bytes": 221
+    },
+    {
+      "path": "apps/web/src/components/sections/helpdesk-form.tsx",
+      "bytes": 3571
+    },
+    {
+      "path": "apps/web/src/components/sections/helpdesk-seo.tsx",
+      "bytes": 463
+    },
+    {
+      "path": "apps/web/src/components/sections/infrastructure.tsx",
+      "bytes": 1260
+    },
+    {
+      "path": "apps/web/src/components/sections/networking.tsx",
+      "bytes": 599
+    },
+    {
+      "path": "apps/web/src/components/sections/services-hub.tsx",
+      "bytes": 11136
+    },
+    {
+      "path": "apps/web/src/components/sections/services-seo.tsx",
+      "bytes": 470
+    },
+    {
+      "path": "apps/web/src/components/sections/services.tsx",
+      "bytes": 15817
+    },
+    {
+      "path": "apps/web/src/components/sections/sla-guarantees.tsx",
+      "bytes": 10359
+    },
+    {
+      "path": "apps/web/src/components/sections/suporte-tecnico-cidade-seo.tsx",
+      "bytes": 290
+    },
+    {
+      "path": "apps/web/src/components/sections/suporte-tecnico-cta.tsx",
+      "bytes": 810
+    },
+    {
+      "path": "apps/web/src/components/sections/suporte-tecnico-seo.tsx",
+      "bytes": 559
+    },
+    {
+      "path": "apps/web/src/components/sections/support-diagnosis.tsx",
+      "bytes": 3469
+    },
+    {
+      "path": "apps/web/src/components/sections/team-page-seo.tsx",
+      "bytes": 1610
+    },
+    {
+      "path": "apps/web/src/components/sections/team.tsx",
+      "bytes": 23540
+    },
+    {
+      "path": "apps/web/src/components/sections/technical-expertise.tsx",
+      "bytes": 16038
+    },
+    {
+      "path": "apps/web/src/components/sections/technical-support.tsx",
+      "bytes": 627
+    },
+    {
+      "path": "apps/web/src/components/sections/trabalhe-conosco-page-seo.tsx",
+      "bytes": 2488
+    },
+    {
+      "path": "apps/web/src/components/sections/trabalhe-conosco.tsx",
+      "bytes": 17597
+    },
+    {
+      "path": "apps/web/src/components/sections/trust.tsx",
+      "bytes": 26026
+    },
+    {
+      "path": "apps/web/src/components/sections/vagas-page-seo.tsx",
+      "bytes": 2437
+    },
+    {
+      "path": "apps/web/src/components/sections/vagas-simple.tsx",
+      "bytes": 26497
+    },
+    {
+      "path": "apps/web/src/components/sections/vagas.tsx",
+      "bytes": 58762
+    },
+    {
+      "path": "apps/web/src/components/sections/vps-configurator.tsx",
+      "bytes": 3755
+    },
+    {
+      "path": "apps/web/src/components/sections/web-development.tsx",
+      "bytes": 615
+    },
+    {
+      "path": "apps/web/src/components/security/security-headers.tsx",
+      "bytes": 210
+    },
+    {
+      "path": "apps/web/src/components/seo/advanced-seo-provider.tsx",
+      "bytes": 11314
+    },
+    {
+      "path": "apps/web/src/components/seo/content-optimization.tsx",
+      "bytes": 9339
+    },
+    {
+      "path": "apps/web/src/components/seo/legal-structured-data.tsx",
+      "bytes": 2656
+    },
+    {
+      "path": "apps/web/src/components/seo/performance-seo.tsx",
+      "bytes": 7612
+    },
+    {
+      "path": "apps/web/src/components/seo/structured-data.tsx",
+      "bytes": 2848
+    },
+    {
+      "path": "apps/web/src/components/social/index.ts",
+      "bytes": 167
+    },
+    {
+      "path": "apps/web/src/components/social/social-follow-buttons.tsx",
+      "bytes": 13438
+    },
+    {
+      "path": "apps/web/src/components/social/social-share-buttons.tsx",
+      "bytes": 10322
+    },
+    {
+      "path": "apps/web/src/components/ui/LoadingSpinner.tsx",
+      "bytes": 1992
+    },
+    {
+      "path": "apps/web/src/components/ui/Toast.tsx",
+      "bytes": 5786
+    },
+    {
+      "path": "apps/web/src/components/ui/advanced-image.tsx",
+      "bytes": 9374
+    },
+    {
+      "path": "apps/web/src/components/ui/animated-background.tsx",
+      "bytes": 9533
+    },
+    {
+      "path": "apps/web/src/components/ui/animated-border.tsx",
+      "bytes": 3294
+    },
+    {
+      "path": "apps/web/src/components/ui/animated-icon.tsx",
+      "bytes": 2288
+    },
+    {
+      "path": "apps/web/src/components/ui/animated-title.tsx",
+      "bytes": 2194
+    },
+    {
+      "path": "apps/web/src/components/ui/breadcrumb.tsx",
+      "bytes": 1106
+    },
+    {
+      "path": "apps/web/src/components/ui/button.tsx",
+      "bytes": 2575
+    },
+    {
+      "path": "apps/web/src/components/ui/carousel.tsx",
+      "bytes": 7134
+    },
+    {
+      "path": "apps/web/src/components/ui/checkbox.tsx",
+      "bytes": 1297
+    },
+    {
+      "path": "apps/web/src/components/ui/collapsible-section.tsx",
+      "bytes": 1802
+    },
+    {
+      "path": "apps/web/src/components/ui/company-autocomplete.tsx",
+      "bytes": 10047
+    },
+    {
+      "path": "apps/web/src/components/ui/consent-banner.tsx",
+      "bytes": 1591
+    },
+    {
+      "path": "apps/web/src/components/ui/data-preview.tsx",
+      "bytes": 3714
+    },
+    {
+      "path": "apps/web/src/components/ui/dynamic-background.tsx",
+      "bytes": 7396
+    },
+    {
+      "path": "apps/web/src/components/ui/enhanced-button.tsx",
+      "bytes": 4884
+    },
+    {
+      "path": "apps/web/src/components/ui/enhanced-card.tsx",
+      "bytes": 8308
+    },
+    {
+      "path": "apps/web/src/components/ui/enhanced-section.tsx",
+      "bytes": 4955
+    },
+    {
+      "path": "apps/web/src/components/ui/form-progress.tsx",
+      "bytes": 3045
+    },
+    {
+      "path": "apps/web/src/components/ui/geometric-pattern.tsx",
+      "bytes": 5447
+    },
+    {
+      "path": "apps/web/src/components/ui/hero-carousel.tsx",
+      "bytes": 13248
+    },
+    {
+      "path": "apps/web/src/components/ui/hero-embla.tsx",
+      "bytes": 27925
+    },
+    {
+      "path": "apps/web/src/components/ui/input.tsx",
+      "bytes": 3990
+    },
+    {
+      "path": "apps/web/src/components/ui/label.tsx",
+      "bytes": 610
+    },
+    {
+      "path": "apps/web/src/components/ui/lead-capture-modal.tsx",
+      "bytes": 4553
+    },
+    {
+      "path": "apps/web/src/components/ui/minimalist-card.tsx",
+      "bytes": 6073
+    },
+    {
+      "path": "apps/web/src/components/ui/minimalist-section.tsx",
+      "bytes": 3113
+    },
+    {
+      "path": "apps/web/src/components/ui/modal.tsx",
+      "bytes": 1765
+    },
+    {
+      "path": "apps/web/src/components/ui/modern-cookie-consent.tsx",
+      "bytes": 15583
+    },
+    {
+      "path": "apps/web/src/components/ui/optimized-image.tsx",
+      "bytes": 1213
+    },
+    {
+      "path": "apps/web/src/components/ui/progress-indicator.tsx",
+      "bytes": 2522
+    },
+    {
+      "path": "apps/web/src/components/ui/range.tsx",
+      "bytes": 1093
+    },
+    {
+      "path": "apps/web/src/components/ui/reading-progress.tsx",
+      "bytes": 847
+    },
+    {
+      "path": "apps/web/src/components/ui/reflection-effect.tsx",
+      "bytes": 4259
+    },
+    {
+      "path": "apps/web/src/components/ui/response-estimate.tsx",
+      "bytes": 3022
+    },
+    {
+      "path": "apps/web/src/components/ui/revolutionary-carousel.tsx",
+      "bytes": 30231
+    },
+    {
+      "path": "apps/web/src/components/ui/section-background.tsx",
+      "bytes": 6225
+    },
+    {
+      "path": "apps/web/src/components/ui/section-header.tsx",
+      "bytes": 4318
+    },
+    {
+      "path": "apps/web/src/components/ui/section-wrapper.tsx",
+      "bytes": 9860
+    },
+    {
+      "path": "apps/web/src/components/ui/security-badges.tsx",
+      "bytes": 2136
+    },
+    {
+      "path": "apps/web/src/components/ui/select.tsx",
+      "bytes": 4108
+    },
+    {
+      "path": "apps/web/src/components/ui/smart-validation.tsx",
+      "bytes": 4104
+    },
+    {
+      "path": "apps/web/src/components/ui/stark-logo.tsx",
+      "bytes": 7740
+    },
+    {
+      "path": "apps/web/src/components/ui/textarea.tsx",
+      "bytes": 3979
+    },
+    {
+      "path": "apps/web/src/components/ui/themed-section.tsx",
+      "bytes": 6312
+    },
+    {
+      "path": "apps/web/src/components/wrappers/client-lead-modal.tsx",
+      "bytes": 765
+    },
+    {
+      "path": "apps/web/src/components/wrappers/cookie-consent.tsx",
+      "bytes": 7223
+    },
+    {
+      "path": "apps/web/src/components/wrappers/ga4.tsx",
+      "bytes": 1695
+    },
+    {
+      "path": "apps/web/src/components/wrappers/hash-redirector.tsx",
+      "bytes": 2061
+    },
+    {
+      "path": "apps/web/src/components/wrappers/index.ts",
+      "bytes": 228
+    },
+    {
+      "path": "apps/web/src/components/wrappers/reveal-on-scroll.tsx",
+      "bytes": 2302
+    },
+    {
+      "path": "apps/web/src/hooks/useApi.ts",
+      "bytes": 2506
+    },
+    {
+      "path": "apps/web/src/lib/analytics-unified.tsx",
+      "bytes": 4847
+    },
+    {
+      "path": "apps/web/src/lib/design-tokens.ts",
+      "bytes": 5881
+    },
+    {
+      "path": "apps/web/src/lib/gtag.tsx",
+      "bytes": 1253
+    },
+    {
+      "path": "apps/web/src/lib/logger.ts",
+      "bytes": 5667
+    },
+    {
+      "path": "apps/web/src/lib/mock-data.ts",
+      "bytes": 7652
+    },
+    {
+      "path": "apps/web/src/lib/performance.tsx",
+      "bytes": 418
+    },
+    {
+      "path": "apps/web/src/lib/response-validation.ts",
+      "bytes": 8010
+    },
+    {
+      "path": "apps/web/src/lib/seo-advanced.tsx",
+      "bytes": 13023
+    },
+    {
+      "path": "apps/web/src/lib/seo-config.ts",
+      "bytes": 744
+    },
+    {
+      "path": "apps/web/src/lib/site.ts",
+      "bytes": 797
+    },
+    {
+      "path": "apps/web/src/lib/stark-typography.ts",
+      "bytes": 6186
+    },
+    {
+      "path": "apps/web/src/lib/theme-system.ts",
+      "bytes": 13197
+    },
+    {
+      "path": "apps/web/src/lib/utils.ts",
+      "bytes": 177
+    },
+    {
+      "path": "apps/web/src/lib/validation.ts",
+      "bytes": 4886
+    },
+    {
+      "path": "apps/web/src/lib/web-vitals.ts",
+      "bytes": 314
+    },
+    {
+      "path": "apps/web/src/services/api.ts",
+      "bytes": 3664
+    },
+    {
+      "path": "apps/web/src/styles/global-improvements.css",
+      "bytes": 8188
+    },
+    {
+      "path": "apps/web/test-styles.html",
+      "bytes": 1
+    },
+    {
+      "path": "apps/web/test_suite_analysis/metadata.json",
+      "bytes": 34
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "bytes": 648
+    },
+    {
+      "path": "biome.json",
+      "bytes": 692
+    },
+    {
+      "path": "commitlint.config.js",
+      "bytes": 67
+    },
+    {
+      "path": "dist/next.config.dev.js",
+      "bytes": 3859
+    },
+    {
+      "path": "env.example",
+      "bytes": 667
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 291
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 262
+    },
+    {
+      "path": "package.json",
+      "bytes": 748
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 373053
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "bytes": 40
+    },
+    {
+      "path": "scripts/check-redirects.mjs",
+      "bytes": 2716
+    },
+    {
+      "path": "sentry.client.config.ts",
+      "bytes": 263
+    },
+    {
+      "path": "sentry.server.config.ts",
+      "bytes": 167
+    },
+    {
+      "path": "turbo.json",
+      "bytes": 448
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 1322
+    }
+  ]
+}

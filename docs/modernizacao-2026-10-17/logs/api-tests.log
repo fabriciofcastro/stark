@@ -1,0 +1,14 @@
+
+> api@0.0.1 test <workspace>/stark/apps/api
+> jest "--runInBand"
+
+PASS src/app.controller.spec.ts
+  AppController
+    root
+      ✓ should return "Hello World!" (18 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.338 s
+Ran all test suites.
